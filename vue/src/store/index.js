@@ -5,9 +5,16 @@ export function createStore(currentToken, currentUser) {
   let store = _createStore({
     state: {
       token: currentToken || '',
-      user: currentUser || {}
-    },
+      user: currentUser || {},
+      preferredName: ''
+      },
     mutations: {
+      SET_PREFERREDNAME(state, name){
+        state.preferredName = name;
+      },
+      /*
+      LOGIN INFOMATION PROVIDED WITH CAPSTONE, IGNORE
+      */
       SET_AUTH_TOKEN(state, token) {
         state.token = token;
         localStorage.setItem('token', token);

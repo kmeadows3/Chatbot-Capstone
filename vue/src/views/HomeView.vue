@@ -1,11 +1,16 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <p>You must be authenticated to see this</p>
+    <ChatDisplay/>
   </div>
 </template>
 
 <script>
+import ChatDisplay from '../components/ChatDisplay.vue';
+
 export default {
+  components: {
+    ChatDisplay
+  }
 };
 </script>
