@@ -37,6 +37,7 @@ public class QueryService {
         for (String keyword : mutlipleWordKeywords){
             if(utterance.contains(keyword)){
                 tokens.add(keyword);
+                //TODO bug-this doesn't remove the keyword for some reason
                 utterance.replace(keyword, "");
             }
         }
@@ -59,11 +60,15 @@ public class QueryService {
         Map<String, Integer> responseCount = new HashMap<>();
 
         for (int i = 0; i < responses.size(); i++){
-            int count = Collections.frequency(responses, responses.get(i));
-            responseCount.put(responses.get(i), count);
+            String response = responses.get(i);
+            int count = Collections.frequency(responses, response);
+            if (!responseCount.containsKey(response)){
+                responseCount.put(response, count);
+            }
         }
-
         List<Map.Entry<String, Integer>> countList = new ArrayList<>(responseCount.entrySet());
+
+        //TODO bug: this does not sort correctly
         countList.sort(Map.Entry.comparingByValue());
 
 
