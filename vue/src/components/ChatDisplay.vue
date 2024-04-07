@@ -1,7 +1,19 @@
 <template>
+<<<<<<< HEAD
     <div id="outer-box">
         <div id="chat-display"></div>
 
+=======
+<div id="outer-box">
+    <div id="chat-display"></div>
+    <div id ="user-input">
+        <form>
+            <textarea name="userInput"  id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox" placeholder="Type here..."></textarea>
+            <button @click.prevent="addUserBox()">Send Response</button>
+        </form>
+    </div>
+</div>
+>>>>>>> 087b358d2fed1c34fe3656bec2182ab8f8f7713e
 
         <div id="user-input">
             <form>
@@ -37,6 +49,7 @@ export default {
             else {
                 this.getResponseFromServer();
             }
+<<<<<<< HEAD
 
             this.scrollChatDisplayToBottom(chatBox);
             this.textBoxText = "";
@@ -65,6 +78,22 @@ export default {
 
 
             this.textBoxText = "Type Here";
+=======
+            this.scrollChatDisplayToBottom(chatBox);
+            this.textBoxText = "";
+        },
+        addRobotBox(chatlyWords){
+            const chatBox = document.getElementById('chat-display');
+            const newResponse = document.createElement('div');
+            newResponse.classList.add('chatbot')
+            newResponse.innerText = chatlyWords;
+            chatBox.appendChild(newResponse);
+
+            this.scrollChatDisplayToBottom(chatBox);
+        },
+        scrollChatDisplayToBottom(chatBox) {
+            chatBox.scrollTop = chatBox.scrollHeight;
+>>>>>>> 087b358d2fed1c34fe3656bec2182ab8f8f7713e
         },
         setUserName() {
             this.$store.commit('SET_PREFERREDNAME', this.textBoxText);
@@ -108,16 +137,22 @@ div#chat-display {
 
 div#chat-display>div {
     border: solid 1px black;
+<<<<<<< HEAD
     width: auto;
     padding: 5px;
     margin: 10px;
+=======
+    width:20%;
+    padding:5px;
+    margin:10px;
+>>>>>>> 087b358d2fed1c34fe3656bec2182ab8f8f7713e
     border-radius: 7px;
 
 }
 
 div.chatbot {
     align-self: start;
-    background-color: lightgreen;
+    background-color: #e8a4e4;
 }
 
 div.user {
