@@ -6,6 +6,8 @@
             <textarea name="userInput"  id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox" placeholder="Type here"></textarea>
             <button @click.prevent="addUserBox()">Enter as human</button>
             <button @click.prevent="addRobotBox()">enter as bot</button>
+            <textarea name="userInput" id ='userInput' v-model="textBoxText" placeholder="Type Here"></textarea>
+            <button @click.prevent="addUserBox()">Send Response</button>
         </form>
     </div>
 </div>
@@ -14,6 +16,8 @@
 
 
 <script>
+import QueryService from '../services/QueryService';
+
 export default {
     data() {
         return{
@@ -27,10 +31,10 @@ export default {
             newResponse.classList.add('user')
             newResponse.innerText = this.textBoxText;
             chatBox.appendChild(newResponse);
-            if (!this.$store.name){
+            if (!this.$store.state.preferredName){
                 this.setUserName();
             }
-            if (this.$store.name){
+            else {
                 this.getResponseFromServer();
             }
             this.textBoxText = "";
@@ -46,18 +50,22 @@ export default {
         },
         setUserName(){
             this.$store.commit('SET_PREFERREDNAME', this.textBoxText);
-            this.addRobotBox("Greetings, " + this.$store.state.preferredName + ", I am an unnamed chat bot.")
+            this.addRobotBox("Nice to meet you, " + this.$store.state.preferredName + ". How may I help?")
         },
         getResponseFromServer(){
-            //GO TO SERVER AND GET RESPONSE
+            QueryService.get(this.textBoxText)
+            .then( response => {
+                if(response.status === 200) {
+                    this.addRobotBox(response.data);
+                }
+            })
+            .catch (error => {
+                console.error("Error in Chat Display: " + error);
+            });
         },
-        scrollChatDisplayToBottom(chatBox) {
-
-            chatBox.scrollTop = chatBox.scrollHeight;
-    },
     },
     mounted(){
-        this.addRobotBox("What is your name?");
+        this.addRobotBox("Greetings, my name's Chatwick. What's yours?");
     }
 }
 
