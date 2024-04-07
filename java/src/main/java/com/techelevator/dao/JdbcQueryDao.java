@@ -20,7 +20,7 @@ public class JdbcQueryDao implements QueryDao {
     }
 
     @Override
-    public List<String> getResponsesWithKeywords(List<String> keywords) {
+    public List<String> getResponsesFromKeywords(List<String> keywords) {
         String sql = "select * from response r " +
                 "JOIN response_intent ri ON ri.response_id = r.response_id " +
                 "JOIN response_entity re on re.response_id = r.response_id " +
@@ -88,5 +88,24 @@ public class JdbcQueryDao implements QueryDao {
         List<Integer>[] returnArray = new List[]{intentIds, entityIds};
         return returnArray;
     }
+
+
+    public List<String> getAllMultiWordKeywords(){
+        List<String> keywords = new ArrayList<>();
+        String sql = "SELECT keyword FROM keyword WHERE keyword LIKE '% %' " +
+                "ORDER BY LENGTH(keyword) - LENGTH(REPLACE(keyword, ' ', '')) DESC";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+            while(results.next()){
+                String keyword = results.getString("keyword");
+                keywords.add(keyword);
+            }
+            } catch (CannotGetJdbcConnectionException e) {
+                throw new DaoException("Unable to connect to server or database", e);
+            } catch (DataIntegrityViolationException e) {
+                throw new DaoException("Data Integrity Violation", e);
+            }
+        return keywords;
+    };
 }
 
