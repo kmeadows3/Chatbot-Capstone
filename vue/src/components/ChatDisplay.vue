@@ -3,7 +3,7 @@
     <div id="chat-display"></div>
     <div id ="user-input">
         <form>
-            <textarea name="userInput" id ='userInput' v-model="textBoxText"></textarea>
+            <textarea name="userInput"  id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox" placeholder="Type here"></textarea>
             <button @click.prevent="addUserBox()">Enter as human</button>
             <button @click.prevent="addRobotBox()">enter as bot</button>
         </form>
@@ -17,7 +17,7 @@
 export default {
     data() {
         return{
-            textBoxText: "Type Here"
+            textBoxText: ""
         }
     },
     methods: {
@@ -33,7 +33,7 @@ export default {
             if (this.$store.name){
                 this.getResponseFromServer();
             }
-            this.textBoxText = "Type Here";
+            this.textBoxText = "";
         },
         addRobotBox(chatlyWords){
             const chatBox = document.getElementById('chat-display');
@@ -41,6 +41,8 @@ export default {
             newResponse.classList.add('chatbot')
             newResponse.innerText = chatlyWords;
             chatBox.appendChild(newResponse);
+
+            this.scrollChatDisplayToBottom(chatBox);
         },
         setUserName(){
             this.$store.commit('SET_PREFERREDNAME', this.textBoxText);
@@ -48,7 +50,11 @@ export default {
         },
         getResponseFromServer(){
             //GO TO SERVER AND GET RESPONSE
-        }
+        },
+        scrollChatDisplayToBottom(chatBox) {
+
+            chatBox.scrollTop = chatBox.scrollHeight;
+    },
     },
     mounted(){
         this.addRobotBox("What is your name?");
@@ -74,7 +80,7 @@ div#chat-display{
 
 div#chat-display > div {
     border: solid 1px black;
-    width:70%;
+    width:20%;
     padding:5px;
     margin:10px;
     border-radius: 7px;
@@ -82,7 +88,7 @@ div#chat-display > div {
 
 div.chatbot{
     align-self: start;
-    background-color: lightgreen;
+    background-color: #e8a4e4;
 }
 div.user{
     align-self: end;
