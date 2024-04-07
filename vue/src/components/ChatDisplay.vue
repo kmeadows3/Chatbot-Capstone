@@ -3,10 +3,7 @@
     <div id="chat-display"></div>
     <div id ="user-input">
         <form>
-            <textarea name="userInput"  id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox" placeholder="Type here"></textarea>
-            <button @click.prevent="addUserBox()">Enter as human</button>
-            <button @click.prevent="addRobotBox()">enter as bot</button>
-            <textarea name="userInput" id ='userInput' v-model="textBoxText" placeholder="Type Here"></textarea>
+            <textarea name="userInput"  id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox" placeholder="Type here..."></textarea>
             <button @click.prevent="addUserBox()">Send Response</button>
         </form>
     </div>
@@ -37,6 +34,7 @@ export default {
             else {
                 this.getResponseFromServer();
             }
+            this.scrollChatDisplayToBottom(chatBox);
             this.textBoxText = "";
         },
         addRobotBox(chatlyWords){
@@ -47,6 +45,9 @@ export default {
             chatBox.appendChild(newResponse);
 
             this.scrollChatDisplayToBottom(chatBox);
+        },
+        scrollChatDisplayToBottom(chatBox) {
+            chatBox.scrollTop = chatBox.scrollHeight;
         },
         setUserName(){
             this.$store.commit('SET_PREFERREDNAME', this.textBoxText);
