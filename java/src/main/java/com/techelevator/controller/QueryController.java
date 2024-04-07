@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.JdbcQueryDao;
+import com.techelevator.model.UserInput;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -16,8 +17,8 @@ public class QueryController {
     }
 
     @RequestMapping(path= "/", method = RequestMethod.POST)
-    public String getResponse(@RequestBody String utterance) {
-        List<String> potentialKeywords = tokenizeUtterance(utterance);
+    public String getResponse(@RequestBody UserInput userInput) {
+        List<String> potentialKeywords = tokenizeUtterance(userInput);
         List<String> responses = queryDao.getResponsesWithKeywords(potentialKeywords);
 
         return responses.get(0);
@@ -26,10 +27,11 @@ public class QueryController {
 
     /**
      *
-     * @param utterance -- the User's utterance
+     * @param userInput -- the Input from the client
      * @return List of all tokens from the utterance
      */
-    private List<String> tokenizeUtterance(String utterance) {
+    private List<String> tokenizeUtterance(UserInput userInput) {
+        String utterance = userInput.getUtterance();
         utterance = utterance.trim();
         String[] potentialKeywordsArray = utterance.split(" ");
 
