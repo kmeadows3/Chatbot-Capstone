@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.JdbcQueryDao;
 import com.techelevator.model.UserInput;
+import com.techelevator.service.QueryService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -11,31 +12,19 @@ import java.util.List;
 @CrossOrigin
 public class QueryController {
 
+    private QueryService queryService;
+
     private JdbcQueryDao queryDao;
-    public QueryController(JdbcQueryDao queryDao) {
-        this.queryDao = queryDao;
+    public QueryController (QueryService queryService) {
+        this.queryService = queryService;
     }
 
     @RequestMapping(path= "/", method = RequestMethod.POST)
     public String getResponse(@RequestBody UserInput userInput) {
-        List<String> potentialKeywords = tokenizeUtterance(userInput);
-        List<String> responses = queryDao.getResponsesWithKeywords(potentialKeywords);
-
-        return responses.get(0);
+        String response = queryService.getResponse(userInput);
+        return response;
 
     }
 
-    /**
-     *
-     * @param userInput -- the Input from the client
-     * @return List of all tokens from the utterance
-     */
-    private List<String> tokenizeUtterance(UserInput userInput) {
-        String utterance = userInput.getUtterance();
-        utterance = utterance.trim();
-        String[] potentialKeywordsArray = utterance.split(" ");
-
-        return Arrays.asList(potentialKeywordsArray);
-    }
 
 }
