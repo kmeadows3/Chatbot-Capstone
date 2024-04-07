@@ -1,11 +1,14 @@
 <template>
 <div id="outer-box">
     <div id="chat-display"></div>
+ 
+    
     <div id ="user-input">
         <form>
-            <textarea name="userInput" id ='userInput' v-model="textBoxText"></textarea>
+            <textarea name="userInput"  id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox"></textarea>
             <button @click.prevent="addUserBox()">Enter as human</button>
             <button @click.prevent="addRobotBox()">enter as bot</button>
+
         </form>
     </div>
 </div>
@@ -16,8 +19,10 @@
 <script>
 export default {
     data() {
+        
         return{
-            textBoxText: "Type Here"
+            textBoxText: "Type Here",
+            isLoading: false
         }
     },
     methods: {
@@ -34,21 +39,43 @@ export default {
                 this.getResponseFromServer();
             }
             this.textBoxText = "Type Here";
+            this.scrollChatDisplayToBottom(chatBox);
         },
-        addRobotBox(chatlyWords){
-            const chatBox = document.getElementById('chat-display');
-            const newResponse = document.createElement('div');
-            newResponse.classList.add('chatbot')
-            newResponse.innerText = chatlyWords;
-            chatBox.appendChild(newResponse);
-        },
+        addRobotBox(chatlyWords) {
+    this.isLoading = true;  
+
+    setTimeout(() => {
+
+        const chatBox = document.getElementById('chat-display');
+        const newResponse = document.createElement('div');
+        newResponse.classList.add('chatbot');
+        const loadingGif = document.createElement('img');
+        loadingGif.src = "/src/assets/resize.gif";
+        newResponse.appendChild(loadingGif);
+        chatBox.appendChild(newResponse);
+        this.scrollChatDisplayToBottom(chatBox);
+
+        setTimeout(() => {
+           
+            
+            newResponse.innerText = this.textBoxText; 
+            this.isLoading = false; 
+        }, 1500);
+    }, 500);  
+
+   
+    this.textBoxText = "Type Here";
+},
         setUserName(){
             this.$store.commit('SET_PREFERREDNAME', this.textBoxText);
             this.addRobotBox("Greetings, " + this.$store.state.preferredName + ", I am an unnamed chat bot.")
         },
         getResponseFromServer(){
             //GO TO SERVER AND GET RESPONSE
-        }
+        },
+        scrollChatDisplayToBottom(chatBox) {
+      chatBox.scrollTop = chatBox.scrollHeight;
+    },
     },
     mounted(){
         this.addRobotBox("What is your name?");
@@ -58,6 +85,8 @@ export default {
 </script>
 
 <style>
+
+
 
 div#chat-display{
     height: 500px;
@@ -74,10 +103,11 @@ div#chat-display{
 
 div#chat-display > div {
     border: solid 1px black;
-    width:70%;
+    width:auto;
     padding:5px;
     margin:10px;
     border-radius: 7px;
+
 }
 
 div.chatbot{
