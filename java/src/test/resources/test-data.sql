@@ -24,6 +24,10 @@ INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('keyword1', 1, NULL);
 INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('keyword2', NULL, 1);  -- ID 2
 INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('keyword3', 1, NULL);  -- ID 3
 INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('keyword4', NULL, 3);  -- ID 4
+INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('Multiple Word Keyword', NULL, 3);  -- ID 5
+INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('Two-word keyword', NULL, 3);  -- ID 6
+INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('The Longest Mutiple Word Keyword', NULL, 3);  -- ID 7
+
 
 INSERT INTO response_intent(response_id, intent_id) VALUES (1, 1);
 INSERT INTO response_intent(response_id, intent_id) VALUES (2, 1);
