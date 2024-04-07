@@ -38,8 +38,18 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
         List<String> potentialKeywords = new ArrayList<>();
         potentialKeywords.add("keyword1");
         potentialKeywords.add("keyword2");
-        List<String> returnedResponses = jdbcQueryDao.getResponsesWithKeywords(potentialKeywords);
+        List<String> returnedResponses = jdbcQueryDao.getResponsesFromKeywords(potentialKeywords);
         Assert.assertEquals(1, returnedResponses.size());
         Assert.assertEquals("Test Response 1", returnedResponses.get(0));
+    }
+
+    @Test
+    public void getAllMultiWordKeywords_returns_expected_list(){
+        List<String> returnedKeywords = jdbcQueryDao.getAllMultiWordKeywords();
+        Assert.assertEquals(3, returnedKeywords.size());
+        Assert.assertEquals("The Longest Mutiple Word Keyword", returnedKeywords.get(0));
+        Assert.assertEquals("Multiple Word Keyword", returnedKeywords.get(1));
+        Assert.assertEquals("Two-word keyword", returnedKeywords.get(2));
+
     }
 }
