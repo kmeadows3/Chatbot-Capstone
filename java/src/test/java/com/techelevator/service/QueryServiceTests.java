@@ -21,10 +21,19 @@ public class QueryServiceTests extends BaseDaoTests {
     }
 
     @Test
-    public void getResponseReturnsExpectedResponse(){
+    public void getResponse_returns_expected_response_when_only_one_response_matches(){
         UserInput input = new UserInput();
         input.setTopic("topic");
-        input.setUtterance("keyword3 keyword5 Multiple Word Keyword");
+        input.setUtterance("intent3keyword entity2keyword");
+        String response = queryService.getResponse(input);
+        Assert.assertEquals("Test Response 5", response);
+    }
+
+    @Test
+    public void getResponse_returns_expected_response_when_multiple_responses_match(){
+        UserInput input = new UserInput();
+        input.setTopic("topic");
+        input.setUtterance("intent2keyword entity2keyword entity3keyword");
         String response = queryService.getResponse(input);
 
         Assert.assertEquals("Test Response 4", response);

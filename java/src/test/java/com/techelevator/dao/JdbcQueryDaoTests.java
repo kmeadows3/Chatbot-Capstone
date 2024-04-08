@@ -21,8 +21,8 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
     @Test
     public void getEntitiesAndIntents_returns_correct_array() {
         List<String> potentialKeywords = new ArrayList<>();
-        potentialKeywords.add("keyword1");
-        potentialKeywords.add("keyword2");
+        potentialKeywords.add("intent1keyword");
+        potentialKeywords.add("entity1keyword");
         List<Integer>[] resultsArray = jdbcQueryDao.getIntentsAndEntitiesFromKeywords(potentialKeywords);
         List<Integer> intents = resultsArray[0];
         List<Integer> entities = resultsArray[1];
@@ -36,8 +36,8 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
     @Test
     public void getResponsesWithKeywords_returns_correct_response_list(){
         List<String> potentialKeywords = new ArrayList<>();
-        potentialKeywords.add("keyword1");
-        potentialKeywords.add("keyword2");
+        potentialKeywords.add("intent1keyword");
+        potentialKeywords.add("entity1keyword");
         List<String> returnedResponses = jdbcQueryDao.getResponsesFromKeywords(potentialKeywords);
         Assert.assertEquals(1, returnedResponses.size());
         Assert.assertEquals("Test Response 1", returnedResponses.get(0));
