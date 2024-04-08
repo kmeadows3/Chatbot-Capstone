@@ -6,12 +6,21 @@ export function createStore(currentToken, currentUser) {
     state: {
       token: currentToken || '',
       user: currentUser || {},
-      preferredName: ''
+      preferredName: '',
+      intent: 1,
+      entity: 1
       },
     mutations: {
       SET_PREFERREDNAME(state, name){
         state.preferredName = name;
       },
+      SET_INTENT(state, newIntent) {
+        state.intent = newIntent;
+      },
+      SET_ENTITY(state, newEntity) {
+        state.entity = newEntity;
+      },
+
       /*
       LOGIN INFORMATION PROVIDED WITH CAPSTONE, IGNORE
       */
@@ -32,6 +41,15 @@ export function createStore(currentToken, currentUser) {
         axios.defaults.headers.common = {};
       }
     },
+
+    getters: {
+      currentIntent(state) {
+        return state.intent;
+      },
+      currentEntity(state) {
+        return state.entity;
+      },
+    }
   });
   return store;
 }
