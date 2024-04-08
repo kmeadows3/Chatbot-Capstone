@@ -63,11 +63,17 @@ INSERT INTO entity(name) VALUES ('Cover Letter');
 -- ID 5
 INSERT INTO entity(name) VALUES ('Employer');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('employer', 5);  -- Entity: Employer(5)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('company', 5);  -- Entity: Employer(5)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('organization', 5);  -- Entity: Employer(5)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('job search', 5);  -- Entity: Employer(5)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('job market', 5);  -- Entity: Employer(5)
 	
 -- ID 6
 INSERT INTO entity(name) VALUES ('General Interview');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('interview', 6);  -- Entity: General Interview(6)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('interviewing', 6);  -- Entity: General Interview(6)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('interview questions', 6);  -- Entity: General Interview(6)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('interview preparation', 6);  -- Entity: General Interview(6)
 
 
 -- ID 7
@@ -82,6 +88,8 @@ INSERT INTO entity(name) VALUES ('Tech Interview');
 INSERT INTO entity(name) VALUES ('HR Interview');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('HR interview', 8);  -- Entity: HR Interview(8)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('HR', 8);  -- Entity: HR Interview(8)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('HR screening interview', 8);  -- Entity: HR Interview(8)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('HR phone interview', 8);  -- Entity: HR Interview(8)
 
 -- ID 9
 INSERT INTO entity(name) VALUES ('Attire');  
@@ -90,6 +98,9 @@ INSERT INTO entity(name) VALUES ('Attire');
 	INSERT INTO keyword(keyword, entity_id) VALUES ('clothes', 9);  -- Entity: Attire(9)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('outfit', 9);  -- Entity: Attire(9)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('clothing', 9);  -- Entity: Attire(9)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('professional attire', 9);  -- Entity: Attire(9)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('business casual', 9);  -- Entity: Attire(9)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('formal wear', 9);  -- Entity: Attire(9)
 
 
 -- ID 10
@@ -97,6 +108,9 @@ INSERT INTO entity(name) VALUES ('Follow Up');
 	INSERT INTO keyword(keyword, entity_id) VALUES ('follow up', 10);  -- Follow up(10)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('follow-up', 10);  -- Follow up(10)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('after', 10);  -- Follow up(10)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('post-interview', 10);  -- Follow up(10)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('thank-you note', 10);  -- Follow up(10)
+	
 
 
 
