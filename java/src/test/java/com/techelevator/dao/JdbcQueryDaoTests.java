@@ -43,7 +43,33 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
 
 
     @Test
-    public void getEntitiesAndIntents_returns_correct_array() {
+    public void getEntitiesAndIntents_returns_correct_array_only_one_intent_keyword() {
+        List<String> potentialKeywords = new ArrayList<>();
+        potentialKeywords.add("intent1keyword");
+        List<Integer>[] resultsArray = jdbcQueryDao.getIntentsAndEntitiesFromKeywords(potentialKeywords);
+        List<Integer> intents = resultsArray[0];
+        List<Integer> entities = resultsArray[1];
+
+        Assert.assertEquals(1, intents.size());
+        Assert.assertEquals(0, entities.size());
+        Assert.assertEquals(1, (int) intents.get(0));
+    }
+
+    @Test
+    public void getEntitiesAndIntents_returns_correct_array_only_one_entity_keyword() {
+        List<String> potentialKeywords = new ArrayList<>();
+        potentialKeywords.add("entity1keyword");
+        List<Integer>[] resultsArray = jdbcQueryDao.getIntentsAndEntitiesFromKeywords(potentialKeywords);
+        List<Integer> intents = resultsArray[0];
+        List<Integer> entities = resultsArray[1];
+
+        Assert.assertEquals(0, intents.size());
+        Assert.assertEquals(1, entities.size());
+        Assert.assertEquals(1, (int) entities.get(0));
+    }
+
+    @Test
+    public void getEntitiesAndIntents_returns_correct_array_both_entity_and_intent() {
         List<String> potentialKeywords = new ArrayList<>();
         potentialKeywords.add("intent1keyword");
         potentialKeywords.add("entity1keyword");
@@ -57,6 +83,19 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
         Assert.assertEquals(1, (int) entities.get(0));
     }
 
+    public void getEntitiesAndIntents_returns_empty_arrays_when_no_keywords_found() {
+        List<String> potentialKeywords = new ArrayList<>();
+        potentialKeywords.add("not a keyword");
+        potentialKeywords.add("still not a keyword");
+        List<Integer>[] resultsArray = jdbcQueryDao.getIntentsAndEntitiesFromKeywords(potentialKeywords);
+        List<Integer> intents = resultsArray[0];
+        List<Integer> entities = resultsArray[1];
+
+        Assert.assertEquals(1, intents.size());
+        Assert.assertEquals(1, entities.size());
+        Assert.assertEquals(1, (int) intents.get(0));
+        Assert.assertEquals(1, (int) entities.get(0));
+    }
 
     @Test
     public void getAllMultiWordKeywords_returns_expected_list(){
