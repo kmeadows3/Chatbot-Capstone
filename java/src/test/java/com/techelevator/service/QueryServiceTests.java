@@ -2,6 +2,7 @@ package com.techelevator.service;
 
 import com.techelevator.dao.BaseDaoTests;
 import com.techelevator.dao.JdbcQueryDao;
+import com.techelevator.model.Response;
 import com.techelevator.model.UserInput;
 import org.junit.Assert;
 import org.junit.Before;
@@ -25,8 +26,8 @@ public class QueryServiceTests extends BaseDaoTests {
         UserInput input = new UserInput();
         input.setPreviousReponseId(1);
         input.setUtterance("intent3keyword entity2keyword");
-        String response = queryService.getResponse(input);
-        Assert.assertEquals("Test Response 5", response);
+        Response response = queryService.getResponse(input);
+        Assert.assertEquals("Test Response 5", response.getResponse());
     }
 
     @Test
@@ -34,9 +35,9 @@ public class QueryServiceTests extends BaseDaoTests {
         UserInput input = new UserInput();
         input.setPreviousReponseId(1);
         input.setUtterance("intent2keyword entity2keyword entity3keyword");
-        String response = queryService.getResponse(input);
+        Response response = queryService.getResponse(input);
 
-        Assert.assertEquals("Test Response 4", response);
+        Assert.assertEquals("Test Response 4", response.getResponse());
     }
 
 
