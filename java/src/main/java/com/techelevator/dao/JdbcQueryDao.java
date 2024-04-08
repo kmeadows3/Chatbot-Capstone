@@ -28,12 +28,7 @@ public class JdbcQueryDao implements QueryDao {
         List<String> responses = new ArrayList<String>();
 
         try {
-            if (intentIds.size() == 0) {
-                intentIds.add(1);
-            }
-            if (entityIds.size() == 0) {
-                entityIds.add(1);
-            }
+
 
             for (Integer intentId : intentIds) {
                 for (Integer entityId : entityIds) {
