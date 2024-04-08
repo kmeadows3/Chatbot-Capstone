@@ -1,167 +1,128 @@
 <template>
-<<<<<<< HEAD
     <div id="outer-box">
         <div id="chat-display"></div>
-
-=======
-<div id="outer-box">
-    <div id="chat-display"></div>
-    <div id ="user-input">
-        <form>
-            <textarea name="userInput"  id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox" placeholder="Type here..."></textarea>
-            <button @click.prevent="addUserBox()">Send Response</button>
-        </form>
-    </div>
-</div>
->>>>>>> 087b358d2fed1c34fe3656bec2182ab8f8f7713e
-
-        <div id="user-input">
+     
+        
+        <div id ="user-input">
             <form>
-                <textarea name="userInput" id='userInput' v-model="textBoxText" placeholder="Type Here"></textarea>
-                <button @click.prevent="addUserBox()">Send Response</button>
+                <textarea name="userInput"  id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox"></textarea>
+                <button @click.prevent="addUserBox()">Enter as human</button>
+                <button @click.prevent="addRobotBox()">enter as bot</button>
+    
             </form>
         </div>
     </div>
-</template>
-
-
-<script>
-import QueryService from '../services/QueryService';
-
-export default {
-    data() {
-
-        return {
-            isLoading: false,
-            textBoxText: ""
-        }
-    },
-    methods: {
-        addUserBox() {
-            const chatBox = document.getElementById('chat-display');
-            const newResponse = document.createElement('div');
-            newResponse.classList.add('user')
-            newResponse.innerText = this.textBoxText;
-            chatBox.appendChild(newResponse);
-            if (!this.$store.state.preferredName) {
-                this.setUserName();
+    
+    </template>
+    
+    
+    <script>
+    export default {
+        data() {
+            
+            return{
+                textBoxText: "Type Here",
+                isLoading: false
             }
-            else {
-                this.getResponseFromServer();
-            }
-<<<<<<< HEAD
-
-            this.scrollChatDisplayToBottom(chatBox);
-            this.textBoxText = "";
         },
-        addRobotBox(chatlyWords) {
-            this.isLoading = true;
-
-            setTimeout(() => {
-
+        methods: {
+            addUserBox(){
                 const chatBox = document.getElementById('chat-display');
                 const newResponse = document.createElement('div');
-                newResponse.classList.add('chatbot');
-                const loadingGif = document.createElement('img');
-                loadingGif.src = "/src/assets/resize.gif";
-                newResponse.appendChild(loadingGif);
+                newResponse.classList.add('user')
+                newResponse.innerText = this.textBoxText;
                 chatBox.appendChild(newResponse);
+                if (!this.$store.name){
+                    this.setUserName();
+                }
+                if (this.$store.name){
+                    this.getResponseFromServer();
+                }
+                this.textBoxText = "Type Here";
                 this.scrollChatDisplayToBottom(chatBox);
-
-                setTimeout(() => {
-
-
-                    newResponse.innerText = this.textBoxText;
-                    this.isLoading = false;
-                }, 1500);
-            }, 500);
-
-
-            this.textBoxText = "Type Here";
-=======
-            this.scrollChatDisplayToBottom(chatBox);
-            this.textBoxText = "";
-        },
-        addRobotBox(chatlyWords){
+            },
+            addRobotBox(chatlyWords) {
+        this.isLoading = true;  
+    
+        setTimeout(() => {
+    
             const chatBox = document.getElementById('chat-display');
             const newResponse = document.createElement('div');
-            newResponse.classList.add('chatbot')
-            newResponse.innerText = chatlyWords;
+            newResponse.classList.add('chatbot');
+            const loadingGif = document.createElement('img');
+            loadingGif.src = "/src/assets/resize.gif";
+            newResponse.appendChild(loadingGif);
             chatBox.appendChild(newResponse);
-
             this.scrollChatDisplayToBottom(chatBox);
-        },
-        scrollChatDisplayToBottom(chatBox) {
-            chatBox.scrollTop = chatBox.scrollHeight;
->>>>>>> 087b358d2fed1c34fe3656bec2182ab8f8f7713e
-        },
-        setUserName() {
-            this.$store.commit('SET_PREFERREDNAME', this.textBoxText);
-            this.addRobotBox("Nice to meet you, " + this.$store.state.preferredName + ". How may I help?")
-        },
-        getResponseFromServer() {
-            QueryService.get(this.textBoxText)
-                .then(response => {
-                    if (response.status === 200) {
-                        this.addRobotBox(response.data);
-                    }
-                })
-                .catch(error => {
-                    console.error("Error in Chat Display: " + error);
-                });
-        },
-        scrollChatDisplayToBottom(chatBox) {
-            chatBox.scrollTop = chatBox.scrollHeight;
-        },
+    
+            setTimeout(() => {
+               
+                
+                newResponse.innerText = this.textBoxText; 
+                this.isLoading = false; 
+            }, 1500);
+        }, 500);  
+    
+       
+        this.textBoxText = "Type Here";
     },
-    mounted() {
-        this.addRobotBox("Greetings, my name's Chatwick. What's yours?");
+            setUserName(){
+                this.$store.commit('SET_PREFERREDNAME', this.textBoxText);
+                this.addRobotBox("Greetings, " + this.$store.state.preferredName + ", I am an unnamed chat bot.")
+            },
+            getResponseFromServer(){
+                //GO TO SERVER AND GET RESPONSE
+            },
+            scrollChatDisplayToBottom(chatBox) {
+          chatBox.scrollTop = chatBox.scrollHeight;
+        },
+        },
+        mounted(){
+            this.addRobotBox("What is your name?");
+        }
     }
-}
-
-</script>
-
-<style>
-div#chat-display {
-    height: 500px;
-    overflow-y: auto;
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-
-
-    border: solid 1px black;
-
-}
-
-div#chat-display>div {
-    border: solid 1px black;
-<<<<<<< HEAD
-    width: auto;
-    padding: 5px;
-    margin: 10px;
-=======
-    width:20%;
-    padding:5px;
-    margin:10px;
->>>>>>> 087b358d2fed1c34fe3656bec2182ab8f8f7713e
-    border-radius: 7px;
-
-}
-
-div.chatbot {
-    align-self: start;
-    background-color: #e8a4e4;
-}
-
-div.user {
-    align-self: end;
-    background-color: lightblue;
-}
-
-textarea {
-    width: 100%;
-    height: 100px;
-}
-</style>
+    
+    </script>
+    
+    <style>
+    
+    
+    
+    div#chat-display{
+        height: 500px;
+        overflow-y: auto;
+        width: 100%;
+    
+        display: flex;
+        flex-direction: column;
+    
+    
+        border: solid 1px black;
+    
+    }
+    
+    div#chat-display > div {
+        border: solid 1px black;
+        width:auto;
+        padding:5px;
+        margin:10px;
+        border-radius: 7px;
+    
+    }
+    
+    div.chatbot{
+        align-self: start;
+        background-color: lightgreen;
+    }
+    div.user{
+        align-self: end;
+        background-color: lightblue;
+    }
+    textarea{
+        width: 100%;
+        height: 100px;
+    }
+    
+    
+    </style>
+    
