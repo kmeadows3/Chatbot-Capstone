@@ -17,10 +17,7 @@ public class QueryController {
 
     @RequestMapping(path= "/", method = RequestMethod.POST)
     public Response getResponse(@RequestBody UserInput userInput) {
-        Response response = new Response();
-        response.setResponse(queryService.getResponse(userInput));
-
-        //String response = queryService.getResponse(userInput);
+        Response response = queryService.getResponse(userInput);
         return response;
 
     }
