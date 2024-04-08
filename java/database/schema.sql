@@ -44,7 +44,7 @@ CREATE TABLE response_entity(
 
 CREATE TABLE keyword(
 	keyword_id serial PRIMARY KEY,
-	keyword varchar(100) NOT NULL,
+	keyword varchar(100) NOT NULL UNIQUE,
 	entity_id int,
 	intent_id int,
 	CONSTRAINT FK_keyword_entity_id FOREIGN KEY(entity_id) REFERENCES entity(entity_id),
