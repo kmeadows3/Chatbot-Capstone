@@ -73,8 +73,8 @@ export default {
         getResponseFromServer() {
             const query = {
                 utterance: this.textBoxText,
-                intent: this.$store.state.intent,
-                entity: this.$store.state.entity,
+                intents: this.$store.state.intents,
+                entities: this.$store.state.entities,
             }
 
             QueryService.get(query)
@@ -82,8 +82,8 @@ export default {
                 if(response.status === 200) {
                     // TODO: When the get returns a success response
                     console.log(response.data);
-                    this.$store.commit('SET_INTENT', response.data.intent);
-                    this.$store.commit('SET_ENTITY', response.data.entity);
+                    this.$store.commit('SET_INTENTS', response.data.intents);
+                    this.$store.commit('SET_ENTITIES', response.data.entities);
                     this.addRobotBox(response.data.response);
                     
                 }

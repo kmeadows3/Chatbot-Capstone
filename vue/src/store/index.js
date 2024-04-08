@@ -14,11 +14,11 @@ export function createStore(currentToken, currentUser) {
       SET_PREFERREDNAME(state, name){
         state.preferredName = name;
       },
-      SET_INTENT(state, newIntent) {
-        state.intent = newIntent;
+      SET_INTENTS(state, newIntents) {
+        state.intents = newIntents;
       },
-      SET_ENTITY(state, newEntity) {
-        state.entity = newEntity;
+      SET_ENTITIES(state, newEntities) {
+        state.entities = newEntities;
       },
 
       /*
