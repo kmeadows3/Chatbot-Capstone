@@ -25,8 +25,18 @@ public class QueryService {
      */
     public Response getResponse(UserInput userInput){
         Response outputResponse = new Response();
-        outputResponse.setIntent(userInput.getIntent());
-        outputResponse.setEntity(userInput.getEntity());
+
+        // TODO -- Remove later, this is test data
+        List<Integer> intents = new ArrayList<>();
+        intents.add(5);
+        intents.add(5);
+
+        List<Integer> entities = new ArrayList<>();
+        entities.add(3);
+        entities.add(7);
+
+        outputResponse.setIntents(intents);
+        outputResponse.setEntities(entities);
 
         List<String> tokens = tokenizeUtterance(userInput);
         List<Integer>[] intentsAndEntities = queryDao.getIntentsAndEntitiesFromKeywords(tokens);

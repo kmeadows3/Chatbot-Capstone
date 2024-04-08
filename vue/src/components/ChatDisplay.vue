@@ -81,8 +81,11 @@ export default {
             .then( response => {
                 if(response.status === 200) {
                     // TODO: When the get returns a success response
-                    this.addRobotBox(response.data);
-                    console.log("Chatwick's Response:  " + response);
+                    console.log(response.data);
+                    this.$store.commit('SET_INTENT', response.data.intent);
+                    this.$store.commit('SET_ENTITY', response.data.entity);
+                    this.addRobotBox(response.data.response);
+                    
                 }
             })
             .catch (error => {

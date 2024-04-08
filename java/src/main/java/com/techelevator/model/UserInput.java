@@ -1,11 +1,13 @@
 package com.techelevator.model;
 
 
+import java.util.List;
+
 public class UserInput {
     private String utterance;
     private int previousResponseId;
-    private int intent;
-    private int entity;
+    private List<Integer> intents;
+    private List<Integer> entities;
 
 
     // Getters
@@ -17,12 +19,12 @@ public class UserInput {
         return previousResponseId;
     }
 
-    public int getIntent() {
-        return intent;
+    public List<Integer> getIntents() {
+        return intents;
     }
 
-    public int getEntity() {
-        return entity;
+    public List<Integer> getEntities() {
+        return entities;
     }
 
 
@@ -36,12 +38,12 @@ public class UserInput {
         this.previousResponseId = previousReponse;
     }
 
-    public void setIntent(int intent) {
-        this.intent = intent;
+    public void setIntents(List<Integer> intents) {
+        this.intents = intents;
     }
 
-    public void setEntity(int entity) {
-        this.entity = entity;
+    public void setEntities(List<Integer> entities) {
+        this.entities = entities;
     }
 
 

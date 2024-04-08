@@ -7,8 +7,8 @@ export function createStore(currentToken, currentUser) {
       token: currentToken || '',
       user: currentUser || {},
       preferredName: '',
-      intent: 1,
-      entity: 1
+      intent: [1],
+      entity: [1]
       },
     mutations: {
       SET_PREFERREDNAME(state, name){

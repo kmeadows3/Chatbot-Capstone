@@ -1,10 +1,12 @@
 package com.techelevator.model;
 
+import java.util.List;
+
 public class Response {
 
     private String response;
-    private int intent;
-    private int entity;
+    private List<Integer> intents;
+    private List<Integer> entities;
 
 
     // Getters
@@ -12,12 +14,12 @@ public class Response {
         return response;
     }
 
-    public int getIntent() {
-        return intent;
+    public List<Integer> getIntents() {
+        return intents;
     }
 
-    public int getEntity() {
-        return entity;
+    public List<Integer> getEntities() {
+        return entities;
     }
 
 
@@ -26,11 +28,11 @@ public class Response {
         this.response = response;
     }
 
-    public void setIntent(int intent) {
-        this.intent = intent;
+    public void setIntents(List<Integer> intents) {
+        this.intents = intents;
     }
 
-    public void setEntity(int entity) {
-        this.entity = entity;
+    public void setEntities(List<Integer> entities) {
+        this.entities = entities;
     }
 }
