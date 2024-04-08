@@ -124,7 +124,7 @@ public class QueryService {
 
     private List<Integer>[] setIntentsAndEntitiesWhenNoneReturned(List<Integer>intentIds, List<Integer>entityIds, UserInput userInput){
         if (intentIds.size() == 0) {
-            if (userInput.getIntents().size() != 0) {
+            if (userInput.getIntents() == null ||userInput.getIntents().size() != 0) {
                 intentIds.addAll(userInput.getIntents());
             } else {
                 intentIds.add(1);  //adds default intent
@@ -132,7 +132,7 @@ public class QueryService {
         }
 
         if (entityIds.size() == 0) {
-            if (userInput.getEntities().size() != 0){
+            if (userInput.getEntities() == null ||userInput.getEntities().size() != 0){
                 entityIds.addAll(userInput.getEntities());
             } else {
                 entityIds.add(1); //adds default entity
