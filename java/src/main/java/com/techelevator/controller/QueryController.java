@@ -17,6 +17,8 @@ public class QueryController {
 
     @RequestMapping(path= "/", method = RequestMethod.POST)
     public Response getResponse(@RequestBody UserInput userInput) {
+        String cleanedUtterance = userInput.getUtterance().replaceAll("[^a-zA-Z ]", "");
+        userInput.setUtterance(cleanedUtterance);
         Response response = queryService.getResponse(userInput);
         return response;
 
