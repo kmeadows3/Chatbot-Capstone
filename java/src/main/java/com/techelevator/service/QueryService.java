@@ -1,6 +1,7 @@
 package com.techelevator.service;
 
 import com.techelevator.dao.QueryDao;
+import com.techelevator.model.Response;
 import com.techelevator.model.UserInput;
 import org.springframework.stereotype.Component;
 
@@ -22,10 +23,17 @@ public class QueryService {
      * @param userInput -- the user input provided by the client
      * @return the chatbot response
      */
-    public String getResponse(UserInput userInput){
+    public Response getResponse(UserInput userInput){
+        Response outputResponse = new Response();
+        outputResponse.setIntent(userInput.getIntent());
+        outputResponse.setEntity(userInput.getEntity());
+
         List<String> tokens = tokenizeUtterance(userInput);
-        List<String> responses = queryDao.getResponsesFromKeywords(tokens);
-        return selectResponse(responses);
+        List<Integer>[] intentsAndEntities = queryDao.getIntentsAndEntitiesFromKeywords(tokens);
+        List<String> responses = queryDao.getResponsesFromIntentsAndEntities(intentsAndEntities[0], intentsAndEntities[1]);
+
+        outputResponse.setResponse(selectResponse(responses));
+        return outputResponse;
     }
 
 

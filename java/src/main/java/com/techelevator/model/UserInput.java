@@ -4,6 +4,8 @@ package com.techelevator.model;
 public class UserInput {
     private String utterance;
     private int previousResponseId;
+    private int intent;
+    private int entity;
 
 
     // Getters
@@ -15,6 +17,15 @@ public class UserInput {
         return previousResponseId;
     }
 
+    public int getIntent() {
+        return intent;
+    }
+
+    public int getEntity() {
+        return entity;
+    }
+
+
 
     // Setters
     public void setUtterance(String utterance) {
@@ -24,4 +35,14 @@ public class UserInput {
     public void setPreviousReponseId(int previousReponse) {
         this.previousResponseId = previousReponse;
     }
+
+    public void setIntent(int intent) {
+        this.intent = intent;
+    }
+
+    public void setEntity(int entity) {
+        this.entity = entity;
+    }
+
+
 }

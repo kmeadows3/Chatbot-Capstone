@@ -19,7 +19,57 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
     }
 
     @Test
-    public void getEntitiesAndIntents_returns_correct_array() {
+    public void getResponsesWithKeywords_returns_correct_response_list_when_only_one_response_matches(){
+        List<Integer> intents = new ArrayList<>();
+        List<Integer> entities = new ArrayList<>();
+        intents.add(2);
+        entities.add(4);
+        List<String> returnedResponses = jdbcQueryDao.getResponsesFromIntentsAndEntities(intents,entities);
+        Assert.assertEquals(1, returnedResponses.size());
+        Assert.assertTrue(returnedResponses.contains("Test Response 6"));
+    }
+
+    @Test
+    public void getResponsesWithKeywords_returns_correct_response_list_when_multiple_responses_match(){
+        List<Integer> intents = new ArrayList<>();
+        List<Integer> entities = new ArrayList<>();
+        intents.add(2);
+        entities.add(3);
+        List<String> returnedResponses = jdbcQueryDao.getResponsesFromIntentsAndEntities(intents,entities);
+        Assert.assertEquals(2, returnedResponses.size());
+        Assert.assertTrue(returnedResponses.contains("Test Response 3"));
+        Assert.assertTrue(returnedResponses.contains("Test Response 4"));
+    }
+
+
+    @Test
+    public void getEntitiesAndIntents_returns_correct_array_only_one_intent_keyword() {
+        List<String> potentialKeywords = new ArrayList<>();
+        potentialKeywords.add("intent1keyword");
+        List<Integer>[] resultsArray = jdbcQueryDao.getIntentsAndEntitiesFromKeywords(potentialKeywords);
+        List<Integer> intents = resultsArray[0];
+        List<Integer> entities = resultsArray[1];
+
+        Assert.assertEquals(1, intents.size());
+        Assert.assertEquals(0, entities.size());
+        Assert.assertEquals(1, (int) intents.get(0));
+    }
+
+    @Test
+    public void getEntitiesAndIntents_returns_correct_array_only_one_entity_keyword() {
+        List<String> potentialKeywords = new ArrayList<>();
+        potentialKeywords.add("entity1keyword");
+        List<Integer>[] resultsArray = jdbcQueryDao.getIntentsAndEntitiesFromKeywords(potentialKeywords);
+        List<Integer> intents = resultsArray[0];
+        List<Integer> entities = resultsArray[1];
+
+        Assert.assertEquals(0, intents.size());
+        Assert.assertEquals(1, entities.size());
+        Assert.assertEquals(1, (int) entities.get(0));
+    }
+
+    @Test
+    public void getEntitiesAndIntents_returns_correct_array_both_entity_and_intent() {
         List<String> potentialKeywords = new ArrayList<>();
         potentialKeywords.add("intent1keyword");
         potentialKeywords.add("entity1keyword");
@@ -33,35 +83,31 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
         Assert.assertEquals(1, (int) entities.get(0));
     }
 
-    @Test
-    public void getResponsesWithKeywords_returns_correct_response_list_when_multiple_responses_match(){
+    public void getEntitiesAndIntents_returns_empty_arrays_when_no_keywords_found() {
         List<String> potentialKeywords = new ArrayList<>();
-        potentialKeywords.add("intent2keyword");
-        potentialKeywords.add("entity3keyword");
-        List<String> returnedResponses = jdbcQueryDao.getResponsesFromKeywords(potentialKeywords);
-        Assert.assertEquals(2, returnedResponses.size());
-        Assert.assertTrue(returnedResponses.contains("Test Response 3"));
-        Assert.assertTrue(returnedResponses.contains("Test Response 4"));
-    }
+        potentialKeywords.add("not a keyword");
+        potentialKeywords.add("still not a keyword");
+        List<Integer>[] resultsArray = jdbcQueryDao.getIntentsAndEntitiesFromKeywords(potentialKeywords);
+        List<Integer> intents = resultsArray[0];
+        List<Integer> entities = resultsArray[1];
 
-    @Test
-    public void getResponsesWithKeywords_works_with_overlapping_multi_word_keywords(){
-        List<String> potentialKeywords = new ArrayList<>();
-        potentialKeywords.add("intent2keyword");
-        potentialKeywords.add("The Longest Multiple Word Keyword");
-        List<String> returnedResponses = jdbcQueryDao.getResponsesFromKeywords(potentialKeywords);
-        Assert.assertTrue(returnedResponses.contains("Test Response 3"));
-        Assert.assertFalse(returnedResponses.contains("Test Response 6"));
-
+        Assert.assertEquals(1, intents.size());
+        Assert.assertEquals(1, entities.size());
+        Assert.assertEquals(1, (int) intents.get(0));
+        Assert.assertEquals(1, (int) entities.get(0));
     }
 
     @Test
     public void getAllMultiWordKeywords_returns_expected_list(){
         List<String> returnedKeywords = jdbcQueryDao.getAllMultiWordKeywords();
         Assert.assertEquals(3, returnedKeywords.size());
-        Assert.assertEquals("The Longest Mutiple Word Keyword", returnedKeywords.get(0));
+        Assert.assertEquals("The Longest Multiple Word Keyword", returnedKeywords.get(0));
         Assert.assertEquals("Multiple Word Keyword", returnedKeywords.get(1));
         Assert.assertEquals("Two-word keyword", returnedKeywords.get(2));
 
     }
+
+
+
+
 }
