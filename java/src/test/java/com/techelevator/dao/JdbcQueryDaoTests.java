@@ -34,13 +34,25 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
     }
 
     @Test
-    public void getResponsesWithKeywords_returns_correct_response_list(){
+    public void getResponsesWithKeywords_returns_correct_response_list_when_multiple_responses_match(){
         List<String> potentialKeywords = new ArrayList<>();
-        potentialKeywords.add("intent1keyword");
-        potentialKeywords.add("entity1keyword");
+        potentialKeywords.add("intent2keyword");
+        potentialKeywords.add("entity3keyword");
         List<String> returnedResponses = jdbcQueryDao.getResponsesFromKeywords(potentialKeywords);
-        Assert.assertEquals(1, returnedResponses.size());
-        Assert.assertEquals("Test Response 1", returnedResponses.get(0));
+        Assert.assertEquals(2, returnedResponses.size());
+        Assert.assertTrue(returnedResponses.contains("Test Response 3"));
+        Assert.assertTrue(returnedResponses.contains("Test Response 4"));
+    }
+
+    @Test
+    public void getResponsesWithKeywords_works_with_overlapping_multi_word_keywords(){
+        List<String> potentialKeywords = new ArrayList<>();
+        potentialKeywords.add("intent2keyword");
+        potentialKeywords.add("The Longest Multiple Word Keyword");
+        List<String> returnedResponses = jdbcQueryDao.getResponsesFromKeywords(potentialKeywords);
+        Assert.assertTrue(returnedResponses.contains("Test Response 3"));
+        Assert.assertFalse(returnedResponses.contains("Test Response 6"));
+
     }
 
     @Test

@@ -26,9 +26,12 @@ INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('entity2keyword', NUL
 
 INSERT INTO entity(name) VALUES ('Entity3');  -- ID 3
 INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('entity3keyword', NULL, 3);  -- ID 7
-INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('Multiple Word Keyword', NULL, 3);  -- ID 8
-INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('Two-word keyword', NULL, 3);  -- ID 9
-INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('The Longest Mutiple Word Keyword', NULL, 3);  -- ID 10
+INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('Two-word keyword', NULL, 3);  -- ID 8
+INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('The Longest Multiple Word Keyword', NULL, 3);  -- ID 9
+
+INSERT INTO entity(name) VALUES ('Entity4');  -- ID 4
+INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('Multiple Word Keyword', NULL, 3);  -- ID 10
+
 
 --Responses and join tables
 INSERT INTO response(response, name) VALUES ('Test Response 1', 'Name 1'); -- ID 1, joined to Intent 1 and Entity 1
@@ -43,16 +46,18 @@ INSERT INTO response(response, name) VALUES ('Test Response 3', 'Name 3'); -- ID
 INSERT INTO response_intent(response_id, intent_id) VALUES (3, 2);
 INSERT INTO response_entity(response_id, entity_id) VALUES (3, 3);
 
-INSERT INTO response(response, name) VALUES ('Test Response 4', 'Name 3'); -- ID 4, joined to intent 2 and entities 2 and 3
+INSERT INTO response(response, name) VALUES ('Test Response 4', 'Name 4'); -- ID 4, joined to intent 2 and entities 2 and 3
 INSERT INTO response_intent(response_id, intent_id) VALUES (4, 2);
 INSERT INTO response_entity(response_id, entity_id) VALUES (4, 2);
 INSERT INTO response_entity(response_id, entity_id) VALUES (4, 3);
 
-INSERT INTO response(response, name) VALUES ('Test Response 5', 'Name 3'); -- ID 5, joined to intent 3 and entity 2
+INSERT INTO response(response, name) VALUES ('Test Response 5', 'Name 5'); -- ID 5, joined to intent 3 and entity 2
 INSERT INTO response_intent(response_id, intent_id) VALUES (5, 3);
 INSERT INTO response_entity(response_id, entity_id) VALUES (5, 2);
 
-
+INSERT INTO response(response, name) VALUES ('Test Response 6', 'Name 6'); -- ID 6, joined to intent 2 and entity 4
+INSERT INTO response_intent(response_id, intent_id) VALUES (6, 2);
+INSERT INTO response_entity(response_id, entity_id) VALUES (6, 4);
 
 
 
