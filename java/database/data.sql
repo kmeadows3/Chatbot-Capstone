@@ -5,36 +5,63 @@ INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpUL
 
 
 -------------------- INTENTS --------------------
-INSERT INTO intent(name) VALUES ('DEFAULT INTENT');  -- ID 1
-INSERT INTO intent(name) VALUES ('Support');  -- ID 2,
-INSERT INTO intent(name) VALUES ('Information');  -- ID 3
-INSERT INTO intent(name) VALUES ('Practice');  -- ID 4
-INSERT INTO intent(name) VALUES ('External Resource');  -- ID 5
-INSERT INTO intent(name) VALUES ('Example');  -- ID 6
+-- ID 1
+INSERT INTO intent(name) VALUES ('DEFAULT INTENT');  
 
--------------------- INTENT KEYWORDS --------------------
-INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('help', 2, NULL);  -- Intent: Support(2)
-INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('support', 2, NULL);  -- Intent: Support(2)
+-- ID 2,
+INSERT INTO intent(name) VALUES ('Support');  
+	INSERT INTO keyword(keyword, intent_id) VALUES ('help', 2);  -- Intent: Support(2)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('support', 2);  -- Intent: Support(2)
+
+-- ID 3
+INSERT INTO intent(name) VALUES ('Information');  
+
+-- ID 4
+INSERT INTO intent(name) VALUES ('Practice');  
+
+-- ID 5
+INSERT INTO intent(name) VALUES ('External Resource');  
+
+-- ID 6
+INSERT INTO intent(name) VALUES ('Example');  
+
 
 
 -------------------- ENTITIES --------------------
-INSERT INTO entity(name) VALUES ('DEFAULT ENTITY');  -- ID 1
-INSERT INTO entity(name) VALUES ('Chatbot');  -- ID 2
-INSERT INTO entity(name) VALUES ('Star Method');  -- ID 3
-INSERT INTO entity(name) VALUES ('Cover Letter');  -- ID 4
-INSERT INTO entity(name) VALUES ('Employer');  -- ID 5
-INSERT INTO entity(name) VALUES ('General Interview');  -- ID 6
-INSERT INTO entity(name) VALUES ('Tech Interview');  -- ID 7
-INSERT INTO entity(name) VALUES ('HR Interview');  -- ID 8
-INSERT INTO entity(name) VALUES ('Attire');  -- ID 9
-INSERT INTO entity(name) VALUES ('Follow Up');  -- ID 10
+-- ID 1
+INSERT INTO entity(name) VALUES ('DEFAULT ENTITY');  
 
--------------------- ENTITIES KEYWORDS --------------------
-INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('chatbot', NULL, 2);  -- Entity: Chatbot(2)
-INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('you', NULL, 2);  -- Entity: Chatbot(2)
+-- ID 2
+INSERT INTO entity(name) VALUES ('Chatbot');  
+	INSERT INTO keyword(keyword, entity_id) VALUES ('chatbot', 2);  -- Entity: Chatbot(2)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('you', 2);  -- Entity: Chatbot(2)
 
-INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('star', NULL, 3);  -- Entity: Star Method(3)
-INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('star method', NULL, 3);  -- Entity: Star Method(3)
+-- ID 3
+INSERT INTO entity(name) VALUES ('Star Method');  
+	INSERT INTO keyword(keyword, entity_id) VALUES ('star', 3);  -- Entity: Star Method(3)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('star method', 3);  -- Entity: Star Method(3)
+
+-- ID 4
+INSERT INTO entity(name) VALUES ('Cover Letter');  
+
+-- ID 5
+INSERT INTO entity(name) VALUES ('Employer');  
+
+-- ID 6
+INSERT INTO entity(name) VALUES ('General Interview');  
+
+-- ID 7
+INSERT INTO entity(name) VALUES ('Tech Interview');  
+
+-- ID 8
+INSERT INTO entity(name) VALUES ('HR Interview');  
+
+-- ID 9
+INSERT INTO entity(name) VALUES ('Attire');  
+
+-- ID 10
+INSERT INTO entity(name) VALUES ('Follow Up');  
+
 
 
 -------------------- DEFAULT INTENT RESPONSES --------------------
@@ -62,6 +89,7 @@ INSERT INTO response_entity(response_id, entity_id) VALUES (4, 1); -- Entity 1: 
 INSERT INTO response(response, name) VALUES ('What would you like an example of?', 'Default Example');
 INSERT INTO response_intent(response_id, intent_id) VALUES (5, 6); -- Intent 6: Example
 INSERT INTO response_entity(response_id, entity_id) VALUES (5, 1); -- Entity 1: Default Entity
+
 
 
 -------------------- DEFAULT ENTITY RESPONSES --------------------
@@ -109,6 +137,7 @@ INSERT INTO response_entity(response_id, entity_id) VALUES (13, 9); -- Entity 9:
 INSERT INTO response(response, name) VALUES ('What would you like to know about follow-ups?', 'Follow Up Default');
 INSERT INTO response_intent(response_id, intent_id) VALUES (14, 1); -- Intent 1: Default Intent
 INSERT INTO response_entity(response_id, entity_id) VALUES (14, 10); -- Entity 10: Follow Up
+
 
 
 -------------------- OTHER RESPONSES --------------------
