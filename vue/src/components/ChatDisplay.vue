@@ -71,10 +71,18 @@ export default {
             this.addRobotBox("Nice to meet you, " + this.$store.state.preferredName + ". How may I help?")
         },
         getResponseFromServer() {
-            QueryService.get(this.textBoxText)
+            const query = {
+                utterance: this.textBoxText,
+                intent: this.$store.state.intent,
+                entity: this.$store.state.entity,
+            }
+
+            QueryService.get(query)
             .then( response => {
                 if(response.status === 200) {
+                    // TODO: When the get returns a success response
                     this.addRobotBox(response.data);
+                    console.log("Chatwick's Response:  " + response);
                 }
             })
             .catch (error => {
