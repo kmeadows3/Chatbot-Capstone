@@ -7,7 +7,7 @@
             <form>
                 <textarea name="userInput" id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox"
                     placeholder="Type Here"></textarea>
-                <button @click.prevent="addUserBox()">Enter as human</button>
+                <button @click.prevent="addUserBox()">Send Response</button>
 
             </form>
         </div>
