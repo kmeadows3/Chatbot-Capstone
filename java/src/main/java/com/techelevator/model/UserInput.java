@@ -3,7 +3,7 @@ package com.techelevator.model;
 
 public class UserInput {
     private String utterance;
-    private String topic;
+    private int previousResponseId;
 
 
     // Getters
@@ -11,8 +11,8 @@ public class UserInput {
         return utterance;
     }
 
-    public String getTopic() {
-        return topic;
+    public int getPreviousResponseId() {
+        return previousResponseId;
     }
 
 
@@ -21,7 +21,7 @@ public class UserInput {
         this.utterance = utterance;
     }
 
-    public void setTopic(String topic) {
-        this.topic = topic;
+    public void setPreviousReponseId(int previousReponse) {
+        this.previousResponseId = previousReponse;
     }
 }
