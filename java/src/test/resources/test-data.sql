@@ -30,7 +30,8 @@ INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('Two-word keyword', N
 INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('The Longest Multiple Word Keyword', NULL, 3);  -- ID 9
 
 INSERT INTO entity(name) VALUES ('Entity4');  -- ID 4
-INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('Multiple Word Keyword', NULL, 3);  -- ID 10
+INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('entity4keyword', NULL, 4);  -- ID 10
+INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('Multiple Word Keyword', NULL, 4);  -- ID 10
 
 
 --Responses and join tables
