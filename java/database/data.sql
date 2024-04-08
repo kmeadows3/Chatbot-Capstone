@@ -35,6 +35,7 @@ INSERT INTO entity(name) VALUES ('DEFAULT ENTITY');
 INSERT INTO entity(name) VALUES ('Chatbot');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('chatbot', 2);  -- Entity: Chatbot(2)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('you', 2);  -- Entity: Chatbot(2)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('chatwick', 2);  -- Entity: Chatbot(2)
 
 -- ID 3
 INSERT INTO entity(name) VALUES ('Star Method');  

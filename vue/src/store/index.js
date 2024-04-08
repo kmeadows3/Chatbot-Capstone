@@ -13,7 +13,7 @@ export function createStore(currentToken, currentUser) {
         state.preferredName = name;
       },
       /*
-      LOGIN INFOMATION PROVIDED WITH CAPSTONE, IGNORE
+      LOGIN INFORMATION PROVIDED WITH CAPSTONE, IGNORE
       */
       SET_AUTH_TOKEN(state, token) {
         state.token = token;
