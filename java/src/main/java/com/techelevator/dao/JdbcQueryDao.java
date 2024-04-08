@@ -20,17 +20,14 @@ public class JdbcQueryDao implements QueryDao {
     }
 
     @Override
-    public List<String> getResponsesFromKeywords(List<String> keywords) {
+    public List<String> getResponsesFromIntentsAndEntities(List<Integer> intentIds, List<Integer> entityIds) {
         String sql = "select * from response r " +
                 "JOIN response_intent ri ON ri.response_id = r.response_id " +
                 "JOIN response_entity re on re.response_id = r.response_id " +
                 "WHERE intent_id = ? AND entity_id = ?";
         List<String> responses = new ArrayList<String>();
-        try {
-            List<Integer>[] intentsAndEntities = getIntentsAndEntitiesFromKeywords(keywords);
-            List<Integer> intentIds = intentsAndEntities[0];
-            List<Integer> entityIds = intentsAndEntities[1];
 
+        try {
             if (intentIds.size() == 0) {
                 intentIds.add(1);
             }
@@ -61,6 +58,7 @@ public class JdbcQueryDao implements QueryDao {
      * @param potentialKeywords -- List of tokens from the utterance
      * @return Array of 2 lists -- the index 0 is the List of intent ids, index 1 is the List of entity ids
      */
+    @Override
     public List<Integer>[] getIntentsAndEntitiesFromKeywords(List<String> potentialKeywords) {
         List<Integer> entityIds = new ArrayList<>();
         List<Integer> intentIds = new ArrayList<>();
@@ -89,7 +87,7 @@ public class JdbcQueryDao implements QueryDao {
         return returnArray;
     }
 
-
+    @Override
     public List<String> getAllMultiWordKeywords(){
         List<String> keywords = new ArrayList<>();
         String sql = "SELECT keyword FROM keyword WHERE keyword LIKE '% %' " +

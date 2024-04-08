@@ -24,7 +24,8 @@ public class QueryService {
      */
     public String getResponse(UserInput userInput){
         List<String> tokens = tokenizeUtterance(userInput);
-        List<String> responses = queryDao.getResponsesFromKeywords(tokens);
+        List<Integer>[] intentsAndEntities = queryDao.getIntentsAndEntitiesFromKeywords(tokens);
+        List<String> responses = queryDao.getResponsesFromIntentsAndEntities(intentsAndEntities[0], intentsAndEntities[1]);
         return selectResponse(responses);
     }
 
