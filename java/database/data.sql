@@ -19,7 +19,8 @@ INSERT INTO intent(name) VALUES ('Information');
 		INSERT INTO keyword(keyword, intent_id) VALUES ('tell', 3);  -- Intent: Information(3)
 		INSERT INTO keyword(keyword, intent_id) VALUES ('details', 3);  -- Intent: Information(3)
 		INSERT INTO keyword(keyword, intent_id) VALUES ('explain', 3);  -- Intent: Information(3)
-
+		INSERT INTO keyword(keyword, intent_id) VALUES ('how do i', 3);  -- Intent: Information(3)
+		INSERT INTO keyword(keyword, intent_id) VALUES ('what is', 3);  -- Intent: Information(3)
 
 -- ID 4
 INSERT INTO intent(name) VALUES ('Practice');  
@@ -46,6 +47,7 @@ INSERT INTO entity(name) VALUES ('DEFAULT ENTITY');
 INSERT INTO entity(name) VALUES ('Chatbot');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('chatbot', 2);  -- Entity: Chatbot(2)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('you', 2);  -- Entity: Chatbot(2)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('yourself', 2);  -- Entity: Chatbot(2)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('chatwick', 2);  -- Entity: Chatbot(2)
 
 -- ID 3
