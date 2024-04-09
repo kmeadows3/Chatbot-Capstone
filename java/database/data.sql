@@ -24,8 +24,8 @@ INSERT INTO intent(name) VALUES ('Information');
 
 -- ID 4
 INSERT INTO intent(name) VALUES ('Practice');  
-	INSERT INTO keyword(keyword, intent_id) VALUES ('practice', 3);  -- Intent: Practice(4)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('ask me', 3); -- Intent: Practice(4)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('practice', 4);  -- Intent: Practice(4)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('ask me', 4); -- Intent: Practice(4)
 
 -- ID 5
 INSERT INTO intent(name) VALUES ('External Resource');
@@ -53,7 +53,9 @@ INSERT INTO entity(name) VALUES ('Chatbot');
 -- ID 3
 INSERT INTO entity(name) VALUES ('Star Method');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('star', 3);  -- Entity: Star Method(3)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('star interview', 3);  -- Entity: Star Method(3)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('star method', 3);  -- Entity: Star Method(3)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('star method interview', 3);  -- Entity: Star Method(3)
 
 -- ID 4
 INSERT INTO entity(name) VALUES ('Cover Letter');  
@@ -86,10 +88,11 @@ INSERT INTO entity(name) VALUES ('Tech Interview');
 	
 -- ID 8
 INSERT INTO entity(name) VALUES ('HR Interview');  
-	INSERT INTO keyword(keyword, entity_id) VALUES ('HR interview', 8);  -- Entity: HR Interview(8)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('HR', 8);  -- Entity: HR Interview(8)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('HR screening interview', 8);  -- Entity: HR Interview(8)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('HR phone interview', 8);  -- Entity: HR Interview(8)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('behavioral interview', 8);  -- Entity: HR Interview(8)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('hr interview', 8);  -- Entity: HR Interview(8)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('hr', 8);  -- Entity: HR Interview(8)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('hr screening interview', 8);  -- Entity: HR Interview(8)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('hr phone interview', 8);  -- Entity: HR Interview(8)
 
 -- ID 9
 INSERT INTO entity(name) VALUES ('Attire');  
@@ -399,8 +402,8 @@ INSERT INTO response_intent(response_id, intent_id) VALUES (38, 5); -- Intent 5:
 INSERT INTO response_entity(response_id, entity_id) VALUES (38, 9); -- Entity 9: Attire
 
 -- ID 39: Attire Example 
-INSERT INTO response(response, name) VALUES ('<p>Here are some examples of professional attire:</p><br/>
-<img src="https://images.pexels.com/photos/7793725/pexels-photo-7793725.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Formalwear examples with suits, button-up shirts, and khaki pants">', 'Example Attire');
+INSERT INTO response(response, name) VALUES ('<p>Here are some examples of professional attire:</p>
+<img class="response_img" src="https://images.pexels.com/photos/7793725/pexels-photo-7793725.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Formalwear examples with suits, button-up shirts, and khaki pants">', 'Example Attire');
 INSERT INTO response_intent(response_id, intent_id) VALUES (39, 6); -- Intent 6: Example
 INSERT INTO response_entity(response_id, entity_id) VALUES (39, 9); -- Entity 9: Attire
 

@@ -120,14 +120,17 @@ div#chat-display>div {
     padding: 5px;
     margin: 10px;
     border-radius: 7px;
+    display: flex;
+    flex-direction: column;
 }
 
-img {
+img.response_img {
     max-width: 90%;
     max-height: 400px;
     border: solid 1px black;
     border-radius: 6px;
     align-self: center;
+    margin-bottom: 10px;
 }
 
 div.chatbot {
