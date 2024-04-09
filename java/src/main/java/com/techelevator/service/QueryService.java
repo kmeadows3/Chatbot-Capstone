@@ -196,7 +196,7 @@ public class QueryService {
      * @return a list of responses that have the highest number of keyword matches
      */
     private List<String> getResponsesWithMostKeywordMatches(List<String> responses) {
-        Map<String, Integer> responseCounts = new HashMap<>();
+        Map<String, Integer> responseCounts = new LinkedHashMap<>();
 
         responses.stream().forEach(response -> {
             if (!responseCounts.containsKey(response)){
@@ -219,26 +219,11 @@ public class QueryService {
     }
 
     /**
-     * TODO -- rename to deprioritize chatbot
      * @param entityIds -- The list of unranked entity ids
      * @return the list of entity ids ranked by priority
      */
     private List<Integer> sortEntitiesByPriority(List<Integer> entityIds) {
-        List<Integer> entityIdListWithoutChatbot = new ArrayList<>();
-
-        for (int entityId : entityIds) {
-            if (entityId != 2) {
-                entityIdListWithoutChatbot.add(entityId);
-            }
-        }
-
-        if (entityIdListWithoutChatbot.size() > 0) {
-            return entityIdListWithoutChatbot;
-        } else {
-            return entityIds;
-        }
-
-        /*List<Integer> rankedList = new ArrayList<>();
+        List<Integer> rankedList = new ArrayList<>();
         for (int currentRankId : rankedIds) {
             for (int currentEntityId : entityIds) {
                 if (currentRankId == currentEntityId) {
@@ -246,7 +231,7 @@ public class QueryService {
                 }
             }
         }
-        return rankedList; */
+        return rankedList;
     }
 
 }
