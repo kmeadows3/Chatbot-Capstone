@@ -19,7 +19,7 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
     }
 
     @Test
-    public void getResponsesWithKeywords_returns_correct_response_list_when_only_one_response_matches(){
+    public void getResponsesFromIntentsAndEntities_returns_correct_response_list_when_only_one_response_matches(){
         List<Integer> intents = new ArrayList<>();
         List<Integer> entities = new ArrayList<>();
         intents.add(2);
@@ -30,7 +30,7 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
     }
 
     @Test
-    public void getResponsesWithKeywords_returns_correct_response_list_when_multiple_responses_match(){
+    public void getResponsesFromIntentsAndEntities_returns_correct_response_list_when_multiple_responses_match(){
         List<Integer> intents = new ArrayList<>();
         List<Integer> entities = new ArrayList<>();
         intents.add(2);
@@ -40,6 +40,8 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
         Assert.assertTrue(returnedResponses.contains("Test Response 3"));
         Assert.assertTrue(returnedResponses.contains("Test Response 4"));
     }
+
+
 
     @Test
     public void getEntitiesAndIntents_returns_correct_array_only_one_intent_keyword() {

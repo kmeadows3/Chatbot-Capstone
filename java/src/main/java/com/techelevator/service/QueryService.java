@@ -52,7 +52,7 @@ public class QueryService {
         List<String> tokens = new ArrayList<>();
 
         String utterance = userInput.getUtterance();
-        utterance = utterance.replaceAll("[^a-zA-Z ]", "").toLowerCase().trim();
+        utterance = utterance.replaceAll("[^a-zA-Z0-9 ]", "").toLowerCase().trim();
         userInput.setUtterance(utterance);
 
         List<String> mutlipleWordKeywords  = queryDao.getAllMultiWordKeywords();
@@ -92,16 +92,18 @@ public class QueryService {
      * @return a list of responses that have the highest number of keyword matches
      */
     private List<Integer>[] setIntentsAndEntitiesWhenNoneReturned(List<Integer>intentIds, List<Integer>entityIds, UserInput userInput){
-        if (intentIds.size() == 0) {
-            if (userInput.getIntents() == null ||userInput.getIntents().size() != 0) {
+
+        if (intentIds.size() == 0 && entityIds.size() == 0){
+            intentIds.add(DEFAULT_INTENT_ID);
+            entityIds.add(DEFAULT_ENTITY_ID);
+        } else if (intentIds.size() == 0) {
+            if (userInput.getIntents() != null && userInput.getIntents().size() != 0) {
                 intentIds.addAll(userInput.getIntents());
             } else {
                 intentIds.add(DEFAULT_INTENT_ID);  //adds default intent
             }
-        }
-
-        if (entityIds.size() == 0) {
-            if (userInput.getEntities() == null ||userInput.getEntities().size() != 0){
+        } else if (entityIds.size() == 0) {
+            if (userInput.getEntities() != null && userInput.getEntities().size() != 0){
                 entityIds.addAll(userInput.getEntities());
             } else {
                 entityIds.add(DEFAULT_ENTITY_ID); //adds default entity
