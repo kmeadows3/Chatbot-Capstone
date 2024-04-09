@@ -23,13 +23,15 @@ public class QueryService {
             6, // General Interview
             2, // Chatbot
             1 }; // Default
-
+    public final int DEFAULT_INTENT_ID = 1;
+    public final int DEFAULT_ENTITY_ID = 1;
+    public final int PRACTICE_INTENT_ID = 4;
+    public final int HR_INTERVIEW_ENTITY_ID = 7;
+    public final int TECHNICAL_INTERVIEW_ENTITY_ID = 8;
+    public final int INTENTS_INDEX = 0;
+    public final int ENTITIES_INDEX = 1;
 
     // Instance Variables
-    public static final int DEFAULT_INTENT_ID = 1;
-    public static final int DEFAULT_ENTITY_ID = 1;
-    public static final int INTENTS_INDEX = 0;
-    public static final int ENTITIES_INDEX = 1;
     private QueryDao queryDao;
 
     public QueryService (QueryDao queryDao){
@@ -47,12 +49,14 @@ public class QueryService {
 
         List<String> tokens = tokenizeUtterance(userInput);
         List<Integer>[] intentsAndEntities = getIntentsAndEntities(tokens, userInput);
-        List<String> potentialResponses = getPotentialResponseList(intentsAndEntities[INTENTS_INDEX],
-                intentsAndEntities[ENTITIES_INDEX]);
+        List<Integer> intents = intentsAndEntities[INTENTS_INDEX];
+        List<Integer> entities = intentsAndEntities[ENTITIES_INDEX];
+        List<String> potentialResponses = getPotentialResponseList(intents,
+                entities);
 
-        outputResponse.setIntents(intentsAndEntities[INTENTS_INDEX]);
-        outputResponse.setEntities(intentsAndEntities[ENTITIES_INDEX]);
-        outputResponse.setResponse(selectResponse(potentialResponses));
+        outputResponse.setIntents(intents);
+        outputResponse.setEntities(entities);
+        outputResponse.setResponse(selectResponse(potentialResponses,intents, entities));
         return outputResponse;
     }
 
@@ -183,10 +187,13 @@ public class QueryService {
      * @param responses -- all responses that match the intents and entities in the utterance
      * @return the single response that best fits the utterance
      */
-    private String selectResponse(List<String> responses){
+    private String selectResponse(List<String> responses, List<Integer> intents, List<Integer> entities){
         List<String> topResponses = getResponsesWithMostKeywordMatches(responses);
-
-        //TODO this needs more logic, currently only returns the first of the responses with the most keyword matches
+        if (intents.contains(PRACTICE_INTENT_ID) &&
+                entities.contains(HR_INTERVIEW_ENTITY_ID) || entities.contains(TECHNICAL_INTERVIEW_ENTITY_ID)){
+            //TODO FILTER OUT ALL NON-PRACTICE RESPONSES
+            //TODO GET A RANDOM RESPONSE FROM THE LIST
+        }
         return topResponses.get(0);
     }
 
