@@ -28,7 +28,6 @@ public class JdbcQueryDao implements QueryDao {
         List<String> responses = new ArrayList<String>();
 
         try {
-
             for (Integer intentId : intentIds) {
                 for (Integer entityId : entityIds) {
                     SqlRowSet result = jdbcTemplate.queryForRowSet(sql, intentId, entityId);

@@ -3,7 +3,6 @@ package com.techelevator.service;
 import com.techelevator.dao.QueryDao;
 import com.techelevator.model.Response;
 import com.techelevator.model.UserInput;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -12,6 +11,21 @@ import java.util.stream.Collectors;
 
 @Component
 public class QueryService {
+
+    // Constants
+    private final int[] RANKED_ENTITY_IDS = new int[]{
+            3, // Star Method
+            4, // Cover Letter
+            5, // Recruiter
+            9, // Attire
+            7, // Tech Interview
+            8, // HR Interview
+            6, // General Interview
+            2, // Chatbot
+            1 }; // Default
+
+
+    // Instance Variables
     public static final int DEFAULT_INTENT_ID = 1;
     public static final int DEFAULT_ENTITY_ID = 1;
     public static final int INTENTS_INDEX = 0;
@@ -121,6 +135,7 @@ public class QueryService {
      * @return List of responses that fit the utterance
      */
     private List<String> getPotentialResponseList(List<Integer> intentIds, List<Integer> entityIds){
+        entityIds = sortEntitiesByPriority(entityIds);
         List<String> responses = queryDao.getResponsesFromIntentsAndEntities(intentIds, entityIds);
         if (responses.size() == 0) {
             responses = handleZeroResponseMatches(intentIds, entityIds);
@@ -146,6 +161,7 @@ public class QueryService {
         List<Integer> defaultEntityList = new ArrayList<>();
         defaultEntityList.add(DEFAULT_ENTITY_ID);
 
+        entityIds = sortEntitiesByPriority(entityIds);
         if (entityIds.get(0) != DEFAULT_ENTITY_ID){
             responses = queryDao.getResponsesFromIntentsAndEntities(defaultIntentList, entityIds);
         }
@@ -179,7 +195,7 @@ public class QueryService {
      * @return a list of responses that have the highest number of keyword matches
      */
     private List<String> getResponsesWithMostKeywordMatches(List<String> responses) {
-        Map<String, Integer> responseCounts = new HashMap<>();
+        Map<String, Integer> responseCounts = new LinkedHashMap<>();
 
         responses.stream().forEach(response -> {
             if (!responseCounts.containsKey(response)){
@@ -200,4 +216,21 @@ public class QueryService {
 
         return topResults;
     }
+
+    /**
+     * @param entityIds -- The list of unranked entity ids
+     * @return the list of entity ids ranked by priority
+     */
+    private List<Integer> sortEntitiesByPriority(List<Integer> entityIds) {
+        List<Integer> rankedList = new ArrayList<>();
+        for (int currentRankId : RANKED_ENTITY_IDS) {
+            for (int currentEntityId : entityIds) {
+                if (currentRankId == currentEntityId) {
+                    rankedList.add(0, currentEntityId);
+                }
+            }
+        }
+        return rankedList;
+    }
+
 }
