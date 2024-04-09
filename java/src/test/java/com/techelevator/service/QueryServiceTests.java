@@ -26,7 +26,7 @@ public class QueryServiceTests extends BaseDaoTests {
         UserInput input = new UserInput();
         input.setPreviousReponseId(1);
         input.setUtterance("intent3keyword entity2keyword");
-        Response response = queryService.getResponse(input);
+        Response response = queryService.getResponseFromUserInput(input);
         Assert.assertEquals("Test Response 5", response.getResponse());
     }
 
@@ -35,7 +35,7 @@ public class QueryServiceTests extends BaseDaoTests {
         UserInput input = new UserInput();
         input.setPreviousReponseId(1);
         input.setUtterance("intent2keyword entity2keyword entity3keyword");
-        Response response = queryService.getResponse(input);
+        Response response = queryService.getResponseFromUserInput(input);
 
         Assert.assertEquals("Test Response 4", response.getResponse());
     }

@@ -28,6 +28,7 @@ public class JdbcQueryDao implements QueryDao {
         List<String> responses = new ArrayList<String>();
 
         try {
+
             for (Integer intentId : intentIds) {
                 for (Integer entityId : entityIds) {
                     SqlRowSet result = jdbcTemplate.queryForRowSet(sql, intentId, entityId);
@@ -37,20 +38,15 @@ public class JdbcQueryDao implements QueryDao {
                 }
             }
 
-            if(responses.size() ==0){
-                SqlRowSet result = jdbcTemplate.queryForRowSet(sql, 1, 1);
-                while (result.next()){
-                    responses.add(result.getString("response"));
-                }
-            }
-
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data Integrity Violation", e);
         }
+
         return responses;
     }
+
 
     /**
      *
