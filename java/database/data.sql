@@ -16,6 +16,7 @@ INSERT INTO intent(name) VALUES ('Support');
 
 -- ID 3
 INSERT INTO intent(name) VALUES ('Information');  
+		INSERT INTO keyword(keyword, intent_id) VALUES ('information', 3);  -- Intent: Information(3)
 		INSERT INTO keyword(keyword, intent_id) VALUES ('tell', 3);  -- Intent: Information(3)
 		INSERT INTO keyword(keyword, intent_id) VALUES ('details', 3);  -- Intent: Information(3)
 		INSERT INTO keyword(keyword, intent_id) VALUES ('explain', 3);  -- Intent: Information(3)
@@ -29,6 +30,10 @@ INSERT INTO intent(name) VALUES ('Practice');
 
 -- ID 5
 INSERT INTO intent(name) VALUES ('External Resource');
+	INSERT INTO keyword(keyword, intent_id) VALUES ('external resource', 5);  -- Intent: External Resource(5)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('external source', 5);  -- Intent: External Resource(5)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('source', 5);  -- Intent: External Resource(5)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('somewhere', 5);  -- Intent: External Resource(5)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('where', 5);  -- Intent: External Resource(5)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('more information', 5);  -- Intent: External Resource(5)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('know more', 5);  -- Intent: External Resource(5)
@@ -334,17 +339,113 @@ INSERT INTO response_intent(response_id, intent_id) VALUES (26, 3); -- Intent 3:
 INSERT INTO response_entity(response_id, entity_id) VALUES (26, 7); -- Entity 7: Tech Interviews
 
 -- ID 27: Tech Interviews Practice
-INSERT INTO response(response, name) VALUES ('___', 'Practice Technical Interviews');
+INSERT INTO response(response, name) VALUES ('<p>Here are ten potential questions that you might encounter during a technical interview for a junior OOP position:</p>
+<ol>
+    <li>
+        <strong>Class Definition & Inheritance</strong><br>
+        Define a <strong>Vehicle</strong> class with attributes <strong>make</strong> and <strong>model</strong>. Create a <strong>Car</strong> class that inherits from <strong>Vehicle</strong> and adds an attribute <strong>num_doors</strong>. Provide a method in both classes to display all attributes.
+    </li>
+    <li>
+        <strong>Encapsulation</strong><br>
+        Explain the concept of encapsulation in OOP. Provide an example of a class where you use private attributes and public methods to demonstrate encapsulation.
+    </li>
+    <li>
+        <strong>Polymorphism & Method Overriding</strong><br>
+        Define a base class <strong>Shape</strong> with a method <strong>area()</strong>. Create two subclasses, <strong>Circle</strong> and <strong>Rectangle</strong>, which override the <strong>area()</strong> method to calculate the area of a circle and rectangle respectively.
+    </li>
+    <li>
+        <strong>Abstraction</strong><br>
+        Describe what abstraction means in the context of OOP. Provide an example of how you can achieve abstraction using abstract classes or interfaces in a programming language of your choice.
+    </li>
+    <li>
+        <strong>Composition</strong><br>
+        Explain the concept of composition in OOP. Provide an example of a class that uses composition to model a <strong>Library</strong> containing multiple <strong>Book</strong> objects.
+    </li>
+    <li>
+        <strong>Static Methods & Variables</strong><br>
+        What is a static method? How does it differ from an instance method? Provide an example of a static method and a static variable in a class.
+    </li>
+    <li>
+        <strong>Constructor Overloading</strong><br>
+        Explain what constructor overloading is and why it’s useful. Provide an example class with multiple constructors to demonstrate constructor overloading.
+    </li>
+    <li>
+        <strong>Exception Handling in OOP</strong><br>
+        Describe how exception handling can be integrated into OOP. Provide an example class that demonstrates how to handle exceptions in its methods.
+    </li>
+    <li>
+        <strong>Interfaces & Multiple Inheritance</strong><br>
+        Explain the concept of an interface in OOP. Why is multiple inheritance problematic in many OOP languages, and how do interfaces help to solve this issue?
+    </li>
+    <li>
+        <strong>Design Patterns</strong><br>
+        Describe the Singleton design pattern. Provide an example of how you would implement a Singleton class in an OOP language to ensure that only one instance of the class is created.
+    </li>
+</ol>', 'Practice Technical Interviews');
 INSERT INTO response_intent(response_id, intent_id) VALUES (27, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (27, 7); -- Entity 7: Tech Interviews
 
 -- ID 28: Tech Interviews External Resources
-INSERT INTO response(response, name) VALUES ('___', 'Tech Interviews External Resources');
+INSERT INTO response(response, name) VALUES ('<h2>Here are some online resources you can used to help prepare for technical interviews:<h2/>
+<h3>Websites & Tutorials</h3>
+<ul>
+    <li>
+        <strong>GeeksforGeeks - Object-Oriented Programming (OOP) Concepts</strong><br>
+        <a href="https://www.geeksforgeeks.org/introduction-of-object-oriented-programming/">A comprehensive collection of articles, tutorials, and coding examples on OOP concepts, including inheritance, polymorphism, encapsulation, and abstraction.</a>
+    </li>
+    <li>
+        <strong>Tutorialspoint - Java Object-Oriented Programming</strong><br>
+        <a href="https://www.tutorialspoint.com/java/java_oops_concepts.htm">A detailed tutorial on OOP concepts in Java, with examples and practice exercises.</a>
+    </li>
+    <li>
+        <strong>Codecademy - Learn Java, Python, or C#</strong><br>
+        <a href="https://www.codecademy.com/">Interactive coding exercises and tutorials on OOP concepts in various programming languages.</a>
+    </li>
+</ul>
+<h3>Practice Platforms</h3>
+<ul>
+    <li>
+        <strong>LeetCode</strong><br>
+        <a href="https://leetcode.com/">While primarily focused on algorithmic coding questions, LeetCode also offers a range of OOP-related problems that can help you practice for technical interviews.</a>
+    </li>
+    <li>
+        <strong>HackerRank</strong><br>
+        <a href="https://www.hackerrank.com/">Similar to LeetCode, HackerRank offers coding challenges that cover OOP concepts and are relevant for technical interviews.</a>
+    </li>
+</ul>
+
+<h3>YouTube Channels</h3>
+<ul>
+    <li>
+        <strong>The Net Ninja</strong><br>
+        <a href="https://www.youtube.com/channel/UCW5YeuERMmlnqo4oq8vwUpg">Offers tutorials on various programming topics, including OOP concepts in languages like Java, Python, and JavaScript.</a>
+    </li>
+    <li>
+        <strong>Programming with Mosh</strong><br>
+        <a href="https://www.youtube.com/c/programmingwithmosh">Provides high-quality tutorials on programming concepts, including OOP principles and best practices.</a>
+    </li>
+</ul>
+
+<h3>Online Forums & Communities</h3>
+<ul>
+    <li>
+        <strong>Stack Overflow</strong><br>
+        <a href="https://stackoverflow.com/">A valuable resource for asking specific questions about OOP concepts, practices, and interview preparation.</a>
+    </li>
+    <li>
+        <strong>Reddit - r/learnprogramming</strong><br>
+        <a href="https://www.reddit.com/r/learnprogramming/">A community where you can ask questions, share resources, and get advice on learning and practicing OOP concepts.</a>
+    </li>
+</ul>', 'Tech Interviews External Resources');
 INSERT INTO response_intent(response_id, intent_id) VALUES (28, 5); -- Intent 5: External Resources
 INSERT INTO response_entity(response_id, entity_id) VALUES (28, 7); -- Entity 7: Tech Interviews
 
 -- ID 29: Example Tech Interview
-INSERT INTO response(response, name) VALUES ('___', 'Example Tech Interview');
+INSERT INTO response(response, name) VALUES ('<h3>Question:</h3>
+<p><strong>Explain the concept of inheritance in Object-Oriented Programming (OOP) and provide an example.</strong></p>
+<h3>Sample Response:</h3>
+<p>Inheritance is a fundamental concept in Object-Oriented Programming (OOP) that allows a class to inherit attributes and behaviors from another class. This promotes code reusability and establishes a relationship between the parent (or base) class and the child (or derived) class. The child class inherits the attributes and methods of the parent class and can also add new attributes or override existing methods.</p>
+<p>For example, consider a <strong>Vehicle</strong> class with attributes like <strong>make</strong> and <strong>model</strong>. We can create a <strong>Car</strong> class that inherits from the <strong>Vehicle</strong> class and adds an additional attribute <strong>numDoors</strong>. The <strong>Car</strong> class will automatically have access to the <strong>make</strong> and <strong>model</strong> attributes from the <strong>Vehicle</strong> class, and we can also define specific methods or behaviors for the <strong>Car</strong> class, such as <strong>drive()</strong> or <strong>park()</strong>. This allows us to write more concise and organized code by leveraging the existing functionality of the <strong>Vehicle</strong> class in the <strong>Car</strong> class.</p>', 'Example Tech Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (29, 6); -- Intent 6: example
 INSERT INTO response_entity(response_id, entity_id) VALUES (29, 7); -- Entity 7: Tech Interviews
 
