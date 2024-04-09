@@ -56,8 +56,6 @@ export default {
                 this.scrollChatDisplayToBottom(chatBox);
 
                 setTimeout(() => {
-
-
                     newResponse.innerHTML = response;
                     this.isLoading = false;
                 }, 750);
@@ -80,8 +78,7 @@ export default {
             QueryService.get(query)
             .then( response => {
                 if(response.status === 200) {
-                    // TODO: When the get returns a success response
-                    console.log(response.data);
+                    // When the get method returns a success response
                     this.$store.commit('SET_INTENTS', response.data.intents);
                     this.$store.commit('SET_ENTITIES', response.data.entities);
                     this.addRobotBox(response.data.response);
@@ -119,11 +116,18 @@ div#chat-display {
 
 div#chat-display>div {
     border: solid 1px black;
-    width: auto;
+    max-width: 75vw;
     padding: 5px;
     margin: 10px;
     border-radius: 7px;
+}
 
+img {
+    max-width: 90%;
+    max-height: 400px;
+    border: solid 1px black;
+    border-radius: 6px;
+    align-self: center;
 }
 
 div.chatbot {

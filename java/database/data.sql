@@ -58,18 +58,17 @@ INSERT INTO entity(name) VALUES ('Star Method');
 -- ID 4
 INSERT INTO entity(name) VALUES ('Cover Letter');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('cover letter', 4);  -- Entity: Cover Letter(4)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('coverletter', 4);  -- Entity: Cover Letter(4)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('cover', 4);  -- Entity: Cover Letter(4)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('letter', 4);  -- Entity: Cover Letter(4)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('writing', 4);  -- Entity: Cover Letter(4)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('write', 4);  -- Entity: Cover Letter(4)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('writing a cover letter', 4);  -- Entity: Cover Letter(4)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('write a cover letter', 4);  -- Entity: Cover Letter(4)
 
 -- ID 5
-INSERT INTO entity(name) VALUES ('Employer');  
-	INSERT INTO keyword(keyword, entity_id) VALUES ('employer', 5);  -- Entity: Employer(5)
+INSERT INTO entity(name) VALUES ('Recruiter');  
+	INSERT INTO keyword(keyword, entity_id) VALUES ('recruiter', 5);  -- Entity: Employer(5)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('company', 5);  -- Entity: Employer(5)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('organization', 5);  -- Entity: Employer(5)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('job search', 5);  -- Entity: Employer(5)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('job market', 5);  -- Entity: Employer(5)
 	
 -- ID 6
 INSERT INTO entity(name) VALUES ('General Interview');  
@@ -78,7 +77,6 @@ INSERT INTO entity(name) VALUES ('General Interview');
 	INSERT INTO keyword(keyword, entity_id) VALUES ('interview questions', 6);  -- Entity: General Interview(6)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('interview preparation', 6);  -- Entity: General Interview(6)
 
-
 -- ID 7
 INSERT INTO entity(name) VALUES ('Tech Interview');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('tech interview', 7);  -- Entity: Tech Interview(7)
@@ -86,7 +84,6 @@ INSERT INTO entity(name) VALUES ('Tech Interview');
 	INSERT INTO keyword(keyword, entity_id) VALUES ('technical', 7);  -- Entity: Tech Interview(7)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('tech', 7);  -- Entity: Tech Interview(7)
 	
-
 -- ID 8
 INSERT INTO entity(name) VALUES ('HR Interview');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('HR interview', 8);  -- Entity: HR Interview(8)
@@ -96,6 +93,7 @@ INSERT INTO entity(name) VALUES ('HR Interview');
 
 -- ID 9
 INSERT INTO entity(name) VALUES ('Attire');  
+	INSERT INTO keyword(keyword, entity_id) VALUES ('attire', 9);  -- Entity: Attire(9)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('dress', 9);  -- Entity: Attire(9)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('wear', 9);  -- Entity: Attire(9)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('clothes', 9);  -- Entity: Attire(9)
@@ -117,106 +115,344 @@ INSERT INTO entity(name) VALUES ('Follow Up');
 
 
 
--------------------- DEFAULT INTENT RESPONSES --------------------
---ID 1: Default Support
-INSERT INTO response(response, name) VALUES ('Sure. What would you like help with?', 'Default Support');
---INSERT INTO response_intent(response_id, intent_id) VALUES (1, 2); -- Intent 2: Support
---INSERT INTO response_entity(response_id, entity_id) VALUES (1, 1); -- Entity 1: Default Entity
+-------------------- DEFAULT INTENT RESPONSES FOR NO ENTITY --------------------
+-- ID 1: Catch-All
+INSERT INTO response(response, name) VALUES ('I apologize, but I did not understand your request. Type “Chatbot Help” to see what commands I can handle.', 'Catch-All Response');
+INSERT INTO response_intent(response_id, intent_id) VALUES (1, 1); -- Intent 1: Default
+INSERT INTO response_entity(response_id, entity_id) VALUES (1, 1); -- Entity 1: Default Entity
 
--- ID 2: Default Information
-INSERT INTO response(response, name) VALUES ('What would you like information about?', 'Default Information');
-INSERT INTO response_intent(response_id, intent_id) VALUES (2, 3); -- Intent 3: Information
+-- ID 2: default support (should be same string as chatbot support)
+INSERT INTO response(response, name) VALUES ('I am designed to be able to provide general interview advice and know about the following topics HR Interviews, Technical Interviews, Interview Attire, Cover Letters, Interview Follow-Up, and Cover Letters. I can also provide interview practice and help guide you to external resources about those topics.
+<br>An example of a common request would be “Tell me about technical interviews,” “Ask me an HR Interview question,” “What is the STAR method?” or “Where can I find more information about cover letters?”', 'default support');
+INSERT INTO response_intent(response_id, intent_id) VALUES (2, 2); -- Intent 2: Support
 INSERT INTO response_entity(response_id, entity_id) VALUES (2, 1); -- Entity 1: Default Entity
 
--- ID 3: Default Practice
-INSERT INTO response(response, name) VALUES ('Is there anything you would like to practice?', 'Default Practice');
-INSERT INTO response_intent(response_id, intent_id) VALUES (3, 4); -- Intent 4: Practice
+-- ID 3: Default Information
+INSERT INTO response(response, name) VALUES ('I would be happy to explain things to you, but I was not able to determine what you were asking for. What would you like information about? I can tell you about Technical Interviews, HR Interviews, Interview Attire, Interview Follow-Up, Employers, Cover Letters, and the STAR Method.', 'Unspecified Information Request');
+INSERT INTO response_intent(response_id, intent_id) VALUES (3, 3); -- Intent 3: Information
 INSERT INTO response_entity(response_id, entity_id) VALUES (3, 1); -- Entity 1: Default Entity
 
--- ID 4: Default External Resource
-INSERT INTO response(response, name) VALUES ('What would you like a resource to?', 'Default External Resource');
-INSERT INTO response_intent(response_id, intent_id) VALUES (4, 5); -- Intent 5: External Resource
+-- ID 4: Default Practice
+INSERT INTO response(response, name) VALUES ('It appears you want to practice something. I can help you practice HR Interviews or or Technical Interviews', 'Unspecified Practice Request');
+INSERT INTO response_intent(response_id, intent_id) VALUES (4, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (4, 1); -- Entity 1: Default Entity
 
--- ID 5: Default Example
-INSERT INTO response(response, name) VALUES ('What would you like an example of?', 'Default Example');
-INSERT INTO response_intent(response_id, intent_id) VALUES (5, 6); -- Intent 6: Example
+-- ID 5: Default External
+INSERT INTO response(response, name) VALUES ('I would be happy to tell you where to find information, but I was not able to determine what you were asking for. What would you like information about? I can tell you about Technical Interviews, HR Interviews, Interview Attire, Interview Follow-Up, Employers, Cover Letters, and the STAR Method.', 'Unspecified External Resource Request');
+INSERT INTO response_intent(response_id, intent_id) VALUES (5, 5); -- Intent 5: External Resource
 INSERT INTO response_entity(response_id, entity_id) VALUES (5, 1); -- Entity 1: Default Entity
 
-
-
--------------------- DEFAULT ENTITY RESPONSES --------------------
--- ID 6: Chatbot Default
-INSERT INTO response(response, name) VALUES ('Ask me for help or support, like "Give me an HR interview question." Or "Where can I learn about writing a cover letter?"', 'Chatbot Default');
-INSERT INTO response_intent(response_id, intent_id) VALUES (6, 1); -- Intent 1: Default Intent
+-- ID 6: Default Example
+INSERT INTO response(response, name) VALUES ('I was not able to determine what topic you wanted me to provide an example for. I can provide examples for Technical Interviews, HR Interviews, Interview Attire, Interview Follow-Up, Employers, Cover Letters, and the STAR Method.', 'Unspecified Example Request');
+INSERT INTO response_intent(response_id, intent_id) VALUES (6, 6); -- Intent 6: External Resource
 INSERT INTO response_entity(response_id, entity_id) VALUES (6, 1); -- Entity 1: Default Entity
-INSERT INTO response_entity(response_id, entity_id) VALUES (6, 2); -- Entity 2: Chatbot
-INSERT INTO response_intent(response_id, intent_id) VALUES (6, 2); -- Intent 2: Support
-
--- ID 7: STAR Method Default
-INSERT INTO response(response, name) VALUES ('What would you like to know about the STAR method?', 'STAR Method Default');
-INSERT INTO response_intent(response_id, intent_id) VALUES (7, 1); -- Intent 1: Default Intent
-INSERT INTO response_entity(response_id, entity_id) VALUES (7, 3); -- Entity 3: STAR Method
-
--- ID 8: Cover Letter Default
-INSERT INTO response(response, name) VALUES ('Is there anything you would like to know about cover letters?', 'Cover Letter Default');
-INSERT INTO response_intent(response_id, intent_id) VALUES (8, 1); -- Intent 1: Default Intent
-INSERT INTO response_entity(response_id, entity_id) VALUES (8, 4); -- Entity 4: Cover Letter
-
--- ID 9: Employer Default
-INSERT INTO response(response, name) VALUES ('Absolutely! What would you like to know about employers?', 'Employer Default');
-INSERT INTO response_intent(response_id, intent_id) VALUES (9, 1); -- Intent 1: Default Intent
-INSERT INTO response_entity(response_id, entity_id) VALUES (9, 5); -- Entity 5: Employer
-
--- ID 10: General Interview Default
-INSERT INTO response(response, name) VALUES ('What would you like to know about interviews?', 'General Interview Default');
-INSERT INTO response_intent(response_id, intent_id) VALUES (10, 1); -- Intent 1: Default Intent
-INSERT INTO response_entity(response_id, entity_id) VALUES (10, 6); -- Entity 6: General Interview
-
--- ID 11: Tech Interview Default
-INSERT INTO response(response, name) VALUES ('What do you want to know about tech interviews?', 'Tech Interview Default');
-INSERT INTO response_intent(response_id, intent_id) VALUES (11, 1); -- Intent 1: Default Intent
-INSERT INTO response_entity(response_id, entity_id) VALUES (11, 7); -- Entity 7: Tech Interview
-
--- ID 12: HR Interview Default
-INSERT INTO response(response, name) VALUES ('What would you like to know about HR interviews?', 'HR Interview Default');
-INSERT INTO response_intent(response_id, intent_id) VALUES (12, 1); -- Intent 1: Default Intent
-INSERT INTO response_entity(response_id, entity_id) VALUES (12, 8); -- Entity 8: HR Interview
-
--- ID 13: Attire Default
-INSERT INTO response(response, name) VALUES ('Do you have any questions about interview attire?', 'Attire Default');
-INSERT INTO response_intent(response_id, intent_id) VALUES (13, 1); -- Intent 1: Default Intent
-INSERT INTO response_entity(response_id, entity_id) VALUES (13, 9); -- Entity 9: Attire
-INSERT INTO response_entity(response_id, entity_id) VALUES (13, 6); -- Entity 6: General Interview
-
-
--- ID 14: Follow Up Default
-INSERT INTO response(response, name) VALUES ('What would you like to know about follow-ups?', 'Follow Up Default');
-INSERT INTO response_intent(response_id, intent_id) VALUES (14, 1); -- Intent 1: Default Intent
-INSERT INTO response_entity(response_id, entity_id) VALUES (14, 10); -- Entity 10: Follow Up
 
 
 
--------------------- OTHER RESPONSES --------------------
--- ID 15: Absolute Default Response
-INSERT INTO response(response, name) VALUES ('Catch All Response', 'Name 1');
-INSERT INTO response_intent(response_id, intent_id) VALUES (15, 1); -- Intent 1: DEFAULT INTENT
-INSERT INTO response_entity(response_id, entity_id) VALUES (15, 1); -- Entity 1: DEFAULT ENTITY
+-------------------- CHATBOT ENTITY RESPONSES --------------------
+-- ID 7: chatbot support / practice / example
+INSERT INTO response(response, name) VALUES ('I am designed to be able to provide general interview advice and know about the following topics HR Interviews, Technical Interviews, Interview Attire, Cover Letters, Interview Follow-Up, and Cover Letters. I can also provide interview practice and help guide you to external resources about those topics.
+<br>An example of a common request would be “Tell me about technical interviews,” “Ask me an HR Interview question,” “What is the STAR method?” or “Where can I find more information about cover letters?”', 'chatbot support');
+INSERT INTO response_intent(response_id, intent_id) VALUES (7, 2); -- Intent 2: Support
+INSERT INTO response_intent(response_id, intent_id) VALUES (7, 4); -- Intent 4: Practice
+INSERT INTO response_intent(response_id, intent_id) VALUES (7, 6); -- Intent 6: Example
+INSERT INTO response_entity(response_id, entity_id) VALUES (7, 2); -- Entity 2: Chatbot Entity
 
--- ID 16: Support Chatbot
-INSERT INTO response(response, name) VALUES ('Ask me for help or support, like "Give me an HR interview question." Or "Where can I learn about writing a cover letter?"', 'Support Chatbot');
---INSERT INTO response_intent(response_id, intent_id) VALUES (16, 2); -- Intent 2: Support
---INSERT INTO response_entity(response_id, entity_id) VALUES (16, 2); -- Entity 2: Chatbot
+-- ID 8: chatbot information / default
+INSERT INTO response(response, name) VALUES ('I am Chatwick, the Tech Elevator Attendant. I am designed to provide Tech Elevators Students with help as they are interviewing for jobs.
+<br> While I may appear to be intelligent, I function by using keyword matching and a rudimentary history to determine which of my vast number of prewritten responses is most appropriate for your request. For support and to see common commands, you can type "help" now, or "Chatwick help" at any time.
+<br>I am programmed by Cameron Coe, Eric Kuklinski, Hassan Mohamud, and Katherine Meadows. They are <em>very</em> intelligent and likable humans, and you should absolutely hire them if you have an opening at your company.', 'Chatbot Information');
+INSERT INTO response_intent(response_id, intent_id) VALUES (8, 1); -- Intent 1: Default
+INSERT INTO response_intent(response_id, intent_id) VALUES (8, 3); -- Intent 3: Information 
+INSERT INTO response_entity(response_id, entity_id) VALUES (8, 2); -- Entity 2: Chatbot 
 
--- ID 17: Support Star method
-INSERT INTO response(response, name) VALUES ('Support about STAR Method', 'Support Star method');
-INSERT INTO response_intent(response_id, intent_id) VALUES (17, 2); -- Intent 2: Support
-INSERT INTO response_entity(response_id, entity_id) VALUES (17, 3); -- Entity 3: Star Method
+-- ID 9: chatbot information / chatbot default
+INSERT INTO response(response, name) VALUES ('As I am a new chatbot, there is no where you can go to learn more about me. However, if you want me to talk about myself, feel free to ask me to tell you about myself', 'Chatbot Information');
+INSERT INTO response_intent(response_id, intent_id) VALUES (9, 5); -- Intent 5: External
+INSERT INTO response_entity(response_id, entity_id) VALUES (9, 2); -- Entity 2: Chatbot 
 
--- ID 18: Star Method Support
-INSERT INTO response(response, name) VALUES ('STAR Method Example', 'Start Method Chatbot');
-INSERT INTO response_intent(response_id, intent_id) VALUES (18, 6); -- Intent 2: Example
-INSERT INTO response_entity(response_id, entity_id) VALUES (18, 3); -- Entity 3: Star Method
+
+-------------------- STAR METHOD ENTITY RESPONSES --------------------
+-- ID 10: Star Method Support / Default 
+INSERT INTO response(response, name) VALUES ('Related to the STAR method, I can assist you with (1) understanding what the STAR method is, (2) give you questions to practice, (3) provide links to external resources for more information, and (4) give you an example STAR question with an appropriate response. For help, type something such as, “understand what the STAR method is” or “give me an example STAR question.”', 'Support Star method');
+INSERT INTO response_intent(response_id, intent_id) VALUES (10, 1); -- Intent 1: Default
+INSERT INTO response_intent(response_id, intent_id) VALUES (10, 2); -- Intent 2: Support
+INSERT INTO response_entity(response_id, entity_id) VALUES (10, 3); -- Entity 3: Star Method
+
+-- ID 11: Star Method Information 
+INSERT INTO response(response, name) VALUES ('The STAR method is a structured technique used for answering behavioral interview questions. The acronym STAR stands for Situation, Task, Action, and Result. When responding to a question using the STAR method, the interviewee first describes the specific Situation or context they were in. Next, they outline the Task or challenge they faced in that situation. Then, they detail the Action or actions they took to address the task. Finally, they conclude by explaining the Result or outcome of their actions, emphasizing what they achieved and what they learned from the experience. This method helps interviewees provide clear and concise answers that showcase their skills, experiences, and problem-solving abilities in a structured manner.', 'Information Star method');
+INSERT INTO response_intent(response_id, intent_id) VALUES (11, 3); -- Intent 3: Information
+INSERT INTO response_entity(response_id, entity_id) VALUES (11, 3); -- Entity 3: Star Method
+
+-- ID 12: Star Method Practice 
+INSERT INTO response(response, name) VALUES ('<p>Here are some example questions you can use to practice the star method:
+<ol>
+<li>Tell me about a time when you had to meet a tight deadline. What was the situation, and how did you ensure you completed the task on time?</li>
+<li>Describe a situation where you had to work as part of a team to achieve a common goal. What was your role, and how did you contribute to the success of the team?</li>
+<li>Can you share an example of a challenge you faced in a previous job and how you overcame it?</li>
+<li>Tell me about a time when you had to adapt to a significant change at work. How did you handle the change, and what was the outcome?</li>
+<li>Describe a situation where you had to handle a difficult client or customer. What approach did you take to resolve the issue?</li>
+<li>Can you give me an example of a time when you had to make a difficult decision at work? What factors did you consider, and what was the result?</li>
+<li>Tell me about a project or initiative you led. What was the objective, and how did you ensure its successful completion?</li>
+<li>Describe a situation where you had to prioritize multiple tasks or projects. How did you manage your time and resources to meet the deadlines?</li>
+<li>Can you share an example of when you had to collaborate with a colleague who had a different work style or opinion than you? How did you handle the situation, and what was the outcome?</li>
+<li>Tell me about a time when you identified a problem or opportunity for improvement in your previous role. What steps did you take to address it, and what was the impact of your actions?</li>
+</ol><p>', 'Practice Star method');
+INSERT INTO response_intent(response_id, intent_id) VALUES (12, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (12, 3); -- Entity 3: Star Method
+
+-- ID 13: Star Method External Resources 
+INSERT INTO response(response, name) VALUES ('
+<p>Here are two good resources you can use for more help and information regarding the STAR method:</p>
+<ol>
+<li>1. <a href="https://www.indeed.com/career-advice/interviewing/using-the-star-method">Resource 1:</a> <br>Indeed offers a comprehensive guide on the STAR method including tips on how to structure your responses and examples of STAR-formatted answers</li>
+<li>2. <a href="https://www.themuse.com/advice/star-interview-method">Resource 2:</a><br>The Muse provides insights into the STAR method, along with examples and tips for crafting effective STAR-based answers during interviews.</li
+</ol>', 'External Resource Star method');
+INSERT INTO response_intent(response_id, intent_id) VALUES (13, 5); -- Intent 5: External Resources
+INSERT INTO response_entity(response_id, entity_id) VALUES (13, 3); -- Entity 3: Star Method
+
+-- ID 14: Star Method Example 
+INSERT INTO response(response, name) VALUES ('<p>Here is an example question along with a response using the STAR method:</p>
+<p><b> Question -</b> Tell me about a time you resolved a conflict on a team.</p>
+<p></b>Response:</b></p>
+<p><b>Situation -</b> In my previous role as a Project Manager at XYZ Company, I was leading a cross-functional team on a critical project. </p>
+<p><b>Task -</b> During the project, tensions arose between the design and engineering teams due to differing opinions on the project’s direction and priorities. The conflict was affecting team collaboration and slowing down progress.</p>
+<p><b>Action -</b> To address the conflict, I scheduled a team meeting to openly discuss and understand each team’s perspectives and concerns. I facilitated a constructive dialogue where team members could express their viewpoints and listen to each other’s ideas.</p>
+<p><b>Result -</b> As a result of the meeting, we reached a consensus on the project’s priorities and established clear communication channels between the design and engineering teams. Team collaboration improved, and we were able to successfully complete the project on time, meeting all objectives.</p>', 'Example Star method');
+INSERT INTO response_intent(response_id, intent_id) VALUES (14, 2); -- Intent 6: Example
+INSERT INTO response_entity(response_id, entity_id) VALUES (14, 3); -- Entity 3: Star Method
+
+
+-------------------- COVER LETTER ENTITY RESPONSES --------------------
+-- ID 15: Cover Letter Support / Default
+INSERT INTO response(response, name) VALUES ('If you’re stuck writing a cover letter, here are some tips to help: You can look at examples online for how to format a cover letter online to get ideas for formatting. Also read both the job description and the company’s about us page carefully, and write down the key points their company is looking for. Anything your skills align with is something you should mention on your cover letter. Organize those points into an outline, and write your cover letter.<br/>For more information about how to write a cover letter, ask me, "How do I write a cover letter?", "How do I write a cover letter?"', 'Support about Cover Letters');
+INSERT INTO response_intent(response_id, intent_id) VALUES (15, 1); -- Intent 1: Default
+INSERT INTO response_intent(response_id, intent_id) VALUES (15, 2); -- Intent 2: Support
+INSERT INTO response_entity(response_id, entity_id) VALUES (15, 4); -- Entity 4: Cover Letter
+
+-- ID 16: Cover Letter Information 
+INSERT INTO response(response, name) VALUES ('Your cover letter should be one page long. The header consists of your contact information- including name, phone number, email, and optional address and LinkedIn URL, followed by the date of submission. The employer’s contact information is optional for digital submissions but necessary for physical submissions. The salutation should be formal, addressing the hiring manager or relevant department directly if possible, and avoiding "To Whom It May Concern" unless absolutely. The introduction paragraph should introduce yourself, mention the company and job title, and express your interest in the position. The body paragraphs should directly address the job description, emphasizing how your skills and experiences align with the company’s needs. Use quantifiable achievements and show how they align to the company’s goals. The closing paragraph should reiterate your interest, provide contact information, and express gratitude. End with a formal closing statement and your typed full name, or physically sign if submitting a hard copy.', 'Information about Cover Letters');
+INSERT INTO response_intent(response_id, intent_id) VALUES (16, 3); -- Intent 3: Information
+INSERT INTO response_entity(response_id, entity_id) VALUES (16, 4); -- Entity 4: Cover Letter
+
+-- ID 17: Cover Letter Practice 
+INSERT INTO response(response, name) VALUES ('<p>You can polish your cover letter by reading out loud to yourself in a mirror or to a friend. After reading, ask yourself or your friends:
+<ul>
+<li>Does this cover letter sound specific to the job you’re applying to?</li>
+<li>Are there any sections that could be improved or shortened for clarity?</li>
+<li>Does this cover letter answer <em>why</em> the company should hire you?</li>
+</ul><p>', 'Practice Cover Letters');
+INSERT INTO response_intent(response_id, intent_id) VALUES (17, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (17, 4); -- Entity 4: Cover Letter
+
+-- ID 18: Cover Letter External Resource 
+INSERT INTO response(response, name) VALUES ('Sure, <a href="https://www.linkedin.com/pulse/how-write-outstanding-cover-letter-kummuni/">here’s an article with tips on how to write an outstanding cover letter.</a>', 'Example Cover Letters');
+INSERT INTO response_intent(response_id, intent_id) VALUES (18, 5); -- Intent 5: External
+INSERT INTO response_entity(response_id, entity_id) VALUES (18, 4); -- Entity 4: Cover Letter
+
+-- ID 19: Cover Letter Example 
+INSERT INTO response(response, name) VALUES ('<p>Here is an example cover letter:</p>
+<p>[Your Name]</p>
+<p>[Your Address]</p>
+<p>[City, State, Zip Code]</p>
+<p>[Your Phone Number]</p>
+<p>[Your Email Address]</p>
+<p>[Your LinkedIn and/or website URL] (Optional)</p>
+<br/>
+<p>[Date]
+<br/>
+<p>[Employer’s Name (if known)]</p>
+<p>[Employer’s Title (if known)]</p>
+<p>[Company Name]</p>
+<p>[Company Address]</p>
+<p>[City, State, Zip Code]</p>
+<br/>
+<p>Dear [Employer’s Name or Hiring Manager],</p>
+<p>I am writing to express my keen interest in the [Job Title] position at [Company Name], as advertised [where you found the job posting]. With a [mention relevant degree or experience], I am excited about the opportunity to contribute to your team and assist in achieving [mention any specific company goals or initiatives you’re aware of].</p>
+<p>Throughout my career, I have honed [mention relevant skills or experiences] that I believe align well with the requirements of the role. For instance, at my previous position at [Previous Company], I [mention a specific achievement or project relevant to the job description, using quantifiable results if possible]. I am confident that my background in [mention relevant field or expertise] will allow me to make immediate and valuable contributions to [Company Name].</p>
+<p>I am particularly drawn to [Company Name]’s commitment to [mention a specific company value or initiative you admire], and I am eager to support these efforts. Furthermore, I am impressed by [mention any recent accomplishments or news about the company]. I am enthusiastic about the prospect of bringing my unique perspective and skill set to your esteemed organization.</p>
+<p>I am available at your earliest convenience for an interview to discuss how my experiences and skills align with the needs of [Company Name]. Thank you for considering my application. I look forward to the possibility of contributing to the success of [Company Name] and am excited about the opportunity to learn more about this exciting role.</p>
+<br/>
+<p>Sincerely,</p>
+<p>[Your Name]</p>', 'Example Cover Letters');
+INSERT INTO response_intent(response_id, intent_id) VALUES (19, 6); -- Intent 6: Example
+INSERT INTO response_entity(response_id, entity_id) VALUES (19, 4); -- Entity 4: Cover Letter
+
+
+-------------------- GENERAL INTERVIEW ENTITY RESPONSES --------------------
+-- ID 20: General Interview Support / Default
+INSERT INTO response(response, name) VALUES ('I’d be happy to provide some support on general interview topics. What specific areas would you like help with? I can assist with preparing for common interview questions, practicing the STAR method, or any other general interview guidance you need.', 'Support General Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (20, 1); -- Intent 1: Default
+INSERT INTO response_intent(response_id, intent_id) VALUES (20,  2); -- Intent 2: Support
+INSERT INTO response_entity(response_id, entity_id) VALUES (20, 6); -- Entity 6: General Interview
+
+-- ID 21: General Interviews Information
+INSERT INTO response(response, name) VALUES ('<p>Here are some key points on general interview preparation and strategies:</p>
+<ul> 
+<li>Prepare for common interview questions and practice using the STAR method to structure your responses.</li>
+<li>Research the company, role, and industry ahead of time so you can speak knowledgeably about why you’re a good fit.</li> 
+<li>Prepare thoughtful questions to ask the interviewer that show your genuine interest.</li>
+<li>Practice your body language and tone of voice to convey confidence and enthusiasm.</li>
+<li>Be ready to discuss your background, skills, and experiences in a clear and concise manner.</li> <li>Follow up promptly with a thank-you note reiterating your interest and fit.</li> 
+</ul>', 'Information on General Interviews');
+INSERT INTO response_intent(response_id, intent_id) VALUES (21, 3); -- Intent 3: Information
+INSERT INTO response_entity(response_id, entity_id) VALUES (21, 6); -- Entity 6: General Interview
+
+-- ID 22: General Interviews Information
+INSERT INTO response(response, name) VALUES ('What type of interview would you like to practice? I can perform practice HR interviews or practice technical interviews.', 'Determine Practice Type');
+INSERT INTO response_intent(response_id, intent_id) VALUES (22, 4); -- Intent 4: practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (22, 6); -- Entity 6: General Interview
+
+-- ID 23: General Interviews External Resources
+INSERT INTO response(response, name) VALUES ('There are many great external resources available to help prepare for interviews. Explore additional interview tips and strategies from reputable sources:
+<ul>
+<li>The Muse’s Ultimate Interview Guide offers 30+ prep tips for job interview success</li>
+<li>Princeton University’s Interview Guide covers preparation tips and nuanced advice for various interview types</li>
+</ul>.', 'External Resources for General Interviews');
+INSERT INTO response_intent(response_id, intent_id) VALUES (23, 5); -- Intent 5: External Resources
+INSERT INTO response_entity(response_id, entity_id) VALUES (23, 6); -- Entity 6: General Interview
+
+-- ID 24: General Interviews Example 
+INSERT INTO response(response, name) VALUES ('What type of interview would you like an example answer for? I can give examples of how I’d respond to a technical interview or a HR interview.', 'Determine Example Type');
+INSERT INTO response_intent(response_id, intent_id) VALUES (24, 6); -- Intent 6: example
+INSERT INTO response_entity(response_id, entity_id) VALUES (24, 6); -- Entity 6: General Interview
+
+
+-------------------- TECHNICAL INTERVIEW ENTITY RESPONSES --------------------
+-- ID 25: Tech Interviews Support / Default
+INSERT INTO response(response, name) VALUES ('I can help you to prepare for a technical interview. Topics I can provide support on are: (1) information on technical interviews, (2) practice interview questions, (3) external resources for more information, and (4) an example question with an appropriate response. If you’re interested in any of these, type something such as, "Information on technical interviews" or "give me some external resources." ', 'Support Technical Interviews');
+INSERT INTO response_intent(response_id, intent_id) VALUES (25, 1); -- Intent 1: Default
+INSERT INTO response_intent(response_id, intent_id) VALUES (25, 2); -- Intent 2: Support
+INSERT INTO response_entity(response_id, entity_id) VALUES (25, 7); -- Entity 7: Tech Interviews
+
+-- ID 26: Tech Interviews Information
+INSERT INTO response(response, name) VALUES ('A technical interview for a junior software developer position typically consists of a series of coding and problem-solving exercises designed to assess a candidate’s programming skills, problem-solving abilities, and understanding of fundamental computer science concepts. During the interview, candidates may be asked to write code to solve algorithmic or data structure challenges, debug code snippets, or design and implement small software projects. Interviewers may also evaluate a candidate’s knowledge of programming languages, software development methodologies, and best practices. Additionally, candidates may be asked to explain their thought processes, justify their coding decisions, and optimize their code for efficiency and readability. The goal of a technical interview is to evaluate a candidate’s technical proficiency, problem-solving skills, and potential to learn and grow within the role of a junior software developer', 'Information Technical Interviews');
+INSERT INTO response_intent(response_id, intent_id) VALUES (26, 3); -- Intent 3: Information
+INSERT INTO response_entity(response_id, entity_id) VALUES (26, 7); -- Entity 7: Tech Interviews
+
+-- ID 27: Tech Interviews Practice
+INSERT INTO response(response, name) VALUES ('___', 'Practice Technical Interviews');
+INSERT INTO response_intent(response_id, intent_id) VALUES (27, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (27, 7); -- Entity 7: Tech Interviews
+
+-- ID 28: Tech Interviews External Resources
+INSERT INTO response(response, name) VALUES ('___', 'Tech Interviews External Resources');
+INSERT INTO response_intent(response_id, intent_id) VALUES (28, 5); -- Intent 5: External Resources
+INSERT INTO response_entity(response_id, entity_id) VALUES (28, 7); -- Entity 7: Tech Interviews
+
+-- ID 29: Example Tech Interview
+INSERT INTO response(response, name) VALUES ('___', 'Example Tech Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (29, 6); -- Intent 6: example
+INSERT INTO response_entity(response_id, entity_id) VALUES (29, 7); -- Entity 7: Tech Interviews
+
+
+-------------------- HR INTERVIEW ENTITY RESPONSES --------------------
+-- ID 30: HR Interview Support / Default
+INSERT INTO response(response, name) VALUES ('You can ask me to give you a practice HR or behavioral interview question, or ask me for an example answer.', 'Support HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (30, 1); -- Intent 1: Default
+INSERT INTO response_intent(response_id, intent_id) VALUES (30, 2); -- Intent 2: Support
+INSERT INTO response_entity(response_id, entity_id) VALUES (30, 8); -- Entity 8: HR Interview
+
+-- ID 31: HR Interview Information 
+INSERT INTO response(response, name) VALUES ('An HR (or behavioral) interview is an opportunity for the hiring team to get to know who you are, and see if you’re a good fit for their team aside from your technical skills. It helps to approach each answer from a problem-solving persective, think about how you solved the problem, how you grew from the experience, and what you will do from now on. Ask me about the STAR method for more information about how to answer interview questions.', 'Information HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (31, 3); -- Intent 3: Information
+INSERT INTO response_entity(response_id, entity_id) VALUES (31, 8); -- Entity 8: HR Interview
+
+-- ID 32: HR Interview Practice 
+INSERT INTO response(response, name) VALUES ('Tell me what you think your top 3 strengths are.', 'Practice HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (32, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (32, 8); -- Entity 8: HR Interview
+
+-- ID 33: HR Interview External Resource 
+INSERT INTO response(response, name) VALUES ('<a href="https://www.linkedin.com/pulse/how-write-outstanding-cover-letter-kummuni/">Here’s a link to an article from Indeed.com about HR/ Behavioral Interviews.</a>', 'External Resource HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (33, 5); -- Intent 5: External Resource
+INSERT INTO response_entity(response_id, entity_id) VALUES (33, 8); -- Entity 8: HR Interview
+
+-- ID 34: HR Interview Example 
+INSERT INTO response(response, name) VALUES ('Here’s an example HR Interview Question and Answer:
+<br/><em>Question:</em> "What is your biggest weakness?"
+<br/><em>Answer:</em> "One area I’ve been actively working on improving is my tendency to take on too many tasks at once. In the past, I’ve sometimes found myself stretched thin trying to juggle multiple projects simultaneously. While my enthusiasm for taking on new challenges is a strength, I’ve realized that it’s also important to prioritize tasks effectively and delegate when necessary to ensure that I can deliver high-quality results consistently. To address this, I’ve been implementing time management techniques such as setting clear priorities, breaking down larger projects into smaller, manageable tasks, and communicating more effectively with my team to ensure alignment on project timelines and responsibilities. I’ve already seen significant improvement in my ability to focus on key priorities and manage my workload more efficiently, and I’m committed to continuing to refine these skills to become an even more effective and productive team member."', 'Example HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (34, 6); -- Intent 6: Support
+INSERT INTO response_entity(response_id, entity_id) VALUES (34, 8); -- Entity 9: HR Interview
+
+
+-------------------- HR INTERVIEW ENTITY RESPONSES --------------------
+-- ID 35: Attire Support 
+INSERT INTO response(response, name) VALUES ('You can ask me for information on how to dress for an interview, or ask me to give you examples of how to dress professionally.', 'Support Attire');
+INSERT INTO response_intent(response_id, intent_id) VALUES (35, 1); -- Intent 1: Default
+INSERT INTO response_intent(response_id, intent_id) VALUES (35, 2); -- Intent 2: Support
+INSERT INTO response_entity(response_id, entity_id) VALUES (35, 9); -- Entity 9: Attire
+
+-- ID 36: Attire Information / Default
+INSERT INTO response(response, name) VALUES ('No matter what the company’s dress code is, dressing up for an interview is the fastest way to give a strong first impression, and it demonstrates the effort you put to present yourself professionally. Go with professional wear or business casual for your outfit. You want to make sure your clothes are clean on the day of the interview, that they are wrinkle free, and that the fabric is comfortable enough to not distract you. If you have a dress shirt, creasing it is nice, but not required. For in-person interviews, be sure your pants and shoes match the rest of your outfit. <br/>Personal hygiene is also a must. Groom yourself so you look as professional and ready as the clothes you’re wearing.', 'Information Attire');
+INSERT INTO response_intent(response_id, intent_id) VALUES (36, 3); -- Intent 3: Information
+INSERT INTO response_entity(response_id, entity_id) VALUES (36, 9); -- Entity 9: Attire
+
+-- ID 37: Attire Practice 
+INSERT INTO response(response, name) VALUES ('Trying on your outfit ahead of time can save you time and lower stress on the day of the interview. Look at yourself in a mirror, and ask yourself what your first impression of that person would be. It can also help to get a second opinion from a friend or family member.', 'Practice Attire');
+INSERT INTO response_intent(response_id, intent_id) VALUES (37, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (37, 9); -- Entity 9: Attire
+
+-- ID 38: Attire External Resources 
+INSERT INTO response(response, name) VALUES ('Here you go. <a href="https://www.linkedin.com/pulse/how-write-outstanding-cover-letter-kummuni/">Click here for an article with tips from business leaders on how to dress for an interview.</a>', 'External Resource Attire');
+INSERT INTO response_intent(response_id, intent_id) VALUES (38, 5); -- Intent 5: External Resource
+INSERT INTO response_entity(response_id, entity_id) VALUES (38, 9); -- Entity 9: Attire
+
+-- ID 39: Attire Example 
+INSERT INTO response(response, name) VALUES ('<p>Here are some examples of professional attire:</p><br/>
+<img src="https://images.pexels.com/photos/7793725/pexels-photo-7793725.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Formalwear examples with suits, button-up shirts, and khaki pants">', 'Example Attire');
+INSERT INTO response_intent(response_id, intent_id) VALUES (39, 6); -- Intent 6: Example
+INSERT INTO response_entity(response_id, entity_id) VALUES (39, 9); -- Entity 9: Attire
+
+
+-------------------- FOLLOW UP ENTITY RESPONSES --------------------
+-- ID 40: Follow Up Support / Default
+INSERT INTO response(response, name) VALUES ('<p>I’d be happy to provide comprehensive support to help you effectively follow up after interviews. Here are the key areas I can assist with: </p>
+<p>I can guide you through writing a thoughtful, tailored thank-you message to send within 24 hours of the interview.</p>
+<p>We can ensure the email reiterates your interest, highlights specific points from your conversation, and keeps you top-of-mind with the hiring manager.</p>
+<p>I can provide sample templates and feedback to help you craft the perfect follow-up.</p>
+<p>Following Up on Next Steps</p>
+<p>I can advise you on the best way to inquire about the status of the hiring process and next steps.</p>
+<p>We can discuss strategies for politely following up if you haven’t heard back, without being overly persistent.</p>
+<p>Please let me know which aspects of the follow-up process you’d like the most support with, and I’ll be happy to dive in further.</p>', 'Comprehensive Support for Interview Follow-Up');
+INSERT INTO response_intent(response_id, intent_id) VALUES (40, 1); -- Intent 1: Default
+INSERT INTO response_intent(response_id, intent_id) VALUES (40, 2); -- Intent 2: Support
+INSERT INTO response_entity(response_id, entity_id) VALUES (40, 10); -- Entity 10: Follow Up
+
+-- ID 41: Follow Up Information
+INSERT INTO response(response, name) VALUES ('<p>Here are the key points on effectively following up after interviews:</p>
+<ul>
+<li>Always send a personalized thank-you email within 24 hours of the interview. .</li>
+<li>Reiterate your interest in the role and company, and call out something specific from your conversation.</li>
+<li>Don’t take your foot off the gas - keep applying to other opportunities even if you feel good about a particular interview.</li>
+<li>Collect rejections and use them to gain momentum..</li>
+<li>Be patient and take a breath. It may take a few weeks to hear back, so keep applying in the meantime.</li>
+<li>Aim to send out at least 3 applications per week during the cohort, and 5 per week after graduation. The more applications you get out, the more interviews you’ll receive.</li>
+<li>Don’t put all your eggs in one basket - continue applying to other roles even if you feel really good about an interview.</li>
+</ul>', 'Information on Interview Follow-Up');
+INSERT INTO response_intent(response_id, intent_id) VALUES (41, 3); -- Intent 3: Information
+INSERT INTO response_entity(response_id, entity_id) VALUES (41, 10); -- Entity 10: Follow Up
+
+-- ID 42: Follow Up External Resources
+INSERT INTO response(response, name) VALUES ('<a href="https://www.coursera.org/articles/follow-up-email-after-interview">Here’s an article I found about how to write a follow up letter to your recruiter.</a>', 'External Resource for Follow Ups');
+INSERT INTO response_intent(response_id, intent_id) VALUES (42, 5); -- Intent 5: External Resource
+INSERT INTO response_entity(response_id, entity_id) VALUES (42, 10); -- Entity 10: Follow Up
+
+
+-- ID 43: Follow Up Example
+INSERT INTO response(response, name) VALUES ('<p>Here is an example of a follow-up email you’d send after an interview:</p>
+<p>Subject Line: Thank You - Software Developer Interview</p>
+<p>Hi Name, </p>
+<p>I appreciate having the opportunity to speak with you today about the Software Developer role at the ABCD company. The job seems to be a perfect match for my abilities and interests. </p>
+<p>In addition to my enthusiasm, I would bring strong communication skills, flexibility, and the ability to encourage others to work cooperatively. During our conversation, I noted that at one point you stressed your need for a Junior Software Developer to quickly become a productive member of the team. Please know that I am more than happy to "go the extra mile" and can ensure that I would put in the extra work as needed to get up to speed. </p>
+<p>I appreciate the time you took to interview me, and I look forward to hearing from you about the next steps in the hiring process.</p>
+<p>Again, thank you very much for your time and consideration. I hope to hear from you soon.</p>
+<p>Best Regards,</p>
+<p>Jane/John Doe</p>
+<p>Email Address</p>
+<p>Phone Number</p>', 'Sample Thank You Message #1');
+INSERT INTO response_intent(response_id, intent_id) VALUES (43, 6); -- Intent 6: Example
+INSERT INTO response_entity(response_id, entity_id) VALUES (43, 10); -- Entity 10: Follow Up
 
 
 
