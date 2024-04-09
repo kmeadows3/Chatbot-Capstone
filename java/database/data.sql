@@ -23,7 +23,8 @@ INSERT INTO intent(name) VALUES ('Information');
 
 -- ID 4
 INSERT INTO intent(name) VALUES ('Practice');  
-	INSERT INTO keyword(keyword, intent_id) VALUES ('practice', 3);  -- Intent: Information(4)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('practice', 3);  -- Intent: Practice(4)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('ask me', 3); -- Intent: Practice(4)
 
 -- ID 5
 INSERT INTO intent(name) VALUES ('External Resource');
@@ -106,9 +107,9 @@ INSERT INTO entity(name) VALUES ('Attire');
 -- ID 10
 INSERT INTO entity(name) VALUES ('Follow Up');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('follow up', 10);  -- Follow up(10)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('follow-up', 10);  -- Follow up(10)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('followup', 10);  -- Follow up(10)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('after', 10);  -- Follow up(10)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('post-interview', 10);  -- Follow up(10)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('postinterview', 10);  -- Follow up(10)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('thank-you note', 10);  -- Follow up(10)
 	
 
