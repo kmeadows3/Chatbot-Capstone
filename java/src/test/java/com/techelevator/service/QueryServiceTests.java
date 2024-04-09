@@ -50,7 +50,7 @@ public class QueryServiceTests extends BaseDaoTests {
     }
 
     @Test
-    public void getResponseFromUserInput_returns_expected_response_when_multiple_responses_match(){
+    public void getResponseFromUserInput_returns_expected_response_when_one_response_has_more_matches(){
         UserInput input = new UserInput();
         List<Integer> intentList = new ArrayList<>();
         List<Integer> entityList = new ArrayList<>();
@@ -160,7 +160,7 @@ public class QueryServiceTests extends BaseDaoTests {
     }
 
     @Test
-    public void getResponseFromUserInput_returns_overall_catch_all_if_no_intent_catch_all(){
+    public void getResponseFromUserInput_returns_overall_catch_all_if_no_intent_or_entity_catch_all(){
         UserInput input = new UserInput();
         List<Integer> intentList = new ArrayList<>();
         List<Integer> entityList = new ArrayList<>();
@@ -172,6 +172,38 @@ public class QueryServiceTests extends BaseDaoTests {
         input.setUtterance("intent3keyword entity4keyword");
         Response response = queryService.getResponseFromUserInput(input);
         Assert.assertEquals("Test Response 1", response.getResponse());
+    }
+
+    @Test
+    public void getResponseFromUserInput_returns_higher_ranked_choice_if_number_of_matches_is_equal_one_intent_and_entity(){
+        UserInput input = new UserInput();
+        List<Integer> intentList = new ArrayList<>();
+        List<Integer> entityList = new ArrayList<>();
+        intentList.add(1);
+        entityList.add(1);
+        input.setIntents(intentList);
+        input.setEntities(entityList);
+
+        input.setUtterance("intent2keyword entity3keyword entity4keyword");
+        Response response = queryService.getResponseFromUserInput(input);
+        //TODO this response might not be the highest ranked, method wasn't created when I wrote the test, other result is Test Response 3
+        Assert.assertEquals("Test Response 6", response.getResponse());
+    }
+
+    @Test
+    public void getResponseFromUserInput_returns_higher_ranked_choice_if_number_of_matches_is_equal_one_intent_and_two_entities(){
+        UserInput input = new UserInput();
+        List<Integer> intentList = new ArrayList<>();
+        List<Integer> entityList = new ArrayList<>();
+        intentList.add(1);
+        entityList.add(1);
+        input.setIntents(intentList);
+        input.setEntities(entityList);
+
+        input.setUtterance("intent5keyword intent6keyword entity2keyword entity3keyword");
+        Response response = queryService.getResponseFromUserInput(input);
+        //TODO this response might not be the highest ranked, method wasn't created when I wrote the test, other result is Test Response 3
+        Assert.assertEquals("Test Response 8", response.getResponse());
     }
 
 }
