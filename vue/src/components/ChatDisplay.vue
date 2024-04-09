@@ -7,7 +7,7 @@
             <form>
                 <textarea name="userInput" id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox"
                     placeholder="Type Here"></textarea>
-                <button @click.prevent="addUserBox()" >Send Response</button>
+                <button @click.prevent="addUserBox()">Send Response</button>
 
             </form>
         </div>
@@ -58,7 +58,7 @@ export default {
                 setTimeout(() => {
 
 
-                    newResponse.innerHTML = response;
+                    newResponse.innerText = response;
                     this.isLoading = false;
                 }, 750);
             }, 250);
@@ -73,19 +73,16 @@ export default {
         getResponseFromServer() {
             const query = {
                 utterance: this.textBoxText,
-                intents: this.$store.state.intents,
-                entities: this.$store.state.entities,
+                intent: this.$store.state.intent,
+                entity: this.$store.state.entity,
             }
 
             QueryService.get(query)
             .then( response => {
                 if(response.status === 200) {
                     // TODO: When the get returns a success response
-                    console.log(response.data);
-                    this.$store.commit('SET_INTENTS', response.data.intents);
-                    this.$store.commit('SET_ENTITIES', response.data.entities);
-                    this.addRobotBox(response.data.response);
-                    
+                    this.addRobotBox(response.data);
+                    console.log("Chatwick's Response:  " + response);
                 }
             })
             .catch (error => {
