@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 public class QueryService {
     public static final int DEFAULT_INTENT_ID = 1;
     public static final int DEFAULT_ENTITY_ID = 1;
+    public static final int INTENTS_INDEX = 0;
+    public static final int ENTITIES_INDEX = 1;
     private QueryDao queryDao;
 
     public QueryService (QueryDao queryDao){
@@ -30,31 +32,32 @@ public class QueryService {
         Response outputResponse = new Response();
 
         List<String> tokens = tokenizeUtterance(userInput);
-
         List<Integer>[] intentsAndEntities = getIntentsAndEntities(tokens, userInput);
+        List<String> potentialResponses = getPotentialResponseList(intentsAndEntities[INTENTS_INDEX],
+                intentsAndEntities[ENTITIES_INDEX]);
 
-        List<String> potentialResponses = getPotentialResponseList(intentsAndEntities[0], intentsAndEntities[1]);
-
-        outputResponse.setIntents(intentsAndEntities[0]);
-        outputResponse.setEntities(intentsAndEntities[1]);
+        outputResponse.setIntents(intentsAndEntities[INTENTS_INDEX]);
+        outputResponse.setEntities(intentsAndEntities[ENTITIES_INDEX]);
         outputResponse.setResponse(selectResponse(potentialResponses));
         return outputResponse;
     }
 
-
     /**
-     * This method takes the utterance provided by the client and breaks it into tokens
+     * This method takes the utterance provided by the client, cleans it, and breaks it into tokens
      *
      * @param userInput -- the Input from the client
      * @return List of all tokens from the utterance
      */
     private List<String> tokenizeUtterance(UserInput userInput) {
         List<String> tokens = new ArrayList<>();
+
         String utterance = userInput.getUtterance();
-        utterance = utterance.trim();
+        utterance = utterance.replaceAll("[^a-zA-Z ]", "").toLowerCase().trim();
+        userInput.setUtterance(utterance);
 
         List<String> mutlipleWordKeywords  = queryDao.getAllMultiWordKeywords();
         for (String keyword : mutlipleWordKeywords){
+            keyword = keyword.toLowerCase();
             if(utterance.contains(keyword)){
                 tokens.add(keyword);
                 utterance = utterance.replace(keyword, "");
@@ -75,7 +78,8 @@ public class QueryService {
      */
     private List<Integer>[] getIntentsAndEntities(List<String> tokens, UserInput userInput){
         List<Integer>[] intentsAndEntities = queryDao.getIntentsAndEntitiesFromKeywords(tokens);
-        intentsAndEntities = setIntentsAndEntitiesWhenNoneReturned(intentsAndEntities[0], intentsAndEntities[1], userInput);
+        intentsAndEntities = setIntentsAndEntitiesWhenNoneReturned(intentsAndEntities[INTENTS_INDEX],
+                intentsAndEntities[ENTITIES_INDEX], userInput);
 
         return intentsAndEntities;
     }
@@ -138,9 +142,9 @@ public class QueryService {
         defaultIntentList.add(DEFAULT_INTENT_ID);
 
         List<Integer> defaultEntityList = new ArrayList<>();
-        defaultEntityList.add(QueryService.DEFAULT_ENTITY_ID);
+        defaultEntityList.add(DEFAULT_ENTITY_ID);
 
-        if (entityIds.get(0) != 1){
+        if (entityIds.get(0) != DEFAULT_ENTITY_ID){
             responses = queryDao.getResponsesFromIntentsAndEntities(defaultIntentList, entityIds);
         }
 
