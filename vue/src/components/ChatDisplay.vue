@@ -58,7 +58,7 @@ export default {
                 setTimeout(() => {
 
 
-                    newResponse.innerText = response;
+                    newResponse.innerHTML = response;
                     this.isLoading = false;
                 }, 750);
             }, 250);
