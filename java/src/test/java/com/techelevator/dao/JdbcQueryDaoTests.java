@@ -44,7 +44,7 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
 
 
     @Test
-    public void getEntitiesAndIntents_returns_correct_array_only_one_intent_keyword() {
+    public void getIntentsAndEntitiesFromKeywords_returns_correct_array_only_one_intent_keyword() {
         List<String> potentialKeywords = new ArrayList<>();
         potentialKeywords.add("intent1keyword");
         List<Integer>[] resultsArray = jdbcQueryDao.getIntentsAndEntitiesFromKeywords(potentialKeywords);
@@ -57,7 +57,7 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
     }
 
     @Test
-    public void getEntitiesAndIntents_returns_correct_array_when_intent_keyword_repeated() {
+    public void getIntentsAndEntitiesFromKeywords_returns_correct_array_when_intent_keyword_repeated() {
         List<String> potentialKeywords = new ArrayList<>();
         potentialKeywords.add("intent1keyword");
         potentialKeywords.add("intent1keyword");
@@ -71,7 +71,7 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
     }
 
     @Test
-    public void getEntitiesAndIntents_returns_correct_array_when_entity_keyword_repeated() {
+    public void getIntentsAndEntitiesFromKeywords_returns_correct_array_when_entity_keyword_repeated() {
         List<String> potentialKeywords = new ArrayList<>();
         potentialKeywords.add("entity1keyword");
         potentialKeywords.add("entity1keyword");
@@ -84,7 +84,7 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
         Assert.assertEquals(1, (int) entities.get(0));
     }
     @Test
-    public void getEntitiesAndIntents_returns_correct_array_multiple_intent_keywords() {
+    public void getIntentsAndEntitiesFromKeywords_returns_correct_array_multiple_intent_keywords() {
         List<String> potentialKeywords = new ArrayList<>();
         potentialKeywords.add("intent1keyword");
         potentialKeywords.add("intent2keyword");
@@ -98,7 +98,7 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
         Assert.assertTrue(intents.contains(2));
     }
     @Test
-    public void getEntitiesAndIntents_returns_correct_array_only_one_entity_keyword() {
+    public void getIntentsAndEntitiesFromKeywords_returns_correct_array_only_one_entity_keyword() {
         List<String> potentialKeywords = new ArrayList<>();
         potentialKeywords.add("entity1keyword");
         List<Integer>[] resultsArray = jdbcQueryDao.getIntentsAndEntitiesFromKeywords(potentialKeywords);
@@ -110,7 +110,7 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
         Assert.assertEquals(1, (int) entities.get(0));
     }
     @Test
-    public void getEntitiesAndIntents_returns_correct_array_multiple_entity_keywords() {
+    public void getIntentsAndEntitiesFromKeywords_returns_correct_array_multiple_entity_keywords() {
         List<String> potentialKeywords = new ArrayList<>();
         potentialKeywords.add("entity1keyword");
         potentialKeywords.add("entity2keyword");
@@ -125,7 +125,7 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
     }
 
     @Test
-    public void getEntitiesAndIntents_returns_correct_array_when_both_entity_and_intent_keywords_exist() {
+    public void getIntentsAndEntitiesFromKeywords_returns_correct_array_when_both_entity_and_intent_keywords_exist() {
         List<String> potentialKeywords = new ArrayList<>();
         potentialKeywords.add("intent1keyword");
         potentialKeywords.add("entity1keyword");
@@ -140,7 +140,7 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
     }
 
     @Test
-    public void getEntitiesAndIntents_returns_empty_arrays_when_no_keywords_found() {
+    public void getIntentsAndEntitiesFromKeywords_returns_empty_arrays_when_no_keywords_found() {
         List<String> potentialKeywords = new ArrayList<>();
         potentialKeywords.add("not a keyword");
         potentialKeywords.add("still not a keyword");

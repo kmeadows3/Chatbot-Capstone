@@ -28,7 +28,6 @@ public class JdbcQueryDao implements QueryDao {
         List<String> responses = new ArrayList<String>();
 
         try {
-
             for (Integer intentId : intentIds) {
                 for (Integer entityId : entityIds) {
                     SqlRowSet result = jdbcTemplate.queryForRowSet(sql, intentId, entityId);
@@ -65,9 +64,9 @@ public class JdbcQueryDao implements QueryDao {
                 while (results.next()) {
                     Integer entityId = results.getInt("entity_id");
                     Integer intentId = results.getInt("intent_id");
-                    if (entityId != 0) {
+                    if (entityId != 0 && !entityIds.contains(entityId)) {
                         entityIds.add(entityId);
-                    } else if (intentId != 0) {
+                    } else if (intentId != 0 && !intentIds.contains(intentId)) {
                         intentIds.add(intentId);
                     }
                 }

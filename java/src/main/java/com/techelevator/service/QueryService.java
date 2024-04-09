@@ -3,7 +3,6 @@ package com.techelevator.service;
 import com.techelevator.dao.QueryDao;
 import com.techelevator.model.Response;
 import com.techelevator.model.UserInput;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -12,10 +11,27 @@ import java.util.stream.Collectors;
 
 @Component
 public class QueryService {
-    public static final int DEFAULT_INTENT_ID = 1;
-    public static final int DEFAULT_ENTITY_ID = 1;
-    public static final int INTENTS_INDEX = 0;
-    public static final int ENTITIES_INDEX = 1;
+
+    // Constants
+    private final int[] RANKED_ENTITY_IDS = new int[]{
+            3, // Star Method
+            4, // Cover Letter
+            5, // Recruiter
+            9, // Attire
+            7, // Tech Interview
+            8, // HR Interview
+            6, // General Interview
+            2, // Chatbot
+            1 }; // Default
+    public final int DEFAULT_INTENT_ID = 1;
+    public final int DEFAULT_ENTITY_ID = 1;
+    public final int PRACTICE_INTENT_ID = 4;
+    public final int HR_INTERVIEW_ENTITY_ID = 7;
+    public final int TECHNICAL_INTERVIEW_ENTITY_ID = 8;
+    public final int INTENTS_INDEX = 0;
+    public final int ENTITIES_INDEX = 1;
+
+    // Instance Variables
     private QueryDao queryDao;
 
     public QueryService (QueryDao queryDao){
@@ -33,12 +49,14 @@ public class QueryService {
 
         List<String> tokens = tokenizeUtterance(userInput);
         List<Integer>[] intentsAndEntities = getIntentsAndEntities(tokens, userInput);
-        List<String> potentialResponses = getPotentialResponseList(intentsAndEntities[INTENTS_INDEX],
-                intentsAndEntities[ENTITIES_INDEX]);
+        List<Integer> intents = intentsAndEntities[INTENTS_INDEX];
+        List<Integer> entities = intentsAndEntities[ENTITIES_INDEX];
+        List<String> potentialResponses = getPotentialResponseList(intents,
+                entities);
 
-        outputResponse.setIntents(intentsAndEntities[INTENTS_INDEX]);
-        outputResponse.setEntities(intentsAndEntities[ENTITIES_INDEX]);
-        outputResponse.setResponse(selectResponse(potentialResponses));
+        outputResponse.setIntents(intents);
+        outputResponse.setEntities(entities);
+        outputResponse.setResponse(selectResponse(potentialResponses,intents, entities));
         return outputResponse;
     }
 
@@ -121,6 +139,7 @@ public class QueryService {
      * @return List of responses that fit the utterance
      */
     private List<String> getPotentialResponseList(List<Integer> intentIds, List<Integer> entityIds){
+        entityIds = sortEntitiesByPriority(entityIds);
         List<String> responses = queryDao.getResponsesFromIntentsAndEntities(intentIds, entityIds);
         if (responses.size() == 0) {
             responses = handleZeroResponseMatches(intentIds, entityIds);
@@ -146,6 +165,7 @@ public class QueryService {
         List<Integer> defaultEntityList = new ArrayList<>();
         defaultEntityList.add(DEFAULT_ENTITY_ID);
 
+        entityIds = sortEntitiesByPriority(entityIds);
         if (entityIds.get(0) != DEFAULT_ENTITY_ID){
             responses = queryDao.getResponsesFromIntentsAndEntities(defaultIntentList, entityIds);
         }
@@ -167,10 +187,13 @@ public class QueryService {
      * @param responses -- all responses that match the intents and entities in the utterance
      * @return the single response that best fits the utterance
      */
-    private String selectResponse(List<String> responses){
+    private String selectResponse(List<String> responses, List<Integer> intents, List<Integer> entities){
         List<String> topResponses = getResponsesWithMostKeywordMatches(responses);
-
-        //TODO this needs more logic, currently only returns the first of the responses with the most keyword matches
+        if (intents.contains(PRACTICE_INTENT_ID) &&
+                entities.contains(HR_INTERVIEW_ENTITY_ID) || entities.contains(TECHNICAL_INTERVIEW_ENTITY_ID)){
+            //TODO FILTER OUT ALL NON-PRACTICE RESPONSES
+            //TODO GET A RANDOM RESPONSE FROM THE LIST
+        }
         return topResponses.get(0);
     }
 
@@ -179,7 +202,7 @@ public class QueryService {
      * @return a list of responses that have the highest number of keyword matches
      */
     private List<String> getResponsesWithMostKeywordMatches(List<String> responses) {
-        Map<String, Integer> responseCounts = new HashMap<>();
+        Map<String, Integer> responseCounts = new LinkedHashMap<>();
 
         responses.stream().forEach(response -> {
             if (!responseCounts.containsKey(response)){
@@ -200,4 +223,21 @@ public class QueryService {
 
         return topResults;
     }
+
+    /**
+     * @param entityIds -- The list of unranked entity ids
+     * @return the list of entity ids ranked by priority
+     */
+    private List<Integer> sortEntitiesByPriority(List<Integer> entityIds) {
+        List<Integer> rankedList = new ArrayList<>();
+        for (int currentRankId : RANKED_ENTITY_IDS) {
+            for (int currentEntityId : entityIds) {
+                if (currentRankId == currentEntityId) {
+                    rankedList.add(0, currentEntityId);
+                }
+            }
+        }
+        return rankedList;
+    }
+
 }
