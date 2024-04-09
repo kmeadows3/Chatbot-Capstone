@@ -3,7 +3,6 @@ package com.techelevator.service;
 import com.techelevator.dao.QueryDao;
 import com.techelevator.model.Response;
 import com.techelevator.model.UserInput;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -14,7 +13,7 @@ import java.util.stream.Collectors;
 public class QueryService {
 
     // Constants
-    int[] rankedIds = new int[]{
+    private final int[] RANKED_ENTITY_IDS = new int[]{
             3, // Star Method
             4, // Cover Letter
             5, // Recruiter
@@ -224,7 +223,7 @@ public class QueryService {
      */
     private List<Integer> sortEntitiesByPriority(List<Integer> entityIds) {
         List<Integer> rankedList = new ArrayList<>();
-        for (int currentRankId : rankedIds) {
+        for (int currentRankId : RANKED_ENTITY_IDS) {
             for (int currentEntityId : entityIds) {
                 if (currentRankId == currentEntityId) {
                     rankedList.add(0, currentEntityId);
