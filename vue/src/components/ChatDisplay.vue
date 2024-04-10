@@ -78,8 +78,8 @@ export default {
             .then( response => {
                 if(response.status === 200) {
                     // When the get method returns a success response
-                    this.$store.commit('SET_INTENTS', response.data.intents);
-                    this.$store.commit('SET_ENTITIES', response.data.entities);
+                    this.$store.commit('SET_INTENTS', response.data.userIntents);
+                    this.$store.commit('SET_ENTITIES', response.data.userEntities);
                     this.addRobotBox(response.data.response);
                 }
             })
