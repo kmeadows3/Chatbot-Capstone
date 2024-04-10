@@ -51,6 +51,7 @@ INSERT INTO entity(name) VALUES ('DEFAULT ENTITY');
 -- ID 2
 INSERT INTO entity(name) VALUES ('Chatbot');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('chatbot', 2);  -- Entity: Chatbot(2)
+    INSERT INTO keyword(keyword, entity_id) VALUES ('chat bot', 2);  -- Entity: Chatbot(2)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('you', 2);  -- Entity: Chatbot(2)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('yourself', 2);  -- Entity: Chatbot(2)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('chatwick', 2);  -- Entity: Chatbot(2)
@@ -89,7 +90,6 @@ INSERT INTO entity(name) VALUES ('Tech Interview');
 	INSERT INTO keyword(keyword, entity_id) VALUES ('tech interview', 7);  -- Entity: Tech Interview(7)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('technical interview', 7);  -- Entity: Tech Interview(7)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('technical', 7);  -- Entity: Tech Interview(7)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('tech', 7);  -- Entity: Tech Interview(7)
 	
 -- ID 8
 INSERT INTO entity(name) VALUES ('HR Interview');  
@@ -118,6 +118,7 @@ INSERT INTO entity(name) VALUES ('Follow Up');
 	INSERT INTO keyword(keyword, entity_id) VALUES ('followup', 10);  -- Follow up(10)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('after', 10);  -- Follow up(10)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('postinterview', 10);  -- Follow up(10)
+    INSERT INTO keyword(keyword, entity_id) VALUES ('post interview', 10);  -- Follow up(10)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('thank-you note', 10);  -- Follow up(10)
 	
 
@@ -462,51 +463,142 @@ INSERT INTO response(response, name) VALUES ('An HR (or behavioral) interview is
 INSERT INTO response_intent(response_id, intent_id) VALUES (31, 3); -- Intent 3: Information
 INSERT INTO response_entity(response_id, entity_id) VALUES (31, 8); -- Entity 8: HR Interview
 
+
 -- ID 32: HR Interview Practice 
-INSERT INTO response(response, name) VALUES ('Tell me what you think your top 3 strengths are.', 'Practice HR Interview');
+INSERT INTO response(response, name) VALUES ('Tell me a little bit about yourself.', 'Practice HR Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (32, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (32, 8); -- Entity 8: HR Interview
 
--- ID 33: HR Interview External Resource 
-INSERT INTO response(response, name) VALUES ('<a href="https://www.linkedin.com/pulse/how-write-outstanding-cover-letter-kummuni/">Here’s a link to an article from Indeed.com about HR/ Behavioral Interviews.</a>', 'External Resource HR Interview');
-INSERT INTO response_intent(response_id, intent_id) VALUES (33, 5); -- Intent 5: External Resource
+-- ID 33: HR Interview Practice 
+INSERT INTO response(response, name) VALUES ('Why are you switching careers?', 'Practice HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (33, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (33, 8); -- Entity 8: HR Interview
+
+-- ID 34: HR Interview Practice 
+INSERT INTO response(response, name) VALUES ('What about coding do you most enjoy?', 'Practice HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (34, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (34, 8); -- Entity 8: HR Interview
+
+-- ID 35: HR Interview Practice 
+INSERT INTO response(response, name) VALUES ('What technology trends are you most excited about?', 'Practice HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (35, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (35, 8); -- Entity 8: HR Interview
+
+-- ID 36: HR Interview Practice 
+INSERT INTO response(response, name) VALUES ('What is important to you when considering employment within an organization?', 'Practice HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (36, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (36, 8); -- Entity 8: HR Interview
+
+-- ID 37: HR Interview Practice 
+INSERT INTO response(response, name) VALUES ('What is your target salary?', 'Practice HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (37, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (37, 8); -- Entity 8: HR Interview
+
+-- ID 38: HR Interview Practice 
+INSERT INTO response(response, name) VALUES ('What is your greatest accomplishment?', 'Practice HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (38, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (38, 8); -- Entity 8: HR Interview
+
+-- ID 39: HR Interview Practice 
+INSERT INTO response(response, name) VALUES ('What is your biggest failure (or a time you failed) and what did you learn from this instance?', 'Practice HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (39, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (39, 8); -- Entity 8: HR Interview
+
+-- ID 40: HR Interview Practice 
+INSERT INTO response(response, name) VALUES ('What are your top 3 strengths?', 'Practice HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (40, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (40, 8); -- Entity 8: HR Interview
+
+-- ID 41: HR Interview Practice 
+INSERT INTO response(response, name) VALUES ('What is your biggest weakness?', 'Practice HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (41, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (41, 8); -- Entity 8: HR Interview
+
+-- ID 42: HR Interview Practice 
+INSERT INTO response(response, name) VALUES ('How do you accept criticism?', 'Practice HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (42, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (42, 8); -- Entity 8: HR Interview
+
+-- ID 43: HR Interview Practice 
+INSERT INTO response(response, name) VALUES ('What kind of role are you looking for in IT?', 'Practice HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (43, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (43, 8); -- Entity 8: HR Interview
+
+-- ID 44: HR Interview Practice 
+INSERT INTO response(response, name) VALUES ('What’s your preferred leadership style?', 'Practice HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (44, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (44, 8); -- Entity 8: HR Interview
+
+-- ID 45: HR Interview Practice 
+INSERT INTO response(response, name) VALUES ('What attracted you to apply for this position?', 'Practice HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (45, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (45, 8); -- Entity 8: HR Interview
+
+-- ID 46: HR Interview Practice 
+INSERT INTO response(response, name) VALUES ('What motivates you in a job?', 'Practice HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (46, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (46, 8); -- Entity 8: HR Interview
+
+-- ID 47: HR Interview Practice 
+INSERT INTO response(response, name) VALUES ('What attracted you to our organization?', 'Practice HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (47, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (47, 8); -- Entity 8: HR Interview
+
+-- ID 48: HR Interview Practice 
+INSERT INTO response(response, name) VALUES ('Where are you in your job search?', 'Practice HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (48, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (48, 8); -- Entity 8: HR Interview
+
+-- ID 49: HR Interview Practice 
+INSERT INTO response(response, name) VALUES ('What other kinds of jobs have you applied to?', 'Practice HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (49, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (49, 8); -- Entity 8: HR Interview
+
+
+
+
+
+
+-- ID 50: HR Interview External Resource 
+INSERT INTO response(response, name) VALUES ('<a href="https://www.linkedin.com/pulse/how-write-outstanding-cover-letter-kummuni/">Here’s a link to an article from Indeed.com about HR/ Behavioral Interviews.</a>', 'External Resource HR Interview');
+INSERT INTO response_intent(response_id, intent_id) VALUES (50, 5); -- Intent 5: External Resource
+INSERT INTO response_entity(response_id, entity_id) VALUES (50, 8); -- Entity 8: HR Interview
 
 -- ID 34: HR Interview Example 
 INSERT INTO response(response, name) VALUES ('Here’s an example HR Interview Question and Answer:
 <br/><em>Question:</em> "What is your biggest weakness?"
 <br/><em>Answer:</em> "One area I’ve been actively working on improving is my tendency to take on too many tasks at once. In the past, I’ve sometimes found myself stretched thin trying to juggle multiple projects simultaneously. While my enthusiasm for taking on new challenges is a strength, I’ve realized that it’s also important to prioritize tasks effectively and delegate when necessary to ensure that I can deliver high-quality results consistently. To address this, I’ve been implementing time management techniques such as setting clear priorities, breaking down larger projects into smaller, manageable tasks, and communicating more effectively with my team to ensure alignment on project timelines and responsibilities. I’ve already seen significant improvement in my ability to focus on key priorities and manage my workload more efficiently, and I’m committed to continuing to refine these skills to become an even more effective and productive team member."', 'Example HR Interview');
-INSERT INTO response_intent(response_id, intent_id) VALUES (34, 6); -- Intent 6: Support
-INSERT INTO response_entity(response_id, entity_id) VALUES (34, 8); -- Entity 9: HR Interview
+INSERT INTO response_intent(response_id, intent_id) VALUES (51, 6); -- Intent 6: Support
+INSERT INTO response_entity(response_id, entity_id) VALUES (51, 8); -- Entity 9: HR Interview
 
 
--------------------- HR INTERVIEW ENTITY RESPONSES --------------------
+-------------------- ATTIRE ENTITY RESPONSES --------------------
 -- ID 35: Attire Support 
 INSERT INTO response(response, name) VALUES ('You can ask me for information on how to dress for an interview, or ask me to give you examples of how to dress professionally.', 'Support Attire');
-INSERT INTO response_intent(response_id, intent_id) VALUES (35, 1); -- Intent 1: Default
-INSERT INTO response_intent(response_id, intent_id) VALUES (35, 2); -- Intent 2: Support
-INSERT INTO response_entity(response_id, entity_id) VALUES (35, 9); -- Entity 9: Attire
+INSERT INTO response_intent(response_id, intent_id) VALUES (52, 1); -- Intent 1: Default
+INSERT INTO response_intent(response_id, intent_id) VALUES (52, 2); -- Intent 2: Support
+INSERT INTO response_entity(response_id, entity_id) VALUES (52, 9); -- Entity 9: Attire
 
 -- ID 36: Attire Information / Default
 INSERT INTO response(response, name) VALUES ('No matter what the company’s dress code is, dressing up for an interview is the fastest way to give a strong first impression, and it demonstrates the effort you put to present yourself professionally. Go with professional wear or business casual for your outfit. You want to make sure your clothes are clean on the day of the interview, that they are wrinkle free, and that the fabric is comfortable enough to not distract you. If you have a dress shirt, creasing it is nice, but not required. For in-person interviews, be sure your pants and shoes match the rest of your outfit. <br/>Personal hygiene is also a must. Groom yourself so you look as professional and ready as the clothes you’re wearing.', 'Information Attire');
-INSERT INTO response_intent(response_id, intent_id) VALUES (36, 3); -- Intent 3: Information
-INSERT INTO response_entity(response_id, entity_id) VALUES (36, 9); -- Entity 9: Attire
+INSERT INTO response_intent(response_id, intent_id) VALUES (53, 3); -- Intent 3: Information
+INSERT INTO response_entity(response_id, entity_id) VALUES (53, 9); -- Entity 9: Attire
 
 -- ID 37: Attire Practice 
 INSERT INTO response(response, name) VALUES ('Trying on your outfit ahead of time can save you time and lower stress on the day of the interview. Look at yourself in a mirror, and ask yourself what your first impression of that person would be. It can also help to get a second opinion from a friend or family member.', 'Practice Attire');
-INSERT INTO response_intent(response_id, intent_id) VALUES (37, 4); -- Intent 4: Practice
-INSERT INTO response_entity(response_id, entity_id) VALUES (37, 9); -- Entity 9: Attire
+INSERT INTO response_intent(response_id, intent_id) VALUES (54, 4); -- Intent 4: Practice
+INSERT INTO response_entity(response_id, entity_id) VALUES (54, 9); -- Entity 9: Attire
 
 -- ID 38: Attire External Resources 
 INSERT INTO response(response, name) VALUES ('Here you go. <a href="https://www.linkedin.com/pulse/how-write-outstanding-cover-letter-kummuni/">Click here for an article with tips from business leaders on how to dress for an interview.</a>', 'External Resource Attire');
-INSERT INTO response_intent(response_id, intent_id) VALUES (38, 5); -- Intent 5: External Resource
-INSERT INTO response_entity(response_id, entity_id) VALUES (38, 9); -- Entity 9: Attire
+INSERT INTO response_intent(response_id, intent_id) VALUES (55, 5); -- Intent 5: External Resource
+INSERT INTO response_entity(response_id, entity_id) VALUES (55, 9); -- Entity 9: Attire
 
 -- ID 39: Attire Example 
 INSERT INTO response(response, name) VALUES ('<p>Here are some examples of professional attire:</p>
 <img class="response_img" src="https://images.pexels.com/photos/7793725/pexels-photo-7793725.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Formalwear examples with suits, button-up shirts, and khaki pants">', 'Example Attire');
-INSERT INTO response_intent(response_id, intent_id) VALUES (39, 6); -- Intent 6: Example
-INSERT INTO response_entity(response_id, entity_id) VALUES (39, 9); -- Entity 9: Attire
+INSERT INTO response_intent(response_id, intent_id) VALUES (56, 6); -- Intent 6: Example
+INSERT INTO response_entity(response_id, entity_id) VALUES (56, 9); -- Entity 9: Attire
 
 
 -------------------- FOLLOW UP ENTITY RESPONSES --------------------
@@ -519,9 +611,9 @@ INSERT INTO response(response, name) VALUES ('<p>I’d be happy to provide compr
 <p>I can advise you on the best way to inquire about the status of the hiring process and next steps.</p>
 <p>We can discuss strategies for politely following up if you haven’t heard back, without being overly persistent.</p>
 <p>Please let me know which aspects of the follow-up process you’d like the most support with, and I’ll be happy to dive in further.</p>', 'Comprehensive Support for Interview Follow-Up');
-INSERT INTO response_intent(response_id, intent_id) VALUES (40, 1); -- Intent 1: Default
-INSERT INTO response_intent(response_id, intent_id) VALUES (40, 2); -- Intent 2: Support
-INSERT INTO response_entity(response_id, entity_id) VALUES (40, 10); -- Entity 10: Follow Up
+INSERT INTO response_intent(response_id, intent_id) VALUES (57, 1); -- Intent 1: Default
+INSERT INTO response_intent(response_id, intent_id) VALUES (57, 2); -- Intent 2: Support
+INSERT INTO response_entity(response_id, entity_id) VALUES (57, 10); -- Entity 10: Follow Up
 
 -- ID 41: Follow Up Information
 INSERT INTO response(response, name) VALUES ('<p>Here are the key points on effectively following up after interviews:</p>
@@ -534,13 +626,13 @@ INSERT INTO response(response, name) VALUES ('<p>Here are the key points on effe
 <li>Aim to send out at least 3 applications per week during the cohort, and 5 per week after graduation. The more applications you get out, the more interviews you’ll receive.</li>
 <li>Don’t put all your eggs in one basket - continue applying to other roles even if you feel really good about an interview.</li>
 </ul>', 'Information on Interview Follow-Up');
-INSERT INTO response_intent(response_id, intent_id) VALUES (41, 3); -- Intent 3: Information
-INSERT INTO response_entity(response_id, entity_id) VALUES (41, 10); -- Entity 10: Follow Up
+INSERT INTO response_intent(response_id, intent_id) VALUES (58, 3); -- Intent 3: Information
+INSERT INTO response_entity(response_id, entity_id) VALUES (58, 10); -- Entity 10: Follow Up
 
 -- ID 42: Follow Up External Resources
 INSERT INTO response(response, name) VALUES ('<a href="https://www.coursera.org/articles/follow-up-email-after-interview">Here’s an article I found about how to write a follow up letter to your recruiter.</a>', 'External Resource for Follow Ups');
-INSERT INTO response_intent(response_id, intent_id) VALUES (42, 5); -- Intent 5: External Resource
-INSERT INTO response_entity(response_id, entity_id) VALUES (42, 10); -- Entity 10: Follow Up
+INSERT INTO response_intent(response_id, intent_id) VALUES (59, 5); -- Intent 5: External Resource
+INSERT INTO response_entity(response_id, entity_id) VALUES (59, 10); -- Entity 10: Follow Up
 
 
 -- ID 43: Follow Up Example
@@ -555,9 +647,14 @@ INSERT INTO response(response, name) VALUES ('<p>Here is an example of a follow-
 <p>Jane/John Doe</p>
 <p>Email Address</p>
 <p>Phone Number</p>', 'Sample Thank You Message #1');
-INSERT INTO response_intent(response_id, intent_id) VALUES (43, 6); -- Intent 6: Example
-INSERT INTO response_entity(response_id, entity_id) VALUES (43, 10); -- Entity 10: Follow Up
+INSERT INTO response_intent(response_id, intent_id) VALUES (60, 6); -- Intent 6: Example
+INSERT INTO response_entity(response_id, entity_id) VALUES (60, 10); -- Entity 10: Follow Up
 
 
+-------------------- RECRUITER ENTITY RESPONSES --------------------
+
+
+
+-------------------- MOTIVATIONAL QUOTES ENTITY RESPONSES --------------------
 
 COMMIT TRANSACTION;
