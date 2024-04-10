@@ -70,8 +70,8 @@ export default {
         getResponseFromServer() {
             const query = {
                 utterance: this.textBoxText,
-                intent: this.$store.state.intent,
-                entity: this.$store.state.entity,
+                intents: this.$store.state.intents,
+                entities: this.$store.state.entities,
             }
 
             QueryService.get(query)
@@ -81,7 +81,6 @@ export default {
                     this.$store.commit('SET_INTENTS', response.data.intents);
                     this.$store.commit('SET_ENTITIES', response.data.entities);
                     this.addRobotBox(response.data.response);
-                    
                 }
             })
             .catch (error => {

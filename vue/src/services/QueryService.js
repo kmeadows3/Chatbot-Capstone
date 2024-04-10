@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 export default {
-    get(utterance) {
-        return axios.post(`/`, utterance);
+    get(query) {
+        return axios.post(`/`, query);
     },
 
 }
