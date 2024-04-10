@@ -86,7 +86,7 @@ export default {
             })
             .catch (error => {
                 console.error("Error in Chat Display: " + error);
-                this.addRobotBox("I'm sorry, there seems to be an issue with the server. Please try again later.");
+                // this.addRobotBox("I'm sorry, there seems to be an issue with the server. Please try again later.");
             });
         },
         scrollChatDisplayToBottom(chatBox) {
@@ -157,7 +157,7 @@ textarea {
 }
 
 textarea:focus {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Increase the box shadow on focus */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); 
 }
 
 button {
