@@ -5,3 +5,13 @@ import axios from 'axios';
 const imageHttp = axios.create({
     baseURL: 'https://picsum.photos'
 });
+
+export default {
+    get(width, height) {
+        let apiCommand = '/';
+        apiCommand += width;
+        apiCommand += '/' + height;
+
+        imageHttp.get('');
+    }
+}

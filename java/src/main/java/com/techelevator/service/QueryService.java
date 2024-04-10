@@ -57,7 +57,8 @@ public class QueryService {
 
         outputResponse.setUserIntents(intents);
         outputResponse.setUserEntities(entities);
-        outputResponse.setResponse(selectResponse(potentialResponses,intents, entities));
+        String potentialResponse = selectResponse(potentialResponses,intents, entities);
+        outputResponse.setResponse(potentialResponse);
         return outputResponse;
     }
 
@@ -111,7 +112,6 @@ public class QueryService {
      * @return a list of responses that have the highest number of keyword matches
      */
     private List<Integer>[] setIntentsAndEntitiesWhenNoneReturned(List<Integer>intentIds, List<Integer>entityIds, UserInput userInput){
-
         if (intentIds.size() == 0 && entityIds.size() == 0){
             intentIds.add(DEFAULT_INTENT_ID);
             entityIds.add(DEFAULT_ENTITY_ID);
@@ -123,7 +123,8 @@ public class QueryService {
             }
         } else if (entityIds.size() == 0) {
             if (userInput.getEntities() != null && userInput.getEntities().size() != 0){
-                entityIds.addAll(userInput.getEntities());
+                List<Integer> rankedEntities = sortEntitiesByPriority(userInput.getEntities());
+                entityIds.addAll(rankedEntities);
             } else {
                 entityIds.add(DEFAULT_ENTITY_ID); //adds default entity
             }
