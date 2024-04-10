@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
+import com.techelevator.model.Response;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,19 +21,24 @@ public class JdbcQueryDao implements QueryDao {
     }
 
     @Override
-    public List<String> getResponsesFromIntentsAndEntities(List<Integer> intentIds, List<Integer> entityIds) {
-        String sql = "select * from response r " +
+    public List<Response> getResponsesFromIntentsAndEntities(List<Integer> intentIds, List<Integer> entityIds) {
+        String sql = "select response, intent_id, entity_id from response r " +
                 "JOIN response_intent ri ON ri.response_id = r.response_id " +
                 "JOIN response_entity re on re.response_id = r.response_id " +
                 "WHERE intent_id = ? AND entity_id = ?";
-        List<String> responses = new ArrayList<String>();
+        List<Response> responses = new ArrayList<>();
 
         try {
             for (Integer intentId : intentIds) {
                 for (Integer entityId : entityIds) {
                     SqlRowSet result = jdbcTemplate.queryForRowSet(sql, intentId, entityId);
                     while (result.next()) {
-                        responses.add(result.getString("response"));
+                        Response response = new Response();
+                        int responseIntent = result.getInt("intent_id");
+                        response.getResponseIntents().add(responseIntent);
+                        response.getResponseEntities().add(result.getInt("entity_id"));
+                        response.setResponse(result.getString("response"));
+                        responses.add(response);
                     }
                 }
             }

@@ -51,11 +51,11 @@ public class QueryService {
         List<Integer>[] intentsAndEntities = getIntentsAndEntities(tokens, userInput);
         List<Integer> intents = intentsAndEntities[INTENTS_INDEX];
         List<Integer> entities = intentsAndEntities[ENTITIES_INDEX];
-        List<String> potentialResponses = getPotentialResponseList(intents,
+        List<Response> potentialResponses = getPotentialResponseList(intents,
                 entities);
 
-        outputResponse.setIntents(intents);
-        outputResponse.setEntities(entities);
+        outputResponse.setUserIntents(intents);
+        outputResponse.setUserEntities(entities);
         outputResponse.setResponse(selectResponse(potentialResponses,intents, entities));
         return outputResponse;
     }
@@ -138,9 +138,9 @@ public class QueryService {
      * @param entityIds -- a list of entity Ids that are obtained from the utterance
      * @return List of responses that fit the utterance
      */
-    private List<String> getPotentialResponseList(List<Integer> intentIds, List<Integer> entityIds){
+    private List<Response> getPotentialResponseList(List<Integer> intentIds, List<Integer> entityIds){
         entityIds = sortEntitiesByPriority(entityIds);
-        List<String> responses = queryDao.getResponsesFromIntentsAndEntities(intentIds, entityIds);
+        List<Response> responses = queryDao.getResponsesFromIntentsAndEntities(intentIds, entityIds);
         if (responses.size() == 0) {
             responses = handleZeroResponseMatches(intentIds, entityIds);
         }
@@ -156,8 +156,8 @@ public class QueryService {
      * @param entityIds -- a list of entity Ids that are obtained from the utterance
      * @return List of responses that match the catch-all conditions
      */
-    private List<String> handleZeroResponseMatches(List<Integer> intentIds, List<Integer> entityIds) {
-        List<String> responses = new ArrayList<>();
+    private List<Response> handleZeroResponseMatches(List<Integer> intentIds, List<Integer> entityIds) {
+        List<Response> responses = new ArrayList<>();
 
         List<Integer> defaultIntentList = new ArrayList<>();
         defaultIntentList.add(DEFAULT_INTENT_ID);
@@ -187,22 +187,23 @@ public class QueryService {
      * @param responses -- all responses that match the intents and entities in the utterance
      * @return the single response that best fits the utterance
      */
-    private String selectResponse(List<String> responses, List<Integer> intents, List<Integer> entities){
-        List<String> topResponses = getResponsesWithMostKeywordMatches(responses);
+    private String selectResponse(List<Response> responses, List<Integer> intents, List<Integer> entities){
         if (intents.contains(PRACTICE_INTENT_ID) &&
                 entities.contains(HR_INTERVIEW_ENTITY_ID) || entities.contains(TECHNICAL_INTERVIEW_ENTITY_ID)){
             //TODO FILTER OUT ALL NON-PRACTICE RESPONSES
             //TODO GET A RANDOM RESPONSE FROM THE LIST
         }
-        return topResponses.get(0);
+        List<Response> topResponses = getResponsesWithMostKeywordMatches(responses);
+
+        return topResponses.get(0).getResponse();
     }
 
     /**
      * @param responses -- all responses that match the intents and entities in the utterance
      * @return a list of responses that have the highest number of keyword matches
      */
-    private List<String> getResponsesWithMostKeywordMatches(List<String> responses) {
-        Map<String, Integer> responseCounts = new LinkedHashMap<>();
+    private List<Response> getResponsesWithMostKeywordMatches(List<Response> responses) {
+        Map<Response, Integer> responseCounts = new LinkedHashMap<>();
 
         responses.stream().forEach(response -> {
             if (!responseCounts.containsKey(response)){
@@ -211,12 +212,12 @@ public class QueryService {
             }
         });
 
-        List<Entry<String, Integer>> countList = new ArrayList<>(responseCounts.entrySet());
+        List<Entry<Response, Integer>> countList = new ArrayList<>(responseCounts.entrySet());
 
         countList.sort(Entry.comparingByValue());
         Collections.reverse(countList);
         int maxCount = countList.get(0).getValue();
-        List<String> topResults = countList.stream()
+        List<Response> topResults = countList.stream()
                 .filter(response -> response.getValue() == maxCount)
                 .map(Entry::getKey)
                 .collect(Collectors.toList());

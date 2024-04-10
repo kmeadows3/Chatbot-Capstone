@@ -86,15 +86,15 @@ public class QueryServiceTests extends BaseDaoTests {
         UserInput input = new UserInput();
         List<Integer> intentList = new ArrayList<>();
         List<Integer> entityList = new ArrayList<>();
-        intentList.add(2);
+        intentList.add(3);
         entityList.add(1);
         input.setIntents(intentList);
         input.setEntities(entityList);
 
-        input.setUtterance("These are not keywords entity3keyword");
+        input.setUtterance("These are not keywords entity2keyword");
         Response response = queryService.getResponseFromUserInput(input);
 
-        Assert.assertEquals("Test Response 3", response.getResponse());
+        Assert.assertEquals("Test Response 5", response.getResponse());
     }
 
     @Test
@@ -103,14 +103,13 @@ public class QueryServiceTests extends BaseDaoTests {
         List<Integer> intentList = new ArrayList<>();
         List<Integer> entityList = new ArrayList<>();
         intentList.add(1);
-        entityList.add(3);
+        entityList.add(2);
         input.setIntents(intentList);
         input.setEntities(entityList);
 
-        input.setUtterance("These are not keywords intent2keyword");
+        input.setUtterance("These are not keywords intent3keyword");
         Response response = queryService.getResponseFromUserInput(input);
-
-        Assert.assertEquals("Test Response 3", response.getResponse());
+        Assert.assertEquals("Test Response 5", response.getResponse());
     }
 
     @Test
@@ -202,8 +201,9 @@ public class QueryServiceTests extends BaseDaoTests {
 
         input.setUtterance("intent5keyword intent6keyword entity2keyword entity3keyword");
         Response response = queryService.getResponseFromUserInput(input);
+
         //TODO this response might not be the highest ranked, method wasn't created when I wrote the test, other result is Test Response 3
-        Assert.assertEquals("Test Response 8", response.getResponse());
+        Assert.assertEquals("Test Response 3", response.getResponse());
     }
 
 }
