@@ -44,10 +44,10 @@ export function createStore(currentToken, currentUser) {
 
     getters: {
       currentIntent(state) {
-        return state.intent;
+        return state.intents;
       },
       currentEntity(state) {
-        return state.entity;
+        return state.entities;
       },
     }
   });
