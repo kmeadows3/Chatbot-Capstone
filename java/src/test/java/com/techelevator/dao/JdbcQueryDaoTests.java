@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.Response;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,11 +23,12 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
     public void getResponsesFromIntentsAndEntities_returns_correct_response_list_when_only_one_response_matches(){
         List<Integer> intents = new ArrayList<>();
         List<Integer> entities = new ArrayList<>();
-        intents.add(2);
-        entities.add(4);
-        List<String> returnedResponses = jdbcQueryDao.getResponsesFromIntentsAndEntities(intents,entities);
+        intents.add(3);
+        entities.add(2);
+        List<Response> returnedResponses = jdbcQueryDao.getResponsesFromIntentsAndEntities(intents,entities);
+        Response expectedResponse = new Response("Test Response 5");
         Assert.assertEquals(1, returnedResponses.size());
-        Assert.assertTrue(returnedResponses.contains("Test Response 6"));
+        Assert.assertTrue(returnedResponses.contains(expectedResponse));
     }
 
     @Test
@@ -35,10 +37,12 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
         List<Integer> entities = new ArrayList<>();
         intents.add(2);
         entities.add(3);
-        List<String> returnedResponses = jdbcQueryDao.getResponsesFromIntentsAndEntities(intents,entities);
+        List<Response> returnedResponses = jdbcQueryDao.getResponsesFromIntentsAndEntities(intents,entities);
+        Response expectedResponse1 = new Response("Test Response 6");
+        Response expectedResponse2 = new Response("Test Response 4");
         Assert.assertEquals(2, returnedResponses.size());
-        Assert.assertTrue(returnedResponses.contains("Test Response 3"));
-        Assert.assertTrue(returnedResponses.contains("Test Response 4"));
+        Assert.assertTrue(returnedResponses.contains(expectedResponse1));
+        Assert.assertTrue(returnedResponses.contains(expectedResponse2));
     }
 
 

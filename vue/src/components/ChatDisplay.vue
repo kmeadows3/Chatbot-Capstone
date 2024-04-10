@@ -4,13 +4,16 @@
 
 
         <div id="user-input">
-            <form>
-                <textarea name="userInput" id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox"
-                    placeholder="Type Here"></textarea>
-            </form>
-            <button @click.prevent="addUserBox()">Send Response</button>
-        </div>
+        <form>
+            <textarea name="userInput" id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox"
+                placeholder="Type Here"></textarea>
+        </form>
+        <button @click.prevent="addUserBox()" :disabled="textBoxText.trim() === ''">
+            Send Response
+        </button>
     </div>
+</div>
+
 </template>
     
     
@@ -27,6 +30,10 @@ export default {
     },
     methods: {
         addUserBox() {
+            if (this.textBoxText.trim() === '') {
+            return;
+        }
+
             const chatBox = document.getElementById('chat-display');
             const newResponse = document.createElement('div');
             newResponse.classList.add('user')
@@ -41,10 +48,10 @@ export default {
             this.scrollChatDisplayToBottom(chatBox);
         },
         addRobotBox(response) {
+            
             this.isLoading = true;
 
             setTimeout(() => {
-
                 const chatBox = document.getElementById('chat-display');
                 const newResponse = document.createElement('div');
                 newResponse.classList.add('chatbot');
@@ -76,18 +83,17 @@ export default {
 
             QueryService.get(query)
             .then( response => {
-                if (response.status === 200) {
-                        // When the get method returns a success response
-                        this.$store.commit('SET_INTENTS', response.data.intents);
-                        this.$store.commit('SET_ENTITIES', response.data.entities);
-                        this.addRobotBox(response.data.response);
-                    } 
-                })
-                .catch(error => {
-                    console.error("Error in Chat Display: " + error);
-                    this.addRobotBox("I'm sorry, there seems to be an issue with the server. Please try again later.");
-
-                });
+                if(response.status === 200) {
+                    // When the get method returns a success response
+                    this.$store.commit('SET_INTENTS', response.data.userIntents);
+                    this.$store.commit('SET_ENTITIES', response.data.userEntities);
+                    this.addRobotBox(response.data.response);
+                }
+            })
+            .catch (error => {
+                console.error("Error in Chat Display: " + error);
+                this.addRobotBox("I'm sorry, there seems to be an issue with the server. Please try again later.");
+            });
         },
         scrollChatDisplayToBottom(chatBox) {
             chatBox.scrollTop = chatBox.scrollHeight;
@@ -134,12 +140,14 @@ img.response_img {
 
 div.chatbot {
     align-self: start;
-    background-color: #a2e6e3; 
+    background-color: #a4e7e3; 
+    font-size: 24px;
 }
 
 div.user {
     align-self: end;
     background-color: #e3f2fd; 
+    font-size: 24px;
 }
 
 textarea {

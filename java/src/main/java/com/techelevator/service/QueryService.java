@@ -16,6 +16,7 @@ public class QueryService {
     private final int[] RANKED_ENTITY_IDS = new int[]{
             3, // Star Method
             4, // Cover Letter
+            10, // Follow up
             5, // Recruiter
             9, // Attire
             7, // Tech Interview
@@ -51,12 +52,13 @@ public class QueryService {
         List<Integer>[] intentsAndEntities = getIntentsAndEntities(tokens, userInput);
         List<Integer> intents = intentsAndEntities[INTENTS_INDEX];
         List<Integer> entities = intentsAndEntities[ENTITIES_INDEX];
-        List<String> potentialResponses = getPotentialResponseList(intents,
+        List<Response> potentialResponses = getPotentialResponseList(intents,
                 entities);
 
-        outputResponse.setIntents(intents);
-        outputResponse.setEntities(entities);
-        outputResponse.setResponse(selectResponse(potentialResponses,intents, entities));
+        outputResponse.setUserIntents(intents);
+        outputResponse.setUserEntities(entities);
+        String potentialResponse = selectResponse(potentialResponses,intents, entities);
+        outputResponse.setResponse(potentialResponse);
         return outputResponse;
     }
 
@@ -110,7 +112,6 @@ public class QueryService {
      * @return a list of responses that have the highest number of keyword matches
      */
     private List<Integer>[] setIntentsAndEntitiesWhenNoneReturned(List<Integer>intentIds, List<Integer>entityIds, UserInput userInput){
-
         if (intentIds.size() == 0 && entityIds.size() == 0){
             intentIds.add(DEFAULT_INTENT_ID);
             entityIds.add(DEFAULT_ENTITY_ID);
@@ -122,7 +123,8 @@ public class QueryService {
             }
         } else if (entityIds.size() == 0) {
             if (userInput.getEntities() != null && userInput.getEntities().size() != 0){
-                entityIds.addAll(userInput.getEntities());
+                List<Integer> rankedEntities = sortEntitiesByPriority(userInput.getEntities());
+                entityIds.addAll(rankedEntities);
             } else {
                 entityIds.add(DEFAULT_ENTITY_ID); //adds default entity
             }
@@ -138,9 +140,9 @@ public class QueryService {
      * @param entityIds -- a list of entity Ids that are obtained from the utterance
      * @return List of responses that fit the utterance
      */
-    private List<String> getPotentialResponseList(List<Integer> intentIds, List<Integer> entityIds){
+    private List<Response> getPotentialResponseList(List<Integer> intentIds, List<Integer> entityIds){
         entityIds = sortEntitiesByPriority(entityIds);
-        List<String> responses = queryDao.getResponsesFromIntentsAndEntities(intentIds, entityIds);
+        List<Response> responses = queryDao.getResponsesFromIntentsAndEntities(intentIds, entityIds);
         if (responses.size() == 0) {
             responses = handleZeroResponseMatches(intentIds, entityIds);
         }
@@ -156,8 +158,8 @@ public class QueryService {
      * @param entityIds -- a list of entity Ids that are obtained from the utterance
      * @return List of responses that match the catch-all conditions
      */
-    private List<String> handleZeroResponseMatches(List<Integer> intentIds, List<Integer> entityIds) {
-        List<String> responses = new ArrayList<>();
+    private List<Response> handleZeroResponseMatches(List<Integer> intentIds, List<Integer> entityIds) {
+        List<Response> responses = new ArrayList<>();
 
         List<Integer> defaultIntentList = new ArrayList<>();
         defaultIntentList.add(DEFAULT_INTENT_ID);
@@ -165,7 +167,6 @@ public class QueryService {
         List<Integer> defaultEntityList = new ArrayList<>();
         defaultEntityList.add(DEFAULT_ENTITY_ID);
 
-        entityIds = sortEntitiesByPriority(entityIds);
         if (entityIds.get(0) != DEFAULT_ENTITY_ID){
             responses = queryDao.getResponsesFromIntentsAndEntities(defaultIntentList, entityIds);
         }
@@ -187,22 +188,62 @@ public class QueryService {
      * @param responses -- all responses that match the intents and entities in the utterance
      * @return the single response that best fits the utterance
      */
-    private String selectResponse(List<String> responses, List<Integer> intents, List<Integer> entities){
-        List<String> topResponses = getResponsesWithMostKeywordMatches(responses);
+    private String selectResponse(List<Response> responses, List<Integer> intents, List<Integer> entities){
+
+        //get list with one random response if the user wants a practice interview
         if (intents.contains(PRACTICE_INTENT_ID) &&
-                entities.contains(HR_INTERVIEW_ENTITY_ID) || entities.contains(TECHNICAL_INTERVIEW_ENTITY_ID)){
-            //TODO FILTER OUT ALL NON-PRACTICE RESPONSES
-            //TODO GET A RANDOM RESPONSE FROM THE LIST
+                (entities.contains(HR_INTERVIEW_ENTITY_ID) || entities.contains(TECHNICAL_INTERVIEW_ENTITY_ID))) {
+            responses = handlePracticeInterviews(responses);
         }
-        return topResponses.get(0);
+
+        //if there are multiple responses, filter out everything but the responses with the most keyword matches on the list
+        if (responses.size() > 1) {
+            responses = getResponsesWithMostKeywordMatches(responses);
+            if (responses.size() > 1){
+                //TODO select the best fitting of the remaining responses
+            }
+        }
+
+
+        return responses.get(0).getResponse();
+    }
+
+    /**
+     *This method selects a random response from the responses that are practice interview questions
+     *
+     * @param responses -- all responses that match the intents and entities in the utterance
+     * @return a random practice interview response
+     */
+    private List<Response> handlePracticeInterviews(List<Response> responses) {
+
+        responses = responses.stream()
+                .filter(response -> response.getResponseIntents().contains(PRACTICE_INTENT_ID))
+                .collect(Collectors.toList());
+        responses = getResponseListWithOnlyOneRandomResponse(responses);
+
+        return responses;
+    }
+
+    /**
+     *This method selects a random response from a list of responses
+     *
+     * @param responses -- all responses that match the intents and entities in the utterance
+     * @return a list of responses that contains only the random response
+     */
+    private static List<Response> getResponseListWithOnlyOneRandomResponse(List<Response> responses) {
+        Random rand = new Random();
+        List<Response> randomResponseList = new ArrayList<>();
+        Response randomResponse = responses.get(rand.nextInt(responses.size()));
+        randomResponseList.add(randomResponse);
+        return randomResponseList;
     }
 
     /**
      * @param responses -- all responses that match the intents and entities in the utterance
      * @return a list of responses that have the highest number of keyword matches
      */
-    private List<String> getResponsesWithMostKeywordMatches(List<String> responses) {
-        Map<String, Integer> responseCounts = new LinkedHashMap<>();
+    private List<Response> getResponsesWithMostKeywordMatches(List<Response> responses) {
+        Map<Response, Integer> responseCounts = new LinkedHashMap<>();
 
         responses.stream().forEach(response -> {
             if (!responseCounts.containsKey(response)){
@@ -211,12 +252,12 @@ public class QueryService {
             }
         });
 
-        List<Entry<String, Integer>> countList = new ArrayList<>(responseCounts.entrySet());
+        List<Entry<Response, Integer>> countList = new ArrayList<>(responseCounts.entrySet());
 
         countList.sort(Entry.comparingByValue());
         Collections.reverse(countList);
         int maxCount = countList.get(0).getValue();
-        List<String> topResults = countList.stream()
+        List<Response> topResults = countList.stream()
                 .filter(response -> response.getValue() == maxCount)
                 .map(Entry::getKey)
                 .collect(Collectors.toList());
