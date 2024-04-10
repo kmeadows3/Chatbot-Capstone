@@ -16,6 +16,7 @@ public class QueryService {
     private final int[] RANKED_ENTITY_IDS = new int[]{
             3, // Star Method
             4, // Cover Letter
+            10, // Follow up
             5, // Recruiter
             9, // Attire
             7, // Tech Interview
