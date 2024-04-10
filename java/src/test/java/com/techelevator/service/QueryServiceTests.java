@@ -122,10 +122,10 @@ public class QueryServiceTests extends BaseDaoTests {
         input.setIntents(intentList);
         input.setEntities(entityList);
 
-        input.setUtterance("gibberish intent4keyword");
+        input.setUtterance("gibberish intent7keyword");
         Response response = queryService.getResponseFromUserInput(input);
 
-        Assert.assertEquals("Intent 4 Catch-All", response.getResponse());
+        Assert.assertEquals("Intent 7 Catch-All", response.getResponse());
     }
 
     @Test
@@ -138,7 +138,7 @@ public class QueryServiceTests extends BaseDaoTests {
         input.setIntents(intentList);
         input.setEntities(entityList);
 
-        input.setUtterance("intent4keyword entity2keyword");
+        input.setUtterance("intent7keyword entity2keyword");
         Response response = queryService.getResponseFromUserInput(input);
         Assert.assertEquals("Test Response 2", response.getResponse());
     }
@@ -153,9 +153,9 @@ public class QueryServiceTests extends BaseDaoTests {
         input.setIntents(intentList);
         input.setEntities(entityList);
 
-        input.setUtterance("intent4keyword entity3keyword");
+        input.setUtterance("intent7keyword entity3keyword");
         Response response = queryService.getResponseFromUserInput(input);
-        Assert.assertEquals("Intent 4 Catch-All", response.getResponse());
+        Assert.assertEquals("Intent 7 Catch-All", response.getResponse());
     }
 
     @Test
@@ -163,14 +163,46 @@ public class QueryServiceTests extends BaseDaoTests {
         UserInput input = new UserInput();
         List<Integer> intentList = new ArrayList<>();
         List<Integer> entityList = new ArrayList<>();
-        intentList.add(1);
-        entityList.add(1);
+        intentList.add(3);
+        entityList.add(4);
         input.setIntents(intentList);
         input.setEntities(entityList);
 
         input.setUtterance("intent3keyword entity4keyword");
         Response response = queryService.getResponseFromUserInput(input);
         Assert.assertEquals("Test Response 1", response.getResponse());
+    }
+
+    @Test
+    public void getResponseFromUserInput_returns_random_interview_hr_question_with_practice_intent_and_hr_entity(){
+        UserInput input = new UserInput();
+        input.setUtterance("intent4keyword entity7keyword");
+
+        List<String> expectedResponseList = new ArrayList<>();
+        expectedResponseList.add("Test Response 10");
+        expectedResponseList.add("Test Response 11");
+        expectedResponseList.add("Test Response 12");
+        expectedResponseList.add("Test Response 13");
+        expectedResponseList.add("Test Response 14");
+
+        Response response = queryService.getResponseFromUserInput(input);
+        Assert.assertTrue(expectedResponseList.contains(response.getResponse()));
+    }
+
+    @Test
+    public void getResponseFromUserInput_returns_random_interview_technical_question_with_practice_intent_and_technial_entity(){
+        UserInput input = new UserInput();
+        input.setUtterance("intent4keyword entity8keyword");
+
+        List<String> expectedResponseList = new ArrayList<>();
+        expectedResponseList.add("Test Response 15");
+        expectedResponseList.add("Test Response 16");
+        expectedResponseList.add("Test Response 17");
+        expectedResponseList.add("Test Response 18");
+        expectedResponseList.add("Test Response 19");
+
+        Response response = queryService.getResponseFromUserInput(input);
+        Assert.assertTrue(expectedResponseList.contains(response.getResponse()));
     }
 
     @Test
@@ -185,7 +217,6 @@ public class QueryServiceTests extends BaseDaoTests {
 
         input.setUtterance("intent2keyword entity3keyword entity4keyword");
         Response response = queryService.getResponseFromUserInput(input);
-        //TODO this response might not be the highest ranked, method wasn't created when I wrote the test, other result is Test Response 3
         Assert.assertEquals("Test Response 6", response.getResponse());
     }
 
@@ -202,8 +233,8 @@ public class QueryServiceTests extends BaseDaoTests {
         input.setUtterance("intent5keyword intent6keyword entity2keyword entity3keyword");
         Response response = queryService.getResponseFromUserInput(input);
 
-        //TODO this response might not be the highest ranked, method wasn't created when I wrote the test, other result is Test Response 3
-        Assert.assertEquals("Test Response 3", response.getResponse());
+        //TODO method to make this happen, the default response is 9
+        Assert.assertEquals("Test Response 8", response.getResponse());
     }
 
 }

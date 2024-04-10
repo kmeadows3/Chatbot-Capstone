@@ -22,7 +22,7 @@ public class JdbcQueryDao implements QueryDao {
 
     @Override
     public List<Response> getResponsesFromIntentsAndEntities(List<Integer> intentIds, List<Integer> entityIds) {
-        String sql = "select response, intent_id, entity_id from response r " +
+        String sql = "SELECT response, intent_id, entity_id from response r " +
                 "JOIN response_intent ri ON ri.response_id = r.response_id " +
                 "JOIN response_entity re on re.response_id = r.response_id " +
                 "WHERE intent_id = ? AND entity_id = ?";
