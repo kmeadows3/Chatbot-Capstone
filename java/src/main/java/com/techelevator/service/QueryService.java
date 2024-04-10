@@ -192,7 +192,7 @@ public class QueryService {
 
         //get list with one random response if the user wants a practice interview
         if (intents.contains(PRACTICE_INTENT_ID) &&
-                entities.contains(HR_INTERVIEW_ENTITY_ID) || entities.contains(TECHNICAL_INTERVIEW_ENTITY_ID)) {
+                (entities.contains(HR_INTERVIEW_ENTITY_ID) || entities.contains(TECHNICAL_INTERVIEW_ENTITY_ID))) {
             responses = handlePracticeInterviews(responses);
         }
 

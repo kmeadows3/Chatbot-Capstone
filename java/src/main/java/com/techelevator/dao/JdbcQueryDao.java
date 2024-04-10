@@ -22,7 +22,7 @@ public class JdbcQueryDao implements QueryDao {
 
     @Override
     public List<Response> getResponsesFromIntentsAndEntities(List<Integer> intentIds, List<Integer> entityIds) {
-        String sql = "SELECT response, intent_id, entity_id from response r " +
+        String sql = "SELECT r.response_id, response from response r " +
                 "JOIN response_intent ri ON ri.response_id = r.response_id " +
                 "JOIN response_entity re on re.response_id = r.response_id " +
                 "WHERE intent_id = ? AND entity_id = ?";
@@ -34,10 +34,10 @@ public class JdbcQueryDao implements QueryDao {
                     SqlRowSet result = jdbcTemplate.queryForRowSet(sql, intentId, entityId);
                     while (result.next()) {
                         Response response = new Response();
-                        int responseIntent = result.getInt("intent_id");
-                        response.getResponseIntents().add(responseIntent);
-                        response.getResponseEntities().add(result.getInt("entity_id"));
                         response.setResponse(result.getString("response"));
+                        int responseId = result.getInt("response_id");
+                        response.setResponseIntents(getAllResponseIntentsByResponseId(responseId));
+                        response.setResponseEntities(getAllResponseEntitiesByResponseId(responseId));
                         responses.add(response);
                     }
                 }
@@ -50,6 +50,40 @@ public class JdbcQueryDao implements QueryDao {
         }
 
         return responses;
+    }
+
+    private List<Integer> getAllResponseIntentsByResponseId(int responseId){
+        String sql = "SELECT intent_id FROM response_intent WHERE response_id = ?";
+        List<Integer> intentList = new ArrayList<>();
+        try{
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, responseId);
+            while(results.next()){
+                intentList.add(results.getInt("intent_id"));
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data Integrity Violation", e);
+        }
+
+        return intentList;
+    }
+
+    private List<Integer> getAllResponseEntitiesByResponseId(int responseId){
+        String sql = "SELECT entity_id FROM response_entity WHERE response_id = ?";
+        List<Integer> intentList = new ArrayList<>();
+        try{
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, responseId);
+            while(results.next()){
+                intentList.add(results.getInt("entity_id"));
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data Integrity Violation", e);
+        }
+
+        return intentList;
     }
 
 
