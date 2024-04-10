@@ -166,7 +166,6 @@ public class QueryService {
         List<Integer> defaultEntityList = new ArrayList<>();
         defaultEntityList.add(DEFAULT_ENTITY_ID);
 
-        entityIds = sortEntitiesByPriority(entityIds);
         if (entityIds.get(0) != DEFAULT_ENTITY_ID){
             responses = queryDao.getResponsesFromIntentsAndEntities(defaultIntentList, entityIds);
         }
@@ -189,14 +188,45 @@ public class QueryService {
      * @return the single response that best fits the utterance
      */
     private String selectResponse(List<Response> responses, List<Integer> intents, List<Integer> entities){
+
         if (intents.contains(PRACTICE_INTENT_ID) &&
-                entities.contains(HR_INTERVIEW_ENTITY_ID) || entities.contains(TECHNICAL_INTERVIEW_ENTITY_ID)){
-            //TODO FILTER OUT ALL NON-PRACTICE RESPONSES
-            //TODO GET A RANDOM RESPONSE FROM THE LIST
+                entities.contains(HR_INTERVIEW_ENTITY_ID) || entities.contains(TECHNICAL_INTERVIEW_ENTITY_ID)) {
+            responses = handlePracticeInterviews(responses);
         }
+
         List<Response> topResponses = getResponsesWithMostKeywordMatches(responses);
 
         return topResponses.get(0).getResponse();
+    }
+
+    /**
+     *This method selects a random response from the responses that are practice interview questions
+     *
+     * @param responses -- all responses that match the intents and entities in the utterance
+     * @return a random practice interview response
+     */
+    private List<Response> handlePracticeInterviews(List<Response> responses) {
+
+        responses = responses.stream()
+                .filter(response -> response.getResponseIntents().contains(PRACTICE_INTENT_ID))
+                .collect(Collectors.toList());
+        responses = getResponseListWithOnlyOneRandomResponse(responses);
+
+        return responses;
+    }
+
+    /**
+     *This method selects a random response from a list of responses
+     *
+     * @param responses -- all responses that match the intents and entities in the utterance
+     * @return a list of responses that contains only the random response
+     */
+    private static List<Response> getResponseListWithOnlyOneRandomResponse(List<Response> responses) {
+        Random rand = new Random();
+        List<Response> randomResponseList = new ArrayList<>();
+        Response randomResponse = responses.get(rand.nextInt(responses.size()));
+        randomResponseList.add(randomResponse);
+        return randomResponseList;
     }
 
     /**
