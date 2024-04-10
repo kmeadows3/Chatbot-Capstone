@@ -76,17 +76,18 @@ export default {
 
             QueryService.get(query)
             .then( response => {
-                if(response.status === 200) {
-                    // When the get method returns a success response
-                    this.$store.commit('SET_INTENTS', response.data.intents);
-                    this.$store.commit('SET_ENTITIES', response.data.entities);
-                    this.addRobotBox(response.data.response);
-                }
-            })
-            .catch (error => {
-                console.error("Error in Chat Display: " + error);
-                // this.addRobotBox("I'm sorry, there seems to be an issue with the server. Please try again later.");
-            });
+                if (response.status === 200) {
+                        // When the get method returns a success response
+                        this.$store.commit('SET_INTENTS', response.data.intents);
+                        this.$store.commit('SET_ENTITIES', response.data.entities);
+                        this.addRobotBox(response.data.response);
+                    } 
+                })
+                .catch(error => {
+                    console.error("Error in Chat Display: " + error);
+                    this.addRobotBox("I'm sorry, there seems to be an issue with the server. Please try again later.");
+
+                });
         },
         scrollChatDisplayToBottom(chatBox) {
             chatBox.scrollTop = chatBox.scrollHeight;
