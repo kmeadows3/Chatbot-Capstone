@@ -1,23 +1,31 @@
 <template>
-    <h1>Inspirational Quote of the Minute:</h1>
-    <h2>{{ quote }}</h2>
-    <p><em>-{{ attribute }}</em></p>
-</template>
+    <div class ='quote'>
+        <h1>Inspirational Quote of the Minute:</h1>
+        <p>{{ quote }}</p>
+        <p><em>-{{ attribute }}</em></p>
+    </div>
+    </template>
 
 <script>
+import InspirationalQuotesService from '../services/InspirationalQuoteService';
 
 export default {
     data() {
         return {
-            quote: "placeholder quote will go here",
-            attribute: "name of quote's attribute",
+            quote: "",
+            attribute: "",
         }
     },
 
     methods: {
         updateQuote() {
-            this.quote = "bug";
-            this.attribute = "buggy";
+            InspirationalQuotesService.getRandom()
+            .then(response => {
+                const quoteBody = response.data[0];
+
+                this.quote = quoteBody.content;
+                this.attribute = quoteBody.author;
+            });
         }
     },
 
@@ -29,4 +37,7 @@ export default {
 </script>
 
 <style>
+div.quote {
+    background-color: aqua;
+}
 </style>
