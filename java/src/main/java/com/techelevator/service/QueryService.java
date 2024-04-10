@@ -189,14 +189,22 @@ public class QueryService {
      */
     private String selectResponse(List<Response> responses, List<Integer> intents, List<Integer> entities){
 
+        //get list with one random response if the user wants a practice interview
         if (intents.contains(PRACTICE_INTENT_ID) &&
                 entities.contains(HR_INTERVIEW_ENTITY_ID) || entities.contains(TECHNICAL_INTERVIEW_ENTITY_ID)) {
             responses = handlePracticeInterviews(responses);
         }
 
-        List<Response> topResponses = getResponsesWithMostKeywordMatches(responses);
+        //if there are multiple responses, filter out everything but the responses with the most keyword matches on the list
+        if (responses.size() > 1) {
+            responses = getResponsesWithMostKeywordMatches(responses);
+            if (responses.size() > 1){
+                //TODO select the best fitting of the remaining responses
+            }
+        }
 
-        return topResponses.get(0).getResponse();
+
+        return responses.get(0).getResponse();
     }
 
     /**
