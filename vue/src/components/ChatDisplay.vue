@@ -141,13 +141,13 @@ img.response_img {
 div.chatbot {
     align-self: start;
     background-color: #a4e7e3; 
-    font-size: 24px;
+    font-size: larger;
 }
 
 div.user {
     align-self: end;
     background-color: #e3f2fd; 
-    font-size: 24px;
+    font-size: larger;
 }
 
 textarea {
