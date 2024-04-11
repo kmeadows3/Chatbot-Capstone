@@ -1,11 +1,8 @@
 <template>
-    <div class ='quote'>
-        <h1>Inspirational Quote of the Minute:</h1>
-        <div class='quote_container'>
-            <img :src="quoteImage" alt="">
-            <p class='quote'>{{ quote }}</p>
-            <p class='attribute'><em>{{ attribute }}</em></p>
-        </div>
+    <div class='quote_container'>
+        <img :src="quoteImage" alt="">
+        <p class='quote'>{{ quote }}</p>
+        <p class='attribute'><em>{{ attribute }}</em></p>
     </div>
     </template>
 
@@ -71,10 +68,6 @@ export default {
   --text-shadow-color: #1d1d1d; 
 }
 
-div.quote {
-    /** */
-}
-
 div.quote_container {
     position: relative;
     text-align: center;
@@ -88,11 +81,6 @@ div.quote_container > img {
 }
 
 div.quote_container > p {
-    /*text-shadow: 1px 1px 2px rgb(9, 0, 43), 
-    -1px -1px 2px rgb(9, 0, 43), 
-    0 0 1em rgb(0, 0, 0), 
-    0 0 0.2em rgb(0, 0, 0); */
-    
     text-shadow: 
     2px 2px var(--text-shadow-blur) var(--text-shadow-color), 
     -2px -2px var(--text-shadow-blur) var(--text-shadow-color), 
@@ -120,8 +108,9 @@ div.quote_container > p.quote {
 div.quote_container > p.attribute {
     font-size: 20px;
     position: absolute;
-    bottom: 5%;
-    left: 30%;
+    width: 50%;
+    bottom: 0%;
+    left: 25%;
 }
 
 </style>
