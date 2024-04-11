@@ -219,7 +219,7 @@ public class QueryService {
         //if there are multiple responses, filter out everything but the responses with the most keyword matches on the list
         if (responses.size() > 1) {
             responses = filterForResponsesWithMostKeywordMatches(responses);
-
+            //if there are still multiple responses, filter out the responses with the most entities that don't match the utterance
             if (responses.size() > 1){
                 filterForResponsesWithMostExactMatch(responses, entities);
             }
@@ -260,6 +260,12 @@ public class QueryService {
         return bestResponses;
     }
 
+    /**
+     * This method takes a list of map entries and returns a list of the keys with the same value as the top ranked key
+     * @param rankedResponseList A list of Map<Response,Integer> entries, sorted by integer so that the index 0 on the list
+     *                           is the top ranked entry
+     * @return a list of the responses whose values matched the top ranked value
+     */
     private List<Response> removeAllButBestRankedMatchesFromEntryList(List<Entry<Response, Integer>> rankedResponseList) {
         int bestRank = rankedResponseList.get(0).getValue();
         List<Response> bestResponses = rankedResponseList.stream()
