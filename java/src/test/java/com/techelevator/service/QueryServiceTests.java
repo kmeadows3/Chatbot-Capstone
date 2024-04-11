@@ -260,7 +260,7 @@ public class QueryServiceTests extends BaseDaoTests {
         input.setUtterance("microsoft.com");
         Response response = queryService.getResponseFromUserInput(input);
         Assert.assertEquals("<p>Microsoft's headquarters is 1 Microsoft Way, Redmond, Washington 98052, US.</p>" +
-                "<p>They describe themselve as 'Every company has a mission. What's ours? To empower every person and" +
+                "<p>They describe themselves as 'Every company has a mission. What's ours? To empower every person and" +
                 " every organization to achieve more. We believe technology can and should be a force for good and " +
                 "that meaningful innovation contributes to a brighter world in the future and today. Our culture " +
                 "doesn’t just encourage curiosity; it embraces it. Each day we make progress together by showing up " +

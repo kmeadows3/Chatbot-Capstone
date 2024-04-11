@@ -1,18 +1,18 @@
 <template>
     <div id="outer-box">
-        <div id="chat-display"></div>
+            <div id="chat-display"></div>
 
 
-        <div id="user-input">
-        <form>
-            <textarea name="userInput" id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox"
-                placeholder="Type Here"></textarea>
-        </form>
-        <button @click.prevent="addUserBox()" :disabled="textBoxText.trim() === ''">
-            Send Response
-        </button>
+            <div id="user-input">
+            <form>
+                <textarea name="userInput" id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox"
+                    placeholder="Type Here"></textarea>
+            </form>
+            <button @click.prevent="addUserBox()" :disabled="textBoxText.trim() === ''">
+                Send Response
+            </button>
+        </div>
     </div>
-</div>
 
 </template>
     
@@ -62,7 +62,17 @@ export default {
                 this.scrollChatDisplayToBottom(chatBox);
 
                 setTimeout(() => {
-                    newResponse.innerHTML = response;
+                    const links = response.match(/<a href="(.*?)".*?>(.*?)<\/a>/g);
+                    if (links) {
+                        let updatedResponse = response;
+                        links.forEach(link => {
+                            const [, url, text] = link.match(/<a href="(.*?)".*?>(.*?)<\/a>/);
+                            updatedResponse = updatedResponse.replace(link, `<a href="${url}" target="_blank">${text}</a>`);
+                        });
+                        newResponse.innerHTML = updatedResponse;
+                    } else {
+                        newResponse.innerHTML = response;
+                    }
                     this.isLoading = false;
                 }, 750);
             }, 250);
@@ -79,6 +89,7 @@ export default {
                 utterance: this.textBoxText,
                 intents: this.$store.state.intents,
                 entities: this.$store.state.entities,
+                mode: this.$store.state.mode
             }
 
             QueryService.get(query)
@@ -87,6 +98,7 @@ export default {
                     // When the get method returns a success response
                     this.$store.commit('SET_INTENTS', response.data.userIntents);
                     this.$store.commit('SET_ENTITIES', response.data.userEntities);
+                    this.$store.commit('SET_MODE', response.data.mode);
                     this.addRobotBox(response.data.response);
                 }
             })
@@ -116,17 +128,20 @@ div#chat-display {
     border-radius: 10px; 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
     background-color: #ebecf0; 
+    margin-bottom: 6px;
+    margin-left: 200px;
 }
 
 div#chat-display > div {
     border: none; 
-    max-width: 75vw;
+    max-width: 45vw;
     padding: 12px 16px; 
     margin: 12px; 
     border-radius: 10px; 
     display: flex;
     flex-direction: column;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    
 }
 
 img.response_img {
@@ -142,6 +157,7 @@ div.chatbot {
     align-self: start;
     background-color: #a4e7e3; 
     font-size: larger;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 div.user {
@@ -162,6 +178,7 @@ textarea {
     resize: none; 
     outline: none; 
     transition: box-shadow 0.3s ease; 
+    margin-left: 200px;
 }
 
 textarea:focus {
@@ -182,11 +199,19 @@ button {
   border-radius: 20px; 
   transition: background-color 0.3s ease; 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-left: 200px;
 }
 
 button:hover {
   background-color: #3b4a9c; 
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); 
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15), 0 3px 5px rgba(0, 0, 0, 0.25); 
+  transform: translateY(-1px);
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8); 
 }
 </style>
     

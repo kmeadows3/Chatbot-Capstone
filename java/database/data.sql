@@ -38,10 +38,14 @@ INSERT INTO intent(name) VALUES ('External Resource');
 	INSERT INTO keyword(keyword, intent_id) VALUES ('where', 5);  -- Intent: External Resource(5)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('more information', 5);  -- Intent: External Resource(5)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('know more', 5);  -- Intent: External Resource(5)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('sources', 5);  -- Intent: External Resource(5)
+
 
 -- ID 6
 INSERT INTO intent(name) VALUES ('Example');  
 	INSERT INTO keyword(keyword, intent_id) VALUES ('example', 6);  -- Intent: Example(6)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('examples', 6);  -- Intent: Example(6)
+
 
 -- ID 7
 INSERT INTO intent(name) VALUES ('Company Information');
@@ -73,38 +77,49 @@ INSERT INTO entity(name) VALUES ('Star Method');
 -- ID 4
 INSERT INTO entity(name) VALUES ('Cover Letter');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('cover letter', 4);  -- Entity: Cover Letter(4)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('cover letters', 4);  -- Entity: Cover Letter(4)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('coverletter', 4);  -- Entity: Cover Letter(4)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('cover', 4);  -- Entity: Cover Letter(4)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('letter', 4);  -- Entity: Cover Letter(4)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('letters', 4);  -- Entity: Cover Letter(4)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('writing a cover letter', 4);  -- Entity: Cover Letter(4)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('write a cover letter', 4);  -- Entity: Cover Letter(4)
 
 -- ID 5
 INSERT INTO entity(name) VALUES ('Recruiter');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('recruiter', 5);  -- Entity: Employer(5)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('recruiters', 5);  -- Entity: Employer(5)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('company', 5);  -- Entity: Employer(5)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('organization', 5);  -- Entity: Employer(5)
 	
 -- ID 6
 INSERT INTO entity(name) VALUES ('General Interview');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('interview', 6);  -- Entity: General Interview(6)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('interviews', 6);  -- Entity: General Interview(6)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('interviewing', 6);  -- Entity: General Interview(6)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('interview question', 6);  -- Entity: General Interview(6)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('interview questions', 6);  -- Entity: General Interview(6)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('interview preparation', 6);  -- Entity: General Interview(6)
 
 -- ID 7
 INSERT INTO entity(name) VALUES ('Tech Interview');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('tech interview', 7);  -- Entity: Tech Interview(7)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('tech interviews', 7);  -- Entity: Tech Interview(7)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('technical interview', 7);  -- Entity: Tech Interview(7)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('technical interviews', 7);  -- Entity: Tech Interview(7)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('technical', 7);  -- Entity: Tech Interview(7)
 	
 -- ID 8
 INSERT INTO entity(name) VALUES ('HR Interview');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('behavioral interview', 8);  -- Entity: HR Interview(8)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('behavioral interviews', 8);  -- Entity: HR Interview(8)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('hr interview', 8);  -- Entity: HR Interview(8)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('hr interviews', 8);  -- Entity: HR Interview(8)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('hr', 8);  -- Entity: HR Interview(8)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('hr screening interview', 8);  -- Entity: HR Interview(8)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('hr screening interviews', 8);  -- Entity: HR Interview(8)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('hr phone interview', 8);  -- Entity: HR Interview(8)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('hr phone interviews', 8);  -- Entity: HR Interview(8)
 
 -- ID 9
 INSERT INTO entity(name) VALUES ('Attire');  
@@ -123,10 +138,14 @@ INSERT INTO entity(name) VALUES ('Attire');
 INSERT INTO entity(name) VALUES ('Follow Up');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('follow up', 10);  -- Follow up(10)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('followup', 10);  -- Follow up(10)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('follow ups', 10);  -- Follow up(10)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('followups', 10);  -- Follow up(10)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('after', 10);  -- Follow up(10)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('postinterview', 10);  -- Follow up(10)
     INSERT INTO keyword(keyword, entity_id) VALUES ('post interview', 10);  -- Follow up(10)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('thank-you note', 10);  -- Follow up(10)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('thankyou note', 10);  -- Follow up(10)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('thankyou notes', 10);  -- Follow up(10)
+
 	
 
 -- Starts a block with an integer
