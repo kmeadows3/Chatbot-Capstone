@@ -59,7 +59,7 @@ public class Company {
     @Override
     public String toString() {
         return "<p>"+ company_name + "'s headquarters is " + headquarters + ".</p>" +
-                "<p>They describe themselve as '" + description +"'</p>"+
+                "<p>They describe themselves as '" + description +"'</p>"+
                 "<p>They have " + employees_on_li +".</p>" +
                 "<p>You can find out more at their website at " + website + " or " +
                 "their LinkedIn at " + url +".</p>";

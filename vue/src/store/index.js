@@ -8,10 +8,12 @@ export function createStore(currentToken, currentUser) {
       user: currentUser || {},
       preferredName: '',
       jobPostings: [],
+      selectedJobPosting: {},
       intents: [1], // starts at 1 - Default intent
       entities: [1], // starts at 1 - Default entity
       mode: 0,
-      },
+    },
+
     mutations: {
       SET_PREFERREDNAME(state, name){
         state.preferredName = name;
@@ -27,6 +29,12 @@ export function createStore(currentToken, currentUser) {
       },
       ADD_JOB_POSTING(state, newJobPosting) {
         state.jobPostings.push(newJobPosting);
+      },
+      CLEAR_JOB_POSTINGS(state) {
+        state.jobPostings = [];
+      },
+      SET_SELECTED_JOB_POSTING(state, jobPosting) {
+        state.selectedJobPosting = jobPosting;
       },
 
       /*
@@ -47,7 +55,7 @@ export function createStore(currentToken, currentUser) {
         state.token = '';
         state.user = {};
         axios.defaults.headers.common = {};
-      }
+      },
     },
 
     getters: {
@@ -56,6 +64,9 @@ export function createStore(currentToken, currentUser) {
       },
       currentEntity(state) {
         return state.entities;
+      },
+      getJobPostings(state) {
+        return state.jobPostings;
       },
     }
   });

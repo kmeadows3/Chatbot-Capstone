@@ -25,7 +25,6 @@ export default {
 
         return {
             textBoxText: "",
-            isLoading: false
         }
     },
     methods: {
@@ -36,8 +35,16 @@ export default {
 
             const chatBox = document.getElementById('chat-display');
             const newResponse = document.createElement('div');
-            newResponse.classList.add('user')
-            newResponse.innerText = this.textBoxText;
+            const userAvatarDiv = document.createElement('div');
+            const userAvatar = document.createElement('img');
+            userAvatar.src = "/src/assets/UserIcon.jpg";
+            userAvatar.classList.add('user-avatar');
+            userAvatarDiv.appendChild(userAvatar);
+            newResponse.classList.add('user');
+            newResponse.appendChild(userAvatarDiv);
+            const textDiv = document.createElement('div');
+            textDiv.innerText = this.textBoxText;
+            newResponse.appendChild(textDiv);
             chatBox.appendChild(newResponse);
             if (!this.$store.state.preferredName) {
                 this.setUserName();
@@ -48,32 +55,40 @@ export default {
             this.scrollChatDisplayToBottom(chatBox);
         },
         addRobotBox(response) {
-            
-            this.isLoading = true;
 
             setTimeout(() => {
                 const chatBox = document.getElementById('chat-display');
                 const newResponse = document.createElement('div');
                 newResponse.classList.add('chatbot');
                 const loadingGif = document.createElement('img');
-                loadingGif.src = "/src/assets/resize.gif";
+                loadingGif.src = "/src/assets/bubbles.gif";
                 newResponse.appendChild(loadingGif);
                 chatBox.appendChild(newResponse);
                 this.scrollChatDisplayToBottom(chatBox);
 
                 setTimeout(() => {
                     const links = response.match(/<a href="(.*?)".*?>(.*?)<\/a>/g);
+                    const chatbotAvatarDiv = document.createElement('div');
+                    const chatbotAvatar = document.createElement('img');
+                    chatbotAvatar.src = "/src/assets/CB Icon.jpg";
+                    chatbotAvatar.classList.add('chatbot-avatar');
+                    chatbotAvatarDiv.appendChild(chatbotAvatar);
+                    const chatbotTextDiv = document.createElement('div');
+                    newResponse.removeChild(loadingGif);
+                    newResponse.appendChild(chatbotAvatarDiv);
+                    newResponse.appendChild(chatbotTextDiv);
+
                     if (links) {
                         let updatedResponse = response;
                         links.forEach(link => {
                             const [, url, text] = link.match(/<a href="(.*?)".*?>(.*?)<\/a>/);
                             updatedResponse = updatedResponse.replace(link, `<a href="${url}" target="_blank">${text}</a>`);
                         });
-                        newResponse.innerHTML = updatedResponse;
+                        chatbotTextDiv.innerHTML = updatedResponse;
                     } else {
-                        newResponse.innerHTML = response;
+                        chatbotTextDiv.innerHTML = response;
                     }
-                    this.isLoading = false;
+                    this.scrollChatDisplayToBottom(chatBox);
                 }, 750);
             }, 250);
 
@@ -89,6 +104,7 @@ export default {
                 utterance: this.textBoxText,
                 intents: this.$store.state.intents,
                 entities: this.$store.state.entities,
+                mode: this.$store.state.mode
             }
 
             QueryService.get(query)
@@ -97,6 +113,7 @@ export default {
                     // When the get method returns a success response
                     this.$store.commit('SET_INTENTS', response.data.userIntents);
                     this.$store.commit('SET_ENTITIES', response.data.userEntities);
+                    this.$store.commit('SET_MODE', response.data.mode);
                     this.addRobotBox(response.data.response);
                 }
             })
@@ -162,6 +179,16 @@ div.user {
     align-self: end;
     background-color: #e3f2fd; 
     font-size: larger;
+}
+
+.user-avatar {
+    max-width: 35px;
+    max-height: 35px;
+}
+
+.chatbot-avatar {
+    max-width: 35px;
+    max-height: 35px;
 }
 
 textarea {

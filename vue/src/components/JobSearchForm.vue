@@ -24,15 +24,15 @@ export default {
             city: '',
             stateAbbreviation: '',
             includeRemote: false,
-            jobPostings: [],
         }
     },
 
     methods: {
         searchJobs() {
-            this.jobPostings = [];
+            this.$store.commit("CLEAR_JOB_POSTINGS");
             this.searchJobsByPage(1);
-            console.log(this.jobPostings);
+            console.log("HIT");
+            console.log(this.$store.state.jobPostings);
             
         },
 
@@ -44,10 +44,12 @@ export default {
 
                 // Add jobs matching the input location
                 const filteredJobPostings = this.filterJobPostingsByLocation(jobPostings, this.formattedLocation);
+                this.addJobPostingsToListInStore(filteredJobPostings);
 
                 // Add remote positions if selected
                 if (this.includeRemote) {
                     const remoteJobPostings = this.filterJobPostingsByLocation(jobPostings, remote);
+                    this.addJobPostingsToListInStore(remoteJobPostings);
                 }
 
                 
@@ -78,18 +80,21 @@ export default {
 
         addJobPostingsToListInStore(jobPostings) {
             jobPostings.forEach(currentJobPosting => {
+                let date = (currentJobPosting.publication_date.split("T"))[0];
+
                 const jobPostingToAdd = {
                     positionTitle: currentJobPosting.name,
                     companyName: currentJobPosting.company.name,
                     companyId: currentJobPosting.company.id,
                     locations: currentJobPosting.locations,
+                    datePosted: date,
                     description: currentJobPosting.contents,
                     levels: currentJobPosting.levels,
                     landingPage: currentJobPosting.refs.landing_page,
                 }
 
                 this.addJobPosting(jobPostingToAdd);
-            })
+            })            
         },
 
         addJobPosting(jobPosting) {

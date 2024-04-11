@@ -1,6 +1,7 @@
 package com.techelevator.service;
 
 import com.techelevator.dao.QueryDao;
+import com.techelevator.exception.CompanyInformationExpection;
 import com.techelevator.model.Company;
 import com.techelevator.model.Response;
 import com.techelevator.model.UserInput;
@@ -59,7 +60,11 @@ public class QueryService {
         if (userInput.getMode() == COMPANY_DATA_MODE){
             intents.add(DEFAULT_INTENT_ID);
             entities.add(DEFAULT_ENTITY_ID);
-            responseString = companyInformationService.getCompanyDataDemoMode(userInput.getUtterance()).toString();
+            try {
+                responseString = companyInformationService.getCompanyDataDemoMode(userInput.getUtterance()).toString();
+            } catch (CompanyInformationExpection e){
+                responseString = e.getMessage();
+            }
         } else {
             List<String> tokens = tokenizeUtterance(userInput);
             List<Integer>[] intentsAndEntities = getIntentsAndEntities(tokens, userInput);
@@ -219,7 +224,7 @@ public class QueryService {
         //if there are multiple responses, filter out everything but the responses with the most keyword matches on the list
         if (responses.size() > 1) {
             responses = filterForResponsesWithMostKeywordMatches(responses);
-
+            //if there are still multiple responses, filter out the responses with the most entities that don't match the utterance
             if (responses.size() > 1){
                 filterForResponsesWithMostExactMatch(responses, entities);
             }
@@ -260,6 +265,12 @@ public class QueryService {
         return bestResponses;
     }
 
+    /**
+     * This method takes a list of map entries and returns a list of the keys with the same value as the top ranked key
+     * @param rankedResponseList A list of Map<Response,Integer> entries, sorted by integer so that the index 0 on the list
+     *                           is the top ranked entry
+     * @return a list of the responses whose values matched the top ranked value
+     */
     private List<Response> removeAllButBestRankedMatchesFromEntryList(List<Entry<Response, Integer>> rankedResponseList) {
         int bestRank = rankedResponseList.get(0).getValue();
         List<Response> bestResponses = rankedResponseList.stream()
