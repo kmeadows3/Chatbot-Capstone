@@ -104,6 +104,7 @@ export default {
                 utterance: this.textBoxText,
                 intents: this.$store.state.intents,
                 entities: this.$store.state.entities,
+                mode: this.$store.state.mode
             }
 
             QueryService.get(query)
@@ -112,6 +113,7 @@ export default {
                     // When the get method returns a success response
                     this.$store.commit('SET_INTENTS', response.data.userIntents);
                     this.$store.commit('SET_ENTITIES', response.data.userEntities);
+                    this.$store.commit('SET_MODE', response.data.mode);
                     this.addRobotBox(response.data.response);
                 }
             })
