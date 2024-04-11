@@ -127,7 +127,7 @@ div#chat-display {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
     background-color: #ebecf0; 
     margin-bottom: 6px;
-    margin-left: 200px;
+    /* margin-left: 200px; */
 }
 
 div#chat-display > div {
@@ -176,7 +176,7 @@ textarea {
     resize: none; 
     outline: none; 
     transition: box-shadow 0.3s ease; 
-    margin-left: 200px;
+    /* margin-left: 200px; */
 }
 
 textarea:focus {
@@ -198,7 +198,7 @@ button {
   transition: background-color 0.3s ease; 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.2);
-  margin-left: 200px;
+  /* margin-left: 200px; */
 }
 
 button:hover {
@@ -211,5 +211,6 @@ button:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8); 
 }
+
 </style>
     
