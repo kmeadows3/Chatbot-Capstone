@@ -28,7 +28,7 @@ export default {
             .then(response => {
                 const quoteBody = response.data[0];
 
-                this.quote = quoteBody.content;
+                this.quote = "“" + quoteBody.content + "”";
                 this.attribute = "-" + quoteBody.author;
             })
             .catch(error => {
@@ -46,6 +46,9 @@ export default {
                 // Picking picture from array representing the page
                 const pickedPhoto = Math.floor(Math.random() * photosPerPage);
                 this.quoteImage = photos[pickedPhoto].src.tiny;
+                
+            })
+            .then (response => {
                 this.updateQuoteText();
             })
             .catch(error => {
@@ -97,7 +100,7 @@ div.quote_container > p {
 
 
 div.quote_container > p.quote {
-    font-size: 30px;
+    font-size: 22px;
     position: absolute;
     width: 90%;
     top: 35%;
@@ -106,11 +109,11 @@ div.quote_container > p.quote {
 }
 
 div.quote_container > p.attribute {
-    font-size: 20px;
+    font-size: 15px;
     position: absolute;
-    width: 50%;
+    width: 100%;
     bottom: 0%;
-    left: 25%;
+    left: 0%;
 }
 
 </style>
