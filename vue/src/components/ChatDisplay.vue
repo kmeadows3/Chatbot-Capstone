@@ -4,16 +4,15 @@
 
 
         <div id="user-input">
-        <form>
-            <textarea name="userInput" id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox"
-                placeholder="Type Here"></textarea>
-        </form>
-        <button @click.prevent="addUserBox()" :disabled="textBoxText.trim() === ''">
-            Send Response
-        </button>
+            <form>
+                <textarea name="userInput" id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox"
+                    placeholder="Type Here"></textarea>
+            </form>
+            <button @click.prevent="addUserBox()" :disabled="textBoxText.trim() === ''">
+                Send Response
+            </button>
+        </div>
     </div>
-</div>
-
 </template>
     
     
