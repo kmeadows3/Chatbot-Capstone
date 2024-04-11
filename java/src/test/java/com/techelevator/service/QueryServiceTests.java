@@ -237,4 +237,20 @@ public class QueryServiceTests extends BaseDaoTests {
         Assert.assertEquals("Test Response 8", response.getResponse());
     }
 
+    @Test
+    public void getResponseFromUserInput_returns_higher_ranked_choice_if_number_of_matches_is_equal(){
+        UserInput input = new UserInput();
+        List<Integer> intentList = new ArrayList<>();
+        List<Integer> entityList = new ArrayList<>();
+        intentList.add(1);
+        entityList.add(1);
+        input.setIntents(intentList);
+        input.setEntities(entityList);
+
+        input.setUtterance("intent2keyword entity3keyword");
+        Response response = queryService.getResponseFromUserInput(input);
+
+        Assert.assertEquals("Test Response 6", response.getResponse());
+
+    }
 }

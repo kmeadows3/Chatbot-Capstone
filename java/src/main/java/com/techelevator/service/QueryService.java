@@ -198,14 +198,55 @@ public class QueryService {
 
         //if there are multiple responses, filter out everything but the responses with the most keyword matches on the list
         if (responses.size() > 1) {
-            responses = getResponsesWithMostKeywordMatches(responses);
+            responses = filterForResponsesWithMostKeywordMatches(responses);
+
             if (responses.size() > 1){
-                //TODO select the best fitting of the remaining responses
+                filterForResponsesWithMostExactMatch(responses, entities);
             }
+            //TODO select the best fitting of the remaining responses
+
+
         }
 
 
         return responses.get(0).getResponse();
+    }
+
+    /**
+     *This method takes a list of responses and filters to find the one whose keywords that most exactly matches the utterance
+     *
+     * @param responses -- list of responses to filter
+     * @para entities -- list of entities derived from the user's utterance
+     * @return list of responses that match the utterance entities the best
+     */
+    private List<Response> filterForResponsesWithMostExactMatch(List<Response> responses, List<Integer> entities) {
+        Map<Response, Integer> responseRanks = new LinkedHashMap<>();
+        for (Response response : responses){
+            int rank = 0;
+            for(int entity : response.getResponseEntities()){
+                if(entities.contains(entity)){
+                    rank--;
+                } else {
+                    rank++;
+                }
+            }
+            responseRanks.put(response, rank);
+        }
+
+        List<Entry<Response, Integer>> rankList = new ArrayList<>(responseRanks.entrySet());
+        rankList.sort(Entry.comparingByValue());
+        List<Response> bestResponses = removeAllButBestRankedMatchesFromEntryList(rankList);
+
+        return bestResponses;
+    }
+
+    private List<Response> removeAllButBestRankedMatchesFromEntryList(List<Entry<Response, Integer>> rankedResponseList) {
+        int bestRank = rankedResponseList.get(0).getValue();
+        List<Response> bestResponses = rankedResponseList.stream()
+                .filter(response -> response.getValue() == bestRank)
+                .map(Entry::getKey)
+                .collect(Collectors.toList());
+        return bestResponses;
     }
 
     /**
@@ -242,7 +283,7 @@ public class QueryService {
      * @param responses -- all responses that match the intents and entities in the utterance
      * @return a list of responses that have the highest number of keyword matches
      */
-    private List<Response> getResponsesWithMostKeywordMatches(List<Response> responses) {
+    private List<Response> filterForResponsesWithMostKeywordMatches(List<Response> responses) {
         Map<Response, Integer> responseCounts = new LinkedHashMap<>();
 
         responses.stream().forEach(response -> {
@@ -256,11 +297,7 @@ public class QueryService {
 
         countList.sort(Entry.comparingByValue());
         Collections.reverse(countList);
-        int maxCount = countList.get(0).getValue();
-        List<Response> topResults = countList.stream()
-                .filter(response -> response.getValue() == maxCount)
-                .map(Entry::getKey)
-                .collect(Collectors.toList());
+        List<Response> topResults = removeAllButBestRankedMatchesFromEntryList(countList);
 
         return topResults;
     }
