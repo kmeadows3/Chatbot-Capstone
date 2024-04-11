@@ -1,6 +1,7 @@
 package com.techelevator.service;
 
 import com.techelevator.dao.QueryDao;
+import com.techelevator.exception.CompanyInformationExpection;
 import com.techelevator.model.Company;
 import com.techelevator.model.Response;
 import com.techelevator.model.UserInput;
@@ -59,7 +60,11 @@ public class QueryService {
         if (userInput.getMode() == COMPANY_DATA_MODE){
             intents.add(DEFAULT_INTENT_ID);
             entities.add(DEFAULT_ENTITY_ID);
-            responseString = companyInformationService.getCompanyDataDemoMode(userInput.getUtterance()).toString();
+            try {
+                responseString = companyInformationService.getCompanyDataDemoMode(userInput.getUtterance()).toString();
+            } catch (CompanyInformationExpection e){
+                responseString = e.getMessage();
+            }
         } else {
             List<String> tokens = tokenizeUtterance(userInput);
             List<Integer>[] intentsAndEntities = getIntentsAndEntities(tokens, userInput);

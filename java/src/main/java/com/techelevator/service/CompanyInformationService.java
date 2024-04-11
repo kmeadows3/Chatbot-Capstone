@@ -1,11 +1,15 @@
 package com.techelevator.service;
 
+import com.techelevator.exception.CompanyInformationExpection;
+import com.techelevator.exception.DaoException;
 import com.techelevator.model.Company;
 import com.techelevator.model.CompanyHeadquarters;
 import com.techelevator.model.CompanyRequestDTO;
 import com.techelevator.model.CompanyResponseDTO;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
 @Component
@@ -24,10 +28,14 @@ public class CompanyInformationService {
         headers.set("X-RapidAPI-Key", apiKey);
         headers.set("X-RapidAPI-Host", apiHost);
         HttpEntity<CompanyRequestDTO> entity = new HttpEntity<>(companyRequestDTO, headers);
-
-        ResponseEntity<CompanyResponseDTO> response = restTemplate.exchange(url, HttpMethod.POST, entity, CompanyResponseDTO.class);
-        CompanyResponseDTO companyResponseDTO = response.getBody();
-        Company company = companyResponseDTO.getData();
+        Company company = new Company();
+        try {
+            ResponseEntity<CompanyResponseDTO> response = restTemplate.exchange(url, HttpMethod.POST, entity, CompanyResponseDTO.class);
+            CompanyResponseDTO companyResponseDTO = response.getBody();
+            company = companyResponseDTO.getData();
+        } catch (RestClientResponseException | ResourceAccessException e){
+            throw new CompanyInformationExpection("I'm sorry, I was unable to find a company with that domain name.");
+        }
 
         return company;
     }
