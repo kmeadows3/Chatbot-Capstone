@@ -1,13 +1,20 @@
-package com.techelevator;
+package com.techelevator.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-public class CompanyModel {
+public class Company {
     private String company_name;
     private String website;
     private String url;
     private String employees_on_li;
     private String description;
+    private CompanyHeadquarters headquarters;
+
+    public CompanyHeadquarters getHeadquarters() {
+        return headquarters;
+    }
+
+    public void setHeadquarters(CompanyHeadquarters headquarters) {
+        this.headquarters = headquarters;
+    }
 
     public String getWebsite() {
         return website;
@@ -51,12 +58,10 @@ public class CompanyModel {
 
     @Override
     public String toString() {
-        return "CompanyModel{" +
-                "name='" + company_name + '\'' +
-                ", website='" + website + '\'' +
-                ", url='" + url + '\'' +
-                ", employees_on_li='" + employees_on_li + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return "<p>"+ company_name + "'s headquarters is " + headquarters + ".</p>" +
+                "<p>They describe themselve as '" + description +"'</p>"+
+                "<p>They have " + employees_on_li +".</p>" +
+                "<p>You can find out more at their website at " + website + " or " +
+                "their LinkedIn at " + url +".</p>";
     }
 }

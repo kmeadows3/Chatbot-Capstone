@@ -1,6 +1,6 @@
-package com.techelevator;
+package com.techelevator.model;
 
-public class CompanyDTO {
+public class CompanyRequestDTO {
     private String link;
 
     public String getLink() {

@@ -1,6 +1,7 @@
 package com.techelevator.service;
 
 import com.techelevator.dao.QueryDao;
+import com.techelevator.model.Company;
 import com.techelevator.model.Response;
 import com.techelevator.model.UserInput;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 @Component
 public class QueryService {
 
+    public final int COMPANY_DATA_MODE = 2;
     // Constants
     private final int[] RANKED_ENTITY_IDS = new int[]{
             3, // Star Method
@@ -24,6 +26,7 @@ public class QueryService {
             6, // General Interview
             2, // Chatbot
             1 }; // Default
+    public final int COMPANY_INFORMATION_INTENT_ID = 7;
     public final int DEFAULT_INTENT_ID = 1;
     public final int DEFAULT_ENTITY_ID = 1;
     public final int PRACTICE_INTENT_ID = 4;
@@ -34,9 +37,11 @@ public class QueryService {
 
     // Instance Variables
     private QueryDao queryDao;
+    private CompanyInformationService companyInformationService;
 
-    public QueryService (QueryDao queryDao){
+    public QueryService (QueryDao queryDao, CompanyInformationService companyInformationService){
         this.queryDao = queryDao;
+        this.companyInformationService = companyInformationService;
     }
 
 
@@ -47,18 +52,33 @@ public class QueryService {
      */
     public Response getResponseFromUserInput(UserInput userInput){
         Response outputResponse = new Response();
+        List<Integer> intents = new ArrayList<>();
+        List<Integer> entities = new ArrayList<>();
+        String responseString = null;
 
-        List<String> tokens = tokenizeUtterance(userInput);
-        List<Integer>[] intentsAndEntities = getIntentsAndEntities(tokens, userInput);
-        List<Integer> intents = intentsAndEntities[INTENTS_INDEX];
-        List<Integer> entities = intentsAndEntities[ENTITIES_INDEX];
-        List<Response> potentialResponses = getPotentialResponseList(intents,
-                entities);
+        if (userInput.getMode() == COMPANY_DATA_MODE){
+            intents.add(DEFAULT_INTENT_ID);
+            entities.add(DEFAULT_ENTITY_ID);
+            responseString = companyInformationService.getCompanyDataDemoMode(userInput.getUtterance()).toString();
+        } else {
+            List<String> tokens = tokenizeUtterance(userInput);
+            List<Integer>[] intentsAndEntities = getIntentsAndEntities(tokens, userInput);
+            intents = intentsAndEntities[INTENTS_INDEX];
+            entities = intentsAndEntities[ENTITIES_INDEX];
+
+            if (intents.contains(COMPANY_INFORMATION_INTENT_ID)){
+                responseString = "Please enter the domain name of the company you're interested in learning more about.";
+                outputResponse.setMode(COMPANY_DATA_MODE);
+            } else {
+                List<Response> potentialResponses = getPotentialResponseList(intents,
+                        entities);
+                responseString = selectResponse(potentialResponses,intents, entities);
+            }
+        }
 
         outputResponse.setUserIntents(intents);
         outputResponse.setUserEntities(entities);
-        String potentialResponse = selectResponse(potentialResponses,intents, entities);
-        outputResponse.setResponse(potentialResponse);
+        outputResponse.setResponse(responseString);
         return outputResponse;
     }
 

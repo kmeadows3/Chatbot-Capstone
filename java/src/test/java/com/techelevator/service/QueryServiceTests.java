@@ -22,7 +22,7 @@ public class QueryServiceTests extends BaseDaoTests {
     public void setup(){
         jdbcTemplate = new JdbcTemplate(dataSource);
         jdbcQueryDao = new JdbcQueryDao(jdbcTemplate);
-        queryService = new QueryService(jdbcQueryDao);
+        queryService = new QueryService(jdbcQueryDao, new CompanyInformationService());
         UserInput input = new UserInput();
         List<Integer> intentList = new ArrayList<>();
         List<Integer> entityList = new ArrayList<>();
@@ -251,6 +251,24 @@ public class QueryServiceTests extends BaseDaoTests {
         Response response = queryService.getResponseFromUserInput(input);
 
         Assert.assertEquals("Test Response 6", response.getResponse());
+    }
 
+    @Test
+    public void getResponseFromUserInput_returns_company_information_when_in_company_mode(){
+        UserInput input = new UserInput();
+        input.setMode(2);
+        input.setUtterance("microsoft.com");
+        Response response = queryService.getResponseFromUserInput(input);
+        Assert.assertEquals("<p>Microsoft's headquarters is 1 Microsoft Way, Redmond, Washington 98052, US.</p>" +
+                "<p>They describe themselve as 'Every company has a mission. What's ours? To empower every person and" +
+                " every organization to achieve more. We believe technology can and should be a force for good and " +
+                "that meaningful innovation contributes to a brighter world in the future and today. Our culture " +
+                "doesn’t just encourage curiosity; it embraces it. Each day we make progress together by showing up " +
+                "as our authentic selves. We show up with a learn-it-all mentality. We show up cheering on others, " +
+                "knowing their success doesn't diminish our own. We show up every day open to learning our own biases, " +
+                "changing our behavior, and inviting in differences. Because impact matters. Microsoft operates in 190 " +
+                "countries and is made up of more than 220,000 passionate employees worldwide.'</p><p>They have " +
+                "10,001+ employees.</p><p>You can find out more at their website at https://news.microsoft.com/ " +
+                "or their LinkedIn at https://www.linkedin.com/company/microsoft.</p>", response.getResponse());
     }
 }
