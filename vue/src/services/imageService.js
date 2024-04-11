@@ -12,8 +12,6 @@ export default {
         const randomIndexInSearchTerms = Math.floor(Math.random() * searchTerms.length);
         const randomSearchTerm = searchTerms[randomIndexInSearchTerms];
 
-        console.log('Random Search Term for Picture: ' + randomSearchTerm);
-
         return client.photos.search({ query: randomSearchTerm, page: pageNumber, per_page: photosPerPage });
             
     }

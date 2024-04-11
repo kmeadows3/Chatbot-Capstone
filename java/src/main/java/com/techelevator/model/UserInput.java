@@ -5,18 +5,13 @@ import java.util.List;
 
 public class UserInput {
     private String utterance;
-    private int previousResponseId;
     private List<Integer> intents;
     private List<Integer> entities;
-
+    private int mode;
 
     // Getters
     public String getUtterance() {
         return utterance;
-    }
-
-    public int getPreviousResponseId() {
-        return previousResponseId;
     }
 
     public List<Integer> getIntents() {
@@ -27,15 +22,13 @@ public class UserInput {
         return entities;
     }
 
-
+    public int getMode() {
+        return mode;
+    }
 
     // Setters
     public void setUtterance(String utterance) {
         this.utterance = utterance;
-    }
-
-    public void setPreviousReponseId(int previousReponse) {
-        this.previousResponseId = previousReponse;
     }
 
     public void setIntents(List<Integer> intents) {
@@ -46,5 +39,7 @@ public class UserInput {
         this.entities = entities;
     }
 
-
+    public void setMode(int mode) {
+        this.mode = mode;
+    }
 }

@@ -11,6 +11,7 @@ public class Response {
     private String response;
     private List<Integer> userIntents;
     private List<Integer> userEntities;
+    private int mode = 0;
     @JsonIgnore
     private List<Integer> responseIntents = new ArrayList<>();
     @JsonIgnore
@@ -26,6 +27,10 @@ public class Response {
     // Getters
     public String getResponse() {
         return response;
+    }
+
+    public int getMode() {
+        return mode;
     }
 
     public List<Integer> getUserIntents() {
@@ -46,6 +51,10 @@ public class Response {
     // Setters
     public void setResponse(String response) {
         this.response = response;
+    }
+
+    public void setMode(int mode) {
+        this.mode = mode;
     }
 
     public void setUserIntents(List<Integer> userIntents) {

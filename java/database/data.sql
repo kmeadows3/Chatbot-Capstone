@@ -43,6 +43,12 @@ INSERT INTO intent(name) VALUES ('External Resource');
 INSERT INTO intent(name) VALUES ('Example');  
 	INSERT INTO keyword(keyword, intent_id) VALUES ('example', 6);  -- Intent: Example(6)
 
+-- ID 7
+INSERT INTO intent(name) VALUES ('Company Information');
+    INSERT INTO keyword(keyword, intent_id) VALUES ('company information', 7);  -- Intent: Example(7)
+    INSERT INTO keyword(keyword, intent_id) VALUES ('company data', 7);  -- Intent: Example(7)
+    INSERT INTO keyword(keyword, intent_id) VALUES ('information about companies', 7);  -- Intent: Example(7)
+
 
 
 -------------------- ENTITIES --------------------
@@ -245,7 +251,7 @@ INSERT INTO response(response, name) VALUES ('<p>Here is an example question alo
 <p><b>Task -</b> During the project, tensions arose between the design and engineering teams due to differing opinions on the project’s direction and priorities. The conflict was affecting team collaboration and slowing down progress.</p>
 <p><b>Action -</b> To address the conflict, I scheduled a team meeting to openly discuss and understand each team’s perspectives and concerns. I facilitated a constructive dialogue where team members could express their viewpoints and listen to each other’s ideas.</p>
 <p><b>Result -</b> As a result of the meeting, we reached a consensus on the project’s priorities and established clear communication channels between the design and engineering teams. Team collaboration improved, and we were able to successfully complete the project on time, meeting all objectives.</p>', 'Example Star method');
-INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 2); -- Intent 6: Example
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 6); -- Intent 6: Example
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 3); -- Entity 3: Star Method
 response_id_counter := response_id_counter + 1;
 

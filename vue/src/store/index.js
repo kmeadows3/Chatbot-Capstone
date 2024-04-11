@@ -7,8 +7,10 @@ export function createStore(currentToken, currentUser) {
       token: currentToken || '',
       user: currentUser || {},
       preferredName: '',
+      jobPostings: [],
       intents: [1], // starts at 1 - Default intent
       entities: [1], // starts at 1 - Default entity
+      mode: 0,
       },
     mutations: {
       SET_PREFERREDNAME(state, name){
@@ -19,6 +21,12 @@ export function createStore(currentToken, currentUser) {
       },
       SET_ENTITIES(state, newEntities) {
         state.entities = newEntities;
+      },
+      SET_MODE(state, newMode){
+        state.mode = newMode;
+      },
+      ADD_JOB_POSTING(state, newJobPosting) {
+        state.jobPostings.push(newJobPosting);
       },
 
       /*
