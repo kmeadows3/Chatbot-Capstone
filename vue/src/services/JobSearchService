@@ -1,22 +1,15 @@
-const REED_JOBS_API_KEY = "5cf42bf6-24b2-48a3-9c7c-af48c4d2456d";
-const REED_JOBS_API_URL = "https://www.reed.co.uk/api/1.0/search?";
+import axios from 'axios';
 
-const JOB_LOCATION = "London";
-const JOB_KEYWORDS = "developer";
+// API Documentation:  https://www.themuse.com/developers/api/v2?ref=apilist.fun
+
+const jobsHttp = axios.create({
+    baseURL: "https://www.themuse.com/api/public",
+});
+
 
 export default {
-    get() {
-        return fetch(`${REED_JOBS_API_URL}keywords=${JOB_KEYWORDS}&locationName=${JOB_LOCATION}&resultsToTake=10&apiKey=${REED_JOBS_API_KEY}`);
+    get(city, stateAbbreviation, pageNumber) {
+        const queryParams = `category=Computer%20and%20ITu&category=Data%20and%20Analytics&category=Data%20Science&category=Software%20Engineering&location=${city}%2C%20${stateAbbreviation}&page=${pageNumber}&descending=true`;
+        return jobsHttp.get(`/jobs?` + queryParams);
     }
 }
-
-/*
-fetch(`${REED_JOBS_API_URL}keywords=${JOB_KEYWORDS}&locationName=${JOB_LOCATION}&resultsToTake=10&apiKey=${REED_JOBS_API_KEY}`)
-	.then(response => response.json())
-	.then(data => {
-		console.log(data.results);
-	})
-	.catch(error => {
-		console.error("Error in Job Search " + error);
-	});
-    */
