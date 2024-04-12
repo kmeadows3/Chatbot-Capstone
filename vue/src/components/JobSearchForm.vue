@@ -1,6 +1,6 @@
 <template>
     <H1>Job Search Form</H1>
-    <form id="job_search_form"  v-on:submit.prevent="() => searchJobs()">
+    <form id="job_search_form">
         <label for="city">City Name: </label>
         <input id="city" type="text" v-model="city">
         <br/>
@@ -10,7 +10,7 @@
         <label for="includeRemote">Include Remote Positions: </label>
         <input id="includeRemote" type="checkbox" v-model="includeRemote">
         <br/>
-        <input type="submit" value="Search Job">
+        
     </form>
 </template>
 
@@ -29,33 +29,42 @@ export default {
 
     methods: {
         searchJobs() {
-            this.$store.commit("CLEAR_JOB_POSTINGS");
-            this.searchJobsByPage(1);
-            console.log("HIT");
-            console.log(this.$store.state.jobPostings);
-            
+            return new Promise((resolve, reject) => {
+                this.$store.commit("CLEAR_JOB_POSTINGS");
+                this.searchJobsByPage(1)
+                .then(response => {
+                    resolve(response); // Resolve the promise when the asynchronous operation is done
+                })
+                .catch(error => {
+                    reject(error); // Reject the promise if an error occurs
+                });
+            });
         },
 
         searchJobsByPage(pageNumber) {
-            JobSearchService.get(this.urlFormattedCityName, this.formattedStateAbbreviation, pageNumber)
-            .then(response => {
-                const jobPostings = response.data;
-                const remote = 'Flexible / Remote';
+            return new Promise((resolve, reject) => {
+                JobSearchService.get(this.urlFormattedCityName, this.formattedStateAbbreviation, pageNumber)
+                .then(response => {
+                    const jobPostings = response.data;
+                    const remote = 'Flexible / Remote';
 
-                // Add jobs matching the input location
-                const filteredJobPostings = this.filterJobPostingsByLocation(jobPostings, this.formattedLocation);
-                this.addJobPostingsToListInStore(filteredJobPostings);
+                    // Add jobs matching the input location
+                    const filteredJobPostings = this.filterJobPostingsByLocation(jobPostings, this.formattedLocation);
+                    this.addJobPostingsToListInStore(filteredJobPostings);
 
-                // Add remote positions if selected
-                if (this.includeRemote) {
-                    const remoteJobPostings = this.filterJobPostingsByLocation(jobPostings, remote);
-                    this.addJobPostingsToListInStore(remoteJobPostings);
-                }
-
-                
-            })
-            .catch(error => {
-                console.error("Error in Job Search " + error);
+                    // Add remote positions if selected
+                    if (this.includeRemote) {
+                        const remoteJobPostings = this.filterJobPostingsByLocation(jobPostings, remote);
+                        this.addJobPostingsToListInStore(remoteJobPostings);
+                    }
+                    
+                    resolve(response); // Resolve the promise when the asynchronous operation is done
+                    
+                })
+                .catch(error => {
+                    console.error("Error in Job Search " + error);
+                    reject(error);
+                });
             });
         },
 
@@ -89,7 +98,7 @@ export default {
                     locations: currentJobPosting.locations,
                     datePosted: date,
                     description: currentJobPosting.contents,
-                    levels: currentJobPosting.levels,
+                    levels: currentJobPosting.levels[0].name,
                     landingPage: currentJobPosting.refs.landing_page,
                 }
 

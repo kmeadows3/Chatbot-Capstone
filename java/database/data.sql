@@ -49,9 +49,20 @@ INSERT INTO intent(name) VALUES ('Example');
 
 -- ID 7
 INSERT INTO intent(name) VALUES ('Company Information');
-    INSERT INTO keyword(keyword, intent_id) VALUES ('company information', 7);  -- Intent: Example(7)
-    INSERT INTO keyword(keyword, intent_id) VALUES ('company data', 7);  -- Intent: Example(7)
-    INSERT INTO keyword(keyword, intent_id) VALUES ('information about companies', 7);  -- Intent: Example(7)
+    INSERT INTO keyword(keyword, intent_id) VALUES ('company information', 7);  -- Intent: Company Information(7)
+    INSERT INTO keyword(keyword, intent_id) VALUES ('company data', 7);  -- Intent: Company Information(7)
+    INSERT INTO keyword(keyword, intent_id) VALUES ('information about companies', 7);  -- Intent: Company Information(7)
+
+-- ID 8
+INSERT INTO intent(name) VALUES ('Job Postings');
+    INSERT INTO keyword(keyword, intent_id) VALUES ('job postings', 8);  -- Intent: Job Postings(8)
+    INSERT INTO keyword(keyword, intent_id) VALUES ('job posting', 8);  -- Intent: Job Postings(8)
+    INSERT INTO keyword(keyword, intent_id) VALUES ('get job postings', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('find job', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('find a job', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('find jobs', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('job search', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('looking for a job', 8);  -- Intent: Job Postings(8)
 
 
 
