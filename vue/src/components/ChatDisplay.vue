@@ -131,7 +131,7 @@ export default {
                         if (currentIndex < response.length) {
                             chatbotTextDiv.textContent += response.charAt(currentIndex);
                             currentIndex++;
-                            setTimeout(typeText, 20);
+                            setTimeout(typeText, 10);
                         } else {
                             if (links) {
                                 let updatedResponse = response;
