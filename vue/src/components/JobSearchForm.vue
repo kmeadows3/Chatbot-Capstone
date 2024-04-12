@@ -1,11 +1,9 @@
 <template>
     <H1>Job Search Form</H1>
     <form id="job_search_form">
-        <label for="city">City Name: </label>
-        <input id="city" type="text" v-model="city">
+        <input id="city" type="text" v-model="city" placeholder="City Name">
         <br/>
-        <label for="stateAbbreviation">State Abbreviation: </label>
-        <input id="stateAbbreviation" type="text" v-model="stateAbbreviation">
+        <input id="stateAbbreviation" type="text" v-model="stateAbbreviation" placeholder="State Abbreviation">
         <br/>
         <label for="includeRemote">Include Remote Positions: </label>
         <input id="includeRemote" type="checkbox" v-model="includeRemote">
