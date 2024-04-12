@@ -51,6 +51,7 @@ export default {
             userAvatar.src = "/src/assets/UserIcon.jpg";
             userAvatar.classList.add('user-avatar');
             userAvatarDiv.appendChild(userAvatar);
+            userAvatarDiv.classList.add('avatar-div');
             newResponse.classList.add('user');
             newResponse.appendChild(userAvatarDiv);
             const userTextDiv = document.createElement('div');
@@ -99,8 +100,9 @@ export default {
                 setTimeout(() => {
                     const links = response.match(/<a href="(.*?)".*?>(.*?)<\/a>/g);
                     const chatbotAvatarDiv = document.createElement('div');
+                    chatbotAvatarDiv.classList.add('avatar-div');
                     const chatbotAvatar = document.createElement('img');
-                    chatbotAvatar.src = "/src/assets/CB Icon.jpg";
+                    chatbotAvatar.src = "/src/assets/BotIcon.png";
                     chatbotAvatar.classList.add('chatbot-avatar');
                     chatbotAvatarDiv.appendChild(chatbotAvatar);
                     const chatbotTextDiv = document.createElement('div');
@@ -195,7 +197,7 @@ div#chat-display>div {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 
 }
 
@@ -210,9 +212,10 @@ img.response_img {
 
 div.chatbot {
     align-self: start;
-    background-color: #a4e7e3;
+    background-color: #f1f5ed;
     font-size: larger;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
 }
 
 div.user {
@@ -229,13 +232,35 @@ div.user {
 }
 
 .user-avatar {
-    max-width: 35px;
-    max-height: 35px;
+    max-width: 45px;
+    max-height: 45px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+    border-radius: 70%;
 }
 
 .chatbot-avatar {
-    max-width: 35px;
-    max-height: 35px;
+    max-width: 45px;
+    max-height: 45px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+    border-radius: 70%;
+
+}
+
+.avatar-div {
+    padding-bottom: 10px;
+}
+
+#chat-display::-webkit-scrollbar {
+    width: 10px;
+}
+
+#chat-display::-webkit-scrollbar-thumb {
+    background-color: #8888;
+    border-radius: 10px;
+}
+
+#chat-display::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
 }
 
 textarea {
