@@ -89,11 +89,25 @@ export default {
 
         // Returns an array of job postings with a matching location
         filterJobPostingsByLocation(jobPostings, searchLocation) {
-            const results = jobPostings.results;
-            const filteredJobPostings = results.filter((result) => {
+            let jobResults = jobPostings.results;
+
+            //filters results by company name (only if there is input)
+            if (this.companyName !== "") {
+                jobResults = jobResults.filter((job) => {
+                    const companyName = job.company.name.toLowerCase().trim();
+                    const companyNameSearch = this.companyName.toLowerCase().trim();
+                    console.log(companyName);
+                    console.log(companyNameSearch);
+                    return companyNameSearch === companyName;
+                });
+            }
+
+            // Filters Jobs By Locations
+            jobResults = jobResults.filter((job) => {
                 let hasMatchingLocation = false;
 
-                const locations = result.locations;
+                // Checks if job posting contains the search location
+                const locations = job.locations;
                 locations.forEach((currentLocation) => {
                     if(currentLocation.name === searchLocation) {
                         hasMatchingLocation = true;
@@ -103,7 +117,7 @@ export default {
                 return hasMatchingLocation;
             });
 
-            return filteredJobPostings;
+            return jobResults;
         },
 
         addJobPostingsToListInStore(jobPostings) {
