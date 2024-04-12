@@ -19,6 +19,7 @@
     
     
 <script>
+var greetUser = false;
 import QueryService from '../services/QueryService';
 import JobSearchForm from '../components/JobSearchForm.vue';
 
@@ -44,12 +45,21 @@ export default {
                 this.textBoxText = "Show me results to my job search."
             }            
 
+            if (!this.$store.state.preferredName) {
+                // Asking for and setting name if not already set
+                this.setUserName();
+            }
             const chatBox = document.getElementById('chat-display');
             const newResponse = document.createElement('div');
             const userAvatarDiv = document.createElement('div');
+            userAvatarDiv.classList.add('avatar-div')
             const userAvatar = document.createElement('img');
             userAvatar.src = "/src/assets/UserIcon.jpg";
             userAvatar.classList.add('user-avatar');
+            const userNameDiv = document.createElement('div');
+            userNameDiv.classList.add('name-divs');
+            userNameDiv.innerText = this.$store.state.preferredName + " -";
+            userAvatarDiv.appendChild(userNameDiv)
             userAvatarDiv.appendChild(userAvatar);
 
             newResponse.classList.add('user');
@@ -60,9 +70,9 @@ export default {
             newResponse.appendChild(userTextDiv);
             chatBox.appendChild(newResponse);
 
-            if (!this.$store.state.preferredName) {
-                // Asking user for name if not declared
-                this.setUserName();
+            if (greetUser) {
+                // Greet user if name was set in above 'if' statement
+                this.greetUser();
             } else {
                 if (this.$store.state.mode === 1) {
                     // Job Searching Mode -- TODO
@@ -104,7 +114,11 @@ export default {
                     const chatbotAvatar = document.createElement('img');
                     chatbotAvatar.src = "/src/assets/BotIcon.png";
                     chatbotAvatar.classList.add('chatbot-avatar');
+                    const chatwickNameDiv = document.createElement('div');
+                    chatwickNameDiv.classList.add('name-divs');
+                    chatwickNameDiv.innerText = "-  Chatwick";
                     chatbotAvatarDiv.appendChild(chatbotAvatar);
+                    chatbotAvatarDiv.appendChild(chatwickNameDiv);
                     const chatbotTextDiv = document.createElement('div');
                     newResponse.removeChild(loadingGif);
                     newResponse.appendChild(chatbotAvatarDiv);
@@ -139,7 +153,12 @@ export default {
 
         setUserName() {
             this.$store.commit('SET_PREFERREDNAME', this.textBoxText);
-            this.addRobotBox("Nice to meet you, " + this.$store.state.preferredName + ". How may I help?")
+            greetUser = true;
+        },
+
+        greetUser() {
+            this.addRobotBox("Nice to meet you, " + this.$store.state.preferredName + ". How may I help?");
+            greetUser = false;
         },
         getResponseFromServer() {
             const query = {
@@ -247,7 +266,15 @@ div.user {
 }
 
 .avatar-div {
-    padding-bottom: 10px;
+    padding-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+}
+
+.name-divs {
+    font-weight: bold;
 }
 
 #chat-display::-webkit-scrollbar {
