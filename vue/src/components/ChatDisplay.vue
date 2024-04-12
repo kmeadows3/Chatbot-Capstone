@@ -42,9 +42,10 @@ export default {
             userAvatarDiv.appendChild(userAvatar);
             newResponse.classList.add('user');
             newResponse.appendChild(userAvatarDiv);
-            const textDiv = document.createElement('div');
-            textDiv.innerText = this.textBoxText;
-            newResponse.appendChild(textDiv);
+            const userTextDiv = document.createElement('div');
+            userTextDiv.classList.add('user-text-div');
+            userTextDiv.innerText = this.textBoxText;
+            newResponse.appendChild(userTextDiv);
             chatBox.appendChild(newResponse);
             if (!this.$store.state.preferredName) {
                 this.setUserName();
@@ -164,6 +165,8 @@ div#chat-display > div {
     flex-direction: column;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
+    
+
    
 
 }
@@ -190,7 +193,13 @@ div.user {
     align-self: end;
     background-color: #e3f2fd; 
     font-size: larger;
+    align-items: flex-end;
+}
 
+.user-text-div {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: normal;
 }
 
 .user-avatar {
