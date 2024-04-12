@@ -27,8 +27,8 @@ public class QueryService {
             6, // General Interview
             2, // Chatbot
             1 }; // Default
-    public final int COMPANY_DATA_MODE = 2;
     public final int JOB_SEARCH_MODE = 1;
+    public final int COMPANY_DATA_MODE = 2;
     public final int COMPANY_INFORMATION_INTENT_ID = 7;
     public final int JOB_SEARCH_INTENT_ID = 8;
     public final int DEFAULT_INTENT_ID = 1;
