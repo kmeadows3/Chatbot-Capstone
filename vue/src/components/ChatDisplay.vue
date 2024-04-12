@@ -39,7 +39,7 @@ export default {
             userAvatar.src = "/src/assets/UserIcon.jpg";
             userAvatar.classList.add('user-avatar');
             userAvatarDiv.appendChild(userAvatar);
-            userAvatarDiv.classList.add('avatar-div');
+
             newResponse.classList.add('user');
             newResponse.appendChild(userAvatarDiv);
             const userTextDiv = document.createElement('div');
