@@ -77,7 +77,7 @@ export default {
                     newResponse.removeChild(loadingGif);
                     newResponse.appendChild(chatbotAvatarDiv);
                     newResponse.appendChild(chatbotTextDiv);
-                    
+
                     let currentIndex = 0;
                     const typeText = () => {
                         if (currentIndex < response.length) {
@@ -93,8 +93,9 @@ export default {
                                 });
                                 chatbotTextDiv.innerHTML = updatedResponse;
                             }
-                            this.scrollChatDisplayToBottom(chatBox);
+                            
                         }
+                        this.scrollChatDisplayToBottom(chatBox);
                     };
                     typeText();
                 }, 750);
