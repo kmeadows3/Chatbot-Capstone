@@ -5,7 +5,7 @@
         <br/>
         <input id="stateAbbreviation" type="text" v-model="stateAbbreviation" placeholder="State Abbreviation">
         <br/>
-        <input id="companyName" type="text" v-model="stateAbbreviation" placeholder="Company Name (Optional)">
+        <input id="companyName" type="text" v-model="companyName" placeholder="Company Name (Optional)">
         <br/>
         <label for="includeRemote">Include Remote Positions: </label>
         <input id="includeRemote" type="checkbox" v-model="includeRemote">
@@ -23,6 +23,7 @@ export default {
         return {
             city: '',
             stateAbbreviation: '',
+            companyName: '',
             includeRemote: false,
         }
     },
@@ -31,7 +32,7 @@ export default {
         searchJobs() {
             return new Promise((resolve, reject) => {
                 this.$store.commit("CLEAR_JOB_POSTINGS");
-                this.searchJobsByPage(1)
+                this.searchJobsOnMultiplePages()
                 .then(response => {
                     resolve(response); // Resolve the promise when the asynchronous operation is done
                 })
@@ -42,7 +43,21 @@ export default {
         },
 
         searchJobsOnMultiplePages() {
-            //TODO
+            return new Promise((resolve, reject) => {
+                const numberOfLoops = 10;
+                let i = 0;
+                while (i < numberOfLoops) {
+                    this.searchJobsByPage(i);
+                    i += 1;
+                }
+                this.searchJobsByPage(i)
+                .then(response => {
+                    resolve(response); // Resolve the promise when the asynchronous operation is done
+                })
+                .catch(error => {
+                    reject(error); // Reject the promise if an error occurs
+                });
+            });
         },
 
         searchJobsByPage(pageNumber) {
