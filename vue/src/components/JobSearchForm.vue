@@ -199,4 +199,32 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+h1{
+    border-bottom-color: rgb(0, 187, 236);
+}
+form {
+  
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 20%;
+}
+
+input,
+button {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+</style>
