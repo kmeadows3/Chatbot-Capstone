@@ -5,6 +5,8 @@
         <br/>
         <input id="stateAbbreviation" type="text" v-model="stateAbbreviation" placeholder="State Abbreviation">
         <br/>
+        <input id="companyName" type="text" v-model="stateAbbreviation" placeholder="Company Name (Optional)">
+        <br/>
         <label for="includeRemote">Include Remote Positions: </label>
         <input id="includeRemote" type="checkbox" v-model="includeRemote">
         <br/>
