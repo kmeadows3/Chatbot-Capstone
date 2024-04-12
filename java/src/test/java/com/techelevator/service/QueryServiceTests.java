@@ -1,5 +1,6 @@
 package com.techelevator.service;
 
+import com.techelevator.ResponseSelector;
 import com.techelevator.dao.BaseDaoTests;
 import com.techelevator.dao.JdbcQueryDao;
 import com.techelevator.model.Response;
@@ -22,7 +23,7 @@ public class QueryServiceTests extends BaseDaoTests {
     public void setup(){
         jdbcTemplate = new JdbcTemplate(dataSource);
         jdbcQueryDao = new JdbcQueryDao(jdbcTemplate);
-        queryService = new QueryService(jdbcQueryDao, new CompanyInformationService());
+        queryService = new QueryService(jdbcQueryDao, new CompanyInformationService(), new ResponseSelector());
         UserInput input = new UserInput();
         List<Integer> intentList = new ArrayList<>();
         List<Integer> entityList = new ArrayList<>();
@@ -122,10 +123,10 @@ public class QueryServiceTests extends BaseDaoTests {
         input.setIntents(intentList);
         input.setEntities(entityList);
 
-        input.setUtterance("gibberish intent7keyword");
+        input.setUtterance("gibberish intent8keyword");
         Response response = queryService.getResponseFromUserInput(input);
 
-        Assert.assertEquals("Intent 7 Catch-All", response.getResponse());
+        Assert.assertEquals("Intent 8 Catch-All", response.getResponse());
     }
 
     @Test
@@ -138,7 +139,7 @@ public class QueryServiceTests extends BaseDaoTests {
         input.setIntents(intentList);
         input.setEntities(entityList);
 
-        input.setUtterance("intent7keyword entity2keyword");
+        input.setUtterance("intent8keyword entity2keyword");
         Response response = queryService.getResponseFromUserInput(input);
         Assert.assertEquals("Test Response 2", response.getResponse());
     }
@@ -153,9 +154,9 @@ public class QueryServiceTests extends BaseDaoTests {
         input.setIntents(intentList);
         input.setEntities(entityList);
 
-        input.setUtterance("intent7keyword entity3keyword");
+        input.setUtterance("intent8keyword entity3keyword");
         Response response = queryService.getResponseFromUserInput(input);
-        Assert.assertEquals("Intent 7 Catch-All", response.getResponse());
+        Assert.assertEquals("Intent 8 Catch-All", response.getResponse());
     }
 
     @Test

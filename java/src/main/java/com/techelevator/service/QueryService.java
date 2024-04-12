@@ -1,20 +1,19 @@
 package com.techelevator.service;
 
+import com.techelevator.ResponseSelector;
 import com.techelevator.dao.QueryDao;
 import com.techelevator.exception.CompanyInformationExpection;
+import com.techelevator.exception.DaoException;
 import com.techelevator.model.Company;
 import com.techelevator.model.Response;
 import com.techelevator.model.UserInput;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 @Component
 public class QueryService {
 
-    public final int COMPANY_DATA_MODE = 2;
     // Constants
     private final int[] RANKED_ENTITY_IDS = new int[]{
             3, // Star Method
@@ -27,22 +26,23 @@ public class QueryService {
             6, // General Interview
             2, // Chatbot
             1 }; // Default
+    public final int COMPANY_DATA_MODE = 2;
     public final int COMPANY_INFORMATION_INTENT_ID = 7;
     public final int DEFAULT_INTENT_ID = 1;
     public final int DEFAULT_ENTITY_ID = 1;
-    public final int PRACTICE_INTENT_ID = 4;
-    public final int HR_INTERVIEW_ENTITY_ID = 7;
-    public final int TECHNICAL_INTERVIEW_ENTITY_ID = 8;
     public final int INTENTS_INDEX = 0;
     public final int ENTITIES_INDEX = 1;
 
     // Instance Variables
     private QueryDao queryDao;
     private CompanyInformationService companyInformationService;
+    private ResponseSelector responseSelector;
 
-    public QueryService (QueryDao queryDao, CompanyInformationService companyInformationService){
+    //Constructor
+    public QueryService (QueryDao queryDao, CompanyInformationService companyInformationService, ResponseSelector responseSelector){
         this.queryDao = queryDao;
         this.companyInformationService = companyInformationService;
+        this.responseSelector = responseSelector;
     }
 
 
@@ -52,38 +52,71 @@ public class QueryService {
      * @return the chatbot response
      */
     public Response getResponseFromUserInput(UserInput userInput){
-        Response outputResponse = new Response();
-        List<Integer> intents = new ArrayList<>();
-        List<Integer> entities = new ArrayList<>();
-        String responseString = null;
+        Response outputResponse = null;
 
         if (userInput.getMode() == COMPANY_DATA_MODE){
-            intents.add(DEFAULT_INTENT_ID);
-            entities.add(DEFAULT_ENTITY_ID);
-            try {
-                responseString = companyInformationService.getCompanyDataDemoMode(userInput.getUtterance()).toString();
-            } catch (CompanyInformationExpection e){
-                responseString = e.getMessage();
-            }
+            outputResponse = companyDataResponse(userInput.getUtterance());
         } else {
-            List<String> tokens = tokenizeUtterance(userInput);
-            List<Integer>[] intentsAndEntities = getIntentsAndEntities(tokens, userInput);
-            intents = intentsAndEntities[INTENTS_INDEX];
-            entities = intentsAndEntities[ENTITIES_INDEX];
+            outputResponse = generalChatbotResponse(userInput);
+        }
 
-            if (intents.contains(COMPANY_INFORMATION_INTENT_ID)){
-                responseString = "Please enter the domain name of the company you're interested in learning more about.";
-                outputResponse.setMode(COMPANY_DATA_MODE);
-            } else {
-                List<Response> potentialResponses = getPotentialResponseList(intents,
-                        entities);
-                responseString = selectResponse(potentialResponses,intents, entities);
-            }
+        return outputResponse;
+    }
+
+
+    /**
+     * This method creates a response when the chatbot is in the default chatbot mode
+     * @param userInput -- the user input provided by the client
+     * @return the chatbot response
+     */
+    private Response generalChatbotResponse(UserInput userInput){
+
+        List<String> tokens = tokenizeUtterance(userInput);
+        List<Integer>[] intentsAndEntities = getIntentsAndEntities(tokens, userInput);
+        List<Integer> intents = intentsAndEntities[INTENTS_INDEX];
+        List<Integer> entities = intentsAndEntities[ENTITIES_INDEX];
+
+        String responseString = null;
+        Response outputResponse = new Response();
+        if (intents.contains(COMPANY_INFORMATION_INTENT_ID)){
+            responseString = "Please enter the domain name of the company you're interested in learning more about.";
+            outputResponse.setMode(COMPANY_DATA_MODE);
+        } else {
+            List<Response> potentialResponses = getPotentialResponseList(intents, entities);
+            responseString = responseSelector.selectResponse(potentialResponses,intents, entities);
         }
 
         outputResponse.setUserIntents(intents);
         outputResponse.setUserEntities(entities);
         outputResponse.setResponse(responseString);
+
+        return outputResponse;
+    }
+
+    /**
+     * This method creates a response when the chatbot is in company information mode
+     * @param utterance the user's utterance
+     * @return the response string that will be returned in the response
+     */
+    private Response companyDataResponse(String utterance) {
+        String responseString;
+        List<Integer> intents = new ArrayList<>();
+        List<Integer> entities = new ArrayList<>();
+        intents.add(DEFAULT_INTENT_ID);
+        entities.add(DEFAULT_ENTITY_ID);
+        Response outputResponse = new Response();
+
+        try {
+            Company company = companyInformationService.getCompanyDataDemoMode(utterance);
+            responseString = company.toString();
+        } catch (CompanyInformationExpection e){
+            responseString = e.getMessage();
+        }
+
+        outputResponse.setUserIntents(intents);
+        outputResponse.setUserEntities(entities);
+        outputResponse.setResponse(responseString);
+
         return outputResponse;
     }
 
@@ -176,6 +209,22 @@ public class QueryService {
     }
 
     /**
+     * @param entityIds -- The list of unranked entity ids
+     * @return the list of entity ids ranked by priority
+     */
+    private List<Integer> sortEntitiesByPriority(List<Integer> entityIds) {
+        List<Integer> rankedList = new ArrayList<>();
+        for (int currentRankId : RANKED_ENTITY_IDS) {
+            for (int currentEntityId : entityIds) {
+                if (currentRankId == currentEntityId) {
+                    rankedList.add(0, currentEntityId);
+                }
+            }
+        }
+        return rankedList;
+    }
+
+    /**
      * This method finds the appropriate catch-all response if the search for a specific response that matched the intents
      * and entities from the utterance has failed to return any responses.
      *
@@ -207,146 +256,5 @@ public class QueryService {
         return responses;
     }
 
-    /**
-     *This method selects the appropriate response from a list of potential responses
-     *
-     * @param responses -- all responses that match the intents and entities in the utterance
-     * @return the single response that best fits the utterance
-     */
-    private String selectResponse(List<Response> responses, List<Integer> intents, List<Integer> entities){
-
-        //get list with one random response if the user wants a practice interview
-        if (intents.contains(PRACTICE_INTENT_ID) &&
-                (entities.contains(HR_INTERVIEW_ENTITY_ID) || entities.contains(TECHNICAL_INTERVIEW_ENTITY_ID))) {
-            responses = handlePracticeInterviews(responses);
-        }
-
-        //if there are multiple responses, filter out everything but the responses with the most keyword matches on the list
-        if (responses.size() > 1) {
-            responses = filterForResponsesWithMostKeywordMatches(responses);
-            //if there are still multiple responses, filter out the responses with the most entities that don't match the utterance
-            if (responses.size() > 1){
-                filterForResponsesWithMostExactMatch(responses, entities);
-            }
-            //TODO select the best fitting of the remaining responses
-
-
-        }
-
-
-        return responses.get(0).getResponse();
-    }
-
-    /**
-     *This method takes a list of responses and filters to find the one whose keywords that most exactly matches the utterance
-     *
-     * @param responses -- list of responses to filter
-     * @para entities -- list of entities derived from the user's utterance
-     * @return list of responses that match the utterance entities the best
-     */
-    private List<Response> filterForResponsesWithMostExactMatch(List<Response> responses, List<Integer> entities) {
-        Map<Response, Integer> responseRanks = new LinkedHashMap<>();
-        for (Response response : responses){
-            int rank = 0;
-            for(int entity : response.getResponseEntities()){
-                if(entities.contains(entity)){
-                    rank--;
-                } else {
-                    rank++;
-                }
-            }
-            responseRanks.put(response, rank);
-        }
-
-        List<Entry<Response, Integer>> rankList = new ArrayList<>(responseRanks.entrySet());
-        rankList.sort(Entry.comparingByValue());
-        List<Response> bestResponses = removeAllButBestRankedMatchesFromEntryList(rankList);
-
-        return bestResponses;
-    }
-
-    /**
-     * This method takes a list of map entries and returns a list of the keys with the same value as the top ranked key
-     * @param rankedResponseList A list of Map<Response,Integer> entries, sorted by integer so that the index 0 on the list
-     *                           is the top ranked entry
-     * @return a list of the responses whose values matched the top ranked value
-     */
-    private List<Response> removeAllButBestRankedMatchesFromEntryList(List<Entry<Response, Integer>> rankedResponseList) {
-        int bestRank = rankedResponseList.get(0).getValue();
-        List<Response> bestResponses = rankedResponseList.stream()
-                .filter(response -> response.getValue() == bestRank)
-                .map(Entry::getKey)
-                .collect(Collectors.toList());
-        return bestResponses;
-    }
-
-    /**
-     *This method selects a random response from the responses that are practice interview questions
-     *
-     * @param responses -- all responses that match the intents and entities in the utterance
-     * @return a random practice interview response
-     */
-    private List<Response> handlePracticeInterviews(List<Response> responses) {
-
-        responses = responses.stream()
-                .filter(response -> response.getResponseIntents().contains(PRACTICE_INTENT_ID))
-                .collect(Collectors.toList());
-        responses = getResponseListWithOnlyOneRandomResponse(responses);
-
-        return responses;
-    }
-
-    /**
-     *This method selects a random response from a list of responses
-     *
-     * @param responses -- all responses that match the intents and entities in the utterance
-     * @return a list of responses that contains only the random response
-     */
-    private static List<Response> getResponseListWithOnlyOneRandomResponse(List<Response> responses) {
-        Random rand = new Random();
-        List<Response> randomResponseList = new ArrayList<>();
-        Response randomResponse = responses.get(rand.nextInt(responses.size()));
-        randomResponseList.add(randomResponse);
-        return randomResponseList;
-    }
-
-    /**
-     * @param responses -- all responses that match the intents and entities in the utterance
-     * @return a list of responses that have the highest number of keyword matches
-     */
-    private List<Response> filterForResponsesWithMostKeywordMatches(List<Response> responses) {
-        Map<Response, Integer> responseCounts = new LinkedHashMap<>();
-
-        responses.stream().forEach(response -> {
-            if (!responseCounts.containsKey(response)){
-                int count = Collections.frequency(responses, response);
-                responseCounts.put(response, count);
-            }
-        });
-
-        List<Entry<Response, Integer>> countList = new ArrayList<>(responseCounts.entrySet());
-
-        countList.sort(Entry.comparingByValue());
-        Collections.reverse(countList);
-        List<Response> topResults = removeAllButBestRankedMatchesFromEntryList(countList);
-
-        return topResults;
-    }
-
-    /**
-     * @param entityIds -- The list of unranked entity ids
-     * @return the list of entity ids ranked by priority
-     */
-    private List<Integer> sortEntitiesByPriority(List<Integer> entityIds) {
-        List<Integer> rankedList = new ArrayList<>();
-        for (int currentRankId : RANKED_ENTITY_IDS) {
-            for (int currentEntityId : entityIds) {
-                if (currentRankId == currentEntityId) {
-                    rankedList.add(0, currentEntityId);
-                }
-            }
-        }
-        return rankedList;
-    }
 
 }

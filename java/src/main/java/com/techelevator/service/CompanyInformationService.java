@@ -60,4 +60,5 @@ public class CompanyInformationService {
 
         return company;
     }
+
 }
