@@ -19,22 +19,25 @@ public class ResponseSelector {
      *This method selects the appropriate response from a list of potential responses
      *
      * @param responses -- all responses that match the intents and entities in the utterance
+     * @param inputIntents -- intents derived from the utterance
+     * @param inputEntities -- entities derived from the utterance
      * @return the single response that best fits the utterance
      */
-    public String selectResponse(List<Response> responses, List<Integer> intents, List<Integer> entities){
+    public String selectResponse(List<Response> responses, List<Integer> inputIntents, List<Integer> inputEntities){
 
         //get list with one random response if the user wants a practice interview
-        if (intents.contains(PRACTICE_INTENT_ID) &&
-                (entities.contains(HR_INTERVIEW_ENTITY_ID) || entities.contains(TECHNICAL_INTERVIEW_ENTITY_ID))) {
+        if (inputIntents.contains(PRACTICE_INTENT_ID) &&
+                (inputEntities.contains(HR_INTERVIEW_ENTITY_ID) || inputEntities.contains(TECHNICAL_INTERVIEW_ENTITY_ID))) {
             responses = handlePracticeInterviews(responses);
         }
 
-        //if there are multiple responses, filter out everything but the responses with the most keyword matches on the list
+
         if (responses.size() > 1) {
+            //filter out everything but the responses that appear on the list the most
             responses = filterForResponsesWithMostKeywordMatches(responses);
-            //if there are still multiple responses, filter out the responses with the most entities that don't match the utterance
             if (responses.size() > 1){
-                responses = filterForResponsesWithMostExactMatch(responses, entities);
+                //filter out the responses with the most entities that don't match the utterance
+                responses = filterForResponsesWithMostExactMatch(responses, inputEntities);
             }
             //TODO select the best fitting of the remaining responses
 

@@ -1,6 +1,6 @@
 <template>
     <div class ="job_details">
-        <h1>Recent Job Posting{{ $store.state.jobPostings.length > 1 ? 's': '' }}</h1>
+        <h1>Recent Job Posting{{ $store.state.jobPostings.length > 1 ? 's': '' }}:</h1>
         <div v-for="jobPosting in $store.state.jobPostings">
             <br/>
             <p>Position Title: {{ jobPosting.positionTitle }}</p>

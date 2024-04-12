@@ -11,7 +11,7 @@ INSERT INTO intent(name) VALUES ('DEFAULT INTENT');  -- ID 1
 INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('intent1keyword', 1, NULL);
 INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('intent1keyword2', 1, NULL);
 
-INSERT INTO intent(name) VALUES ('Intent2');  -- ID 2
+INSERT INTO intent(name) VALUES ('Intent2');  -- ID 2 (only links to default entity)
 INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('intent2keyword', 2, NULL);
 
 INSERT INTO intent(name) VALUES ('Intent3');  -- ID 3, DO NOT MAKE CATCH ALL
@@ -29,8 +29,11 @@ INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('intent6keyword', 6, 
 INSERT INTO intent(name) VALUES ('Intent7'); -- ID 7 (THE COMPANY INFORMATION INTENT)
 INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('intent7keyword', 7, NULL);
 
-INSERT INTO intent(name) VALUES ('Intent8'); -- ID 8 (only links to default entity)
+INSERT INTO intent(name) VALUES ('Intent8'); -- ID 8 (JOB SEARCH INTENT)
 INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('intent8keyword', 8, NULL);
+
+INSERT INTO intent(name) VALUES ('Intent8'); -- ID 9 (only links to default entity)
+INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('intent9keyword', 9, NULL);
 
 
 --Entities and associated keywords
@@ -72,29 +75,30 @@ INSERT INTO response(response, name) VALUES ('Test Response 2', 'Name 2'); -- ID
 INSERT INTO response_intent(response_id, intent_id) VALUES (2, 1);  -- Entity 2 catch all
 INSERT INTO response_entity(response_id, entity_id) VALUES (2, 2);
 
-INSERT INTO response(response, name) VALUES ('Test Response 3', 'Name 3'); -- ID 3, joined to intent 2 and entity 4
-INSERT INTO response_intent(response_id, intent_id) VALUES (3, 2);
+INSERT INTO response(response, name) VALUES ('Test Response 3', 'Name 3'); -- ID 3, joined to intent 5 and entity 4
+INSERT INTO response_intent(response_id, intent_id) VALUES (3, 5);
 INSERT INTO response_entity(response_id, entity_id) VALUES (3, 4);
 
-INSERT INTO response(response, name) VALUES ('Test Response 4', 'Name 4'); -- ID 4, joined to intent 2 and entities 2 and 3
-INSERT INTO response_intent(response_id, intent_id) VALUES (4, 2); -- TEST RELIES ON NO OTHER RESPONSES IN intent 2 / entity 3
-INSERT INTO response_entity(response_id, entity_id) VALUES (4, 2); -- having 3 matches
+INSERT INTO response(response, name) VALUES ('Test Response 4', 'Name 4'); -- ID 4, joined to intent 5 and entities 2 and 3
+INSERT INTO response_intent(response_id, intent_id) VALUES (4, 5); -- TEST RELIES ON NO OTHER RESPONSES IN intent 5 / entity 3
+INSERT INTO response_entity(response_id, entity_id) VALUES (4, 2); -- having 4 matches
 INSERT INTO response_entity(response_id, entity_id) VALUES (4, 3);
+INSERT INTO response_entity(response_id, entity_id) VALUES (4, 4);
 
 INSERT INTO response(response, name) VALUES ('Test Response 5', 'Name 5'); -- ID 5, joined to intent 3 and entity 2
 INSERT INTO response_intent(response_id, intent_id) VALUES (5, 3);  -- TEST RELIES ON NO OTHER RESPONSES HAVING THIS
 INSERT INTO response_entity(response_id, entity_id) VALUES (5, 2);  --     intent/entity pairing
 
-INSERT INTO response(response, name) VALUES ('Test Response 6', 'Name 6'); -- ID 6, joined to intent 2 and entity 3
-INSERT INTO response_intent(response_id, intent_id) VALUES (6, 2);
+INSERT INTO response(response, name) VALUES ('Test Response 6', 'Name 6'); -- ID 6, joined to intent 3 and entity 3
+INSERT INTO response_intent(response_id, intent_id) VALUES (6, 3);
 INSERT INTO response_entity(response_id, entity_id) VALUES (6, 3);
 
-INSERT INTO response(response, name) VALUES ('Intent 8 Catch-All', 'Name 7'); -- ID 7, joined to intent 8 and default entity
-INSERT INTO response_intent(response_id, intent_id) VALUES (7, 8);  -- DO NOT ATTACH ANYTHING TO INTENT 8
+INSERT INTO response(response, name) VALUES ('Intent 2 Catch-All', 'Name 7'); -- ID 7, joined to intent 2 and default entity
+INSERT INTO response_intent(response_id, intent_id) VALUES (7, 2);  -- DO NOT ATTACH ANYTHING TO INTENT 2
 INSERT INTO response_entity(response_id, entity_id) VALUES (7, 1);
 
-INSERT INTO response(response, name) VALUES ('Test Response 8', 'Name 8'); -- ID 8 join to intent 5 and entity 2 and 3
-INSERT INTO response_intent(response_id, intent_id) VALUES (8, 5);
+INSERT INTO response(response, name) VALUES ('Test Response 8', 'Name 8'); -- ID 8 join to intent 3 and entity 2 and 3
+INSERT INTO response_intent(response_id, intent_id) VALUES (8, 3);
 INSERT INTO response_entity(response_id, entity_id) VALUES (8, 2);
 INSERT INTO response_entity(response_id, entity_id) VALUES (8, 3);
 

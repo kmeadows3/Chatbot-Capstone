@@ -71,6 +71,8 @@ export default {
                         let confirmMessage = "I found some results to your search: ";
                         this.addRobotBox(confirmMessage);
                         this.$store.commit('SET_MODE', 0); // Resets chatbot from job posting mode to normal mode
+                        this.$store.commit('SET_INTENTS', [1]); // Resets intents
+                        this.$store.commit('SET_ENTITIES', [1]); // Resets entities
                     })
                     .catch(error => {
                         console.error(error);
