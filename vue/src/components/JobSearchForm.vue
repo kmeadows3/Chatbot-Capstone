@@ -33,7 +33,9 @@ export default {
             this.searchJobsByPage(1);
             console.log("HIT");
             console.log(this.$store.state.jobPostings);
-            
+
+            // Mode to Post Job listings in chat
+            //this.$store.commit("SET_MODE", 3); 
         },
 
         searchJobsByPage(pageNumber) {

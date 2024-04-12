@@ -11,7 +11,7 @@ export function createStore(currentToken, currentUser) {
       selectedJobPosting: {},
       intents: [1], // starts at 1 - Default intent
       entities: [1], // starts at 1 - Default entity
-      mode: 0,
+      mode: 1,
     },
 
     mutations: {
