@@ -41,6 +41,10 @@ export default {
             });
         },
 
+        searchJobsOnMultiplePages() {
+            //TODO
+        },
+
         searchJobsByPage(pageNumber) {
             return new Promise((resolve, reject) => {
                 JobSearchService.get(this.urlFormattedCityName, this.formattedStateAbbreviation, pageNumber)
