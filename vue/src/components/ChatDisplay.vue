@@ -6,7 +6,7 @@
             <div v-show="this.$store.state.mode === 1">
                 <JobSearchForm ref="jobSearchForm" />
             </div>
-            <form v-show="true">
+            <form v-show="this.$store.state.mode !== 1">
                 <textarea name="userInput" id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox"
                     placeholder="Type Here"></textarea>
             </form>
@@ -81,6 +81,8 @@ export default {
                         let confirmMessage = "I found some results to your search: ";
                         this.addRobotBox(confirmMessage);
                         this.$store.commit('SET_MODE', 0); // Resets chatbot from job posting mode to normal mode
+                        this.$store.commit('SET_INTENTS', [1]); // Resets intents
+                        this.$store.commit('SET_ENTITIES', [1]); // Resets entities
                     })
                     .catch(error => {
                         console.error(error);

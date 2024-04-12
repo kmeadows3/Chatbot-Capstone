@@ -49,9 +49,20 @@ INSERT INTO intent(name) VALUES ('Example');
 
 -- ID 7
 INSERT INTO intent(name) VALUES ('Company Information');
-    INSERT INTO keyword(keyword, intent_id) VALUES ('company information', 7);  -- Intent: Example(7)
-    INSERT INTO keyword(keyword, intent_id) VALUES ('company data', 7);  -- Intent: Example(7)
-    INSERT INTO keyword(keyword, intent_id) VALUES ('information about companies', 7);  -- Intent: Example(7)
+    INSERT INTO keyword(keyword, intent_id) VALUES ('company information', 7);  -- Intent: Company Information(7)
+    INSERT INTO keyword(keyword, intent_id) VALUES ('company data', 7);  -- Intent: Company Information(7)
+    INSERT INTO keyword(keyword, intent_id) VALUES ('information about companies', 7);  -- Intent: Company Information(7)
+
+-- ID 8
+INSERT INTO intent(name) VALUES ('Job Postings');
+    INSERT INTO keyword(keyword, intent_id) VALUES ('job postings', 8);  -- Intent: Job Postings(8)
+    INSERT INTO keyword(keyword, intent_id) VALUES ('job posting', 8);  -- Intent: Job Postings(8)
+    INSERT INTO keyword(keyword, intent_id) VALUES ('get job postings', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('find job', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('find a job', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('find jobs', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('job search', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('looking for a job', 8);  -- Intent: Job Postings(8)
 
 
 
@@ -230,7 +241,7 @@ INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter,
 response_id_counter := response_id_counter + 1;
 
 -- Chatbot default bad
-INSERT INTO response(response, name) VALUES ('It’s okay, I often struggle to understand the so-call "logic" of humans. If you are not sure how to properly access my services, type "Chatbot Help", and I would be happy to educate you.', 'Chatbot Information');
+INSERT INTO response(response, name) VALUES ('It’s okay, I often struggle to understand the so-called "logic" of humans. If you are not sure how to properly access my services, type "Chatbot Help", and I would be happy to educate you.', 'Chatbot Information');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 3); -- Intent 3: Information
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 2); -- Entity 2: Chatbot 

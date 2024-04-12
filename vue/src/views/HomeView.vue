@@ -1,9 +1,10 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
     <ChatDisplay />
     <InspirationalQuotes />
-    <JobDetails />
+    <div v-show="$store.state.jobPostings.length > 0">
+      <JobDetails />
+    </div>
   </div>
 </template>
 

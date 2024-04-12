@@ -41,6 +41,10 @@ export default {
             });
         },
 
+        searchJobsOnMultiplePages() {
+            //TODO
+        },
+
         searchJobsByPage(pageNumber) {
             return new Promise((resolve, reject) => {
                 JobSearchService.get(this.urlFormattedCityName, this.formattedStateAbbreviation, pageNumber)
@@ -98,7 +102,7 @@ export default {
                     locations: currentJobPosting.locations,
                     datePosted: date,
                     description: currentJobPosting.contents,
-                    levels: currentJobPosting.levels,
+                    levels: currentJobPosting.levels[0].name,
                     landingPage: currentJobPosting.refs.landing_page,
                 }
 

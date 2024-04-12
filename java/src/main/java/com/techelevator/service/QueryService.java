@@ -28,7 +28,9 @@ public class QueryService {
             2, // Chatbot
             1 }; // Default
     public final int COMPANY_DATA_MODE = 2;
+    public final int JOB_SEARCH_MODE = 1;
     public final int COMPANY_INFORMATION_INTENT_ID = 7;
+    public final int JOB_SEARCH_INTENT_ID = 8;
     public final int DEFAULT_INTENT_ID = 1;
     public final int DEFAULT_ENTITY_ID = 1;
     public final int INTENTS_INDEX = 0;
@@ -70,7 +72,7 @@ public class QueryService {
      * @param userInput -- the user input provided by the client
      * @return the chatbot response
      */
-    private Response generalChatbotResponse(UserInput userInput){
+    private Response generalChatbotResponse(UserInput userInput) {
 
         List<String> tokens = tokenizeUtterance(userInput);
         List<Integer>[] intentsAndEntities = getIntentsAndEntities(tokens, userInput);
@@ -79,10 +81,13 @@ public class QueryService {
 
         String responseString = null;
         Response outputResponse = new Response();
-        if (intents.contains(COMPANY_INFORMATION_INTENT_ID)){
+        if (intents.contains(COMPANY_INFORMATION_INTENT_ID)) {
             responseString = "Please enter the domain name of the company you're interested in learning more about.";
             outputResponse.setMode(COMPANY_DATA_MODE);
-        } else {
+        } else if (intents.contains(JOB_SEARCH_INTENT_ID)){
+            responseString = "I'd be happy to help you find a job. First I'll needs some information about what you're looking for.";
+            outputResponse.setMode(JOB_SEARCH_MODE);
+        }else {
             List<Response> potentialResponses = getPotentialResponseList(intents, entities);
             responseString = responseSelector.selectResponse(potentialResponses,intents, entities);
         }

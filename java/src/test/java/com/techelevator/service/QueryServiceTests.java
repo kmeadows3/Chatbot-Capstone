@@ -43,8 +43,6 @@ public class QueryServiceTests extends BaseDaoTests {
         input.setIntents(intentList);
         input.setEntities(entityList);
 
-
-
         input.setUtterance("intent3keyword entity2keyword");
         Response response = queryService.getResponseFromUserInput(input);
         Assert.assertEquals("Test Response 5", response.getResponse());
@@ -60,7 +58,7 @@ public class QueryServiceTests extends BaseDaoTests {
         input.setIntents(intentList);
         input.setEntities(entityList);
 
-        input.setUtterance("intent2keyword entity2keyword entity3keyword");
+        input.setUtterance("intent5keyword entity2keyword entity3keyword entity4keyword");
         Response response = queryService.getResponseFromUserInput(input);
 
         Assert.assertEquals("Test Response 4", response.getResponse());
@@ -123,10 +121,10 @@ public class QueryServiceTests extends BaseDaoTests {
         input.setIntents(intentList);
         input.setEntities(entityList);
 
-        input.setUtterance("gibberish intent8keyword");
+        input.setUtterance("gibberish intent2keyword");
         Response response = queryService.getResponseFromUserInput(input);
 
-        Assert.assertEquals("Intent 8 Catch-All", response.getResponse());
+        Assert.assertEquals("Intent 2 Catch-All", response.getResponse());
     }
 
     @Test
@@ -154,9 +152,9 @@ public class QueryServiceTests extends BaseDaoTests {
         input.setIntents(intentList);
         input.setEntities(entityList);
 
-        input.setUtterance("intent8keyword entity3keyword");
+        input.setUtterance("intent2keyword entity3keyword");
         Response response = queryService.getResponseFromUserInput(input);
-        Assert.assertEquals("Intent 8 Catch-All", response.getResponse());
+        Assert.assertEquals("Intent 2 Catch-All", response.getResponse());
     }
 
     @Test
@@ -216,7 +214,7 @@ public class QueryServiceTests extends BaseDaoTests {
         input.setIntents(intentList);
         input.setEntities(entityList);
 
-        input.setUtterance("intent2keyword entity3keyword entity4keyword");
+        input.setUtterance("intent3keyword entity3keyword entity4keyword");
         Response response = queryService.getResponseFromUserInput(input);
         Assert.assertEquals("Test Response 6", response.getResponse());
     }
@@ -231,7 +229,7 @@ public class QueryServiceTests extends BaseDaoTests {
         input.setIntents(intentList);
         input.setEntities(entityList);
 
-        input.setUtterance("intent5keyword intent6keyword entity2keyword entity3keyword");
+        input.setUtterance("intent3keyword intent6keyword entity2keyword entity3keyword");
         Response response = queryService.getResponseFromUserInput(input);
 
         //TODO method to make this happen, the default response is 9
@@ -248,7 +246,7 @@ public class QueryServiceTests extends BaseDaoTests {
         input.setIntents(intentList);
         input.setEntities(entityList);
 
-        input.setUtterance("intent2keyword entity3keyword");
+        input.setUtterance("intent3keyword entity3keyword");
         Response response = queryService.getResponseFromUserInput(input);
 
         Assert.assertEquals("Test Response 6", response.getResponse());
