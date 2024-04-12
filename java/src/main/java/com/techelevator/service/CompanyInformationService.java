@@ -1,7 +1,6 @@
 package com.techelevator.service;
 
 import com.techelevator.exception.CompanyInformationExpection;
-import com.techelevator.exception.DaoException;
 import com.techelevator.model.Company;
 import com.techelevator.model.CompanyHeadquarters;
 import com.techelevator.model.CompanyRequestDTO;
@@ -15,9 +14,10 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class CompanyInformationService {
     private RestTemplate restTemplate = new RestTemplate();
-    private String apiKey = "c01969675dmsh90c9cf1d5b0c87fp1a4bd0jsn60b0494c5f2c";
-    private String apiHost = "linkedin-data-scraper.p.rapidapi.com";
-    private String url = "https://linkedin-data-scraper.p.rapidapi.com/web-domain";
+    private final String API_KEY = "c01969675dmsh90c9cf1d5b0c87fp1a4bd0jsn60b0494c5f2c";
+    private final String API_HOST = "linkedin-data-scraper.p.rapidapi.com";
+    private final String URL = "https://linkedin-data-scraper.p.rapidapi.com/web-domain";
+    private final String BROKEN_URL = "https://linkedin-data-scraper.p.rapidapi.com/adfasdfasdfas";
 
     public Company getCompanyData(String webDomain){
         CompanyRequestDTO companyRequestDTO = new CompanyRequestDTO();
@@ -25,12 +25,13 @@ public class CompanyInformationService {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("X-RapidAPI-Key", apiKey);
-        headers.set("X-RapidAPI-Host", apiHost);
+        headers.set("X-RapidAPI-Key", API_KEY);
+        headers.set("X-RapidAPI-Host", API_HOST);
         HttpEntity<CompanyRequestDTO> entity = new HttpEntity<>(companyRequestDTO, headers);
         Company company = new Company();
         try {
-            ResponseEntity<CompanyResponseDTO> response = restTemplate.exchange(url, HttpMethod.POST, entity, CompanyResponseDTO.class);
+            ResponseEntity<CompanyResponseDTO> response = restTemplate.exchange(BROKEN_URL, HttpMethod.POST, entity,
+                    CompanyResponseDTO.class);
             CompanyResponseDTO companyResponseDTO = response.getBody();
             company = companyResponseDTO.getData();
         } catch (RestClientResponseException | ResourceAccessException e){

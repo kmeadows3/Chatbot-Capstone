@@ -2,13 +2,15 @@
     <div id="outer-box">
         <div id="chat-display"></div>
 
-
         <div id="user-input">
-            <form>
+            <div v-show="this.$store.state.mode === 1">
+                <JobSearchForm ref="jobSearchForm" />
+            </div>
+            <form v-show="true">
                 <textarea name="userInput" id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox"
                     placeholder="Type Here"></textarea>
             </form>
-            <button @click.prevent="addUserBox()" :disabled="textBoxText.trim() === ''">
+            <button @click.prevent="addUserBox()">
                 Send Response
             </button>
         </div>
@@ -18,19 +20,29 @@
     
 <script>
 import QueryService from '../services/QueryService';
+import JobSearchForm from '../components/JobSearchForm.vue';
 
 export default {
     data() {
-
         return {
             textBoxText: "",
         }
     },
+
+    components: {
+        JobSearchForm,
+    },
+    
     methods: {
         addUserBox() {
-            if (this.textBoxText.trim() === '') {
+            if (this.textBoxText.trim() === '' && this.$store.state.mode !== 1) {
                 return;
             }
+
+            if (this.$store.state.mode === 1 && this.$store.state.preferredName) {
+                // Job Searching Mode
+                this.textBoxText = "Show me results to my job search."
+            }            
 
             const chatBox = document.getElementById('chat-display');
             const newResponse = document.createElement('div');
@@ -47,14 +59,33 @@ export default {
             userTextDiv.innerText = this.textBoxText;
             newResponse.appendChild(userTextDiv);
             chatBox.appendChild(newResponse);
+
             if (!this.$store.state.preferredName) {
+                // Asking user for name if not declared
                 this.setUserName();
             } else {
-                this.getResponseFromServer();
+                if (this.$store.state.mode === 1) {
+                    // Job Searching Mode -- TODO
+                    this.$refs.jobSearchForm.searchJobs()
+                    .then(response => {
+                        let confirmMessage = "I found some results to your search: ";
+                        this.addRobotBox(confirmMessage);
+                        this.$store.commit('SET_MODE', 0); // Resets chatbot from job posting mode to normal mode
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+
+                    
+                } else {
+                    this.getResponseFromServer();
+                }
             }
+            
             this.textBoxText = "";
             this.scrollChatDisplayToBottom(chatBox);
         },
+
         addRobotBox(response) {
             setTimeout(() => {
                 const chatBox = document.getElementById('chat-display');
@@ -105,6 +136,7 @@ export default {
                 }, 750);
             }, 250);
         },
+
         setUserName() {
             this.$store.commit('SET_PREFERREDNAME', this.textBoxText);
             this.addRobotBox("Nice to meet you, " + this.$store.state.preferredName + ". How may I help?")

@@ -34,7 +34,7 @@ public class ResponseSelector {
             responses = filterForResponsesWithMostKeywordMatches(responses);
             //if there are still multiple responses, filter out the responses with the most entities that don't match the utterance
             if (responses.size() > 1){
-                filterForResponsesWithMostExactMatch(responses, entities);
+                responses = filterForResponsesWithMostExactMatch(responses, entities);
             }
             //TODO select the best fitting of the remaining responses
 

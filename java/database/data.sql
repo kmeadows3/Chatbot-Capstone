@@ -146,6 +146,17 @@ INSERT INTO entity(name) VALUES ('Follow Up');
 	INSERT INTO keyword(keyword, entity_id) VALUES ('thankyou note', 10);  -- Follow up(10)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('thankyou notes', 10);  -- Follow up(10)
 
+-- ID 11
+INSERT INTO entity(name) VALUES ('Negative');  
+	INSERT INTO keyword(keyword, entity_id) VALUES ('not', 11);  -- negative(11)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('shouldnt', 11);  -- negative(11)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('dont', 11);  -- negative(11)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('avoid', 11);  -- negative(11)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('bad', 11);  -- negative(11)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('suck', 11);  -- negative(11)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('sucks', 11);  -- negative(11)
+
+
 	
 
 -- Starts a block with an integer
@@ -212,10 +223,19 @@ INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter,
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 2); -- Entity 2: Chatbot 
 response_id_counter := response_id_counter + 1;
 
--- Chatbot information / chatbot default
+-- Chatbot External
 INSERT INTO response(response, name) VALUES ('As I am a new chatbot, there is no where you can go to learn more about me. However, if you want me to talk about myself, feel free to ask me to tell you about myself', 'Chatbot Information');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 5); -- Intent 5: External
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 2); -- Entity 2: Chatbot 
+response_id_counter := response_id_counter + 1;
+
+-- Chatbot default bad
+INSERT INTO response(response, name) VALUES ('It’s okay, I often struggle to understand the so-call "logic" of humans. If you are not sure how to properly access my services, type "Chatbot Help", and I would be happy to educate you.', 'Chatbot Information');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 3); -- Intent 3: Information
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 2); -- Entity 2: Chatbot 
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 11); -- Entity 11: Negative 
+
 response_id_counter := response_id_counter + 1;
 
 
@@ -264,8 +284,8 @@ response_id_counter := response_id_counter + 1;
 
 -- Star Method Example 
 INSERT INTO response(response, name) VALUES ('<p>Here is an example question along with a response using the STAR method:</p>
-<p><b> Question -</b> Tell me about a time you resolved a conflict on a team.</p>
-<p></b>Response:</b></p>
+<p><b> Question -</b> "Tell me about a time you resolved a conflict on a team."</p>
+<p><b>Response:</b></p>
 <p><b>Situation -</b> In my previous role as a Project Manager at XYZ Company, I was leading a cross-functional team on a critical project. </p>
 <p><b>Task -</b> During the project, tensions arose between the design and engineering teams due to differing opinions on the project’s direction and priorities. The conflict was affecting team collaboration and slowing down progress.</p>
 <p><b>Action -</b> To address the conflict, I scheduled a team meeting to openly discuss and understand each team’s perspectives and concerns. I facilitated a constructive dialogue where team members could express their viewpoints and listen to each other’s ideas.</p>
@@ -274,6 +294,14 @@ INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter,
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 3); -- Entity 3: Star Method
 response_id_counter := response_id_counter + 1;
 
+-- Star Method bad Example 
+INSERT INTO response(response, name) VALUES ('<p>Here is how NOT to answer a question with the STAR method.</p>
+<p><b> Question -</b> "Tell me your greatest weakness."</p>
+<p><b>Response:</b> "I am bad at communication." </p>', 'Example Star method');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 6); -- Intent 6: Example
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 3); -- Entity 3: Star Method
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 11); -- Entity 11: Negative
+response_id_counter := response_id_counter + 1;
 
 -------------------- COVER LETTER ENTITY RESPONSES --------------------
 -- Cover Letter Support / Default
