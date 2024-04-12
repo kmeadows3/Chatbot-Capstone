@@ -26,8 +26,11 @@ INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('intent5keyword', 5, 
 INSERT INTO intent(name) VALUES ('Intent6');  -- ID 6
 INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('intent6keyword', 6, NULL);
 
-INSERT INTO intent(name) VALUES ('Intent7'); -- ID 7 (only links to default entity)
+INSERT INTO intent(name) VALUES ('Intent7'); -- ID 7 (THE COMPANY INFORMATION INTENT)
 INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('intent7keyword', 7, NULL);
+
+INSERT INTO intent(name) VALUES ('Intent8'); -- ID 8 (only links to default entity)
+INSERT INTO keyword(keyword, intent_id, entity_id) VALUES ('intent8keyword', 8, NULL);
 
 
 --Entities and associated keywords
@@ -86,8 +89,8 @@ INSERT INTO response(response, name) VALUES ('Test Response 6', 'Name 6'); -- ID
 INSERT INTO response_intent(response_id, intent_id) VALUES (6, 2);
 INSERT INTO response_entity(response_id, entity_id) VALUES (6, 3);
 
-INSERT INTO response(response, name) VALUES ('Intent 7 Catch-All', 'Name 7'); -- ID 7, joined to intent 7 and default entity
-INSERT INTO response_intent(response_id, intent_id) VALUES (7, 7);  -- DO NOT ATTACH ANYTHING TO INTENT 7
+INSERT INTO response(response, name) VALUES ('Intent 8 Catch-All', 'Name 7'); -- ID 7, joined to intent 8 and default entity
+INSERT INTO response_intent(response_id, intent_id) VALUES (7, 8);  -- DO NOT ATTACH ANYTHING TO INTENT 8
 INSERT INTO response_entity(response_id, entity_id) VALUES (7, 1);
 
 INSERT INTO response(response, name) VALUES ('Test Response 8', 'Name 8'); -- ID 8 join to intent 5 and entity 2 and 3
