@@ -1,9 +1,9 @@
 <template>
     <div id="outer-box">
-            <div id="chat-display"></div>
+        <div id="chat-display"></div>
 
 
-            <div id="user-input">
+        <div id="user-input">
             <form>
                 <textarea name="userInput" id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox"
                     placeholder="Type Here"></textarea>
@@ -13,7 +13,6 @@
             </button>
         </div>
     </div>
-
 </template>
     
     
@@ -30,8 +29,8 @@ export default {
     methods: {
         addUserBox() {
             if (this.textBoxText.trim() === '') {
-            return;
-        }
+                return;
+            }
 
             const chatBox = document.getElementById('chat-display');
             const newResponse = document.createElement('div');
@@ -56,7 +55,6 @@ export default {
             this.scrollChatDisplayToBottom(chatBox);
         },
         addRobotBox(response) {
-
             setTimeout(() => {
                 const chatBox = document.getElementById('chat-display');
                 const newResponse = document.createElement('div');
@@ -93,16 +91,18 @@ export default {
                                     updatedResponse = updatedResponse.replace(link, `<a href="${url}" target="_blank">${text}</a>`);
                                 });
                                 chatbotTextDiv.innerHTML = updatedResponse;
+                            } else {
+                                chatbotTextDiv.innerHTML = response;
                             }
-                            
+                           
                         }
                         this.scrollChatDisplayToBottom(chatBox);
+                            this.textBoxText = "";
                     };
                     typeText();
                 }, 750);
             }, 250);
         },
-
         setUserName() {
             this.$store.commit('SET_PREFERREDNAME', this.textBoxText);
             this.addRobotBox("Nice to meet you, " + this.$store.state.preferredName + ". How may I help?")
@@ -116,19 +116,19 @@ export default {
             }
 
             QueryService.get(query)
-            .then( response => {
-                if(response.status === 200) {
-                    // When the get method returns a success response
-                    this.$store.commit('SET_INTENTS', response.data.userIntents);
-                    this.$store.commit('SET_ENTITIES', response.data.userEntities);
-                    this.$store.commit('SET_MODE', response.data.mode);
-                    this.addRobotBox(response.data.response);
-                }
-            })
-            .catch (error => {
-                console.error("Error in Chat Display: " + error);
-                this.addRobotBox("I'm sorry, there seems to be an issue with the server. Please try again later.");
-            });
+                .then(response => {
+                    if (response.status === 200) {
+                        // When the get method returns a success response
+                        this.$store.commit('SET_INTENTS', response.data.userIntents);
+                        this.$store.commit('SET_ENTITIES', response.data.userEntities);
+                        this.$store.commit('SET_MODE', response.data.mode);
+                        this.addRobotBox(response.data.response);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error in Chat Display: " + error);
+                    this.addRobotBox("I'm sorry, there seems to be an issue with the server. Please try again later.");
+                });
         },
         scrollChatDisplayToBottom(chatBox) {
             chatBox.scrollTop = chatBox.scrollHeight;
@@ -148,26 +148,22 @@ div#chat-display {
     width: 70%;
     display: flex;
     flex-direction: column;
-    border-radius: 10px; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-    background-color: #ebecf0; 
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #ebecf0;
     margin-bottom: 6px;
     /* margin-left: 200px; */
 }
 
-div#chat-display > div {
-    border: none; 
+div#chat-display>div {
+    border: none;
     max-width: 45vw;
-    padding: 12px 16px; 
-    margin: 12px; 
-    border-radius: 10px; 
+    padding: 12px 16px;
+    margin: 12px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-    
-
-   
 
 }
 
@@ -182,16 +178,14 @@ img.response_img {
 
 div.chatbot {
     align-self: start;
-    background-color: #a4e7e3; 
+    background-color: #a4e7e3;
     font-size: larger;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-
-  
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 div.user {
     align-self: end;
-    background-color: #e3f2fd; 
+    background-color: #e3f2fd;
     font-size: larger;
     align-items: flex-end;
 }
@@ -214,51 +208,50 @@ div.user {
 
 textarea {
     width: 68%;
-    height: 50px; 
-    padding: 12px 16px; 
-    font-size: 16px; 
+    height: 50px;
+    padding: 12px 16px;
+    font-size: 16px;
     border: solid gray 2px;
-    border-radius: 20px; 
-    background-color: #f5f5f5; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-    resize: none; 
-    outline: none; 
-    transition: box-shadow 0.3s ease; 
+    border-radius: 20px;
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    resize: none;
+    outline: none;
+    transition: box-shadow 0.3s ease;
     /* margin-left: 200px; */
 }
 
 textarea:focus {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
 button {
-  background-color: #4c5caf; 
-  border: none; 
-  color: white; 
-  padding: 12px 24px; 
-  text-align: center; 
-  text-decoration: none; 
-  display: inline-block; 
-  font-size: 16px; 
-  margin: 4px 2px; 
-  cursor: pointer; 
-  border-radius: 20px; 
-  transition: background-color 0.3s ease; 
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.2);
-  /* margin-left: 200px; */
+    background-color: #4c5caf;
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* margin-left: 200px; */
 }
 
 button:hover {
-  background-color: #3b4a9c; 
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15), 0 3px 5px rgba(0, 0, 0, 0.25); 
-  transform: translateY(-1px);
+    background-color: #3b4a9c;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15), 0 3px 5px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px);
 }
 
 button:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8); 
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8);
 }
-
 </style>
     
