@@ -16,6 +16,7 @@ public class QueryService {
 
     // Constants
     private final int[] RANKED_ENTITY_IDS = new int[]{
+            11, // Negative
             3, // Star Method
             4, // Cover Letter
             10, // Follow up
