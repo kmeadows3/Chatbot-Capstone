@@ -2,7 +2,9 @@
   <div class="home">
     <ChatDisplay />
     <InspirationalQuotes />
-    <JobDetails />
+    <div v-show="$store.state.jobPostings.length > 0">
+      <JobDetails />
+    </div>
   </div>
 </template>
 
