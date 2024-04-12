@@ -6,7 +6,7 @@
             <div v-show="this.$store.state.mode === 1">
                 <JobSearchForm ref="jobSearchForm" />
             </div>
-            <form v-show="true">
+            <form v-show="this.$store.state.mode !== 1">
                 <textarea name="userInput" id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox"
                     placeholder="Type Here"></textarea>
             </form>

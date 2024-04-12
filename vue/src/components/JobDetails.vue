@@ -8,7 +8,7 @@
             <p>Company Name: {{ jobPosting.companyName }}</p>
             <p>Company ID: {{ jobPosting.companyId }}</p>
             <p>Locations: {{ jobPosting.locations }}</p>
-            <p>Description: {{ jobPosting.description }}</p>
+            <p>Description: <span v-html="jobPosting.description"></span></p>
             <p>Date Posted: {{ jobPosting.datePosted }}</p>
             <p>Landing Page: <a v-bind:href="jobPosting.landingPage">{{ jobPosting.landingPage }}</a></p>
             <br/>
