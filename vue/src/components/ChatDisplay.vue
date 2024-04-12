@@ -85,18 +85,17 @@ export default {
                 if (this.$store.state.mode === 1) {
                     // Job Searching Mode -- TODO
                     this.$refs.jobSearchForm.searchJobs()
-                        .then(response => {
-                            let confirmMessage = "I found some results to your search: ";
-                            this.addRobotBox(confirmMessage);
-                            this.$store.commit('SET_MODE', 0); // Resets chatbot from job posting mode to normal mode
-                            this.$store.commit('SET_INTENTS', [1]); // Resets intents
-                            this.$store.commit('SET_ENTITIES', [1]); // Resets entities
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        });
+                    .then(response => {
+                        this.addRobotBox("I found some results to your search: ");
+                        this.$store.commit('SET_MODE', 0); // Resets chatbot from job posting mode to normal mode
+                        this.$store.commit('SET_INTENTS', [1]); // Resets intents
+                        this.$store.commit('SET_ENTITIES', [1]); // Resets entities
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
 
-
+                    
                 } else {
                     this.getResponseFromServer();
                 }
