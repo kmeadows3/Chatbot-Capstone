@@ -77,32 +77,29 @@ export default {
                     newResponse.removeChild(loadingGif);
                     newResponse.appendChild(chatbotAvatarDiv);
                     newResponse.appendChild(chatbotTextDiv);
-
-
-
                     
-      let currentIndex = 0;
-      const typeText = () => {
-        if (currentIndex < response.length) {
-          chatbotTextDiv.textContent += response.charAt(currentIndex);
-          currentIndex++;
-          setTimeout(typeText, 20); 
-        } else {
-          if (links) {
-            let updatedResponse = response;
-            links.forEach(link => {
-              const [, url, text] = link.match(/<a href="(.*?)".*?>(.*?)<\/a>/);
-              updatedResponse = updatedResponse.replace(link, `<a href="${url}" target="_blank">${text}</a>`);
-            });
-            chatbotTextDiv.innerHTML = updatedResponse;
-          }
-          this.scrollChatDisplayToBottom(chatBox);
-        }
-      };
-      typeText();
-    }, 750);
-  }, 250);
-},
+                    let currentIndex = 0;
+                    const typeText = () => {
+                        if (currentIndex < response.length) {
+                            chatbotTextDiv.textContent += response.charAt(currentIndex);
+                            currentIndex++;
+                            setTimeout(typeText, 20);
+                        } else {
+                            if (links) {
+                                let updatedResponse = response;
+                                links.forEach(link => {
+                                    const [, url, text] = link.match(/<a href="(.*?)".*?>(.*?)<\/a>/);
+                                    updatedResponse = updatedResponse.replace(link, `<a href="${url}" target="_blank">${text}</a>`);
+                                });
+                                chatbotTextDiv.innerHTML = updatedResponse;
+                            }
+                            this.scrollChatDisplayToBottom(chatBox);
+                        }
+                    };
+                    typeText();
+                }, 750);
+            }, 250);
+        },
 
         setUserName() {
             this.$store.commit('SET_PREFERREDNAME', this.textBoxText);
