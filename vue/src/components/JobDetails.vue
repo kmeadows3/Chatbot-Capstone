@@ -2,17 +2,16 @@
     <div class ="job_details">
         <h1>Recent Job Posting{{ $store.state.jobPostings.length > 1 ? 's': '' }}:</h1>
         <div v-for="jobPosting in $store.state.jobPostings">
-            <br/>
-            <p>Position Title: {{ jobPosting.positionTitle }}</p>
-            <p>Position Level: {{ jobPosting.levels }}</p>
-            <p>Company Name: {{ jobPosting.companyName }}</p>
-            <p>Company ID: {{ jobPosting.companyId }}</p>
-            <p>Date Posted: {{ jobPosting.datePosted }}</p>
-            <p>Locations: {{ jobPosting.locations }}</p>
-            <p>Description: <span v-html="jobPosting.description"></span></p>
-            <p>Landing Page: <a v-bind:href="jobPosting.landingPage">{{ jobPosting.landingPage }}</a></p>
-            <br/>
-            <p>=======================================</p>
+            <div class="job_card" target="_blank">
+                <p>Position Title: {{ jobPosting.positionTitle }}</p>
+                <p>Position Level: {{ jobPosting.levels }}</p>
+                <p>Company Name: {{ jobPosting.companyName }}</p>
+                <p>Company ID: {{ jobPosting.companyId }}</p>
+                <p>Date Posted: {{ jobPosting.datePosted }}</p>
+                <p>Locations: {{ jobPosting.locations }}</p>
+                <p class="description">Description: <span v-html="jobPosting.description"></span></p>
+                <p>Landing Page: <a v-bind:href="jobPosting.landingPage" target="_blank">{{ jobPosting.landingPage }}</a></p>
+            </div>
         </div>
     </div>
 </template>
@@ -30,7 +29,13 @@ div.job_details {
     border-radius: 8px;
     width: 500px;
     padding: 10px;
-    
+}
+
+div.job_card {
+    background-color: rgb(21, 255, 185);
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
 }
 
 </style>
