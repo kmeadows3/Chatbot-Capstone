@@ -1,11 +1,17 @@
 <template>
-  <div class="home">
-    <ChatDisplay />
-    <InspirationalQuotes />
-    <div v-show="$store.state.jobPostings.length > 0">
-      <JobDetails />
+  <body class="home_display">
+    <div class="chatbot">
+      <ChatDisplay />
     </div>
-  </div>
+    <div class="quote">
+      <InspirationalQuotes />
+    </div>
+    <div class="job_postings">
+      <div v-show="$store.state.jobPostings.length > 0">
+        <JobDetails />
+      </div>
+    </div>
+  </body>
 </template>
 
 <script>
@@ -21,3 +27,33 @@ export default {
   }
 };
 </script>
+
+<style>
+body {
+  width: 100 vw;
+  height: 100 vh;
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-template-rows: 20% 80%;
+
+  grid-template-areas: 
+  "chatbot quote"
+  "chatbot job_postings";
+}
+
+div.chatbot {
+  grid-area: chatbot;
+}
+
+div.quote {
+  grid-area: quote;
+  display: flex;
+  justify-content: center;
+}
+
+div.job_postings {
+  background-color: blue;
+  grid-area: job_postings;
+}
+
+</style>

@@ -28,13 +28,15 @@ export default {
             .then(response => {
                 const quoteBody = response.data[0];
 
-                this.quote = "“" + quoteBody.content + "”";
+                //this.quote = "“" + quoteBody.content + "”";
+                this.quote = '“Friendship is but another name for an alliance with the follies and the misfortunes of others. Our own share of miseries is sufficient: why enter then as volunteers into those of another?”';
                 this.attribute = "-" + quoteBody.author;
             })
             .catch(error => {
                 console.error('Error fetching Quote Text:', error);
             });
         },
+
         updateQuoteImage() {
             const photosPerPage = 50;
             const pageNumber = 1 + Math.floor(Math.random() * 50); // number between 1 and 50
@@ -74,13 +76,9 @@ export default {
 div.quote_container {
     position: relative;
     text-align: center;
-    width: 400px;
+    width: 100px;
+    height: 100%;
     color: white;
-}
-
-div.quote_container > img {
-    border-radius: 10px;
-    width:100%;
 }
 
 div.quote_container > p {
@@ -98,9 +96,15 @@ div.quote_container > p {
     0 0 0.1em rgb(0, 0, 0);
 }
 
+div.quote_container > img {
+    border-radius: 10px;
+    height:100%;
+    width: 100%;
+}
+
 
 div.quote_container > p.quote {
-    font-size: 22px;
+    font-size: calc(100vw / 100);
     position: absolute;
     width: 90%;
     top: 35%;
@@ -109,7 +113,7 @@ div.quote_container > p.quote {
 }
 
 div.quote_container > p.attribute {
-    font-size: 15px;
+    font-size: calc(100vw / 140);
     position: absolute;
     width: 100%;
     bottom: 0%;
