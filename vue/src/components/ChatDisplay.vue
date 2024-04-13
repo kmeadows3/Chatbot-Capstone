@@ -13,12 +13,20 @@
             <button @click.prevent="addUserBox()">
                 Send Response
             </button>
+            <button @click.prevent="beginVoiceRecognition()">
+                Voice Search
+            </button>
         </div>
     </div>
 </template>
     
     
 <script>
+var speechRecognition = window.webkitSpeechRecognition;
+var recognition = new speechRecognition();
+recognition.lang = 'en-US';
+
+
 var greetUser = false;
 import QueryService from '../services/QueryService';
 import JobSearchForm from '../components/JobSearchForm.vue';
@@ -33,7 +41,7 @@ export default {
     components: {
         JobSearchForm,
     },
-    
+
     methods: {
         addUserBox() {
             if (this.textBoxText.trim() === '' && this.$store.state.mode !== 1) {
@@ -43,7 +51,7 @@ export default {
             if (this.$store.state.mode === 1 && this.$store.state.preferredName) {
                 // Job Searching Mode
                 this.textBoxText = "Show me results to my job search."
-            }            
+            }
 
             if (!this.$store.state.preferredName) {
                 // Asking for and setting name if not already set
@@ -92,7 +100,7 @@ export default {
                     this.getResponseFromServer();
                 }
             }
-            
+
             this.textBoxText = "";
             this.scrollChatDisplayToBottom(chatBox);
         },
@@ -130,7 +138,7 @@ export default {
                         if (currentIndex < response.length) {
                             chatbotTextDiv.textContent += response.charAt(currentIndex);
                             currentIndex++;
-                            setTimeout(typeText, 1);
+                            setTimeout(typeText, 0);
                         } else {
                             if (links) {
                                 let updatedResponse = response;
@@ -142,10 +150,10 @@ export default {
                             } else {
                                 chatbotTextDiv.innerHTML = response;
                             }
-                           
+
                         }
                         this.scrollChatDisplayToBottom(chatBox);
-                            this.textBoxText = "";
+                        this.textBoxText = "";
                     };
                     typeText();
                 }, 750);
@@ -187,11 +195,35 @@ export default {
         scrollChatDisplayToBottom(chatBox) {
             chatBox.scrollTop = chatBox.scrollHeight;
         },
+
+        beginVoiceRecognition() {
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                this.textBoxText = transcript;
+                this.addUserBox();
+            };
+
+            recognition.start();
+            // this.addVoiceToTextBox();
+
+        },
+
+        // addVoiceToTextBox() {
+        //     var finalTranscript;
+        //     recognition.onresult = function(event) {
+        //         finalTranscript = event.results[0][0].transcript;
+        //         this.textBoxText = finalTranscript;
+        //     }
+
+        // },
+
     },
     mounted() {
         this.addRobotBox("Greetings, my name's Chatwick. What's yours?");
     }
 }
+
 
 </script>
     
@@ -235,7 +267,7 @@ div.chatbot {
     background-color: #f1f5ed;
     font-size: larger;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    
+
 }
 
 div.user {

@@ -94,11 +94,25 @@ export default {
 
         // Returns an array of job postings with a matching location
         filterJobPostingsByLocation(jobPostings, searchLocation) {
-            const results = jobPostings.results;
-            const filteredJobPostings = results.filter((result) => {
+            let jobResults = jobPostings.results;
+
+            //filters results by company name (only if there is input)
+            if (this.companyName !== "") {
+                jobResults = jobResults.filter((job) => {
+                    const companyName = job.company.name.toLowerCase().trim();
+                    const companyNameSearch = this.companyName.toLowerCase().trim();
+                    console.log(companyName);
+                    console.log(companyNameSearch);
+                    return companyNameSearch === companyName;
+                });
+            }
+
+            // Filters Jobs By Locations
+            jobResults = jobResults.filter((job) => {
                 let hasMatchingLocation = false;
 
-                const locations = result.locations;
+                // Checks if job posting contains the search location
+                const locations = job.locations;
                 locations.forEach((currentLocation) => {
                     if(currentLocation.name === searchLocation) {
                         hasMatchingLocation = true;
@@ -108,7 +122,7 @@ export default {
                 return hasMatchingLocation;
             });
 
-            return filteredJobPostings;
+            return jobResults;
         },
 
         addJobPostingsToListInStore(jobPostings) {
@@ -221,20 +235,50 @@ export default {
 
 <style>
 .job-search-container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    height: 100%;
-    /* background-color: #f5f5f5; */
-    /* padding: 2rem; */
-    max-width: 25%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #f5f5f5;
+  width: 100vh;
+  margin: 20px;
+  max-height: 1000px;
 }
 
 .job-search-form-container {
+  background-color: white;
+  padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
+  max-width: 80vh;
   width: 100%;
+  max-height: 1000px;
+  margin: 20px;
+}
+
+.job-search-title {
+  text-align: left;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #007bff;
+  border-bottom: solid #007bff 2px;
+}
+
+.job-search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+
+.form-group input[type="text"] {
+  max-width: 300px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-right: 40px;
+  margin-bottom: 20px;
 }
 
 </style>
