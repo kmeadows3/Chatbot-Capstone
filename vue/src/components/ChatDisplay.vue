@@ -470,9 +470,6 @@ button:hover {
 button:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8);
-<<<<<<< HEAD
-}</style>
-=======
 }
 
 form {
@@ -480,5 +477,4 @@ form {
 }
 
 </style>
->>>>>>> fe5d79250628c2bd2e22abebc71351f2f03a9b16
     
