@@ -123,7 +123,7 @@ div.quote_container > img {
 
 
 div.quote_container > p.quote {
-    font-size: calc(1.45vw);
+    font-size: min(calc(3.2vh), calc(1.45vw));
     position: absolute;
     width: 95%;
     top: 30%;
@@ -133,6 +133,7 @@ div.quote_container > p.quote {
 
 div.quote_container > p.attribute {
     font-size: calc(1.2vw);
+    font-size: min(calc(2.65vh), calc(1.45vw));
     position: absolute;
     width: 100%;
     bottom: 0%;

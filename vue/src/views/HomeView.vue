@@ -29,9 +29,11 @@ export default {
 </script>
 
 <style>
+
+
 div.home_display {
-  width: 100 vw;
-  height: 100 vh;
+  width: 96vw;
+  height: 90vh;
   padding: 10px;
   display: grid;
 
