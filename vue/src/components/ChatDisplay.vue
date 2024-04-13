@@ -77,7 +77,13 @@ export default {
         doJobSearch(){
             this.$refs.jobSearchForm.searchJobs()
                 .then(response => {
-                    this.addRobotBox("I found some results to your search: ");
+                    if (this.$store.state.jobPostings.length > 0) {
+                        this.addRobotBox("I found some results to your search.");
+                    } else {
+                        let message = "My apologies, I couldn't find any results matching your search. "
+                        message += "Try using different search parameters, and be sure to check for spelling."
+                        this.addRobotBox(message);
+                    }
                     this.$store.commit('SET_MODE', 0); // Resets chatbot from job posting mode to normal mode
                     this.$store.commit('SET_INTENTS', [1]); // Resets intents
                     this.$store.commit('SET_ENTITIES', [1]); // Resets entities
@@ -86,7 +92,7 @@ export default {
                     console.error(error);
                 }); 
         },
-        
+
         createUserBox(){
             const newResponse = document.createElement('div');
             newResponse.classList.add('user');
@@ -189,7 +195,11 @@ export default {
         },
 
         greetUser() {
-            this.addRobotBox("Nice to meet you, " + this.$store.state.preferredName + ". How may I help?");
+            let message = "Nice to meet you. ";
+            message += "I can help you with applying for technical jobs.";
+            message += "</br>";
+            message += `Press "help" at any time, and I'll let you know what features are available.`;
+            this.addRobotBox(message);
             greetUser = false;
         },
         getResponseFromServer() {
@@ -243,7 +253,7 @@ export default {
 
     },
     mounted() {
-        this.addRobotBox("Greetings, my name's Chatwick. What's yours?");
+        this.addRobotBox("Greetings, I'm Chatwick. What's your name?");
     }
 }
 
@@ -252,16 +262,15 @@ export default {
     
 <style>
 div#chat-display {
-    height: 500px;
+    height: calc(105vh - 250px);
     overflow-y: auto;
-    width: 70%;
+    width: 98%;
+    margin: 1%;
     display: flex;
     flex-direction: column;
+    background-color: #ebecf0;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #ebecf0;
-    margin-bottom: 6px;
-    /* margin-left: 200px; */
 }
 
 div#chat-display>div {
@@ -273,6 +282,7 @@ div#chat-display>div {
     display: flex;
     flex-direction: column;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    height: auto;
 
 }
 
@@ -287,10 +297,7 @@ img.response_img {
 
 div.chatbot {
     align-self: start;
-    background-color: #f1f5ed;
     font-size: larger;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
 }
 
 div.user {
@@ -347,7 +354,7 @@ div.user {
 }
 
 textarea {
-    width: 68%;
+    width: 100%;
     height: 50px;
     padding: 12px 16px;
     font-size: 16px;
@@ -393,5 +400,10 @@ button:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8);
 }
+
+form {
+    display: flex;
+}
+
 </style>
     

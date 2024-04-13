@@ -42,7 +42,7 @@ export default {
 
         updateQuoteImage() {
             const photosPerPage = 50;
-            const pageNumber = 1 + Math.floor(Math.random() * 50); // number between 1 and 50
+            const pageNumber = 1 + Math.floor(Math.random() * 30); // number between 1 and 30
 
             ImageService.getRandom(pageNumber, photosPerPage)
             .then(response => {

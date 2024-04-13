@@ -1,21 +1,13 @@
 <template>
-    <div class="job-search-container">
-            <div class="job-search-form-container">
-                <h1 class="job-search-title">Job Search</h1>
-                <form class="job-search-form">
-                    <div class="form-group">
-                        <input type="text" id="city" v-model="city" placeholder="City Name">
-                            <input type="text" id="stateAbbreviation" v-model="stateAbbreviation" placeholder="State Abbreviation">
-                            <div class="form-group">
-                                <input type="text" id="companyName" v-model="companyName" placeholder="Company Name (Optional)">
-                                <label for="includeRemote">Remote:</label>
-                                <input id="includeRemote" type="checkbox" v-model="includeRemote" />
-                            </div>
-                    </div>
-            </form>
+    <form class="job-search-form">
+        <input type="text" id="city" v-model="city" placeholder="City Name">
+        <input type="text" id="stateAbbreviation" v-model="stateAbbreviation" placeholder="State Abbreviation">
+        <input type="text" id="companyName" v-model="companyName" placeholder="Company Name (Optional)">
+        <div>
+            <label for="includeRemote">Include Remote Positions:</label>
+            <input id="includeRemote" type="checkbox" v-model="includeRemote" />
         </div>
-
-    </div>
+    </form>
     
 </template>
 
@@ -234,51 +226,31 @@ export default {
 </script>
 
 <style>
-.job-search-container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: #f5f5f5;
-  width: 100vh;
-  margin: 20px;
-  max-height: 1000px;
-}
-
-.job-search-form-container {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  max-width: 80vh;
-  width: 100%;
-  max-height: 1000px;
-  margin: 20px;
-}
-
-.job-search-title {
-  text-align: left;
-  margin-bottom: 2rem;
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #007bff;
-  border-bottom: solid #007bff 2px;
-}
 
 .job-search-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2px;
+
+    width:100%;
 }
 
 
-.form-group input[type="text"] {
-  max-width: 300px;
-  padding: 0.75rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  margin-right: 40px;
-  margin-bottom: 20px;
+.job-search-form input[type="text"] {
+    border: solid gray 2px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.job-search-form > * {
+    width: 100%;
+    padding: 3px;
+    padding-left: 10px;
+}
+
+.job-search-form > div {
+    font-size: 16px;
 }
 
 </style>
