@@ -12,6 +12,7 @@ public class Response {
     private List<Integer> userIntents;
     private List<Integer> userEntities;
     private int mode = 0;
+    private List<Question> quiz;
     @JsonIgnore
     private List<Integer> responseIntents = new ArrayList<>();
     @JsonIgnore
@@ -47,6 +48,9 @@ public class Response {
         return responseEntities;
     }
 
+    public List<Question> getQuiz() {
+        return quiz;
+    }
 
     // Setters
     public void setResponse(String response) {
@@ -72,6 +76,9 @@ public class Response {
         this.responseEntities = responseEntities;
     }
 
+    public void setQuiz(List<Question> quiz) {
+        this.quiz = quiz;
+    }
 
     @Override
     public boolean equals(Object o) {
