@@ -1,6 +1,7 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users, response_intent, response_entity, keyword, entity, intent, response;
+DROP TABLE IF EXISTS users, response_intent, response_entity, keyword, entity, intent, response, 
+	answer, question, difficulty;
 
 CREATE TABLE users (
 	user_id SERIAL,
@@ -51,5 +52,25 @@ CREATE TABLE keyword(
 	CONSTRAINT FK_keyword_intent_id FOREIGN KEY(intent_id) REFERENCES intent(intent_id)
 );
 
+CREATE TABLE difficulty(
+	difficulty_id serial PRIMARY KEY,
+	difficulty varchar(15) NOT NULL UNIQUE
+);
+
+CREATE TABLE question(
+	question_id serial PRIMARY KEY,
+	question text NOT NULL,
+	difficulty_id int NOT NULL,
+	CONSTRAINT FK_question_difficulty_id FOREIGN KEY(difficulty_id) REFERENCES difficulty(difficulty_id)
+);
+
+CREATE TABLE answer(
+	answer_id serial PRIMARY KEY,
+	answer text NOT NULL,
+	is_correct boolean NOT NULL,
+	question_id int NOT NULL,
+	CONSTRAINT FK_answer_question_id FOREIGN KEY(question_id) REFERENCES question(question_id)
+
+);
 
 COMMIT TRANSACTION; 

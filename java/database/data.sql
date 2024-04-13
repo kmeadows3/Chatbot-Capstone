@@ -779,8 +779,55 @@ response_id_counter := response_id_counter + 1;
 
 
 
--------------------- MOTIVATIONAL QUOTES ENTITY RESPONSES --------------------
 
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------
+--                                                QUIZ DATA                                                --
+-------------------------------------------------------------------------------------------------------------
+
+INSERT INTO difficulty(difficulty) VALUES ('Easy');  -- id 1
+INSERT INTO difficulty(difficulty) VALUES ('Moderate'); -- id 2
+INSERT INTO difficulty(difficulty) VALUES ('Difficult'); -- id 3
+
+-- Quiz Question ID 1
+INSERT INTO question (question, difficulty_id) VALUES ('What is a variable?', 1);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Either a value or abstract storage location
+		paired with an associated symbolic name.', true, 1);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Variable answer 1', false, 1);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Variable answer 2', false, 1);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Variable answer 3', false, 1);
+
+-- Quiz Question ID 2
+INSERT INTO question (question, difficulty_id) VALUES ('What are the advantages of the DAO pattern?', 2);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The DAO pattern abstracts and encapsulates data 
+		access logic, promoting separation of concerns and code reusability. By centralizing data access within 
+		dedicated DAO classes, it enhances maintainability, testability, and adaptability of the application, 
+		allowing for easier changes to the data source or access technology without impacting other parts of 
+		the codebase.', true, 2);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong DAO answer 1', false, 2);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong DAO answer 2', false, 2);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong DAO answer 3', false, 2);
+ 
+-- Quiz Question ID 3
+INSERT INTO question (question, difficulty_id) VALUES ('Quiz Question 3', 2);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Correct Question 3 answer', true, 3);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 3 answer 1', false, 3);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 3 answer 2', false, 3);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 3 answer 3', false, 3);
+
+-- Quiz Question ID 4
+INSERT INTO question (question, difficulty_id) VALUES ('Quiz Question 4', 3);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Correct Question 4 answer', true, 4);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 4 answer 1', false, 4);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 4 answer 2', false, 4);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 4 answer 3', false, 4);
 
 END $$;
 
