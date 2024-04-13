@@ -147,4 +147,38 @@ INSERT INTO response(response, name) VALUES ('Test Response 19', 'Name 19'); -- 
 INSERT INTO response_intent(response_id, intent_id) VALUES (19, 4);
 INSERT INTO response_entity(response_id, entity_id) VALUES (19, 8);
 
+
+INSERT INTO difficulty(difficulty) VALUES ('Easy');  -- id 1
+INSERT INTO difficulty(difficulty) VALUES ('Moderate'); -- id 2
+INSERT INTO difficulty(difficulty) VALUES ('Difficult'); -- id 3
+
+-- Quiz Question ID 1
+INSERT INTO question (question, difficulty_id) VALUES ('Quiz Question 1', 1);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Correct Question 1 answer', true, 1);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 1 answer 1', false, 1);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 1 answer 2', false, 1);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 1 answer 3', false, 1);
+
+-- Quiz Question ID 2
+INSERT INTO question (question, difficulty_id) VALUES ('Quiz Question 2', 2);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Correct Question 2 answer', true, 2);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 2 answer 1', false, 2);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 2 answer 2', false, 2);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 2 answer 3', false, 2);
+
+-- Quiz Question ID 3
+INSERT INTO question (question, difficulty_id) VALUES ('Quiz Question 3', 2);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Correct Question 3 answer', true, 3);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 3 answer 1', false, 3);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 3 answer 2', false, 3);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 3 answer 3', false, 3);
+
+-- Quiz Question ID 4
+INSERT INTO question (question, difficulty_id) VALUES ('Quiz Question 4', 3);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Correct Question 4 answer', true, 4);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 4 answer 1', false, 4);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 4 answer 2', false, 4);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 4 answer 3', false, 4);
+
+
 COMMIT TRANSACTION;

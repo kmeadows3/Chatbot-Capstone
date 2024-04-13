@@ -16,6 +16,10 @@ export default {
             quote: "",
             attribute: "",
             quoteImage: "",
+
+            // Revise to 1 min later (currently 1hr)
+            refreshTimer: 600000, // in milliseconds
+            intervalId: null,
         }
     },
 
@@ -35,6 +39,7 @@ export default {
                 console.error('Error fetching Quote Text:', error);
             });
         },
+
         updateQuoteImage() {
             const photosPerPage = 50;
             const pageNumber = 1 + Math.floor(Math.random() * 50); // number between 1 and 50
@@ -57,9 +62,32 @@ export default {
         },
     },
 
+    watch: {
+        '$store.state.mode'(newValue, oldValue) {
+            // update the quote whenever the mode is changed to 3 (quote mode) in the store
+            console.log(newValue);
+            if (newValue === 3) {
+                this.updateQuoteSection();
+                this.$store.commit('SET_MODE', oldValue); // Resets chatbot from job posting mode to normal mode
+                this.$store.commit('SET_INTENTS', [1]); // Resets intents
+                this.$store.commit('SET_ENTITIES', [1]); // Resets entities
+            }
+        }
+    },
+
     created() {
         this.updateQuoteSection();
-    }
+    },
+
+    mounted() {
+        this.intervalId = setInterval(this.updateQuoteSection, this.refreshTimer); // Run given a refresh TImer
+    },
+    
+    beforeDestroy() {
+        clearInterval(this.intervalId); // Clear the interval when the component is destroyed
+    },
+
+    
 }
 
 </script>
@@ -74,13 +102,9 @@ export default {
 div.quote_container {
     position: relative;
     text-align: center;
-    width: 400px;
+    width: 100%;
+    height: 100%;
     color: white;
-}
-
-div.quote_container > img {
-    border-radius: 10px;
-    width:100%;
 }
 
 div.quote_container > p {
@@ -98,18 +122,33 @@ div.quote_container > p {
     0 0 0.1em rgb(0, 0, 0);
 }
 
+div.quote_container {
+    border-radius: 8px;
+    overflow: hidden; /* Makes a window for all the elements inside */
+}
+
+div.quote_container > img {
+    position: absolute;
+    left: 0%;
+    top: -50px;
+    height:200%;
+    width: 100%;
+    
+}
+
 
 div.quote_container > p.quote {
-    font-size: 22px;
+    font-size: min(calc(3.2vh), calc(1.45vw));
     position: absolute;
-    width: 90%;
-    top: 35%;
+    width: 95%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
 div.quote_container > p.attribute {
-    font-size: 15px;
+    font-size: calc(1.2vw);
+    font-size: min(calc(2.65vh), calc(1.45vw));
     position: absolute;
     width: 100%;
     bottom: 0%;
