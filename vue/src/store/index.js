@@ -28,7 +28,7 @@ export function createStore(currentToken, currentUser) {
         state.mode = newMode;
       },
       ADD_JOB_POSTING(state, newJobPosting) {
-        state.jobPostings.unshift(newJobPosting);
+        state.jobPostings.push(newJobPosting);
       },
       CLEAR_JOB_POSTINGS(state) {
         state.jobPostings = [];
