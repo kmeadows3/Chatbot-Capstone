@@ -33,10 +33,10 @@ export default {
 
 div.home_display {
   width: 96vw;
-  height: 90vh;
+  height: 95vh;
   padding: 10px;
+  
   display: grid;
-
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 2fr 5fr;
   gap: 10px;
@@ -46,8 +46,15 @@ div.home_display {
   "chatbot job_postings";
 }
 
+div.home_display > *{
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 div.chatbot {
   grid-area: chatbot;
+  background-color: #f1f5ed;
+  height: 100%;
 }
 
 div.quote {
@@ -59,7 +66,6 @@ div.quote {
 div.job_postings {
   grid-area: job_postings;
   background-color: rgb(234, 234, 234);
-  border: 2px solid rgb(67, 67, 67);
   border-radius: 8px;
   overflow-y: auto;
 }
