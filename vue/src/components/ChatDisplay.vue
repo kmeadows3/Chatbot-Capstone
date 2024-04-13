@@ -74,7 +74,7 @@ export default {
             newResponse.appendChild(userAvatarDiv);
             const userTextDiv = document.createElement('div');
             userTextDiv.classList.add('user-text-div');
-            userTextDiv.innerText = this.textBoxText;
+            userTextDiv.textContent = this.textBoxText;
             newResponse.appendChild(userTextDiv);
             chatBox.appendChild(newResponse);
 
@@ -148,7 +148,7 @@ export default {
                                 });
                                 chatbotTextDiv.innerHTML = updatedResponse;
                             } else {
-                                chatbotTextDiv.innerHTML = response;
+                                chatbotTextDiv.textContent = response;
                             }
 
                         }
