@@ -1,7 +1,9 @@
 <template>
     <div id="outer-box">
         <div id="chat-display"></div>
-
+        <div class="overlay" v-if="record">
+            <img src="/src/assets/record.gif" alt="Overlay" class="overlay-image">
+        </div>
         <div id="user-input">
             <div v-show="this.$store.state.mode === 1">
                 <JobSearchForm ref="jobSearchForm" />
@@ -14,7 +16,10 @@
                 Send Response
             </button>
             <button @click.prevent="beginVoiceRecognition()">
-                Voice Search
+                Voice Response
+            </button>
+            <button id="text-to-speech-button" @click.prevent="toggleTextToSpeech()">
+                {{ textToSpeech ? 'Disable text-to-speech' : 'Enable text-to-speech'}}
             </button>
         </div>
     </div>
@@ -26,6 +31,8 @@ var speechRecognition = window.webkitSpeechRecognition;
 var recognition = new speechRecognition();
 recognition.lang = 'en-US';
 
+var synthesis = window.speechSynthesis;
+synthesis.cancel();
 
 var greetUser = false;
 import QueryService from '../services/QueryService';
@@ -35,6 +42,8 @@ export default {
     data() {
         return {
             textBoxText: "",
+            record: false,
+            textToSpeech: false,
         }
     },
 
@@ -149,7 +158,7 @@ export default {
 
             let currentIndex = 0;
             this.typeText(currentIndex, response, chatbotTextDiv, chatBox);
-            }, 750)
+            }, 750);
              this.textBoxText = "";
         },
         createChatbotHeading(){
@@ -171,7 +180,15 @@ export default {
                 currentIndex++;
                 setTimeout(this.typeText, 0, currentIndex, response, chatbotTextDiv, chatBox);
             } else {
-                this.convertToHTML(response, chatbotTextDiv)
+
+                this.convertToHTML(response, chatbotTextDiv);
+
+                if (this.textToSpeech) {
+                    const utterance = new SpeechSynthesisUtterance(chatbotTextDiv.textContent);
+                    utterance.lang = 'en-US';
+                    synthesis.speak(utterance);
+                }
+
             }
             this.scrollChatDisplayToBottom(chatBox);
         },
@@ -231,25 +248,46 @@ export default {
 
         beginVoiceRecognition() {
 
+            synthesis.cancel();
+            var startSound = new Audio("/src/assets/startSound.mp3");
+            var endSound = new Audio("/src/assets/endSound.mp3");
+            setTimeout(() => {
+                startSound.play();
+                this.record = true;
+            }, 1000);
+
             recognition.onresult = (event) => {
-                const transcript = event.results[0][0].transcript;
-                this.textBoxText = transcript;
-                this.addUserBox();
+                setTimeout(() => {
+                    this.record = false;
+                    endSound.play();
+                    const transcript = event.results[0][0].transcript;
+                    this.textBoxText = transcript;
+                    this.addUserBox();
+                }, 250);
+
             };
 
+            recognition.onend = () => {
+                this.record = false;
+
+            }
             recognition.start();
-            // this.addVoiceToTextBox();
 
         },
 
-        // addVoiceToTextBox() {
-        //     var finalTranscript;
-        //     recognition.onresult = function(event) {
-        //         finalTranscript = event.results[0][0].transcript;
-        //         this.textBoxText = finalTranscript;
-        //     }
+        toggleTextToSpeech() {
+            this.textToSpeech = !this.textToSpeech;
+            const speechButton = document.getElementById('text-to-speech-button');
+            if(!this.textToSpeech) {
+                synthesis.cancel();
+                speechButton.classList.remove('text-to-speech');
+            }
+            if(this.textToSpeech) {
+                speechButton.classList.add('text-to-speech');
+            }
+        }
 
-        // },
+
 
     },
     mounted() {
@@ -271,6 +309,11 @@ div#chat-display {
     background-color: #ebecf0;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #ebecf0;
+    margin-bottom: 6px;
+
+    position: relative;
+    /* margin-left: 200px; */
 }
 
 div#chat-display>div {
@@ -340,6 +383,28 @@ div.user {
     font-weight: bold;
 }
 
+.overlay {
+    position: fixed;
+    /* Fixed position to overlay on everything */
+    top: 22%;
+    /* Top of the screen */
+    left: 31%;
+    /* Left of the screen */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    z-index: 9999;
+    /* Higher z-index to overlay on top */
+    pointer-events: none;
+    /* Allows interaction with elements behind the overlay */
+}
+
+.overlay-image {
+    width: auto;
+    height: 15%;
+}
+
 #chat-display::-webkit-scrollbar {
     width: 10px;
 }
@@ -390,6 +455,12 @@ button {
     /* margin-left: 200px; */
 }
 
+.text-to-speech {
+    border: solid;
+    border-color: red;
+    
+}
+
 button:hover {
     background-color: #3b4a9c;
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15), 0 3px 5px rgba(0, 0, 0, 0.25);
@@ -399,6 +470,9 @@ button:hover {
 button:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8);
+<<<<<<< HEAD
+}</style>
+=======
 }
 
 form {
@@ -406,4 +480,5 @@ form {
 }
 
 </style>
+>>>>>>> fe5d79250628c2bd2e22abebc71351f2f03a9b16
     
