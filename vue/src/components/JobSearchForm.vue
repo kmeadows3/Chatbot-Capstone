@@ -1,17 +1,22 @@
 <template>
-    <H1>Job Search Form</H1>
-    <form id="job_search_form">
-        <input id="city" type="text" v-model="city" placeholder="City Name">
-        <br/>
-        <input id="stateAbbreviation" type="text" v-model="stateAbbreviation" placeholder="State Abbreviation">
-        <br/>
-        <input id="companyName" type="text" v-model="companyName" placeholder="Company Name (Optional)">
-        <br/>
-        <label for="includeRemote">Include Remote Positions: </label>
-        <input id="includeRemote" type="checkbox" v-model="includeRemote">
-        <br/>
-        
-    </form>
+    <div class="job-search-container">
+            <div class="job-search-form-container">
+                <h1 class="job-search-title">Job Search</h1>
+                <form class="job-search-form">
+                    <div class="form-group">
+                        <input type="text" id="city" v-model="city" placeholder="City Name">
+                            <input type="text" id="stateAbbreviation" v-model="stateAbbreviation" placeholder="State Abbreviation">
+                            <div class="form-group">
+                                <input type="text" id="companyName" v-model="companyName" placeholder="Company Name (Optional)">
+                                <label for="includeRemote">Remote:</label>
+                                <input id="includeRemote" type="checkbox" v-model="includeRemote" />
+                            </div>
+                    </div>
+            </form>
+        </div>
+
+    </div>
+    
 </template>
 
 <script>
@@ -215,31 +220,21 @@ export default {
 </script>
 
 <style>
-h1{
-    border-bottom-color: rgb(0, 187, 236);
-}
-form {
-  
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 20%;
-}
-
-input,
-button {
-  padding: 0.5rem;
-  font-size: 1rem;
+.job-search-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    /* background-color: #f5f5f5; */
+    /* padding: 2rem; */
+    max-width: 25%;
 }
 
-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
+.job-search-form-container {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
 }
 
 </style>
