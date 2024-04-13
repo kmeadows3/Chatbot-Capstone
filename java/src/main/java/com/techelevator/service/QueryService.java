@@ -2,6 +2,7 @@ package com.techelevator.service;
 
 import com.techelevator.ResponseSelector;
 import com.techelevator.dao.QueryDao;
+import com.techelevator.dao.QuizDao;
 import com.techelevator.exception.CompanyInformationExpection;
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Company;
@@ -30,9 +31,11 @@ public class QueryService {
     public final int JOB_SEARCH_MODE = 1;
     public final int COMPANY_DATA_MODE = 2;
     public final int NEW_QUOTE_MODE = 3;
+    public final int QUIZ_MODE = 4;
     public final int COMPANY_INFORMATION_INTENT_ID = 7;
     public final int JOB_SEARCH_INTENT_ID = 8;
     public final int NEW_QUOTE_INTENT_ID = 9;
+    public final int QUIZ_INTENT_ID = 10;
     public final int DEFAULT_INTENT_ID = 1;
     public final int DEFAULT_ENTITY_ID = 1;
     public final int INTENTS_INDEX = 0;
@@ -40,12 +43,14 @@ public class QueryService {
 
     // Instance Variables
     private QueryDao queryDao;
+    private QuizDao quizDao;
     private CompanyInformationService companyInformationService;
     private ResponseSelector responseSelector;
 
     //Constructor
-    public QueryService (QueryDao queryDao, CompanyInformationService companyInformationService, ResponseSelector responseSelector){
+    public QueryService (QueryDao queryDao, QuizDao quizDao, CompanyInformationService companyInformationService, ResponseSelector responseSelector){
         this.queryDao = queryDao;
+        this.quizDao = quizDao;
         this.companyInformationService = companyInformationService;
         this.responseSelector = responseSelector;
     }
@@ -83,22 +88,26 @@ public class QueryService {
 
         String responseString = null;
         Response outputResponse = new Response();
+        outputResponse.setUserIntents(intents);
+        outputResponse.setUserEntities(entities);
+
         if (intents.contains(COMPANY_INFORMATION_INTENT_ID)) {
             responseString = "Please enter the domain name of the company you're interested in learning more about.";
             outputResponse.setMode(COMPANY_DATA_MODE);
-        } else if (intents.contains(JOB_SEARCH_INTENT_ID)){
+        } else if (intents.contains(JOB_SEARCH_INTENT_ID)) {
             responseString = "I'd be happy to help you find a job. First I'll needs some information about what you're looking for.";
             outputResponse.setMode(JOB_SEARCH_MODE);
-        } else if (intents.contains(NEW_QUOTE_INTENT_ID)){
+        } else if (intents.contains(NEW_QUOTE_INTENT_ID)) {
             responseString = "I just updated the motivational quote.";
             outputResponse.setMode(NEW_QUOTE_MODE);
+        } else if (intents.contains(QUIZ_INTENT_ID)) {
+            outputResponse = sendQuizToClient();
         } else {
             List<Response> potentialResponses = getPotentialResponseList(intents, entities);
             responseString = responseSelector.selectResponse(potentialResponses,intents, entities);
         }
 
-        outputResponse.setUserIntents(intents);
-        outputResponse.setUserEntities(entities);
+
         outputResponse.setResponse(responseString);
 
         return outputResponse;
@@ -111,11 +120,7 @@ public class QueryService {
      */
     private Response companyDataResponse(String utterance) {
         String responseString;
-        List<Integer> intents = new ArrayList<>();
-        List<Integer> entities = new ArrayList<>();
-        intents.add(DEFAULT_INTENT_ID);
-        entities.add(DEFAULT_ENTITY_ID);
-        Response outputResponse = new Response();
+        Response outputResponse = setDefaultResponseIntentsAndEntities(new Response());
 
         try {
             Company company = companyInformationService.getCompanyDataDemoMode(utterance);
@@ -124,10 +129,36 @@ public class QueryService {
             responseString = e.getMessage();
         }
 
-        outputResponse.setUserIntents(intents);
-        outputResponse.setUserEntities(entities);
         outputResponse.setResponse(responseString);
 
+        return outputResponse;
+    }
+
+
+    /**
+     * This method creates a response that contains a list of questions to the user and sets the mode to quiz
+     * @return Response with quiz and quiz mode
+     */
+    private Response sendQuizToClient(){
+        Response response = setDefaultResponseIntentsAndEntities(new Response("Beginning New Quiz"));
+        response.setMode(QUIZ_MODE);
+        response.setQuiz(quizDao.getRandomQuiz());
+
+        return response;
+    }
+
+    /**
+     * This method takes a response and sets the intents and entties to be the default values
+     * @param outputResponse the response to be set
+     * @return the response with the new intents and entities
+     */
+    private Response setDefaultResponseIntentsAndEntities(Response outputResponse) {
+        List<Integer> intents = new ArrayList<>();
+        List<Integer> entities = new ArrayList<>();
+        intents.add(DEFAULT_INTENT_ID);
+        entities.add(DEFAULT_ENTITY_ID);
+        outputResponse.setUserIntents(intents);
+        outputResponse.setUserEntities(entities);
         return outputResponse;
     }
 
