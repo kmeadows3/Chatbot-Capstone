@@ -1,9 +1,16 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.QuizResponse;
+import com.techelevator.exception.DaoException;
+import com.techelevator.model.Answer;
+import com.techelevator.model.Question;
+import com.techelevator.model.Quiz;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -16,33 +23,45 @@ public class JdbcQuizDao implements QuizDao{
     }
 
     @Override
-    public QuizResponse getRandomQuizQuestion(List<Integer> askedQuestionIds) {
-        String sql = buildSqlStringForRandomSearch(askedQuestionIds);
-        //TODO WORKING HERE
-        return null;
-    }
-
-    private String buildSqlStringForRandomSearch(List<Integer> askedQuestionIds) {
-        String sqlStart = "SELECT question_id, question, q.difficulty_id, difficulty FROM question q " +
-                "JOIN difficulty d ON d.difficulty_id = q.difficulty_id ";
-        String sqlEnd = "ORDER BY RANDOM() LIMIT 1";
-        String removeFormerQuestions = "WHERE question_id NOT IN (";
-
-        StringBuilder sqlBuilder = new StringBuilder(sqlStart);
-        if (askedQuestionIds.size() == 0){
-            sqlBuilder.append(sqlEnd);
-        } else {
-            sqlBuilder.append(removeFormerQuestions);
-            for (int i = 0; i < askedQuestionIds.size(); i++){
-                if(i == 0){
-                    sqlBuilder.append("?");
-                } else {
-                    sqlBuilder.append(", ?");
-                }
+    public List<Question> getRandomQuiz() {
+        String sql = "SELECT question_id, question, q.difficulty_id, difficulty FROM question q " +
+                "JOIN difficulty d ON d.difficulty_id = q.difficulty_id " +
+                "ORDER BY RANDOM() LIMIT 3";
+        List<Question> questions = new ArrayList<>();
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+            while (results.next()){
+                Question question = new Question();
+                question.setId(results.getInt("question_id"));
+                question.setQuestion(results.getString("question"));
+                question.setDifficulty(results.getInt("difficulty_id"));
+                question.setDifficultyString(results.getString("difficulty"));
+                question.setAnswers(getAnswers(question.getId()));
+                questions.add(question);
             }
-            sqlBuilder.append(") ");
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data Integrity Violation", e);
         }
 
-        return sqlBuilder.toString();
+        return questions;
     }
+
+    private List<Answer> getAnswers(int questionId){
+        String sql = "SELECT answer_id, answer, is_correct FROM answer WHERE question_id = ? ORDER BY RANDOM()";
+        List<Answer> answers = new ArrayList<>();
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, questionId);
+        while (results.next()){
+            Answer answer = new Answer();
+            answer.setAnswer(results.getString("answer"));
+            answer.setId(results.getInt("answer_id"));
+            answer.setCorrect(results.getBoolean("is_correct"));
+            answers.add(answer);
+        }
+
+        return answers;
+    }
+
 }

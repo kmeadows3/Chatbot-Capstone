@@ -1,6 +1,6 @@
 package com.techelevator.model;
 
-public class QuizAnswer {
+public class Answer {
     private int id;
     private String answer;
     private boolean isCorrect;

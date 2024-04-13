@@ -1,11 +1,11 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.QuizResponse;
+import com.techelevator.model.Question;
 
 import java.util.List;
 
 public interface QuizDao {
 
-    QuizResponse getRandomQuizQuestion(List<Integer> askedQuestions);
+    List<Question> getRandomQuiz();
 
 }

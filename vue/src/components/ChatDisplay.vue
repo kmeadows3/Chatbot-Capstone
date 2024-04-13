@@ -68,7 +68,7 @@ export default {
                 // Greet user if name was set in above 'if' statement
                 this.greetUser();
             } else if (this.$store.state.mode === 1){
-                // Job Searching Mode -- TODO
+                // Job Searching Mode
                 this.doJobSearch();
             } else {
                 this.getResponseFromServer();
@@ -86,8 +86,8 @@ export default {
                     console.error(error);
                 }); 
         },
+        
         createUserBox(){
-
             const newResponse = document.createElement('div');
             newResponse.classList.add('user');
             const userAvatarDiv = this.createUserHeading();
