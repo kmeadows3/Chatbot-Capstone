@@ -16,6 +16,10 @@ export default {
             quote: "",
             attribute: "",
             quoteImage: "",
+
+            // Revise to 1 min later (currently 1hr)
+            refreshTimer: 600000, // in milliseconds
+            intervalId: null,
         }
     },
 
@@ -28,8 +32,7 @@ export default {
             .then(response => {
                 const quoteBody = response.data[0];
 
-                //this.quote = "“" + quoteBody.content + "”";
-                this.quote = '“Friendship is but another name for an alliance with the follies and the misfortunes of others. Our own share of miseries is sufficient: why enter then as volunteers into those of another?”';
+                this.quote = "“" + quoteBody.content + "”";
                 this.attribute = "-" + quoteBody.author;
             })
             .catch(error => {
@@ -61,7 +64,15 @@ export default {
 
     created() {
         this.updateQuoteSection();
-    }
+    },
+
+    mounted() {
+        this.intervalId = setInterval(this.updateQuoteSection, this.refreshTimer); // Run given a refresh TImer
+    },
+    
+    beforeDestroy() {
+        clearInterval(this.intervalId); // Clear the interval when the component is destroyed
+    },
 }
 
 </script>
@@ -76,7 +87,7 @@ export default {
 div.quote_container {
     position: relative;
     text-align: center;
-    width: 100px;
+    width: 100%;
     height: 100%;
     color: white;
 }
@@ -96,24 +107,32 @@ div.quote_container > p {
     0 0 0.1em rgb(0, 0, 0);
 }
 
+div.quote_container {
+    border-radius: 8px;
+    overflow: hidden; /* Makes a window for all the elements inside */
+}
+
 div.quote_container > img {
-    border-radius: 10px;
-    height:100%;
+    position: absolute;
+    left: 0%;
+    top: -50px;
+    height:200%;
     width: 100%;
+    
 }
 
 
 div.quote_container > p.quote {
-    font-size: calc(100vw / 100);
+    font-size: calc(1.45vw);
     position: absolute;
-    width: 90%;
-    top: 35%;
+    width: 95%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
 div.quote_container > p.attribute {
-    font-size: calc(100vw / 140);
+    font-size: calc(1.2vw);
     position: absolute;
     width: 100%;
     bottom: 0%;

@@ -64,6 +64,16 @@ INSERT INTO intent(name) VALUES ('Job Postings');
 	INSERT INTO keyword(keyword, intent_id) VALUES ('job search', 8);  -- Intent: Job Postings(8)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('looking for a job', 8);  -- Intent: Job Postings(8)
 
+-- ID 8
+INSERT INTO intent(name) VALUES ('New Quote');
+    INSERT INTO keyword(keyword, intent_id) VALUES ('new quote', 9);  -- Intent: New Quote(9)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('new quotes', 9);  -- Intent: New Quote(9)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('inspire', 9);  -- Intent: New Quote(9)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('inspiration', 9);  -- Intent: New Quote(9)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('motivate me', 9);  -- Intent: New Quote(9)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('motivation', 9);  -- Intent: New Quote(9)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('famous quote', 9);  -- Intent: New Quote(9)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('famous quotes', 9);  -- Intent: New Quote(9)
 
 
 -------------------- ENTITIES --------------------
