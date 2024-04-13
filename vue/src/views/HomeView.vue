@@ -7,7 +7,9 @@
       <InspirationalQuotes />
     </div>
     <div class="job_postings">
-      <JobDetails />
+      <div v-show="$store.state.jobPostings.length > 0">
+        <JobDetails />
+      </div>
     </div>
   </div>
 </template>
@@ -56,6 +58,23 @@ div.quote {
 
 div.job_postings {
   grid-area: job_postings;
+  background-color: rgb(234, 234, 234);
+  border: 2px solid rgb(67, 67, 67);
+  border-radius: 8px;
+  overflow-y: auto;
+}
+
+div.job_postings::-webkit-scrollbar {
+    width: 10px;
+}
+
+div.job_postings::-webkit-scrollbar-thumb {
+    background-color: #8888;
+    border-radius: 10px;
+}
+
+div.job_postings::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
 }
 
 </style>
