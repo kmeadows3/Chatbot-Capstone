@@ -1,5 +1,5 @@
 <template>
-  <body class="home_display">
+  <div class="home_display">
     <div class="chatbot">
       <ChatDisplay />
     </div>
@@ -11,7 +11,7 @@
         <JobDetails />
       </div>
     </div>
-  </body>
+  </div>
 </template>
 
 <script>
@@ -29,12 +29,15 @@ export default {
 </script>
 
 <style>
-body {
+div.home_display {
   width: 100 vw;
   height: 100 vh;
+  padding: 10px;
   display: grid;
-  grid-template-columns: 4fr 1fr;
-  grid-template-rows: 20% 80%;
+
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 2fr 5fr;
+  gap: 10px;
 
   grid-template-areas: 
   "chatbot quote"

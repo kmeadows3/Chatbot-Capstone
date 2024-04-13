@@ -29,8 +29,10 @@ public class QueryService {
             1 }; // Default
     public final int JOB_SEARCH_MODE = 1;
     public final int COMPANY_DATA_MODE = 2;
+    public final int NEW_QUOTE_MODE = 3;
     public final int COMPANY_INFORMATION_INTENT_ID = 7;
     public final int JOB_SEARCH_INTENT_ID = 8;
+    public final int NEW_QUOTE_INTENT_ID = 9;
     public final int DEFAULT_INTENT_ID = 1;
     public final int DEFAULT_ENTITY_ID = 1;
     public final int INTENTS_INDEX = 0;
@@ -87,7 +89,10 @@ public class QueryService {
         } else if (intents.contains(JOB_SEARCH_INTENT_ID)){
             responseString = "I'd be happy to help you find a job. First I'll needs some information about what you're looking for.";
             outputResponse.setMode(JOB_SEARCH_MODE);
-        }else {
+        } else if (intents.contains(NEW_QUOTE_INTENT_ID)){
+            responseString = "I just updated the motivational quote.";
+            outputResponse.setMode(NEW_QUOTE_MODE);
+        } else {
             List<Response> potentialResponses = getPotentialResponseList(intents, entities);
             responseString = responseSelector.selectResponse(potentialResponses,intents, entities);
         }
