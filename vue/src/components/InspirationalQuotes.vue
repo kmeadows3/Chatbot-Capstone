@@ -62,6 +62,19 @@ export default {
         },
     },
 
+    watch: {
+        '$store.state.mode'(newValue, oldValue) {
+            // update the quote whenever the mode is changed to 3 (quote mode) in the store
+            console.log(newValue);
+            if (newValue === 3) {
+                this.updateQuoteSection();
+                this.$store.commit('SET_MODE', oldValue); // Resets chatbot from job posting mode to normal mode
+                this.$store.commit('SET_INTENTS', [1]); // Resets intents
+                this.$store.commit('SET_ENTITIES', [1]); // Resets entities
+            }
+        }
+    },
+
     created() {
         this.updateQuoteSection();
     },
@@ -73,6 +86,8 @@ export default {
     beforeDestroy() {
         clearInterval(this.intervalId); // Clear the interval when the component is destroyed
     },
+
+    
 }
 
 </script>

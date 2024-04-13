@@ -86,8 +86,8 @@ export default {
                     console.error(error);
                 }); 
         },
+        
         createUserBox(){
-
             const newResponse = document.createElement('div');
             newResponse.classList.add('user');
             const userAvatarDiv = this.createUserHeading();
