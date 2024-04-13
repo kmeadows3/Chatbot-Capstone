@@ -234,22 +234,23 @@ export default {
 </script>
 
 <style>
-.job-search-container {
+/* .job-search-container {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   background-color: #f5f5f5;
-  width: 100vh;
+  width: 70vh;
   margin: 20px;
   max-height: 1000px;
-}
+  border-radius: 20px;
+} */
 
 .job-search-form-container {
-  background-color: white;
+  background-color: #ebecf0;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  max-width: 80vh;
+  box-shadow: 0 30px 10px rgba(0, 0, 0, 0.1);
+  max-width: 65vh;
   width: 100%;
   max-height: 1000px;
   margin: 20px;
@@ -257,7 +258,7 @@ export default {
 
 .job-search-title {
   text-align: left;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-size: 2.5rem;
   font-weight: bold;
   color: #007bff;
@@ -275,10 +276,16 @@ export default {
   max-width: 300px;
   padding: 0.75rem;
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: solid gray 2px;
+    border-radius: 20px;
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    resize: none;
+    outline: none;
+    transition: box-shadow 0.3s ease;
   margin-right: 40px;
   margin-bottom: 20px;
+  display: block;
 }
 
 </style>

@@ -93,7 +93,7 @@ export default {
             const userAvatarDiv = this.createUserHeading();
             const userTextDiv = document.createElement('div');
             userTextDiv.classList.add('user-text-div');
-            userTextDiv.innerText = this.textBoxText;
+            userTextDiv.textContent = this.textBoxText;
             newResponse.appendChild(userAvatarDiv);
             newResponse.appendChild(userTextDiv);
             return newResponse;
@@ -177,6 +177,7 @@ export default {
                         const [, url, text] = link.match(/<a href="(.*?)".*?>(.*?)<\/a>/);
                         updatedResponse = updatedResponse.replace(link, `<a href="${url}" target="_blank">${text}</a>`);
                     });
+                    
                     chatbotTextDiv.innerHTML = updatedResponse;
                 } else {
                     chatbotTextDiv.innerHTML = response;
