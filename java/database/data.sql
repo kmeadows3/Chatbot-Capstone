@@ -25,6 +25,7 @@ INSERT INTO intent(name) VALUES ('Information');
 
 -- ID 4
 INSERT INTO intent(name) VALUES ('Practice');  
+	-- DO NOT INCLUDE QUIZ AS A KEYWORD FOR THIS, IT'S USED BY THE QUIZ MODE
 	INSERT INTO keyword(keyword, intent_id) VALUES ('practice', 4);  -- Intent: Practice(4)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('ask me', 4); -- Intent: Practice(4)
     INSERT INTO keyword(keyword, intent_id) VALUES ('next question', 4); -- Intent: Practice(4)
@@ -66,7 +67,7 @@ INSERT INTO intent(name) VALUES ('Job Postings');
 	INSERT INTO keyword(keyword, intent_id) VALUES ('search for job', 8);  -- Intent: Job Postings(8)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('search for jobs', 8);  -- Intent: Job Postings(8)
 
--- ID 8
+-- ID 9
 INSERT INTO intent(name) VALUES ('New Quote');
     INSERT INTO keyword(keyword, intent_id) VALUES ('new quote', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('new quotes', 9);  -- Intent: New Quote(9)
@@ -76,6 +77,10 @@ INSERT INTO intent(name) VALUES ('New Quote');
 	INSERT INTO keyword(keyword, intent_id) VALUES ('motivation', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('famous quote', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('famous quotes', 9);  -- Intent: New Quote(9)
+
+-- ID 10
+INSERT INTO intent(name) VALUES ('Quiz');
+    INSERT INTO keyword(keyword, intent_id) VALUES ('quiz', 10);  -- Intent: Quiz(10)
 
 
 -------------------- ENTITIES --------------------
@@ -792,6 +797,11 @@ INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter,
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 10); -- Entity 10: Follow Up
 response_id_counter := response_id_counter + 1;
 
+-- Default Bad Response
+INSERT INTO response(response, name) VALUES ('I apologize, I did not understand that, though it did seem vaguely negative. If you type "Chatbot Help" I can let you know what I can understand.');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 6: Example
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 11); -- Entity 10: Follow Up
+response_id_counter := response_id_counter + 1;
 
 -------------------- RECRUITER ENTITY RESPONSES --------------------
 

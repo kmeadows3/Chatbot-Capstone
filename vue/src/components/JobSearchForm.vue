@@ -226,6 +226,7 @@ export default {
 </script>
 
 <style>
+<<<<<<< HEAD
 
 .job-search-form {
     display: flex;
@@ -234,6 +235,37 @@ export default {
     gap: 2px;
 
     width:100%;
+=======
+/* .job-search-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #f5f5f5;
+  width: 70vh;
+  margin: 20px;
+  max-height: 1000px;
+  border-radius: 20px;
+} */
+
+.job-search-form-container {
+  background-color: #ebecf0;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 30px 10px rgba(0, 0, 0, 0.1);
+  max-width: 65vh;
+  width: 100%;
+  max-height: 1000px;
+  margin: 20px;
+}
+
+.job-search-title {
+  text-align: left;
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #007bff;
+  border-bottom: solid #007bff 2px;
+>>>>>>> d8a7c10d7a8ec66df811c9e31e753d6798baca2b
 }
 
 
@@ -249,8 +281,25 @@ export default {
     padding-left: 10px;
 }
 
+<<<<<<< HEAD
 .job-search-form > div {
     font-size: 16px;
+=======
+.form-group input[type="text"] {
+  max-width: 300px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: solid gray 2px;
+    border-radius: 20px;
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    resize: none;
+    outline: none;
+    transition: box-shadow 0.3s ease;
+  margin-right: 40px;
+  margin-bottom: 20px;
+  display: block;
+>>>>>>> d8a7c10d7a8ec66df811c9e31e753d6798baca2b
 }
 
 </style>
