@@ -1,7 +1,9 @@
 <template>
     <div id="outer-box">
         <div id="chat-display"></div>
-
+        <div class="overlay" v-if="record">
+            <img src="/src/assets/record.gif" alt="Overlay" class="overlay-image">
+        </div>
         <div id="user-input">
             <div v-show="this.$store.state.mode === 1">
                 <JobSearchForm ref="jobSearchForm" />
@@ -26,6 +28,9 @@ var speechRecognition = window.webkitSpeechRecognition;
 var recognition = new speechRecognition();
 recognition.lang = 'en-US';
 
+var synthesis = window.speechSynthesis;
+//var synthesis = new speechSynthesis();
+
 
 var greetUser = false;
 import QueryService from '../services/QueryService';
@@ -35,6 +40,7 @@ export default {
     data() {
         return {
             textBoxText: "",
+            record: false
         }
     },
 
@@ -85,17 +91,17 @@ export default {
                 if (this.$store.state.mode === 1) {
                     // Job Searching Mode -- TODO
                     this.$refs.jobSearchForm.searchJobs()
-                    .then(response => {
-                        this.addRobotBox("I found some results to your search: ");
-                        this.$store.commit('SET_MODE', 0); // Resets chatbot from job posting mode to normal mode
-                        this.$store.commit('SET_INTENTS', [1]); // Resets intents
-                        this.$store.commit('SET_ENTITIES', [1]); // Resets entities
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
+                        .then(response => {
+                            this.addRobotBox("I found some results to your search: ");
+                            this.$store.commit('SET_MODE', 0); // Resets chatbot from job posting mode to normal mode
+                            this.$store.commit('SET_INTENTS', [1]); // Resets intents
+                            this.$store.commit('SET_ENTITIES', [1]); // Resets entities
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
 
-                    
+
                 } else {
                     this.getResponseFromServer();
                 }
@@ -198,25 +204,40 @@ export default {
 
         beginVoiceRecognition() {
 
+            //      const countdownDiv = document.createElement('div');
+            //      const countdownGif = document.createElement('img');
+            //      countdownGif.src = "/src/assets/record.gif";
+            //      countdownDiv.appendChild(countdownGif);
+            //      const chatBox = document.getElementById('outer-box');
+            //      chatBox.appendChild(countdownGif);
+
+            var startSound = new Audio("/src/assets/startSound.mp3");
+            var endSound = new Audio("/src/assets/endSound.mp3");
+            setTimeout(() => {
+                this.record = true;
+                startSound.play();
+            }, 1000);
+
             recognition.onresult = (event) => {
-                const transcript = event.results[0][0].transcript;
-                this.textBoxText = transcript;
-                this.addUserBox();
+                setTimeout(() => {
+                    this.record = false;
+                    endSound.play();
+                    const transcript = event.results[0][0].transcript;
+                    this.textBoxText = transcript;
+                    this.addUserBox();
+                }, 250);
+
             };
 
+            recognition.onend = () => {
+                this.record = false;
+
+            }
             recognition.start();
-            // this.addVoiceToTextBox();
 
         },
 
-        // addVoiceToTextBox() {
-        //     var finalTranscript;
-        //     recognition.onresult = function(event) {
-        //         finalTranscript = event.results[0][0].transcript;
-        //         this.textBoxText = finalTranscript;
-        //     }
 
-        // },
 
     },
     mounted() {
@@ -238,6 +259,8 @@ div#chat-display {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background-color: #ebecf0;
     margin-bottom: 6px;
+
+    position: relative;
     /* margin-left: 200px; */
 }
 
@@ -310,6 +333,28 @@ div.user {
     font-weight: bold;
 }
 
+.overlay {
+    position: fixed;
+    /* Fixed position to overlay on everything */
+    top: 22%;
+    /* Top of the screen */
+    left: 31%;
+    /* Left of the screen */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    z-index: 9999;
+    /* Higher z-index to overlay on top */
+    pointer-events: none;
+    /* Allows interaction with elements behind the overlay */
+}
+
+.overlay-image {
+    width: auto;
+    height: 15%;
+}
+
 #chat-display::-webkit-scrollbar {
     width: 10px;
 }
@@ -369,6 +414,5 @@ button:hover {
 button:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8);
-}
-</style>
+}</style>
     
