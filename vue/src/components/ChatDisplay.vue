@@ -213,10 +213,9 @@ export default {
         },
 
         greetUser() {
-            let message = "Nice to meet you. ";
-            message += "I can help you with applying for technical jobs.";
-            message += "</br>";
-            message += `Press "help" at any time, and I'll let you know what features are available.`;
+            let message = "Nice to meet you, " + this.$store.state.preferredName + ". ";
+            message += "I can help you with applying for technical jobs. ";
+            message += `Type "Chatbot support" at any time, and I'll let you know what features are available.`;
             this.addRobotBox(message);
             greetUser = false;
         },
