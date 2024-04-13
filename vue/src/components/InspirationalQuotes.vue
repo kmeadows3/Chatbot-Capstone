@@ -62,6 +62,19 @@ export default {
         },
     },
 
+    watch: {
+        '$store.state.mode'(newValue, oldValue) {
+            // update the quote whenever the mode is changed to 3 (quote mode) in the store
+            console.log(newValue);
+            if (newValue === 3) {
+                this.updateQuoteSection();
+                this.$store.commit('SET_MODE', oldValue); // Resets chatbot from job posting mode to normal mode
+                this.$store.commit('SET_INTENTS', [1]); // Resets intents
+                this.$store.commit('SET_ENTITIES', [1]); // Resets entities
+            }
+        }
+    },
+
     created() {
         this.updateQuoteSection();
     },
@@ -73,6 +86,8 @@ export default {
     beforeDestroy() {
         clearInterval(this.intervalId); // Clear the interval when the component is destroyed
     },
+
+    
 }
 
 </script>
@@ -123,7 +138,7 @@ div.quote_container > img {
 
 
 div.quote_container > p.quote {
-    font-size: calc(1.45vw);
+    font-size: min(calc(3.2vh), calc(1.45vw));
     position: absolute;
     width: 95%;
     top: 30%;
@@ -133,6 +148,7 @@ div.quote_container > p.quote {
 
 div.quote_container > p.attribute {
     font-size: calc(1.2vw);
+    font-size: min(calc(2.65vh), calc(1.45vw));
     position: absolute;
     width: 100%;
     bottom: 0%;

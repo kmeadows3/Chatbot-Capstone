@@ -7,9 +7,7 @@
       <InspirationalQuotes />
     </div>
     <div class="job_postings">
-      <div v-show="$store.state.jobPostings.length > 0">
-        <JobDetails />
-      </div>
+      <JobDetails />
     </div>
   </div>
 </template>
@@ -29,9 +27,11 @@ export default {
 </script>
 
 <style>
+
+
 div.home_display {
-  width: 100 vw;
-  height: 100 vh;
+  width: 96vw;
+  height: 90vh;
   padding: 10px;
   display: grid;
 
@@ -55,7 +55,6 @@ div.quote {
 }
 
 div.job_postings {
-  background-color: blue;
   grid-area: job_postings;
 }
 
