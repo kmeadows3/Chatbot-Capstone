@@ -10,6 +10,15 @@
 import InspirationalQuotesService from '../services/InspirationalQuoteService';
 import ImageService from '../services/imageService';
 
+/*
+Modes:
+0 - Normal Chat Bot
+1 - Job Postings
+2 - Company Data
+3 - Get a new Quote
+4 - Quiz
+*/
+
 export default {
     data() {
         return {
@@ -32,7 +41,7 @@ export default {
                 const quoteBody = response.data[0];
 
                 this.quote = "“" + quoteBody.content + "”";
-                this.attribute = "-" + quoteBody.author;
+                this.attribute = quoteBody.author;
             })
             .catch(error => {
                 console.error('Error fetching Quote Text:', error);
@@ -122,16 +131,16 @@ div.quote_container > p {
 }
 
 div.quote_container {
-    border-radius: 8px;
+    border-radius: 14px;
     overflow: hidden; /* Makes a window for all the elements inside */
 }
 
 div.quote_container > img {
     position: absolute;
-    left: 0%;
-    top: -50px;
-    height:200%;
-    width: 100%;
+    right: 0;
+    top: -150px;
+    height:400px;
+    width: 500px;
     
 }
 

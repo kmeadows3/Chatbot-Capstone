@@ -4,8 +4,9 @@
         <input type="text" id="stateAbbreviation" v-model="stateAbbreviation" placeholder="State Abbreviation">
         <input type="text" id="companyName" v-model="companyName" placeholder="Company Name (Optional)">
         <div>
-            <label for="includeRemote">Include Remote Positions:</label>
+            
             <input id="includeRemote" type="checkbox" v-model="includeRemote" />
+            <label for="includeRemote">Include Remote Positions</label>
         </div>
     </form>
     
@@ -31,7 +32,7 @@ export default {
                 this.$store.commit("CLEAR_JOB_POSTINGS");
                 this.searchJobsOnMultiplePages()
                 .then(response => {
-                    resolve(response); // Resolve the promise when the asynchronous operation is done
+                    resolve(true); // Resolve the promise when the asynchronous operation is done
                 })
                 .catch(error => {
                     reject(error); // Reject the promise if an error occurs
@@ -93,8 +94,6 @@ export default {
                 jobResults = jobResults.filter((job) => {
                     const companyName = job.company.name.toLowerCase().trim();
                     const companyNameSearch = this.companyName.toLowerCase().trim();
-                    console.log(companyName);
-                    console.log(companyNameSearch);
                     return companyNameSearch === companyName;
                 });
             }
@@ -236,6 +235,9 @@ export default {
     width:100%;
 }
 
+label {
+    color: white;
+}
 
 .job-search-form input[type="text"] {
     border: solid gray 2px;

@@ -1,7 +1,7 @@
 <template>
     <div class ="job_description">
         <div class="exit">
-            <a href="#" @click.prevent="unselectJob()">X</a>
+            <a href="#" @click.prevent="unselectJob()"><strong>X</strong></a>
         </div>
         <p id="position_title">{{ this.$store.state.selectedJobPosting.positionTitle }}</p>
         <p id="position_details">{{ this.$store.state.selectedJobPosting.levels }} 
@@ -41,7 +41,7 @@ export default {
 <style>
 
 div.job_description{
-    background-color: rgb(130, 220, 204);
+    background-color: #6cd9f7;
     margin: calc(100vw / 150);
     border-radius: 8px;
     padding: 10px;
@@ -62,7 +62,7 @@ div.job_description > div.exit{
 }
 
 div.job_description > div.exit > a {
-    color: red;
+    color: rgb(187, 0, 0);
     text-decoration: none;
 }
 

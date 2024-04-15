@@ -49,6 +49,11 @@ div.job_details {
     display: flex; /* Use flexbox to control layout */
     flex-direction: column;
     align-items: center;
+    text-align: center;
+}
+
+div.job_details > h1 {
+    margin: 20;
 }
 
 div.job_cards_container {
@@ -77,6 +82,18 @@ a.job_card {
     overflow-wrap: break-word; /* Breaks up long links to keep them inside the card */
     align-self: flex-start; /* Align cards to the start of their container */
 }
+
+a.job_card:hover {
+    transform: translateY(-2px);
+    background-color: #6cd9f7;
+
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    
+}
+
 
 a.job_card > p {
     margin: 0;

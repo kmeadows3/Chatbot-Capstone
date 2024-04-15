@@ -237,7 +237,14 @@ export default {
         greetUser() {
             let message = "Nice to meet you, " + this.$store.state.preferredName + ". ";
             message += "I can help you with applying for technical jobs. ";
-            message += `Type "Chatbot support" at any time, and I'll let you know what features are available.`;
+            message += `Type "Chatbot support" at any time, or try one of these commands:`;
+            message += '<ul>';
+                message += '<li>Search for job postings.</li>';
+                message += '<li>Take a technical quiz.</li>';
+                message += '<li>Practice HR interview questions.</li>';
+                message += '<li>I want information about a company.</li>';
+                message += '<li>What should I wear to an interview?</li>';
+            message += '</ul>';
             this.addRobotBox(message);
             greetUser = false;
         },
@@ -335,6 +342,11 @@ export default {
     
 <style>
 
+body {
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 div#chat-display {
     height: calc(105vh - 250px);
     overflow-y: auto;
@@ -387,7 +399,6 @@ div.chatbot {
 div.user {
     align-self: end;
     background-color: #E2D6FC;
-    font-size: larger;
     align-items: flex-end;
 }
 
@@ -465,7 +476,7 @@ textarea {
     padding: 12px 16px;
     font-size: 16px;
     border: solid gray 2px;
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: #f5f5f5;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     resize: none;

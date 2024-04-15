@@ -62,6 +62,7 @@ div.chatbot_window {
   grid-area: chatbot;
   background-color: #297a98;
   height: 100%;
+  border-radius: 14px;
 }
 
 div.quote {
@@ -72,8 +73,8 @@ div.quote {
 
 div.job_postings {
   grid-area: job_postings;
-  background-color: rgb(241, 241, 241);
-  border-radius: 8px;
+  background-color: #f2f8ff;
+  border-radius: 14px;
   overflow-y: auto;
 }
 
