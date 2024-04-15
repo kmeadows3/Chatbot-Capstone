@@ -79,7 +79,7 @@ export default {
                 // Greet user if name was set in above 'if' statement
                 this.greetUser();
             } else if (this.$store.state.mode === 1){
-                // Job Searching Mode
+                // Job Searching Mode -- TODO
                 this.doJobSearch();
             } else {
                 this.getResponseFromServer();
@@ -103,8 +103,8 @@ export default {
                     console.error(error);
                 }); 
         },
-
         createUserBox(){
+
             const newResponse = document.createElement('div');
             newResponse.classList.add('user');
             const userAvatarDiv = this.createUserHeading();
@@ -129,12 +129,12 @@ export default {
             return userAvatarDiv;
         },
         addRobotBox(response) {
-
             const chatBox = document.getElementById('chat-display');
             const newResponseBox = document.createElement('div');
             const loadingGif = this.chatBotLoad(chatBox, newResponseBox);
             setTimeout(this.createChatbotBox, 750, response, chatBox, newResponseBox, loadingGif);
         },
+
         chatBotLoad(chatBox, newResponseBox) {
             newResponseBox.classList.add('chatbot');
             const loadingGif = document.createElement('img');
@@ -145,25 +145,33 @@ export default {
                 chatBox.appendChild(newResponseBox);
                 this.scrollChatDisplayToBottom(chatBox);
             }, 250)
-            
+
             return loadingGif;
         },
+
         createChatbotBox(response, chatBox, newResponseBox, loadingGif) {
             const chatbotAvatarDiv = this.createChatbotHeading()
             const chatbotTextDiv = document.createElement('div');
 
             setTimeout(() => {
-            newResponseBox.removeChild(loadingGif);
-            newResponseBox.appendChild(chatbotAvatarDiv);
-            newResponseBox.appendChild(chatbotTextDiv);
-           
+                newResponseBox.removeChild(loadingGif);
+                newResponseBox.appendChild(chatbotAvatarDiv);
+                newResponseBox.appendChild(chatbotTextDiv);
+                this.convertToHTML(response, chatbotTextDiv);
 
-            let currentIndex = 0;
-            this.typeText(currentIndex, response, chatbotTextDiv, chatBox);
+                if (this.textToSpeech) {
+                    const utterance = new SpeechSynthesisUtterance(chatbotTextDiv.textContent);
+                    utterance.lang = 'en-US';
+                    synthesis.speak(utterance);
+                }
+
+                this.scrollChatDisplayToBottom(chatBox);
             }, 750);
-             this.textBoxText = "";
+
+            this.textBoxText = "";
         },
-        createChatbotHeading(){
+
+        createChatbotHeading() {
             const chatbotAvatarDiv = document.createElement('div');
             chatbotAvatarDiv.classList.add('avatar-div');
             const chatbotAvatar = document.createElement('img');
@@ -176,37 +184,23 @@ export default {
             chatbotAvatarDiv.appendChild(chatwickNameDiv);
             return chatbotAvatarDiv;
         },
-        typeText(currentIndex, response, chatbotTextDiv, chatBox){
-            if (currentIndex < response.length) {
-                chatbotTextDiv.textContent += response.charAt(currentIndex);
-                currentIndex++;
-                setTimeout(this.typeText, 0, currentIndex, response, chatbotTextDiv, chatBox);
-            } else {
 
-                this.convertToHTML(response, chatbotTextDiv);
-
-                if (this.textToSpeech) {
-                    const utterance = new SpeechSynthesisUtterance(chatbotTextDiv.textContent);
-                    utterance.lang = 'en-US';
-                    synthesis.speak(utterance);
-                }
-
-            }
-            this.scrollChatDisplayToBottom(chatBox);
-        },
-        convertToHTML(response, chatbotTextDiv){
+        convertToHTML(response, chatbotTextDiv) {
             const links = response.match(/<a href="(.*?)".*?>(.*?)<\/a>/g);
-                if (links) {
-                    let updatedResponse = response;
-                    links.forEach(link => {
-                        const [, url, text] = link.match(/<a href="(.*?)".*?>(.*?)<\/a>/);
-                        updatedResponse = updatedResponse.replace(link, `<a href="${url}" target="_blank">${text}</a>`);
-                    });
-                    
-                    chatbotTextDiv.innerHTML = updatedResponse;
-                } else {
-                    chatbotTextDiv.innerHTML = response;
-                }
+            if (links) {
+                let updatedResponse = response;
+                links.forEach(link => {
+                    const [, url, text] = link.match(/<a href="(.*?)".*?>(.*?)<\/a>/);
+                    updatedResponse = updatedResponse.replace(link, `<a href="${url}" target="_blank">${text}</a>`);
+                });
+                chatbotTextDiv.innerHTML = updatedResponse;
+            } else {
+                chatbotTextDiv.innerHTML = response;
+            }
+        },
+
+        scrollChatDisplayToBottom(chatBox) {
+            chatBox.scrollTop = chatBox.scrollHeight;
         },
         setUserName() {
             let name = this.textBoxText;
@@ -277,9 +271,6 @@ export default {
             chatBox.appendChild(chatbotOuterBox);
             this.scrollChatDisplayToBottom(chatBox);
             this.$store.commit('SET_MODE', 0);
-        },
-        scrollChatDisplayToBottom(chatBox) {
-            chatBox.scrollTop = chatBox.scrollHeight;
         },
 
         beginVoiceRecognition() {
