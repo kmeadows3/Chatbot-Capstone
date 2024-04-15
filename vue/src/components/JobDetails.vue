@@ -2,16 +2,17 @@
     <div class ="job_details" v-show="$store.state.jobPostings.length > 0">
         <h1>Recent Job Posting{{ $store.state.jobPostings.length > 1 ? 's': '' }}:</h1>
         <div class="job_cards_container">
-            <div class="job_card" v-for="jobPosting in $store.state.jobPostings">
-                    <p id="position_title">{{ jobPosting.positionTitle }}</p>
-                    <p id="position_details">{{ jobPosting.levels }} || {{ jobPosting.datePosted }}</p>
-                    <p>Company: {{ jobPosting.companyName }} || ID: {{ jobPosting.companyId }}</p>
-                    <p>Locations: {{ formatLocations(jobPosting.locations) }}</p>
-                    <div v-show="false">
-                        <p class="description">Description: <span v-html="jobPosting.description"></span></p>
-                    </div>
-                    <a v-bind:href="jobPosting.landingPage" target="_blank">Click here to go to Original Job Posting.</a>
-            </div>
+            <a href="#" class="job_card" v-for="jobPosting in $store.state.jobPostings">
+                <a href="#" id="more_job_info"></a>
+                <p id="position_title">{{ jobPosting.positionTitle }}</p>
+                <p id="position_details">{{ jobPosting.levels }} || {{ jobPosting.datePosted }}</p>
+                <p>Company: {{ jobPosting.companyName }} || ID: {{ jobPosting.companyId }}</p>
+                <p><strong>Location{{ jobPosting.locations.length > 1 ? 's' : '' }}: </strong>{{ formatLocations(jobPosting.locations) }}</p>
+                <div v-show="false">
+                    <p class="description">Description: <span v-html="jobPosting.description"></span></p>
+                </div>
+                <a v-bind:href="jobPosting.landingPage" target="_blank">Click here to go to Original Job Posting.</a>
+            </a>
         </div>
     </div>
 </template>
@@ -66,14 +67,16 @@ div.job_search_results::-webkit-scrollbar-track {
 }
 
 
-
-div.job_card {
+a.job_card {
+    text-decoration: none; 
+    color: inherit;
     background-color: rgb(130, 220, 204);
     border-radius: 8px;
     width: 90%;
     height: auto;
     padding-left: 10px;
     padding-right: 10px;
+    padding-bottom: 10px;
     margin-bottom: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -81,9 +84,17 @@ div.job_card {
     align-self: flex-start; /* Align cards to the start of their container */
 }
 
+
+
 p#position_title {
     font-size: 30px;
     font-weight: bold;
+    text-decoration: underline;
 }
+
+p#position_details {
+    font-size: 20px;
+}
+
 
 </style>

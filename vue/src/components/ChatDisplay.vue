@@ -121,7 +121,7 @@ export default {
             userAvatar.classList.add('user-avatar');
             const userNameDiv = document.createElement('div');
             userNameDiv.classList.add('name-divs');
-            userNameDiv.innerText = this.$store.state.preferredName + " -";
+            userNameDiv.innerText = this.$store.state.preferredName;
             userAvatarDiv.appendChild(userNameDiv)
             userAvatarDiv.appendChild(userAvatar);
             return userAvatarDiv;
@@ -169,7 +169,7 @@ export default {
             chatbotAvatar.classList.add('chatbot-avatar');
             const chatwickNameDiv = document.createElement('div');
             chatwickNameDiv.classList.add('name-divs');
-            chatwickNameDiv.innerText = "-  Chatwick";
+            chatwickNameDiv.innerText = "CHATWICK";
             chatbotAvatarDiv.appendChild(chatbotAvatar);
             chatbotAvatarDiv.appendChild(chatwickNameDiv);
             return chatbotAvatarDiv;
@@ -208,8 +208,27 @@ export default {
         },
 
         setUserName() {
-            this.$store.commit('SET_PREFERREDNAME', this.textBoxText);
+            let name = this.textBoxText;
+            name = this.removeFromName(name, "hello");
+            name = this.removeFromName(name, "hey");
+            name = this.removeFromName(name, "hi");
+            name = this.removeFromName(name, "greetings");
+            name = this.removeFromName(name, "my name is");
+            name = this.removeFromName(name, "I'm ");
+            name = this.removeFromName(name, "Im ");
+            name = this.removeFromName(name, "I am ");
+            name = this.removeFromName(name, ", ");
+            name = this.removeFromName(name, ".");
+            name = this.removeFromName(name, ". ");
+            name = this.removeFromName(name, "?");
+            this.$store.commit('SET_PREFERREDNAME', name);
             greetUser = true;
+        },
+
+        removeFromName(oldString, textToReplace) {
+            oldString = oldString.toUpperCase();
+            textToReplace = textToReplace.toUpperCase();
+            return oldString.replace(textToReplace, "");
         },
 
         greetUser() {
