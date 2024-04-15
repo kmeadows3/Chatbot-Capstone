@@ -139,7 +139,7 @@ div.quote_container > img {
     position: absolute;
     right: 0;
     top: -150px;
-    height:400px;
+    height:430px;
     width: 500px;
     
 }

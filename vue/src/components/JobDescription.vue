@@ -45,6 +45,7 @@ div.job_description{
     margin: calc(100vw / 150);
     border-radius: 8px;
     padding: 10px;
+    overflow-wrap: break-word;
 }
 
 div.job_description > p {
@@ -54,16 +55,19 @@ div.job_description > p {
 
 div.job_description > div.external_link{
     margin-top: 20px;
+    text-align: center;
 }
 
 div.job_description > div.exit{
-    margin-top: 0px;
     text-align: right;
+    margin: 0px;
 }
 
 div.job_description > div.exit > a {
     color: rgb(187, 0, 0);
     text-decoration: none;
+    font-size: 20px;
+    margin: 0px;
 }
 
 </style>

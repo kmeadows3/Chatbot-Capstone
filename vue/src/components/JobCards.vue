@@ -26,7 +26,7 @@ export default {
             }
 
             if (locationsArray.length > 3) {
-                outputString += '+' + (locationsArray.length-3) + 'more'
+                outputString += '+' + (locationsArray.length-3) + ' more'
             }
 
             return outputString;

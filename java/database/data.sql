@@ -23,6 +23,7 @@ INSERT INTO intent(name) VALUES ('Information');
 		INSERT INTO keyword(keyword, intent_id) VALUES ('how do i', 3);  -- Intent: Information(3)
 		INSERT INTO keyword(keyword, intent_id) VALUES ('what is', 3);  -- Intent: Information(3)
 		INSERT INTO keyword(keyword, intent_id) VALUES ('advice', 3); -- Intent: Information(3)
+		INSERT INTO keyword(keyword, intent_id) VALUES ('what commands', 3); -- Intent: Information(3)
 
 -- ID 4
 INSERT INTO intent(name) VALUES ('Practice');  
@@ -30,6 +31,7 @@ INSERT INTO intent(name) VALUES ('Practice');
 	INSERT INTO keyword(keyword, intent_id) VALUES ('practice', 4);  -- Intent: Practice(4)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('ask me', 4); -- Intent: Practice(4)
     INSERT INTO keyword(keyword, intent_id) VALUES ('next question', 4); -- Intent: Practice(4)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('different', 4);
 
 -- ID 5
 INSERT INTO intent(name) VALUES ('External Resource');
@@ -246,8 +248,14 @@ response_id_counter := response_id_counter + 1;
 
 -------------------- CHATBOT ENTITY RESPONSES --------------------
 -- Chatbot support / practice / example
-INSERT INTO response(response, name) VALUES ('I am designed to be able to provide general interview advice and know about the following topics HR Interviews, Technical Interviews, Interview Attire, Cover Letters, Interview Follow-Up, and Cover Letters. I can also provide interview practice and help guide you to external resources about those topics.
-<br>An example of a common request would be “Tell me about technical interviews,” “Ask me an HR Interview question,” “What is the STAR method?” or “Where can I find more information about cover letters?”', 'chatbot support');
+INSERT INTO response(response, name) VALUES ('You can try any of these commands:
+<br/><ul>
+<li>Search for job postings.</li>
+<li>Take a technical quiz.</li>
+<li>Practice HR interview questions.</li>
+<li>I want information about a company.</li>
+<li>Give me an example cover letter.</li>
+</ul>', 'chatbot support');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 2); -- Intent 2: Support
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 6); -- Intent 6: Example

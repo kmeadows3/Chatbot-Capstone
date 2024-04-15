@@ -1,9 +1,9 @@
 <template>
     <div class="box">
-    <p class="score">You scored {{totalScore}} points out of a possible {{ totalPossibleScore }} points. {{ resultString }}.</p>
+    <p class="score">You scored {{totalScore}} points out of a possible {{ totalPossibleScore }} points. {{ resultString }}</p>
     
     <ul>
-        <p>Score Breakdown: </p>
+        <p><strong>Score Breakdown</strong></p>
         <li v-for = "difficulty in difficultyArray" v-bind:key="difficulty.difficulty">
             {{ difficulty.difficulty }} Questions: {{ difficulty.correctCount }} / {{ difficulty.totalCount }}
         </li>
@@ -80,10 +80,9 @@ p {
 }
 p.score {
     background-color: aliceblue;
-    border-radius: 5px;
+    border-radius: 8px;
     margin: 10px 5px 5px 5px;
-    padding: 5px;
-    padding-bottom: 5px;
+    padding: 10px;
     font-size: 0.8em;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }

@@ -4,7 +4,7 @@ import { createClient } from 'pexels';
 const client = createClient('vBMRgCXuDHQ3BU05Pm2EghNw4Hu1HoeN9q2ra2ua3Jy1S6sGh3TUrnxe');
 
 const searchTerms = ['City', 'Nature', 'Landscapes', 'Thoughtful', 'Dog', 'Cat', 'Silly', 
-'Scary Clown', 'Water', 'Sky', 'Library', 'Writing', 'Plants', 'Black and White', 'Paper', 'Clouds'];
+'Scary Clown', 'Water', 'Sky', 'Library', 'Writing', 'Plants', 'Black and White', 'Paper', 'Clouds', 'Space'];
 
 export default {
     getRandom(pageNumber, photosPerPage) {
