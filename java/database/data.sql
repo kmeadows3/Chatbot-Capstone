@@ -31,7 +31,8 @@ INSERT INTO intent(name) VALUES ('Practice');
 	INSERT INTO keyword(keyword, intent_id) VALUES ('practice', 4);  -- Intent: Practice(4)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('ask me', 4); -- Intent: Practice(4)
     INSERT INTO keyword(keyword, intent_id) VALUES ('next question', 4); -- Intent: Practice(4)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('different', 4);
+	INSERT INTO keyword(keyword, intent_id) VALUES ('give me a different', 4);
+	INSERT INTO keyword(keyword, intent_id) VALUES ('give me a new', 4);
 
 -- ID 5
 INSERT INTO intent(name) VALUES ('External Resource');
