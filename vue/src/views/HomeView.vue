@@ -8,7 +8,9 @@
       <InspirationalQuotes />
     </div>
     <div class="job_postings" v-show="this.$store.state.selectedJobPosting.isEmpty">
-      <JobCards />
+      <button v-show="$store.state.jobPostings.length!=0" @click="toggleJobs()">{{ showJobs ? "Show Instructions" : "Show Jobs" }}</button>
+      <Instructions v-show="$store.state.jobPostings.length==0 || !showJobs"/>
+      <JobCards v-show="showJobs"/>
     </div>
     <div class="job_postings" v-if="!this.$store.state.selectedJobPosting.isEmpty">
       <JobDescription />
@@ -20,7 +22,8 @@
 import ChatDisplay from '../components/ChatDisplay.vue';
 import InspirationalQuotes from '../components/InspirationalQuotes.vue'
 import JobCards from '../components/JobCards.vue';
-import JobDescription from '../components/JobDescription.vue'
+import JobDescription from '../components/JobDescription.vue';
+import Instructions from '../components/Instructions.vue';
 
 export default {
   components: {
@@ -28,8 +31,19 @@ export default {
     InspirationalQuotes,
     JobCards,
     JobDescription,
+    Instructions
+  },
+  data(){
+    return {
+      showJobs: true
+    }
+  },
+  methods: {
+    toggleJobs() {
+      this.showJobs = !this.showJobs;
+    }
   }
-};
+}
 </script>
 
 <style>
