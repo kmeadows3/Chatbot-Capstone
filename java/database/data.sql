@@ -83,6 +83,15 @@ INSERT INTO intent(name) VALUES ('New Quote');
 INSERT INTO intent(name) VALUES ('Quiz');
     INSERT INTO keyword(keyword, intent_id) VALUES ('quiz', 10);  -- Intent: Quiz(10)
 
+-- ID 11
+INSERT INTO intent(name) VALUES ('Negative');  
+	INSERT INTO keyword(keyword, intent_id) VALUES ('not', 11);  -- negative(11)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('shouldnt', 11);  -- negative(11)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('dont', 11);  -- negative(11)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('avoid', 11);  -- negative(11)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('bad', 11);  -- negative(11)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('suck', 11);  -- negative(11)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('sucks', 11);  -- negative(11)
 
 -------------------- ENTITIES --------------------
 -- ID 1
@@ -175,16 +184,6 @@ INSERT INTO entity(name) VALUES ('Follow Up');
 	INSERT INTO keyword(keyword, entity_id) VALUES ('thankyou note', 10);  -- Follow up(10)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('thankyou notes', 10);  -- Follow up(10)
 
--- ID 11
-INSERT INTO entity(name) VALUES ('Negative');  
-	INSERT INTO keyword(keyword, entity_id) VALUES ('not', 11);  -- negative(11)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('shouldnt', 11);  -- negative(11)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('dont', 11);  -- negative(11)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('avoid', 11);  -- negative(11)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('bad', 11);  -- negative(11)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('suck', 11);  -- negative(11)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('sucks', 11);  -- negative(11)
-
 
 	
 
@@ -238,6 +237,11 @@ INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter,
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 1); -- Entity 1: Default Entity
 response_id_counter := response_id_counter + 1;
 
+-- Default Negative
+INSERT INTO response(response, name) VALUES ('I was not able to determine what you are attempting to tell me, though it does seem vaguely negative. Can you rephrase your request?', 'default negative');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 11); -- Intent 11: Negative
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 1); -- Entity 1: Default Entity
+response_id_counter := response_id_counter + 1;
 
 
 -------------------- CHATBOT ENTITY RESPONSES --------------------
@@ -268,9 +272,8 @@ response_id_counter := response_id_counter + 1;
 -- Chatbot default bad
 INSERT INTO response(response, name) VALUES ('It’s okay, I often struggle to understand the so-called "logic" of humans. If you are not sure how to properly access my services, type "Chatbot Help", and I would be happy to educate you.', 'Chatbot Information');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
-INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 3); -- Intent 3: Information
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 2); -- Entity 2: Chatbot 
-INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 11); -- Entity 11: Negative 
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 11); -- Intent 11: Negative 
 
 response_id_counter := response_id_counter + 1;
 
@@ -336,7 +339,7 @@ INSERT INTO response(response, name) VALUES ('<p>Here is how NOT to answer a que
 <p><b>Response:</b> "I am bad at communication." </p>', 'Example Star method');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 6); -- Intent 6: Example
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 3); -- Entity 3: Star Method
-INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 11); -- Entity 11: Negative
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 11); -- Intent 11: Negative
 response_id_counter := response_id_counter + 1;
 
 -------------------- COVER LETTER ENTITY RESPONSES --------------------
@@ -799,17 +802,7 @@ INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter,
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 10); -- Entity 10: Follow Up
 response_id_counter := response_id_counter + 1;
 
--- Default Bad Response
-INSERT INTO response(response, name) VALUES ('I apologize, I did not understand that, though it did seem vaguely negative. If you type "Chatbot Help" I can let you know what I can understand.', 'General negative response');
-INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
-INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 11); -- Entity 11: Negative
-response_id_counter := response_id_counter + 1;
 
--- Bad support
-INSERT INTO response(response, name) VALUES ('What would you like help with?', 'Negative Help response');
-INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 2); -- Intent 2: Support
-INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 11); -- Entity 11: Negative
-response_id_counter := response_id_counter + 1;
 
 -------------------- RECRUITER ENTITY RESPONSES --------------------
 

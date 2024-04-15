@@ -37,7 +37,7 @@ public class ResponseSelector {
             responses = filterForResponsesWithMostKeywordMatches(responses);
             if (responses.size() > 1){
                 //filter out the responses with the most entities that don't match the utterance
-                responses = filterForResponsesWithMostExactMatch(responses, inputEntities);
+                responses = filterForResponsesWithMostExactMatch(responses, inputEntities, inputIntents);
             }
             //TODO select the best fitting of the remaining responses
 
@@ -55,12 +55,19 @@ public class ResponseSelector {
      * @para entities -- list of entities derived from the user's utterance
      * @return list of responses that match the utterance entities the best
      */
-    private List<Response> filterForResponsesWithMostExactMatch(List<Response> responses, List<Integer> entities) {
+    private List<Response> filterForResponsesWithMostExactMatch(List<Response> responses, List<Integer> entities, List<Integer> intents) {
         Map<Response, Integer> responseRanks = new LinkedHashMap<>();
         for (Response response : responses){
             int rank = 0;
             for(int entity : response.getResponseEntities()){
                 if(entities.contains(entity)){
+                    rank--;
+                } else {
+                    rank++;
+                }
+            }
+            for(int intent : response.getResponseIntents()){
+                if(intents.contains(intent)){
                     rank--;
                 } else {
                     rank++;
