@@ -129,6 +129,7 @@ export default {
         addRobotBox(response) {
             const chatBox = document.getElementById('chat-display');
             const newResponseBox = document.createElement('div');
+            newResponseBox.classList.add('chatbot');
             const loadingGif = this.chatBotLoad(chatBox, newResponseBox);
             setTimeout(this.createChatbotBox, 750, response, chatBox, newResponseBox, loadingGif);
         },
@@ -318,17 +319,17 @@ export default {
 </script>
     
 <style>
+
 div#chat-display {
     height: calc(105vh - 250px);
     overflow-y: auto;
-    width: 98%;
-    margin: 1%;
+    width: calc(100% - 12px);
+    margin: 6px;
     display: flex;
     flex-direction: column;
-    background-color: #ebecf0;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #ebecf0;
+    background-color: #effaff;
     margin-bottom: 6px;
 
     position: relative;
@@ -348,6 +349,11 @@ div#chat-display>div {
 
 }
 
+div#user-input {
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
 img.response_img {
     max-width: 90%;
     max-height: 400px;
@@ -359,12 +365,13 @@ img.response_img {
 
 div.chatbot {
     align-self: start;
-    font-size: larger;
+    background-color: #DCFCD2;
 }
+
 
 div.user {
     align-self: end;
-    background-color: #e3f2fd;
+    background-color: #E2D6FC;
     font-size: larger;
     align-items: flex-end;
 }
@@ -457,9 +464,9 @@ textarea:focus {
 }
 
 button {
-    background-color: #4c5caf;
+    background-color: #49c5ff;
     border: none;
-    color: white;
+    color: black;
     padding: 12px 24px;
     text-align: center;
     text-decoration: none;
@@ -475,13 +482,12 @@ button {
 }
 
 .text-to-speech {
-    border: solid;
-    border-color: red;
+    background-color: white;
     
 }
 
 button:hover {
-    background-color: #3b4a9c;
+    background-color: #9adfff;
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15), 0 3px 5px rgba(0, 0, 0, 0.25);
     transform: translateY(-1px);
 }

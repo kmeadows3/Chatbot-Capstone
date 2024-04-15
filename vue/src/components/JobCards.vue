@@ -65,7 +65,7 @@ div.job_cards_container {
 a.job_card {
     text-decoration: none; 
     color: inherit;
-    background-color: rgb(130, 220, 204);
+    background-color: #3ac5ec;
     border-radius: 8px;
     width: 90%;
     height: auto;
@@ -84,7 +84,7 @@ a.job_card > p {
 }
 
 p#position_title {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
     text-decoration: underline;
 }
