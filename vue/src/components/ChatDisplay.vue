@@ -208,27 +208,20 @@ export default {
             name = this.removeFromName(name, "greetings");
             name = this.removeFromName(name, "my name is");
             name = this.removeFromName(name, "I'm ");
+            name = this.removeFromName(name, "Im ");
             name = this.removeFromName(name, "I am ");
-            name = this.removeFromName(name, "how are you");
             name = this.removeFromName(name, ", ");
             name = this.removeFromName(name, ".");
             name = this.removeFromName(name, ". ");
             name = this.removeFromName(name, "?");
-            name = this.removeFromName(name, "<");
-            name = this.removeFromName(name, ">");
-            name = this.removeFromName(name, "/");
-            name = this.removeFromName(name, `"`);
-            name = this.removeFromName(name, "`");
-            name = this.removeFromName(name, `'`);
             this.$store.commit('SET_PREFERREDNAME', name);
             greetUser = true;
         },
 
         removeFromName(oldString, textToReplace) {
-            const escapedText = textToReplace.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            const regex = new RegExp(escapedText.toUpperCase(), 'g');
             oldString = oldString.toUpperCase();
-            return oldString.replace(regex, "");
+            textToReplace = textToReplace.toUpperCase();
+            return oldString.replace(textToReplace, "");
         },
 
         greetUser() {
@@ -360,6 +353,7 @@ img.response_img {
 div.chatbot {
     align-self: start;
     font-size: larger;
+    background-color: #3b4a9c;
 }
 
 div.user {
