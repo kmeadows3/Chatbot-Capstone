@@ -1,11 +1,14 @@
 <template>
-    <p>You scored {{totalScore}} points out of a possible {{ totalPossibleScore }} points. If this were a technical interview, I would {{ wouldHire ? 'move you along in the hiring process': 'choose to go with other applicants' }}.</p>
-    <p>Quiz Breakdown: </p>
+    <div class="box">
+    <p class="score">You scored {{totalScore}} points out of a possible {{ totalPossibleScore }} points. {{ resultString }}.</p>
+    
     <ul>
+        <p>Score Breakdown: </p>
         <li v-for = "difficulty in difficultyArray" v-bind:key="difficulty.difficulty">
             {{ difficulty.difficulty }} Questions: {{ difficulty.correctCount }} / {{ difficulty.totalCount }}
         </li>
     </ul>
+    </div>
 </template>
 
 <script>
@@ -46,13 +49,50 @@ export default {
             })
             return arr;
         },
-        wouldHire() {
-            let wouldHire = false;
-            this.totalScore / this.totalPossibleScore > 0.5 ? wouldHire = true : wouldHire = false;
-            return wouldHire;
+        resultString() {
+            let result = "I would advise more studying.";
+            const avg = this.totalScore / this.totalPossibleScore;
+
+            if (avg == 1) {
+                result = "That's a perfect score, very impressive."
+            } else if (avg > 75) {
+                result = "Well done. If this were a technical interview, I would  move you along in the hiring process."
+            } else if (avg > 25) {
+                result = "Your score could be improved. I would advise more studying."
+            } else if (avg == 0) {
+                result = "That's impressive on a multiple choice test. Either you are extremely unlucky, or you knew the correct answers and intentionally"
+                + " avoided them. Either way, I advise more studying."
+            }
+
+            return result;
         }
     }
     
 }
 
 </script>
+
+<style scoped>
+p {
+    font-size: 0.7em;
+    margin: 0px;
+    padding: 5px;
+}
+p.score {
+    background-color: aliceblue;
+    border-radius: 5px;
+    margin: 10px 5px 5px 5px;
+    padding: 5px;
+    padding-bottom: 5px;
+    font-size: 0.8em;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+ul {
+    margin: 0px;
+    padding: 5px;
+}
+li {
+    margin: 0px 0px 0px 25px;
+    font-size: 0.7em;
+}
+</style>

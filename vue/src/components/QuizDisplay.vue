@@ -1,6 +1,9 @@
 <template>
-    <div @click ="startQuiz()" v-if="!showQuestion">
-        Click for first question
+    <div class="box" v-if="!showQuestion">
+        <p>I am going to perform a short quiz to test your technical prowess. Click on the buttons to choose your answer, and I will give you a score at the end.</p>
+        <button @click ="startQuiz()">
+            Click for first question
+        </button>
     </div>
     <QuizQuestion v-bind:question="currentQuestion" v-show="showQuestion && !quizOver" @sendAnswer="answerQuestion"/>
     <QuizResults v-bind:quiz="updatedQuiz" v-if="quizOver"/>
@@ -47,3 +50,30 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+div.box {
+    background-color: lightblue;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+p {
+    margin: 0px;
+    padding: 5px;
+    font-size: 0.8em;
+}
+button {
+    box-sizing:border-box;
+    border: none;
+    display: inline-block;
+    width: 50%;
+    margin: 5px auto 5px auto;
+    padding: 10px 10px;
+    
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.7em;
+}
+</style>
