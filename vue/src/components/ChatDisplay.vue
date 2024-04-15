@@ -216,14 +216,21 @@ export default {
             name = this.removeFromName(name, ".");
             name = this.removeFromName(name, ". ");
             name = this.removeFromName(name, "?");
+            name = this.removeFromName(name, "<");
+            name = this.removeFromName(name, ">");
+            name = this.removeFromName(name, "/");
+            name = this.removeFromName(name, `"`);
+            name = this.removeFromName(name, "`");
+            name = this.removeFromName(name, `'`);
             this.$store.commit('SET_PREFERREDNAME', name);
             greetUser = true;
         },
 
         removeFromName(oldString, textToReplace) {
+            const escapedText = textToReplace.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const regex = new RegExp(escapedText.toUpperCase(), 'g');
             oldString = oldString.toUpperCase();
-            textToReplace = textToReplace.toUpperCase();
-            return oldString.replace(textToReplace, "");
+            return oldString.replace(regex, "");
         },
 
         greetUser() {
