@@ -45,9 +45,11 @@ export default {
                 this.currentQuestion = this.updatedQuiz[this.currentQuestionIndex];
             } else {
                 this.quizOver = true;
+                this.$emit('quizOver');
             }
         }
-    }
+    },
+    emits: ['quizOver']
 }
 </script>
 

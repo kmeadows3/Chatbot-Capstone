@@ -281,10 +281,14 @@ export default {
             chatbotOuterBox.classList.add('chatbot');
             const chatbotAvatarDiv = this.createChatbotHeading();
             chatbotOuterBox.appendChild(chatbotAvatarDiv);
-            const quizDisplay = h(QuizDisplay, {quiz: quiz});
+            const quizDisplay = h(QuizDisplay, {quiz: quiz, onQuizOver:this.exitQuiz});
             render(quizDisplay, chatbotOuterBox);
             chatBox.appendChild(chatbotOuterBox);
             this.scrollChatDisplayToBottom(chatBox);
+            // this.$store.commit('SET_MODE', 0);
+        },
+        exitQuiz(){
+            console.log("QUIZ ENDED");
             this.$store.commit('SET_MODE', 0);
         },
 
