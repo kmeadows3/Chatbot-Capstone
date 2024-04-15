@@ -80,6 +80,7 @@ div.job_postings {
 
 div.job_postings::-webkit-scrollbar {
     width: 10px;
+    border-radius: 10px;
 }
 
 div.job_postings::-webkit-scrollbar-thumb {
@@ -89,6 +90,7 @@ div.job_postings::-webkit-scrollbar-thumb {
 
 div.job_postings::-webkit-scrollbar-track {
     background-color: #f5f5f5;
+    border-radius: 10px;
 }
 
 </style>

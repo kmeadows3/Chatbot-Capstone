@@ -396,13 +396,13 @@ img.response_img {
 
 div.chatbot {
     align-self: start;
-    background-color: #DCFCD2;
+    background-color: #e1ffed;
 }
 
 
 div.user {
     align-self: end;
-    background-color: #E2D6FC;
+    background-color: #e7e0ff;
     align-items: flex-end;
 }
 
@@ -463,6 +463,7 @@ div.user {
 
 #chat-display::-webkit-scrollbar {
     width: 10px;
+    border-radius: 10px;
 }
 
 #chat-display::-webkit-scrollbar-thumb {
@@ -472,6 +473,7 @@ div.user {
 
 #chat-display::-webkit-scrollbar-track {
     background-color: #f5f5f5;
+    border-radius: 10px;
 }
 
 textarea {
