@@ -3,14 +3,17 @@
         Click for first question
     </div>
     <QuizQuestion v-bind:question="currentQuestion" v-show="showQuestion && !quizOver" @sendAnswer="answerQuestion"/>
-    <div v-show="quizOver">Quiz Over</div>
+    <QuizResults v-bind:quiz="updatedQuiz" v-if="quizOver"/>
 </template>
 
 <script>
-import QuizQuestion from './QuizQuestion.vue'
+import QuizQuestion from './QuizQuestion.vue';
+import QuizResults from './QuizResults.vue';
 
 
 export default {
+     
+
     props: ['quiz'],
     data(){
         return {
@@ -22,7 +25,8 @@ export default {
         }
     },
     components: {
-        QuizQuestion
+        QuizQuestion,
+        QuizResults
     }, 
     methods: {
         startQuiz(){
@@ -38,10 +42,8 @@ export default {
                 this.currentQuestion = this.updatedQuiz[this.currentQuestionIndex];
             } else {
                 this.quizOver = true;
-                this.$emit('quizCompleted', this.updatedQuiz);
             }
         }
-
     }
 }
 </script>

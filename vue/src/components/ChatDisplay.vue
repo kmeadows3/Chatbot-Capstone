@@ -37,6 +37,8 @@ synthesis.cancel();
 var greetUser = false;
 import QueryService from '../services/QueryService';
 import JobSearchForm from '../components/JobSearchForm.vue';
+import QuizDisplay from './QuizDisplay.vue';
+import { h, render } from 'vue';
 
 export default {
     data() {
@@ -206,7 +208,6 @@ export default {
                     chatbotTextDiv.innerHTML = response;
                 }
         },
-
         setUserName() {
             let name = this.textBoxText;
             name = this.removeFromName(name, "hello");
@@ -253,13 +254,29 @@ export default {
                         this.$store.commit('SET_INTENTS', response.data.userIntents);
                         this.$store.commit('SET_ENTITIES', response.data.userEntities);
                         this.$store.commit('SET_MODE', response.data.mode);
+                        if(this.$store.state.mode == 4){
+                            this.handleQuiz(response.data.quiz)
+                        } else {
                         this.addRobotBox(response.data.response);
+                        }
                     }
                 })
                 .catch(error => {
                     console.error("Error in Chat Display: " + error);
                     this.addRobotBox("I'm sorry, there seems to be an issue with the server. Please try again later.");
                 });
+        },
+        handleQuiz(quiz){
+            const chatBox = document.getElementById('chat-display');
+            const chatbotOuterBox = document.createElement('div');
+            chatbotOuterBox.classList.add('chatbot');
+            const chatbotAvatarDiv = this.createChatbotHeading();
+            chatbotOuterBox.appendChild(chatbotAvatarDiv);
+            const quizDisplay = h(QuizDisplay, {quiz: quiz});
+            render(quizDisplay, chatbotOuterBox);
+            chatBox.appendChild(chatbotOuterBox);
+            this.scrollChatDisplayToBottom(chatBox);
+            this.$store.commit('SET_MODE', 0);
         },
         scrollChatDisplayToBottom(chatBox) {
             chatBox.scrollTop = chatBox.scrollHeight;
