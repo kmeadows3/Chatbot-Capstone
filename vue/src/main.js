@@ -23,7 +23,6 @@ if (currentToken) {
 
 // Create the Vuex store passing in the stored credentials
 const store = createStore(currentToken, currentUser);
-
 const app = createApp(CapstoneApp);
 app.use(store);
 app.use(router);

@@ -1,6 +1,7 @@
 <template>
+  <div class="background"></div>
   <div class="home_display">
-    <div class="chatbot">
+    <div class="chatbot_window">
       <ChatDisplay />
     </div>
     <div class="quote">
@@ -33,6 +34,9 @@ export default {
 
 <style>
 
+body {
+  background-color: #D4F0FC;
+}
 
 div.home_display {
   width: 96vw;
@@ -54,9 +58,9 @@ div.home_display > *{
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-div.chatbot {
+div.chatbot_window {
   grid-area: chatbot;
-  background-color: #f1f5ed;
+  background-color: #297a98;
   height: 100%;
 }
 
@@ -68,7 +72,7 @@ div.quote {
 
 div.job_postings {
   grid-area: job_postings;
-  background-color: rgb(234, 234, 234);
+  background-color: rgb(241, 241, 241);
   border-radius: 8px;
   overflow-y: auto;
 }
