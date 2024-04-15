@@ -1,9 +1,7 @@
 <template>
     <div id="outer-box">
         <div id="chat-display"></div>
-        <div class="overlay" v-if="record">
-            <img src="/src/assets/record.gif" alt="Overlay" class="overlay-image">
-        </div>
+
         <div id="user-input">
             <div v-show="this.$store.state.mode === 1">
                 <JobSearchForm ref="jobSearchForm" />
@@ -16,10 +14,7 @@
                 Send Response
             </button>
             <button @click.prevent="beginVoiceRecognition()">
-                Voice Response
-            </button>
-            <button id="text-to-speech-button" @click.prevent="toggleTextToSpeech()">
-                {{ textToSpeech ? 'Disable text-to-speech' : 'Enable text-to-speech'}}
+                Voice Search
             </button>
         </div>
     </div>
@@ -31,24 +26,23 @@ var speechRecognition = window.webkitSpeechRecognition;
 var recognition = new speechRecognition();
 recognition.lang = 'en-US';
 
-var synthesis = window.speechSynthesis;
-synthesis.cancel();
 
 var greetUser = false;
 import QueryService from '../services/QueryService';
 import JobSearchForm from '../components/JobSearchForm.vue';
+import QuizDisplay from './QuizDisplay.vue';
+import { h, render } from 'vue';
 
 export default {
     data() {
         return {
             textBoxText: "",
-            record: false,
-            textToSpeech: false,
         }
     },
 
     components: {
         JobSearchForm,
+        QuizDisplay
     },
 
     methods: {
@@ -77,7 +71,7 @@ export default {
                 // Greet user if name was set in above 'if' statement
                 this.greetUser();
             } else if (this.$store.state.mode === 1){
-                // Job Searching Mode -- TODO
+                // Job Searching Mode
                 this.doJobSearch();
             } else {
                 this.getResponseFromServer();
@@ -86,13 +80,7 @@ export default {
         doJobSearch(){
             this.$refs.jobSearchForm.searchJobs()
                 .then(response => {
-                    if (this.$store.state.jobPostings.length > 0) {
-                        this.addRobotBox("I found some results to your search.");
-                    } else {
-                        let message = "My apologies, I couldn't find any results matching your search. "
-                        message += "Try using different search parameters, and be sure to check for spelling."
-                        this.addRobotBox(message);
-                    }
+                    this.addRobotBox("I found some results to your search: ");
                     this.$store.commit('SET_MODE', 0); // Resets chatbot from job posting mode to normal mode
                     this.$store.commit('SET_INTENTS', [1]); // Resets intents
                     this.$store.commit('SET_ENTITIES', [1]); // Resets entities
@@ -101,8 +89,8 @@ export default {
                     console.error(error);
                 }); 
         },
+        
         createUserBox(){
-
             const newResponse = document.createElement('div');
             newResponse.classList.add('user');
             const userAvatarDiv = this.createUserHeading();
@@ -121,20 +109,21 @@ export default {
             userAvatar.classList.add('user-avatar');
             const userNameDiv = document.createElement('div');
             userNameDiv.classList.add('name-divs');
-            userNameDiv.innerText = this.$store.state.preferredName;
+            userNameDiv.innerText = this.$store.state.preferredName + " -";
             userAvatarDiv.appendChild(userNameDiv)
             userAvatarDiv.appendChild(userAvatar);
             return userAvatarDiv;
         },
         addRobotBox(response) {
+
             const chatBox = document.getElementById('chat-display');
             const newResponseBox = document.createElement('div');
+            newResponseBox.classList.add('chatbot');
+
             const loadingGif = this.chatBotLoad(chatBox, newResponseBox);
             setTimeout(this.createChatbotBox, 750, response, chatBox, newResponseBox, loadingGif);
         },
-
         chatBotLoad(chatBox, newResponseBox) {
-            newResponseBox.classList.add('chatbot');
             const loadingGif = document.createElement('img');
             loadingGif.src = "/src/assets/bubbles.gif";
 
@@ -143,33 +132,25 @@ export default {
                 chatBox.appendChild(newResponseBox);
                 this.scrollChatDisplayToBottom(chatBox);
             }, 250)
-
+            
             return loadingGif;
         },
-
         createChatbotBox(response, chatBox, newResponseBox, loadingGif) {
             const chatbotAvatarDiv = this.createChatbotHeading()
             const chatbotTextDiv = document.createElement('div');
 
             setTimeout(() => {
-                newResponseBox.removeChild(loadingGif);
-                newResponseBox.appendChild(chatbotAvatarDiv);
-                newResponseBox.appendChild(chatbotTextDiv);
-                this.convertToHTML(response, chatbotTextDiv);
+            newResponseBox.removeChild(loadingGif);
+            newResponseBox.appendChild(chatbotAvatarDiv);
+            newResponseBox.appendChild(chatbotTextDiv);
+           
 
-                if (this.textToSpeech) {
-                    const utterance = new SpeechSynthesisUtterance(chatbotTextDiv.textContent);
-                    utterance.lang = 'en-US';
-                    synthesis.speak(utterance);
-                }
-
-                this.scrollChatDisplayToBottom(chatBox);
-            }, 750);
-
-            this.textBoxText = "";
+            let currentIndex = 0;
+            this.typeText(currentIndex, response, chatbotTextDiv, chatBox);
+            }, 750)
+             this.textBoxText = "";
         },
-
-        createChatbotHeading() {
+        createChatbotHeading(){
             const chatbotAvatarDiv = document.createElement('div');
             chatbotAvatarDiv.classList.add('avatar-div');
             const chatbotAvatar = document.createElement('img');
@@ -177,58 +158,43 @@ export default {
             chatbotAvatar.classList.add('chatbot-avatar');
             const chatwickNameDiv = document.createElement('div');
             chatwickNameDiv.classList.add('name-divs');
-            chatwickNameDiv.innerText = "CHATWICK";
+            chatwickNameDiv.innerText = "-  Chatwick";
             chatbotAvatarDiv.appendChild(chatbotAvatar);
             chatbotAvatarDiv.appendChild(chatwickNameDiv);
             return chatbotAvatarDiv;
         },
-
-        convertToHTML(response, chatbotTextDiv) {
-            const links = response.match(/<a href="(.*?)".*?>(.*?)<\/a>/g);
-            if (links) {
-                let updatedResponse = response;
-                links.forEach(link => {
-                    const [, url, text] = link.match(/<a href="(.*?)".*?>(.*?)<\/a>/);
-                    updatedResponse = updatedResponse.replace(link, `<a href="${url}" target="_blank">${text}</a>`);
-                });
-                chatbotTextDiv.innerHTML = updatedResponse;
+        typeText(currentIndex, response, chatbotTextDiv, chatBox){
+            if (currentIndex < response.length) {
+                chatbotTextDiv.textContent += response.charAt(currentIndex);
+                currentIndex++;
+                setTimeout(this.typeText, 0, currentIndex, response, chatbotTextDiv, chatBox);
             } else {
-                chatbotTextDiv.innerHTML = response;
+                this.convertToHTML(response, chatbotTextDiv)
             }
+            this.scrollChatDisplayToBottom(chatBox);
+        },
+        convertToHTML(response, chatbotTextDiv){
+            const links = response.match(/<a href="(.*?)".*?>(.*?)<\/a>/g);
+                if (links) {
+                    let updatedResponse = response;
+                    links.forEach(link => {
+                        const [, url, text] = link.match(/<a href="(.*?)".*?>(.*?)<\/a>/);
+                        updatedResponse = updatedResponse.replace(link, `<a href="${url}" target="_blank">${text}</a>`);
+                    });
+                    
+                    chatbotTextDiv.innerHTML = updatedResponse;
+                } else {
+                    chatbotTextDiv.innerHTML = response;
+                }
         },
 
-        scrollChatDisplayToBottom(chatBox) {
-            chatBox.scrollTop = chatBox.scrollHeight;
-        },
         setUserName() {
-            let name = this.textBoxText;
-            name = this.removeFromName(name, "hello");
-            name = this.removeFromName(name, "hey");
-            name = this.removeFromName(name, "hi");
-            name = this.removeFromName(name, "greetings");
-            name = this.removeFromName(name, "my name is");
-            name = this.removeFromName(name, "I'm ");
-            name = this.removeFromName(name, "Im ");
-            name = this.removeFromName(name, "I am ");
-            name = this.removeFromName(name, ", ");
-            name = this.removeFromName(name, ".");
-            name = this.removeFromName(name, ". ");
-            name = this.removeFromName(name, "?");
-            this.$store.commit('SET_PREFERREDNAME', name);
+            this.$store.commit('SET_PREFERREDNAME', this.textBoxText);
             greetUser = true;
         },
 
-        removeFromName(oldString, textToReplace) {
-            oldString = oldString.toUpperCase();
-            textToReplace = textToReplace.toUpperCase();
-            return oldString.replace(textToReplace, "");
-        },
-
         greetUser() {
-            let message = "Nice to meet you, " + this.$store.state.preferredName + ". ";
-            message += "I can help you with applying for technical jobs. ";
-            message += `Type "Chatbot support" at any time, and I'll let you know what features are available.`;
-            this.addRobotBox(message);
+            this.addRobotBox("Nice to meet you, " + this.$store.state.preferredName + ". How may I help?");
             greetUser = false;
         },
         getResponseFromServer() {
@@ -246,7 +212,11 @@ export default {
                         this.$store.commit('SET_INTENTS', response.data.userIntents);
                         this.$store.commit('SET_ENTITIES', response.data.userEntities);
                         this.$store.commit('SET_MODE', response.data.mode);
+                        if(this.$store.state.mode == 4){
+                            this.handleQuiz(response.data.quiz)
+                        } else {
                         this.addRobotBox(response.data.response);
+                        }
                     }
                 })
                 .catch(error => {
@@ -254,56 +224,76 @@ export default {
                     this.addRobotBox("I'm sorry, there seems to be an issue with the server. Please try again later.");
                 });
         },
-        // scrollChatDisplayToBottom(chatBox) {
-        //     chatBox.scrollTop = chatBox.scrollHeight;
-        // },
+        handleQuiz(quiz){
+            const chatBox = document.getElementById('chat-display');
+            const chatbotOuterBox = document.createElement('div');
+            chatbotOuterBox.classList.add('chatbot');
+            const chatbotAvatarDiv = this.createChatbotHeading();
+            chatbotOuterBox.appendChild(chatbotAvatarDiv);
+            chatbotOuterBox.addEventListener('quizCompleted', this.sendQuiz);
+            let questionBox = h(QuizDisplay, {quiz: quiz});
+            render(questionBox, chatbotOuterBox);
+            chatBox.appendChild(chatbotOuterBox);
+            this.scrollChatDisplayToBottom(chatBox);
+
+
+        },
+        sendQuiz(updatedQuiz){
+            console.log("method called");
+            const query = {
+                intents: this.$store.state.intents,
+                entities: this.$store.state.entities,
+                mode: this.$store.state.mode,
+                quiz: updatedQuiz
+            };
+            QueryService.get(query)
+                .then(response => {
+                    if (response.status === 200) {
+                        // When the get method returns a success response
+                        this.$store.commit('SET_INTENTS', response.data.userIntents);
+                        this.$store.commit('SET_ENTITIES', response.data.userEntities);
+                        this.$store.commit('SET_MODE', response.data.mode);
+                        if(this.$store.state.mode == 4){
+                            this.handleQuiz(response.data.quiz)
+                        } else {
+                        this.addRobotBox(response.data.response);
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error("Error in Chat Display: " + error);
+                    this.addRobotBox("I'm sorry, there seems to be an issue with the server. Please try again later.");
+                });
+        },
+        scrollChatDisplayToBottom(chatBox) {
+            chatBox.scrollTop = chatBox.scrollHeight;
+        },
 
         beginVoiceRecognition() {
 
-            synthesis.cancel();
-            var startSound = new Audio("/src/assets/startSound.mp3");
-            var endSound = new Audio("/src/assets/endSound.mp3");
-            setTimeout(() => {
-                startSound.play();
-                this.record = true;
-            }, 1000);
-
             recognition.onresult = (event) => {
-                setTimeout(() => {
-                    this.record = false;
-                    endSound.play();
-                    const transcript = event.results[0][0].transcript;
-                    this.textBoxText = transcript;
-                    this.addUserBox();
-                }, 250);
-
+                const transcript = event.results[0][0].transcript;
+                this.textBoxText = transcript;
+                this.addUserBox();
             };
 
-            recognition.onend = () => {
-                this.record = false;
-
-            }
             recognition.start();
+            // this.addVoiceToTextBox();
 
         },
 
-        toggleTextToSpeech() {
-            this.textToSpeech = !this.textToSpeech;
-            const speechButton = document.getElementById('text-to-speech-button');
-            if(!this.textToSpeech) {
-                synthesis.cancel();
-                speechButton.classList.remove('text-to-speech');
-            }
-            if(this.textToSpeech) {
-                speechButton.classList.add('text-to-speech');
-            }
-        }
+        // addVoiceToTextBox() {
+        //     var finalTranscript;
+        //     recognition.onresult = function(event) {
+        //         finalTranscript = event.results[0][0].transcript;
+        //         this.textBoxText = finalTranscript;
+        //     }
 
-
+        // },
 
     },
     mounted() {
-        this.addRobotBox("Greetings, I'm Chatwick. What's your name?");
+        this.addRobotBox("Greetings, my name's Chatwick. What's yours?");
     }
 }
 
@@ -312,19 +302,15 @@ export default {
     
 <style>
 div#chat-display {
-    height: calc(105vh - 250px);
+    height: 500px;
     overflow-y: auto;
-    width: 98%;
-    margin: 1%;
+    width: 70%;
     display: flex;
     flex-direction: column;
-    background-color: #ebecf0;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background-color: #ebecf0;
     margin-bottom: 6px;
-
-    position: relative;
     /* margin-left: 200px; */
 }
 
@@ -337,7 +323,6 @@ div#chat-display>div {
     display: flex;
     flex-direction: column;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    height: auto;
 
 }
 
@@ -352,7 +337,10 @@ img.response_img {
 
 div.chatbot {
     align-self: start;
+    background-color: #f1f5ed;
     font-size: larger;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
 }
 
 div.user {
@@ -395,28 +383,6 @@ div.user {
     font-weight: bold;
 }
 
-.overlay {
-    position: fixed;
-    /* Fixed position to overlay on everything */
-    top: 22%;
-    /* Top of the screen */
-    left: 31%;
-    /* Left of the screen */
-    width: 100%;
-    /* Full width */
-    height: 100%;
-    /* Full height */
-    z-index: 9999;
-    /* Higher z-index to overlay on top */
-    pointer-events: none;
-    /* Allows interaction with elements behind the overlay */
-}
-
-.overlay-image {
-    width: auto;
-    height: 15%;
-}
-
 #chat-display::-webkit-scrollbar {
     width: 10px;
 }
@@ -431,7 +397,7 @@ div.user {
 }
 
 textarea {
-    width: 100%;
+    width: 68%;
     height: 50px;
     padding: 12px 16px;
     font-size: 16px;
@@ -467,12 +433,6 @@ button {
     /* margin-left: 200px; */
 }
 
-.text-to-speech {
-    border: solid;
-    border-color: red;
-    
-}
-
 button:hover {
     background-color: #3b4a9c;
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15), 0 3px 5px rgba(0, 0, 0, 0.25);
@@ -483,10 +443,5 @@ button:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8);
 }
-
-form {
-    display: flex;
-}
-
 </style>
     

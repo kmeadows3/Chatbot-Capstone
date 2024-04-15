@@ -1,24 +1,37 @@
 <template>
     <div class ="job_details" v-show="$store.state.jobPostings.length > 0">
         <h1>Recent Job Posting{{ $store.state.jobPostings.length > 1 ? 's': '' }}:</h1>
-        <div v-for="jobPosting in $store.state.jobPostings">
-            <div class="job_card" target="_blank">
-                <p>Position Title: {{ jobPosting.positionTitle }}</p>
-                <p>Position Level: {{ jobPosting.levels }}</p>
-                <p>Company Name: {{ jobPosting.companyName }}</p>
-                <p>Company ID: {{ jobPosting.companyId }}</p>
-                <p>Date Posted: {{ jobPosting.datePosted }}</p>
-                <p>Locations: {{ jobPosting.locations }}</p>
-                <p class="description">Description: <span v-html="jobPosting.description"></span></p>
-                <p>Landing Page: <a v-bind:href="jobPosting.landingPage" target="_blank">{{ jobPosting.landingPage }}</a></p>
-            </div>
+        <div class="job_cards_container">
+            <a href="#" class="job_card" v-for="jobPosting in $store.state.jobPostings">
+                <a href="#" id="more_job_info"></a>
+                <p id="position_title">{{ jobPosting.positionTitle }}</p>
+                <p id="position_details">{{ jobPosting.levels }} || {{ jobPosting.datePosted }}</p>
+                <p>Company: {{ jobPosting.companyName }} || ID: {{ jobPosting.companyId }}</p>
+                <p><strong>Location{{ jobPosting.locations.length > 1 ? 's' : '' }}: </strong>{{ formatLocations(jobPosting.locations) }}</p>
+                <div v-show="false">
+                    <p class="description">Description: <span v-html="jobPosting.description"></span></p>
+                </div>
+                <a v-bind:href="jobPosting.landingPage" target="_blank">Click here to go to Original Job Posting.</a>
+            </a>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    //
+    methods: {
+        formatLocations(locationsArray) {
+            let outputString = '';
+            for (let i = 0; i < locationsArray.length; i++) {
+                const location = locationsArray[i];
+                outputString += location.name;
+                if (i < locationsArray.length - 1) {
+                    outputString += " || ";
+                }
+            }
+            return outputString;
+        }
+    }
 }
 </script>
 
@@ -28,8 +41,16 @@ div.job_details {
     max-height: 100%;
     overflow-y: auto; /* Enable vertical scrolling */
     display: flex; /* Use flexbox to control layout */
-    flex-direction: column; /* Arrange child elements vertically */
+    flex-direction: column;
     align-items: center;
+}
+
+div.job_cards_container {
+    width: 100%;
+    display: flex; /* Use flexbox to control layout */
+    flex-direction: row; /* Arrange child elements vertically */
+    flex-wrap: wrap; /* Allow cards to wrap to the next row */
+    justify-content: space-around;
 }
 
 div.job_search_results::-webkit-scrollbar {
@@ -46,18 +67,34 @@ div.job_search_results::-webkit-scrollbar-track {
 }
 
 
-
-div.job_card {
-    background-color: rgb(21, 255, 185);
+a.job_card {
+    text-decoration: none; 
+    color: inherit;
+    background-color: rgb(130, 220, 204);
     border-radius: 8px;
     width: 90%;
-    padding: 10px;
-    margin-left: 3%;
+    height: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
     margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-wrap: break-word; /* Breaks up long links to keep them inside the card */
+    align-self: flex-start; /* Align cards to the start of their container */
 }
 
 
 
+p#position_title {
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+p#position_details {
+    font-size: 20px;
+}
 
 
 </style>
