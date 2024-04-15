@@ -5,9 +5,7 @@ import com.techelevator.dao.QueryDao;
 import com.techelevator.dao.QuizDao;
 import com.techelevator.exception.CompanyInformationExpection;
 import com.techelevator.exception.DaoException;
-import com.techelevator.model.Company;
-import com.techelevator.model.Response;
-import com.techelevator.model.UserInput;
+import com.techelevator.model.*;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -66,11 +64,37 @@ public class QueryService {
 
         if (userInput.getMode() == COMPANY_DATA_MODE){
             outputResponse = companyDataResponse(userInput.getUtterance());
+        } else if (userInput.getMode() == QUIZ_MODE){
+            outputResponse = scoreQuiz(userInput.getQuiz());
         } else {
             outputResponse = generalChatbotResponse(userInput);
         }
 
         return outputResponse;
+    }
+
+    private Response scoreQuiz(List<Question> quiz) {
+        Response response = setDefaultResponseIntentsAndEntities(new Response());
+        QuizScore quizScore = new QuizScore(quiz);
+
+        int overallScore = quizScore.getQuizScore();
+        int easyCorrectCount = quizScore.getEasyCorrectCount();
+        int easyTotal = quizScore.getEasyQuestionCount();
+        int mediumCorrectCount = quizScore.getMediumCorrectCount();
+        int mediumTotal = quizScore.getMediumQuestionCount();
+        int hardCorrectCount = quizScore.getHardCorrectCount();
+        int hardTotal = quizScore.getHardQuestionCount();
+        int possibleScore = quizScore.getTotalPossibleScore();
+        String passFail = "failed";
+        if (overallScore > 3){
+            passFail = "passed";
+        }
+
+        String quizReport = "You scored " + overallScore + " points out of a possible " + possibleScore +  " points. " +
+                "With this score, I declare that you " + passFail + ".";
+
+        response.setResponse(quizReport);
+        return response;
     }
 
 

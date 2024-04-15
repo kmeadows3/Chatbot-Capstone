@@ -8,6 +8,11 @@ public class QuizScore {
     public static final int HARD_VALUE = 3;
     List<Question> quiz;
 
+    public QuizScore(){}
+
+    public QuizScore(List<Question> quiz) {
+        this.quiz = quiz;
+    }
 
     //DERIVED
     public int getQuizScore(){
@@ -76,6 +81,11 @@ public class QuizScore {
             }
         }
         return count;
+    }
+
+    public int getTotalPossibleScore(){
+        return getHardQuestionCount() * HARD_VALUE + getMediumQuestionCount() * MEDIUM_VALUE +
+                getEasyQuestionCount() * EASY_VALUE;
     }
 
 
