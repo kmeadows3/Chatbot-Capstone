@@ -1,17 +1,12 @@
 <template>
     <div class ="job_details" v-show="$store.state.jobPostings.length > 0">
-        <h1>Recent Job Posting{{ $store.state.jobPostings.length > 1 ? 's': '' }}:</h1>
+        <h1>Recent Job Posting{{ $store.state.jobPostings.length > 1 ? 's' : '' }}</h1>
         <div class="job_cards_container">
-            <a href="#" class="job_card" v-for="jobPosting in $store.state.jobPostings">
-                <a href="#" id="more_job_info"></a>
+            <a href="#" class="job_card" v-for="jobPosting in $store.state.jobPostings" @click.prevent="expandJobInfo(jobPosting)">          
                 <p id="position_title">{{ jobPosting.positionTitle }}</p>
-                <p id="position_details">{{ jobPosting.levels }} || {{ jobPosting.datePosted }}</p>
-                <p>Company: {{ jobPosting.companyName }} || ID: {{ jobPosting.companyId }}</p>
-                <p><strong>Location{{ jobPosting.locations.length > 1 ? 's' : '' }}: </strong>{{ formatLocations(jobPosting.locations) }}</p>
-                <div v-show="false">
-                    <p class="description">Description: <span v-html="jobPosting.description"></span></p>
-                </div>
-                <a v-bind:href="jobPosting.landingPage" target="_blank">Click here to go to Original Job Posting.</a>
+                <p id="position_details">{{ jobPosting.levels }} || Posted {{ jobPosting.datePosted }}</p>
+                <p><strong>Company</strong>: {{ jobPosting.companyName }} || ID: {{ jobPosting.companyId }}</p>
+                <p><strong>Location{{ jobPosting.locations.length > 1 ? 's' : '' }}</strong>: {{ formatLocations(jobPosting.locations) }}</p>
             </a>
         </div>
     </div>
@@ -22,15 +17,26 @@ export default {
     methods: {
         formatLocations(locationsArray) {
             let outputString = '';
-            for (let i = 0; i < locationsArray.length; i++) {
+            for (let i = 0; i < locationsArray.length && i < 3; i++) {
                 const location = locationsArray[i];
                 outputString += location.name;
                 if (i < locationsArray.length - 1) {
                     outputString += " || ";
                 }
             }
+
+            if (locationsArray.length > 3) {
+                outputString += '+' + (locationsArray.length-3) + 'more'
+            }
+
             return outputString;
-        }
+        },
+
+        expandJobInfo(jobPosting) {
+            jobPosting.isEmpty = false;
+            this.$store.commit('SET_SELECTED_JOB_POSTING', jobPosting);
+            
+        },
     }
 }
 </script>
@@ -53,18 +59,7 @@ div.job_cards_container {
     justify-content: space-around;
 }
 
-div.job_search_results::-webkit-scrollbar {
-    width: 10px;
-}
 
-div.job_search_results::-webkit-scrollbar-thumb {
-    background-color: #8888;
-    border-radius: 10px;
-}
-
-div.job_search_results::-webkit-scrollbar-track {
-    background-color: #f5f5f5;
-}
 
 
 a.job_card {
@@ -78,13 +73,15 @@ a.job_card {
     padding-right: 10px;
     padding-bottom: 10px;
     margin-bottom: 20px;
-    border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow-wrap: break-word; /* Breaks up long links to keep them inside the card */
     align-self: flex-start; /* Align cards to the start of their container */
 }
 
-
+a.job_card > p {
+    margin: 0;
+    margin-top: 20px;
+}
 
 p#position_title {
     font-size: 30px;

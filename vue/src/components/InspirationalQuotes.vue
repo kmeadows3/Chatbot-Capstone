@@ -16,9 +16,7 @@ export default {
             quote: "",
             attribute: "",
             quoteImage: "",
-
-            // Revise to 1 min later (currently 1hr)
-            refreshTimer: 600000, // in milliseconds
+            refreshTimer: 0,
             intervalId: null,
         }
     },
@@ -26,6 +24,7 @@ export default {
     methods: {
         updateQuoteSection() {
             this.updateQuoteImage();
+            this.refreshTimer = 600000; // in milliseconds -- set to one minute for presentation
         },
         updateQuoteText() {
             InspirationalQuotesService.getRandom()
