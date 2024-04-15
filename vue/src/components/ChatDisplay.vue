@@ -208,8 +208,8 @@ export default {
             name = this.removeFromName(name, "greetings");
             name = this.removeFromName(name, "my name is");
             name = this.removeFromName(name, "I'm ");
-            name = this.removeFromName(name, "Im ");
             name = this.removeFromName(name, "I am ");
+            name = this.removeFromName(name, "how are you");
             name = this.removeFromName(name, ", ");
             name = this.removeFromName(name, ".");
             name = this.removeFromName(name, ". ");

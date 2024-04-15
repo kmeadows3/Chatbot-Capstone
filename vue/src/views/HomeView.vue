@@ -6,10 +6,11 @@
     <div class="quote">
       <InspirationalQuotes />
     </div>
-    <div class="job_postings">
-      <div v-show="$store.state.jobPostings.length > 0">
-        <JobDetails />
-      </div>
+    <div class="job_postings" v-show="this.$store.state.selectedJobPosting.isEmpty">
+      <JobCards />
+    </div>
+    <div class="job_postings" v-if="!this.$store.state.selectedJobPosting.isEmpty">
+      <JobDescription />
     </div>
   </div>
 </template>
@@ -17,13 +18,15 @@
 <script>
 import ChatDisplay from '../components/ChatDisplay.vue';
 import InspirationalQuotes from '../components/InspirationalQuotes.vue'
-import JobDetails from '../components/JobDetails.vue';
+import JobCards from '../components/JobCards.vue';
+import JobDescription from '../components/JobDescription.vue'
 
 export default {
   components: {
     ChatDisplay,
     InspirationalQuotes,
-    JobDetails,
+    JobCards,
+    JobDescription,
   }
 };
 </script>
