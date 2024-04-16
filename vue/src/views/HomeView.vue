@@ -8,7 +8,9 @@
       <InspirationalQuotes />
     </div>
     <div class="job_postings" v-show="this.$store.state.selectedJobPosting.isEmpty">
-      <JobCards />
+      <button v-show="$store.state.jobPostings.length!=0" @click="toggleJobs()">{{ showJobs ? "Show Instructions" : "Show Jobs" }}</button>
+      <Instructions v-show="$store.state.jobPostings.length==0 || !showJobs"/>
+      <JobCards v-show="showJobs"/>
     </div>
     <div class="job_postings" v-if="!this.$store.state.selectedJobPosting.isEmpty">
       <JobDescription />
@@ -20,7 +22,8 @@
 import ChatDisplay from '../components/ChatDisplay.vue';
 import InspirationalQuotes from '../components/InspirationalQuotes.vue'
 import JobCards from '../components/JobCards.vue';
-import JobDescription from '../components/JobDescription.vue'
+import JobDescription from '../components/JobDescription.vue';
+import Instructions from '../components/Instructions.vue';
 
 export default {
   components: {
@@ -28,8 +31,19 @@ export default {
     InspirationalQuotes,
     JobCards,
     JobDescription,
+    Instructions
+  },
+  data(){
+    return {
+      showJobs: true
+    }
+  },
+  methods: {
+    toggleJobs() {
+      this.showJobs = !this.showJobs;
+    }
   }
-};
+}
 </script>
 
 <style>
@@ -62,6 +76,7 @@ div.chatbot_window {
   grid-area: chatbot;
   background-color: #297a98;
   height: 100%;
+  border-radius: 14px;
 }
 
 div.quote {
@@ -72,13 +87,14 @@ div.quote {
 
 div.job_postings {
   grid-area: job_postings;
-  background-color: rgb(241, 241, 241);
-  border-radius: 8px;
+  background-color: #f2f8ff;
+  border-radius: 14px;
   overflow-y: auto;
 }
 
 div.job_postings::-webkit-scrollbar {
     width: 10px;
+    border-radius: 10px;
 }
 
 div.job_postings::-webkit-scrollbar-thumb {
@@ -88,6 +104,7 @@ div.job_postings::-webkit-scrollbar-thumb {
 
 div.job_postings::-webkit-scrollbar-track {
     background-color: #f5f5f5;
+    border-radius: 10px;
 }
 
 </style>

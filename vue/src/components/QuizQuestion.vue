@@ -23,7 +23,7 @@
 <style scoped>
 p.question {
     background-color: aliceblue;
-    border-radius: 5px;
+    border-radius: 8px;
     margin: 10px 5px 5px 5px;
     padding: 10px;
     padding-bottom: 0px;

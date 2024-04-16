@@ -45,16 +45,18 @@ export default {
                 this.currentQuestion = this.updatedQuiz[this.currentQuestionIndex];
             } else {
                 this.quizOver = true;
+                this.$emit('quizOver');
             }
         }
-    }
+    },
+    emits: ['quizOver']
 }
 </script>
 
 <style scoped>
 div.box {
-    background-color: lightblue;
-    border-radius: 5px;
+    background-color: #b8e8ff;
+    border-radius: 10px;
     padding: 5px;
     display: flex;
     flex-direction: column;

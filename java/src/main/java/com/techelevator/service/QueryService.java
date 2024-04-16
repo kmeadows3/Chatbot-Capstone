@@ -15,7 +15,6 @@ public class QueryService {
 
     // Constants
     private final int[] RANKED_ENTITY_IDS = new int[]{
-            11, // Negative
             3, // Star Method
             4, // Cover Letter
             10, // Follow up
@@ -25,7 +24,9 @@ public class QueryService {
             8, // HR Interview
             6, // General Interview
             2, // Chatbot
-            1 }; // Default
+            1, // Default
+            11, // Negative
+    }; // Default
     public final int JOB_SEARCH_MODE = 1;
     public final int COMPANY_DATA_MODE = 2;
     public final int NEW_QUOTE_MODE = 3;
@@ -64,37 +65,11 @@ public class QueryService {
 
         if (userInput.getMode() == COMPANY_DATA_MODE){
             outputResponse = companyDataResponse(userInput.getUtterance());
-        } else if (userInput.getMode() == QUIZ_MODE){
-            outputResponse = scoreQuiz(userInput.getQuiz());
         } else {
             outputResponse = generalChatbotResponse(userInput);
         }
 
         return outputResponse;
-    }
-
-    private Response scoreQuiz(List<Question> quiz) {
-        Response response = setDefaultResponseIntentsAndEntities(new Response());
-        QuizScore quizScore = new QuizScore(quiz);
-
-        int overallScore = quizScore.getQuizScore();
-        int easyCorrectCount = quizScore.getEasyCorrectCount();
-        int easyTotal = quizScore.getEasyQuestionCount();
-        int mediumCorrectCount = quizScore.getMediumCorrectCount();
-        int mediumTotal = quizScore.getMediumQuestionCount();
-        int hardCorrectCount = quizScore.getHardCorrectCount();
-        int hardTotal = quizScore.getHardQuestionCount();
-        int possibleScore = quizScore.getTotalPossibleScore();
-        String passFail = "failed";
-        if (overallScore > 3){
-            passFail = "passed";
-        }
-
-        String quizReport = "You scored " + overallScore + " points out of a possible " + possibleScore +  " points. " +
-                "With this score, I declare that you " + passFail + ".";
-
-        response.setResponse(quizReport);
-        return response;
     }
 
 
