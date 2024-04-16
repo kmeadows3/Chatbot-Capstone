@@ -50,8 +50,6 @@ INSERT INTO intent(name) VALUES ('External Resource');
 	INSERT INTO keyword(keyword, intent_id) VALUES ('know more', 5);  -- Intent: External Resource(5)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('sources', 5);  -- Intent: External Resource(5)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('more info', 5);  -- Intent: External Resource(5)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('source', 5);  -- Intent: External Resource(5)
-
 
 
 -- ID 6
@@ -84,6 +82,14 @@ INSERT INTO intent(name) VALUES ('Job Postings');
 	INSERT INTO keyword(keyword, intent_id) VALUES ('looking for a job', 8);  -- Intent: Job Postings(8)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('search for job', 8);  -- Intent: Job Postings(8)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('search for jobs', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('job listing', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('job listings', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('jobs in', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('jobs at', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('jobs with', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('looking for jobs', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('want jobs', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('want a job', 8);  -- Intent: Job Postings(8)
 
 -- ID 9
 INSERT INTO intent(name) VALUES ('New Quote');
@@ -95,6 +101,11 @@ INSERT INTO intent(name) VALUES ('New Quote');
 	INSERT INTO keyword(keyword, intent_id) VALUES ('motivation', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('famous quote', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('famous quotes', 9);  -- Intent: New Quote(9)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('motivational', 9);  -- Intent: New Quote(9)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('inspirational', 9);  -- Intent: New Quote(9)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('motivate', 9);  -- Intent: New Quote(9)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('new picture', 9);  -- Intent: New Quote(9)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('new pic', 9);  -- Intent: New Quote(9)
 
 -- ID 10
 INSERT INTO intent(name) VALUES ('Quiz');
