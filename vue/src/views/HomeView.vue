@@ -48,7 +48,6 @@ body {
 }
 
 div.home_display {
-  width: calc(96vw - 15px);
   height: 95vh;
   padding: 10px;
   
@@ -66,7 +65,7 @@ div.home_display {
   div.home_display {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 200px 100vh;
+    grid-template-rows: 1fr 150px 100vh;
     gap: 10px;
 
     grid-template-areas: 
