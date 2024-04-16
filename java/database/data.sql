@@ -876,39 +876,39 @@ INSERT INTO difficulty(difficulty) VALUES ('Easy');  -- id 1
 INSERT INTO difficulty(difficulty) VALUES ('Moderate'); -- id 2
 INSERT INTO difficulty(difficulty) VALUES ('Difficult'); -- id 3
 
--- Quiz Question ID 1
+-- -- Quiz Question ID 1
 
-INSERT INTO question (question, difficulty_id) VALUES ('What is a variable?', 1);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Either a value or abstract storage location
-		paired with an associated symbolic name.', true, 1);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Variable answer 1', false, 1);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Variable answer 2', false, 1);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Variable answer 3', false, 1);
+-- INSERT INTO question (question, difficulty_id) VALUES ('What is a variable?', 1);
+-- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Either a value or abstract storage location
+-- 		paired with an associated symbolic name.', true, 1);
+-- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Variable answer 1', false, 1);
+-- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Variable answer 2', false, 1);
+-- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Variable answer 3', false, 1);
 
--- Quiz Question ID 2
-INSERT INTO question (question, difficulty_id) VALUES ('What are the advantages of the DAO pattern?', 2);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The DAO pattern abstracts and encapsulates data 
-		access logic, promoting separation of concerns and code reusability. By centralizing data access within 
-		dedicated DAO classes, it enhances maintainability, testability, and adaptability of the application, 
-		allowing for easier changes to the data source or access technology without impacting other parts of 
-		the codebase.', true, 2);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong DAO answer 1', false, 2);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong DAO answer 2', false, 2);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong DAO answer 3', false, 2);
+-- -- Quiz Question ID 2
+-- INSERT INTO question (question, difficulty_id) VALUES ('What are the advantages of the DAO pattern?', 2);
+-- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The DAO pattern abstracts and encapsulates data 
+-- 		access logic, promoting separation of concerns and code reusability. By centralizing data access within 
+-- 		dedicated DAO classes, it enhances maintainability, testability, and adaptability of the application, 
+-- 		allowing for easier changes to the data source or access technology without impacting other parts of 
+-- 		the codebase.', true, 2);
+-- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong DAO answer 1', false, 2);
+-- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong DAO answer 2', false, 2);
+-- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong DAO answer 3', false, 2);
  
--- Quiz Question ID 3
-INSERT INTO question (question, difficulty_id) VALUES ('Quiz Question 3', 2);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Correct Question 3 answer', true, 3);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 3 answer 1', false, 3);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 3 answer 2', false, 3);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 3 answer 3', false, 3);
+-- -- Quiz Question ID 3
+-- INSERT INTO question (question, difficulty_id) VALUES ('Quiz Question 3', 2);
+-- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Correct Question 3 answer', true, 3);
+-- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 3 answer 1', false, 3);
+-- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 3 answer 2', false, 3);
+-- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 3 answer 3', false, 3);
 
--- Quiz Question ID 4
-INSERT INTO question (question, difficulty_id) VALUES ('Quiz Question 4', 3);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Correct Question 4 answer', true, 4);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 4 answer 1', false, 4);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 4 answer 2', false, 4);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 4 answer 3', false, 4);
+-- -- Quiz Question ID 4
+-- INSERT INTO question (question, difficulty_id) VALUES ('Quiz Question 4', 3);
+-- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Correct Question 4 answer', true, 4);
+-- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 4 answer 1', false, 4);
+-- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 4 answer 2', false, 4);
+-- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 4 answer 3', false, 4);
 	
 -- PROMPT TO GENERATE ANSWERS
 -- You are a senior Java developer.  Given this question "What is method Overloading?" that is being used for a quiz, generate 4 answers as insert statements in this format:  "INSERT INTO answer (answer, is_correct, question_id) VALUES ('A reference type holds a reference on the stack that points to the location of an object on the heap.', true, 3);"  One of the answers should be correct and there should be 3 incorrect answers that sound real.
@@ -988,100 +988,100 @@ INSERT INTO question (question, difficulty_id) VALUES ('Quiz Question 4', 3);
 -- EASY QUIZ QUESTIONS 
 -- JAVA
 INSERT INTO question (question, difficulty_id) VALUES ('What is the difference between a class and an Object?', 1); -- 1
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A class is a blueprint for an Ojbject, while an Object is an instantiation of that class in memory.', true, 1);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A class is a blueprint for an Ojbject, while an Object is an instantiation of that class in memory.', true, 1);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A class is a blueprint for creating different methods, while an Object is a collection of classes', false, 1);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A class is used to implement interfaces, while an Object is used to extend other classes', false, 1);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A class can only exist after an Object has been created, while an Object can exist independently of classes.', false, 1);
 
 INSERT INTO question (question, difficulty_id) VALUES ('What is a Value Type', 1); -- 2
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A primitive data type that holds its value directly on the stack.', true, 2);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A primitive data type that holds its value directly on the stack.', true, 2);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A Value Type is a type that can only hold null values', false, 2);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A primitive data type that refers to an object’s location in memory, rather than its actual value', false, 2);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A type that can change its value at runtime', false, 2);
 
 INSERT INTO question (question, difficulty_id) VALUES ('What is a Reference Type', 1);  -- 3
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A reference type holds a reference on the stack that points to the location of an object on the heap.', true, 3);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A reference type holds a reference on the stack that points to the location of an object on the heap.', true, 3);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A type that directly contains its value, rather than a reference to an object.', false, 3);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A data type that can only hold numeric values', false, 3);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A data type that is always immutable, meaning its state cannot be changed after it is created', false, 3);
 
-INSERT INTO question (question, difficulty_id) VALUES ('What is method Overloading',1);  -- 4
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Method overloading is the ability of a single method to perform more than one task, such as multiple methods with the same name but different parameters.', true, 4);
+INSERT INTO question (question, difficulty_id) VALUES ('What is method Overloading', 1);  -- 4
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - Method overloading is the ability of a single method to perform more than one task, such as multiple methods with the same name but different parameters.', true, 4);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Method overloading is when a class inherits a method from its superclass.', false, 4);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Method overloading is the process of changing the functionality of an existing method in a subclass.', false, 4);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Method overloading is the ability of a method to call itself.', false, 4);
 
-INSERT INTO question (question, difficulty_id) VALUES ('What are the 4 parts of a method signature',1);  -- 5													   
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The four parts of a method signature are the method name, the parameter list, the return type, and the exception list.', true, 5);
+INSERT INTO question (question, difficulty_id) VALUES ('What are the 4 parts of a method signature', 1);  -- 5													   
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - The four parts of a method signature are the method name, the parameter list, the return type, and the exception list.', true, 5);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The four parts of a method signature are the method name, the class name, the return type, and the exception list.', false, 5);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The four parts of a method signature are the method name, the parameter list, the return type, and the method body.', false, 5);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The four parts of a method signature are the method name, the class name, the parameter list, and the return type.', false, 5);
 
-INSERT INTO question (question, difficulty_id) VALUES ('When would you use a break statement',1);  -- 6													   
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A break statement is used to terminate the current loop or switch statement and transfer control to the statement immediately following the loop or switch.', true, 6);
+INSERT INTO question (question, difficulty_id) VALUES ('When would you use a break statement', 1);  -- 6													   
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A break statement is used to terminate the current loop or switch statement and transfer control to the statement immediately following the loop or switch.', true, 6);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A break statement is used to create a loop that runs indefinitely.', false, 6);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A break statement is used to declare variables.', false, 6);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A break statement is used to catch exceptions in try-catch blocks.', false, 6);												   
 
-INSERT INTO question (question, difficulty_id) VALUES ('Define Polymorphism',1);  -- 7														   
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Polymorphism is a concept in object-oriented programming that allows objects of different types to be processed in a uniform way. It refers to the ability of a variable, function or object to take on multiple forms.', true, 7);
+INSERT INTO question (question, difficulty_id) VALUES ('Define Polymorphism', 1);  -- 7														   
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - Polymorphism is a concept in object-oriented programming that allows objects of different types to be processed in a uniform way. It refers to the ability of a variable, function or object to take on multiple forms.', true, 7);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Polymorphism is a programming concept that allows for data to be stored in multiple formats within a single variable.', false, 7);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Polymorphism is a concept in programming that allows for functions to be written in multiple languages.', false, 7);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Polymorphism is a concept in programming that allows for a single function to be written with multiple signatures.', false, 7);
 	
-INSERT INTO question (question, difficulty_id) VALUES ('What are the 3 pillar principles of Object Oriented Programming',1);  -- 8
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Encapsulation, Inheritance, and Polymorphism.', true, 8);
+INSERT INTO question (question, difficulty_id) VALUES ('What are the 3 pillar principles of Object Oriented Programming', 1);  -- 8
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - Encapsulation, Inheritance, and Polymorphism.', true, 8);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Abstraction, Encapsulation, and Multithreading.', false, 8);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Inheritance, Polymorphism, and Recursion.', false, 8);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Encapsulation, Polymorphism, and Concurrency.', false, 8);
 	
-INSERT INTO question (question, difficulty_id) VALUES ('Define Inheritance',1);  -- 9
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Inheritance is a mechanism in which one class acquires the property of another class.', true, 9);
+INSERT INTO question (question, difficulty_id) VALUES ('Define Inheritance', 1);  -- 9
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - Inheritance is a mechanism in which one class acquires the property of another class.', true, 9);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Inheritance is a process of executing methods from another class.', false, 9);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Inheritance is a technique to create duplicate objects.', false, 9);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Inheritance is a tool for creating interfaces in Java.', false, 9);
 													   
-INSERT INTO question (question, difficulty_id) VALUES ('Define Encapsulation',1);  -- 10											
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Encapsulation is a mechanism that binds together code and the data it manipulates, and keeps both safe from outside interference and misuse.', true, 10);
+INSERT INTO question (question, difficulty_id) VALUES ('Define Encapsulation', 1);  -- 10											
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - Encapsulation is a mechanism that binds together code and the data it manipulates, and keeps both safe from outside interference and misuse.', true, 10);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Encapsulation is a process of executing methods from another class.', false, 10);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Encapsulation is a technique to create duplicate objects.', false, 10);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Encapsulation is a tool for creating interfaces in Java.', false, 10);
 	
-INSERT INTO question (question, difficulty_id) VALUES ('What is a primary key',1);  -- 11													  
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A primary key in SQL is a field in a table which uniquely identifies each row/record in a database table.', true, 11);
+INSERT INTO question (question, difficulty_id) VALUES ('What is a primary key', 1);  -- 11													  
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A primary key in SQL is a field in a table which uniquely identifies each row/record in a database table.', true, 11);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A primary key in SQL is a tool to create interfaces.', false, 11);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A primary key in SQL is a mechanism to manipulate data.', false, 11);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A primary key in SQL is a process of executing methods from another class.', false, 11);
 	
-INSERT INTO question (question, difficulty_id) VALUES ('What is a foreign key',1);  -- 12	
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A foreign key in SQL is a field in a table that is primary key in another table.', true, 12);
+INSERT INTO question (question, difficulty_id) VALUES ('What is a foreign key', 1);  -- 12	
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A foreign key in SQL is a field in a table that is primary key in another table.', true, 12);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A foreign key in SQL is a special index used to speed up queries.', false, 12);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A foreign key in SQL is a constraint that forces the values in a column to be unique.', false, 12);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A foreign key in SQL is a method for encrypting data stored in a database.', false, 12);
 
-INSERT INTO question (question, difficulty_id) VALUES ('What is HTTP',1);  -- 13
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('HTTP is a protocol used for transmitting hypertext over the internet.', true, 13);
+INSERT INTO question (question, difficulty_id) VALUES ('What is HTTP', 1);  -- 13
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - HTTP is a protocol used for transmitting hypertext over the internet.', true, 13);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('HTTP is a high-level programming language.', false, 13);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('HTTP is a hardware device used for data storage.', false, 13);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('HTTP is a type of computer virus.', false, 13);
 
-INSERT INTO question (question, difficulty_id) VALUES ('What is the difference between HTTP and HTTPS',1);  -- 14
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The difference between HTTP and HTTPS is that HTTPS uses encryption to secure the data during transmission, while HTTP does not.', true, 14);
+INSERT INTO question (question, difficulty_id) VALUES ('What is the difference between HTTP and HTTPS', 1);  -- 14
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - The difference between HTTP and HTTPS is that HTTPS uses encryption to secure the data during transmission, while HTTP does not.', true, 14);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('HTTP and HTTPS are both programming languages, but HTTPS is object-oriented while HTTP is not.', false, 14);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('HTTP is used for transmitting hypertext over the internet, while HTTPS is a database management system.', false, 14);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('HTTP stands for HyperText Transfer Protocol, while HTTPS stands for HyperText Transfer Protocol Secure Socket.', false, 14);
 
-INSERT INTO question (question, difficulty_id) VALUES ('What is the difference between a GET and a POST',1);  -- 16
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('GET retrieves data from a server with parameters in the query string, POST sends data to a server with parameters in the message body.', true, 16);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('GET sends data to a server with parameters in the message body, POST retrieves data from a server with parameters in the header.', false, 16);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('GET and POST are used for the same purpose.', false, 16);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('GET is used to update data on a server, POST is used to retrieve data.', false, 16);
+INSERT INTO question (question, difficulty_id) VALUES ('What is the difference between a GET and a POST', 1);  -- 15
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - GET retrieves data from a server with parameters in the query string, POST sends data to a server with parameters in the message body.', true, 15);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('GET sends data to a server with parameters in the message body, POST retrieves data from a server with parameters in the header.', false, 15);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('GET and POST are used for the same purpose.', false, 15);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('GET is used to update data on a server, POST is used to retrieve data.', false, 15);
 	
-INSERT INTO question (question, difficulty_id) VALUES ('What is a port',1);  -- 17
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A port is a communication endpoint in an operating system.', true, 17);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A port is a piece of hardware that connects peripherals to a computer.', false, 17);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A port is a protocol used for transmitting data over the internet.', false, 17);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A port is a type of computer memory.', false, 17);
+INSERT INTO question (question, difficulty_id) VALUES ('What is a port', 1);  -- 16
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A port is a communication endpoint in an operating system.', true, 16);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A port is a piece of hardware that connects peripherals to a computer.', false, 16);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A port is a protocol used for transmitting data over the internet.', false, 16);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A port is a type of computer memory.', false, 16);
 									
 END $$;
 
