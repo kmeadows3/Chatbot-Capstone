@@ -12,6 +12,7 @@
                 <li>“I want to search for jobs.”</li>
                 <li>“I would like company information.”</li>
                 <li>“Give me a technical quiz.”</li>
+                <li>“Give me an example cover letter.”</li>
                 <li>“Chatbot support.”</li>
             </ul>
         </div>
