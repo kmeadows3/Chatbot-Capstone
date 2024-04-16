@@ -7,11 +7,12 @@
                 <li>“What is the STAR Method?”</li>
                 <li>“I want to search for jobs.”</li>
                 <li>“I would like company information.”</li>
+                <li>“Give me an example cover letter.”</li>
                 <li>“Chatbot support.”</li>
             </ul>
         </div>
         <div class = 'Credits'>
-            <p> Coded by: Cameron Coe, Eric Kuklinski, Hassan Mohamud, and Katherine Meadows</p>
+            <p> Created by: Cameron Coe, Eric Kuklinski, Hassan Mohamud, and Katherine Meadows</p>
         </div>    
     </div>
 </template>
