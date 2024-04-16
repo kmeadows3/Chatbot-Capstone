@@ -10,15 +10,22 @@
 import InspirationalQuotesService from '../services/InspirationalQuoteService';
 import ImageService from '../services/imageService';
 
+/*
+Modes:
+0 - Normal Chat Bot
+1 - Job Postings
+2 - Company Data
+3 - Get a new Quote
+4 - Quiz
+*/
+
 export default {
     data() {
         return {
             quote: "",
             attribute: "",
             quoteImage: "",
-
-            // Revise to 1 min later (currently 1hr)
-            refreshTimer: 600000, // in milliseconds
+            refreshTimer: 0,
             intervalId: null,
         }
     },
@@ -26,6 +33,7 @@ export default {
     methods: {
         updateQuoteSection() {
             this.updateQuoteImage();
+            this.refreshTimer = 600000; // in milliseconds -- set to one minute for presentation
         },
         updateQuoteText() {
             InspirationalQuotesService.getRandom()
@@ -33,7 +41,7 @@ export default {
                 const quoteBody = response.data[0];
 
                 this.quote = "“" + quoteBody.content + "”";
-                this.attribute = "-" + quoteBody.author;
+                this.attribute = quoteBody.author;
             })
             .catch(error => {
                 console.error('Error fetching Quote Text:', error);
@@ -123,16 +131,16 @@ div.quote_container > p {
 }
 
 div.quote_container {
-    border-radius: 8px;
+    border-radius: 14px;
     overflow: hidden; /* Makes a window for all the elements inside */
 }
 
 div.quote_container > img {
     position: absolute;
-    left: 0%;
-    top: -50px;
-    height:200%;
-    width: 100%;
+    right: 0;
+    top: -150px;
+    height:430px;
+    width: 500px;
     
 }
 

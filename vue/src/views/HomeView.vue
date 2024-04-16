@@ -1,15 +1,19 @@
 <template>
+  <div class="background"></div>
   <div class="home_display">
-    <div class="chatbot">
+    <div class="chatbot_window">
       <ChatDisplay />
     </div>
     <div class="quote">
       <InspirationalQuotes />
     </div>
-    <div class="job_postings">
-      <div v-show="$store.state.jobPostings.length > 0">
-        <JobDetails />
-      </div>
+    <div class="job_postings" v-show="this.$store.state.selectedJobPosting.isEmpty">
+      <button v-show="$store.state.jobPostings.length!=0" @click="toggleJobs()">{{ showJobs ? "Show Instructions" : "Show Jobs" }}</button>
+      <Instructions v-show="$store.state.jobPostings.length==0 || !showJobs"/>
+      <JobCards v-show="showJobs"/>
+    </div>
+    <div class="job_postings" v-if="!this.$store.state.selectedJobPosting.isEmpty">
+      <JobDescription />
     </div>
   </div>
 </template>
@@ -17,19 +21,36 @@
 <script>
 import ChatDisplay from '../components/ChatDisplay.vue';
 import InspirationalQuotes from '../components/InspirationalQuotes.vue'
-import JobDetails from '../components/JobDetails.vue';
+import JobCards from '../components/JobCards.vue';
+import JobDescription from '../components/JobDescription.vue';
+import Instructions from '../components/Instructions.vue';
 
 export default {
   components: {
     ChatDisplay,
     InspirationalQuotes,
-    JobDetails,
+    JobCards,
+    JobDescription,
+    Instructions
+  },
+  data(){
+    return {
+      showJobs: true
+    }
+  },
+  methods: {
+    toggleJobs() {
+      this.showJobs = !this.showJobs;
+    }
   }
-};
+}
 </script>
 
 <style>
 
+body {
+  background-color: #D4F0FC;
+}
 
 div.home_display {
   width: 96vw;
@@ -51,10 +72,11 @@ div.home_display > *{
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-div.chatbot {
+div.chatbot_window {
   grid-area: chatbot;
-  background-color: #f1f5ed;
+  background-color: #297a98;
   height: 100%;
+  border-radius: 14px;
 }
 
 div.quote {
@@ -65,13 +87,14 @@ div.quote {
 
 div.job_postings {
   grid-area: job_postings;
-  background-color: rgb(234, 234, 234);
-  border-radius: 8px;
+  background-color: #f2f8ff;
+  border-radius: 14px;
   overflow-y: auto;
 }
 
 div.job_postings::-webkit-scrollbar {
     width: 10px;
+    border-radius: 10px;
 }
 
 div.job_postings::-webkit-scrollbar-thumb {
@@ -81,6 +104,7 @@ div.job_postings::-webkit-scrollbar-thumb {
 
 div.job_postings::-webkit-scrollbar-track {
     background-color: #f5f5f5;
+    border-radius: 10px;
 }
 
 </style>

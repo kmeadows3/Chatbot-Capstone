@@ -5,9 +5,7 @@ import com.techelevator.dao.QueryDao;
 import com.techelevator.dao.QuizDao;
 import com.techelevator.exception.CompanyInformationExpection;
 import com.techelevator.exception.DaoException;
-import com.techelevator.model.Company;
-import com.techelevator.model.Response;
-import com.techelevator.model.UserInput;
+import com.techelevator.model.*;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -17,7 +15,6 @@ public class QueryService {
 
     // Constants
     private final int[] RANKED_ENTITY_IDS = new int[]{
-            11, // Negative
             3, // Star Method
             4, // Cover Letter
             10, // Follow up
@@ -27,7 +24,9 @@ public class QueryService {
             8, // HR Interview
             6, // General Interview
             2, // Chatbot
-            1 }; // Default
+            1, // Default
+            11, // Negative
+    }; // Default
     public final int JOB_SEARCH_MODE = 1;
     public final int COMPANY_DATA_MODE = 2;
     public final int NEW_QUOTE_MODE = 3;

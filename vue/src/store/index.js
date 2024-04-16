@@ -8,7 +8,7 @@ export function createStore(currentToken, currentUser) {
       user: currentUser || {},
       preferredName: '',
       jobPostings: [],
-      selectedJobPosting: {},
+      selectedJobPosting: {isEmpty: true},
       intents: [1], // starts at 1 - Default intent
       entities: [1], // starts at 1 - Default entity
       mode: 0,
@@ -28,7 +28,9 @@ export function createStore(currentToken, currentUser) {
         state.mode = newMode;
       },
       ADD_JOB_POSTING(state, newJobPosting) {
-        state.jobPostings.unshift(newJobPosting);
+        if (state.jobPostings.length < 50) {
+          state.jobPostings.push(newJobPosting);
+        }
       },
       CLEAR_JOB_POSTINGS(state) {
         state.jobPostings = [];

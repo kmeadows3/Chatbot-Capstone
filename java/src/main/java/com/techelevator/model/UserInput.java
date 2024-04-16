@@ -8,6 +8,7 @@ public class UserInput {
     private List<Integer> intents;
     private List<Integer> entities;
     private int mode;
+    private List<Question> quiz;
 
     // Getters
     public String getUtterance() {
@@ -26,6 +27,10 @@ public class UserInput {
         return mode;
     }
 
+    public List<Question> getQuiz() {
+        return quiz;
+    }
+
     // Setters
     public void setUtterance(String utterance) {
         this.utterance = utterance;
@@ -41,5 +46,8 @@ public class UserInput {
 
     public void setMode(int mode) {
         this.mode = mode;
+    }
+    public void setQuiz(List<Question> quiz) {
+        this.quiz = quiz;
     }
 }
