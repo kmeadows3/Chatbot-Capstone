@@ -1,15 +1,17 @@
 <template>
-    <button class="toggle" v-show="$store.state.jobPostings.length!=0" @click="toggleJobs()">{{ showJobs ? "Show Instructions" : "Show Jobs" }}</button>
-    <Instructions v-show="$store.state.jobPostings.length===0 || !showJobs"/>
-    <div class ="job_details" v-show="$store.state.jobPostings.length > 0 && showJobs">
-        <h1>Recent Job Posting{{ $store.state.jobPostings.length > 1 ? 's' : '' }}</h1>
-        <div class="job_cards_container">
-            <a href="#" class="job_card" v-for="jobPosting in $store.state.jobPostings" @click.prevent="expandJobInfo(jobPosting)">          
-                <p id="position_title">{{ jobPosting.positionTitle }}</p>
-                <p id="position_details">{{ jobPosting.levels }} || Posted {{ jobPosting.datePosted }}</p>
-                <p><strong>Company</strong>: {{ jobPosting.companyName }} || ID: {{ jobPosting.companyId }}</p>
-                <p><strong>Location{{ jobPosting.locations.length > 1 ? 's' : '' }}</strong>: {{ formatLocations(jobPosting.locations) }}</p>
-            </a>
+    <div class="job_postings" v-show="this.$store.state.selectedJobPosting.isEmpty">
+        <button class="toggle" v-show="$store.state.jobPostings.length!=0" @click="toggleJobs()">{{ showJobs ? "Show Instructions" : "Show Jobs" }}</button>
+        <Instructions v-show="$store.state.jobPostings.length===0 || !showJobs"/>
+        <div class ="job_details" v-show="$store.state.jobPostings.length > 0 && showJobs">
+            <h1>Recent Job Posting{{ $store.state.jobPostings.length > 1 ? 's' : '' }}</h1>
+            <div class="job_cards_container">
+                <a href="#" class="job_card" v-for="jobPosting in $store.state.jobPostings" @click.prevent="expandJobInfo(jobPosting)">          
+                    <p id="position_title">{{ jobPosting.positionTitle }}</p>
+                    <p id="position_details">{{ jobPosting.levels }} || Posted {{ jobPosting.datePosted }}</p>
+                    <p><strong>Company</strong>: {{ jobPosting.companyName }} || ID: {{ jobPosting.companyId }}</p>
+                    <p><strong>Location{{ jobPosting.locations.length > 1 ? 's' : '' }}</strong>: {{ formatLocations(jobPosting.locations) }}</p>
+                </a>
+            </div>
         </div>
     </div>
 </template>

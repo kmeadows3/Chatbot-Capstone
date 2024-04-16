@@ -10,15 +10,15 @@
             </div>
             <form v-show="this.$store.state.mode !== 1">
                 <textarea name="userInput" id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox"
-                    placeholder="Type Here"></textarea>
+                    placeholder="Type Here" :disabled="this.$store.state.mode == 4"></textarea>
             </form>
-            <button @click.prevent="addUserBox()">
-                Send Response
+            <button @click.prevent="addUserBox()" :class="this.$store.state.mode == 4 ? 'disabled' : ''">
+                {{this.$store.state.mode !== 1 ? "Send Response" : "Search Jobs"}}
             </button>
-            <button @click.prevent="beginVoiceRecognition()">
+            <button @click.prevent="beginVoiceRecognition()" :class="this.$store.state.mode == 4 ? 'disabled' : ''">
                 Voice Response
             </button>
-            <button id="text-to-speech-button" @click.prevent="toggleTextToSpeech()">
+            <button id="text-to-speech-button" @click.prevent="toggleTextToSpeech()" :class="this.$store.state.mode == 4 ? 'disabled' : ''">
                 {{ textToSpeech ? 'Disable text-to-speech' : 'Enable text-to-speech' }}
             </button>
         </div>
@@ -360,7 +360,6 @@ div#chat-display {
     margin-bottom: 6px;
 
     position: relative;
-    /* margin-left: 200px; */
 }
 
 div#chat-display>div {
@@ -491,6 +490,11 @@ textarea:focus {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
+textarea:disabled {
+    background-color: #AAAAAA;
+    box-shadow: 0px 0px 0px;
+}
+
 button {
     background-color: #49c5ff;
     border: none;
@@ -507,6 +511,18 @@ button {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.2);
     /* margin-left: 200px; */
+}
+
+button.disabled{
+    background-color: #AAAAAA;
+    box-shadow: 0px 0px 0px;
+    cursor:default;
+}
+
+button.disabled:hover {
+    background-color: #AAAAAA;
+    box-shadow: 0px 0px 0px;
+    transform: translateY(0px);
 }
 
 .text-to-speech {
