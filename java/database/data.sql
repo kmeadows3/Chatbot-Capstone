@@ -876,213 +876,354 @@ INSERT INTO difficulty(difficulty) VALUES ('Easy');  -- id 1
 INSERT INTO difficulty(difficulty) VALUES ('Moderate'); -- id 2
 INSERT INTO difficulty(difficulty) VALUES ('Difficult'); -- id 3
 
--- -- Quiz Question ID 1
-
--- INSERT INTO question (question, difficulty_id) VALUES ('What is a variable?', 1);
--- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Either a value or abstract storage location
--- 		paired with an associated symbolic name.', true, 1);
--- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Variable answer 1', false, 1);
--- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Variable answer 2', false, 1);
--- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Variable answer 3', false, 1);
-
--- -- Quiz Question ID 2
--- INSERT INTO question (question, difficulty_id) VALUES ('What are the advantages of the DAO pattern?', 2);
--- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The DAO pattern abstracts and encapsulates data 
--- 		access logic, promoting separation of concerns and code reusability. By centralizing data access within 
--- 		dedicated DAO classes, it enhances maintainability, testability, and adaptability of the application, 
--- 		allowing for easier changes to the data source or access technology without impacting other parts of 
--- 		the codebase.', true, 2);
--- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong DAO answer 1', false, 2);
--- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong DAO answer 2', false, 2);
--- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong DAO answer 3', false, 2);
- 
--- -- Quiz Question ID 3
--- INSERT INTO question (question, difficulty_id) VALUES ('Quiz Question 3', 2);
--- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Correct Question 3 answer', true, 3);
--- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 3 answer 1', false, 3);
--- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 3 answer 2', false, 3);
--- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 3 answer 3', false, 3);
-
--- -- Quiz Question ID 4
--- INSERT INTO question (question, difficulty_id) VALUES ('Quiz Question 4', 3);
--- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Correct Question 4 answer', true, 4);
--- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 4 answer 1', false, 4);
--- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 4 answer 2', false, 4);
--- 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 4 answer 3', false, 4);
-	
--- PROMPT TO GENERATE ANSWERS
--- You are a senior Java developer.  Given this question "What is method Overloading?" that is being used for a quiz, generate 4 answers as insert statements in this format:  "INSERT INTO answer (answer, is_correct, question_id) VALUES ('A reference type holds a reference on the stack that points to the location of an object on the heap.', true, 3);"  One of the answers should be correct and there should be 3 incorrect answers that sound real.
-
--- Easy 
--- JAVA
---     -What is the difference between a class and an Object
---     -What is a Value Type
---     -What is a Reference Type
---     -What is method Overloading
---     -What are the 4 parts of a method signature
---     -When would you use a break statement
---     -Define Polymorphism
---     -What are the 3 pillar principles of Object Oriented Programming
---     -Define Inheritance 
---     -Define Encapsulation
--- SQL
---     -What is a primary key
---     -What is a foreign key
--- API
---     -What is REST
---     -What is HTTP
---     -What is the difference between HTTP and HTTPS
---     -When would you use a GET request
---     -What is the difference between a GET and a POST
---     -What is a port
-
-
--- Medium 
--- JAVA
---     What causes a NullPointerException
---     What is the stack and the heap
---     Why is Encapsulation important
---     What is the purpose of the MVC pattern
---     How does a Java program go from source code to a running application
---     What is a immutable
---     Why is loose coupling important?
---     How can you Override a private method?
---     What is serialization/deserialization
---     When would you use a Stack collection
--- SQL
---     What is a constraint in SQL
---     What is a composite primary key
--- API
---     Why is Login always a POST
---     What does it mean that HTTP is stateless
---     What are the 3 factors of authentication
---     What is the difference between authentication and authorization
---     What does a HTTP status 500 mean
---     What is a server
-
--- Hard 
--- JAVA
---     Which OO principle says "SRP definition"
---     What is the difference between a final and immutable 
---     What is autoboxing
---     What is a generic
---     What is garbage collection
---     What is the difference between the JRE, JVM, and JDK
---     What is the difference between a hash and encryption
---     When would you use == with a String
---     What is a static method
---     What memory space do methods run in
---     Why is the main method public static void
--- SQL 
---     Why can't other uses see changes made inside your transaction
---     What is the purpose of normalization
--- API
---     Why it is important that HTTP is stateless
---     What does it mean that REST is caching
---     How does the server know a JWT is valid
---     What happens if you add a new item to a database with a GET request
---     What is the difference between the 401 and 403 status codes
---     What does it mean to say a request is idempotent
-
-
 -- EASY QUIZ QUESTIONS 
 -- JAVA
-INSERT INTO question (question, difficulty_id) VALUES ('What is the difference between a class and an Object?', 1); -- 1
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A class is a blueprint for an Ojbject, while an Object is an instantiation of that class in memory.', true, 1);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A class is a blueprint for creating different methods, while an Object is a collection of classes', false, 1);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A class is used to implement interfaces, while an Object is used to extend other classes', false, 1);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A class can only exist after an Object has been created, while an Object can exist independently of classes.', false, 1);
+INSERT INTO question (question, difficulty_id) VALUES ('What is the difference between a Class and an Object?', 1); -- 1
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A Class is a blueprint for an object, while an Object is an instantiation of that class in memory.', true, 1);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A Class is a blueprint for creating different methods, while an Object is a collection of classes', false, 1);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A Class is used to implement interfaces, while an Object is used to extend other classes', false, 1);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A Class can only exist after an Object has been created, while an object can exist independently of classes.', false, 1);
 
-INSERT INTO question (question, difficulty_id) VALUES ('What is a Value Type', 1); -- 2
+INSERT INTO question (question, difficulty_id) VALUES ('What is a Value Type?', 1); -- 2
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A primitive data type that holds its value directly on the stack.', true, 2);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A Value Type is a type that can only hold null values', false, 2);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A type that can only hold null values', false, 2);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A primitive data type that refers to an object’s location in memory, rather than its actual value', false, 2);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A type that can change its value at runtime', false, 2);
 
-INSERT INTO question (question, difficulty_id) VALUES ('What is a Reference Type', 1);  -- 3
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A reference type holds a reference on the stack that points to the location of an object on the heap.', true, 3);
+INSERT INTO question (question, difficulty_id) VALUES ('What is a Reference Type?', 1);  -- 3
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A type that holds a reference on the stack that points to the location of an object on the heap.', true, 3);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A type that directly contains its value, rather than a reference to an object.', false, 3);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A data type that can only hold numeric values', false, 3);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A data type that is always immutable, meaning its state cannot be changed after it is created', false, 3);
 
-INSERT INTO question (question, difficulty_id) VALUES ('What is method Overloading', 1);  -- 4
+INSERT INTO question (question, difficulty_id) VALUES ('What is Method Overloading?', 1);  -- 4
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - Method overloading is the ability of a single method to perform more than one task, such as multiple methods with the same name but different parameters.', true, 4);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Method overloading is when a class inherits a method from its superclass.', false, 4);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Method overloading is the process of changing the functionality of an existing method in a subclass.', false, 4);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Method overloading is the ability of a method to call itself.', false, 4);
 
-INSERT INTO question (question, difficulty_id) VALUES ('What are the 4 parts of a method signature', 1);  -- 5													   
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - The four parts of a method signature are the method name, the parameter list, the return type, and the exception list.', true, 5);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The four parts of a method signature are the method name, the class name, the return type, and the exception list.', false, 5);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The four parts of a method signature are the method name, the parameter list, the return type, and the method body.', false, 5);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The four parts of a method signature are the method name, the class name, the parameter list, and the return type.', false, 5);
+INSERT INTO question (question, difficulty_id) VALUES ('What are the 4 parts of a method signature?', 1);  -- 5													   
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - The method name, the parameter list, the return type, and the exception list.', true, 5);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The method name, the class name, the return type, and the exception list.', false, 5);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The method name, the parameter list, the return type, and the method body.', false, 5);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The method name, the class name, the parameter list, and the return type.', false, 5);
 
-INSERT INTO question (question, difficulty_id) VALUES ('When would you use a break statement', 1);  -- 6													   
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A break statement is used to terminate the current loop or switch statement and transfer control to the statement immediately following the loop or switch.', true, 6);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A break statement is used to create a loop that runs indefinitely.', false, 6);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A break statement is used to declare variables.', false, 6);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A break statement is used to catch exceptions in try-catch blocks.', false, 6);												   
+INSERT INTO question (question, difficulty_id) VALUES ('When would you use a break statement?', 1);  -- 6													   
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - To terminate the current loop or switch statement and transfer control to the statement immediately following the loop or switch.', true, 6);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('To create a loop that runs indefinitely.', false, 6);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('To declare variables.', false, 6);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('To catch exceptions in try-catch blocks.', false, 6);												   
 
 INSERT INTO question (question, difficulty_id) VALUES ('Define Polymorphism', 1);  -- 7														   
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - Polymorphism is a concept in object-oriented programming that allows objects of different types to be processed in a uniform way. It refers to the ability of a variable, function or object to take on multiple forms.', true, 7);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Polymorphism is a programming concept that allows for data to be stored in multiple formats within a single variable.', false, 7);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Polymorphism is a concept in programming that allows for functions to be written in multiple languages.', false, 7);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Polymorphism is a concept in programming that allows for a single function to be written with multiple signatures.', false, 7);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A concept in object-oriented programming that allows objects of different types to be processed in a uniform way. It refers to the ability of a variable, function or object to take on multiple forms.', true, 7);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A object-oriented programming concept that allows for data to be stored in multiple formats within a single variable.', false, 7);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A concept in object-oriented programming that allows for functions to be written in multiple languages.', false, 7);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A concept in object-oriented programming that allows for a single function to be written with multiple signatures.', false, 7);
 	
-INSERT INTO question (question, difficulty_id) VALUES ('What are the 3 pillar principles of Object Oriented Programming', 1);  -- 8
+INSERT INTO question (question, difficulty_id) VALUES ('What are the 3 pillar principles of Object Oriented Programming?', 1);  -- 8
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - Encapsulation, Inheritance, and Polymorphism.', true, 8);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Abstraction, Encapsulation, and Multithreading.', false, 8);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Inheritance, Polymorphism, and Recursion.', false, 8);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Encapsulation, Polymorphism, and Concurrency.', false, 8);
 	
 INSERT INTO question (question, difficulty_id) VALUES ('Define Inheritance', 1);  -- 9
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - Inheritance is a mechanism in which one class acquires the property of another class.', true, 9);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Inheritance is a process of executing methods from another class.', false, 9);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Inheritance is a technique to create duplicate objects.', false, 9);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Inheritance is a tool for creating interfaces in Java.', false, 9);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A mechanism in which one class acquires the property of another class.', true, 9);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A process of executing methods from another class.', false, 9);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A technique to create duplicate objects.', false, 9);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A tool for creating interfaces in Java.', false, 9);
 													   
 INSERT INTO question (question, difficulty_id) VALUES ('Define Encapsulation', 1);  -- 10											
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - Encapsulation is a mechanism that binds together code and the data it manipulates, and keeps both safe from outside interference and misuse.', true, 10);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Encapsulation is a process of executing methods from another class.', false, 10);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Encapsulation is a technique to create duplicate objects.', false, 10);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Encapsulation is a tool for creating interfaces in Java.', false, 10);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A mechanism that binds together code and the data it manipulates, and keeps both safe from outside interference and misuse.', true, 10);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A process of executing methods from another class.', false, 10);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A technique to create duplicate objects.', false, 10);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A tool for creating interfaces in Java.', false, 10);
 	
-INSERT INTO question (question, difficulty_id) VALUES ('What is a primary key', 1);  -- 11													  
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A primary key in SQL is a field in a table which uniquely identifies each row/record in a database table.', true, 11);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A primary key in SQL is a tool to create interfaces.', false, 11);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A primary key in SQL is a mechanism to manipulate data.', false, 11);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A primary key in SQL is a process of executing methods from another class.', false, 11);
+INSERT INTO question (question, difficulty_id) VALUES ('What is a Primary Key?', 1);  -- 11													  
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - In SQL, a field in a table which uniquely identifies each row/record in a database table.', true, 11);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('In SQL, a tool to create interfaces.', false, 11);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('In SQL, a mechanism to manipulate data.', false, 11);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('In SQL, a process of executing methods from another class.', false, 11);
 	
-INSERT INTO question (question, difficulty_id) VALUES ('What is a foreign key', 1);  -- 12	
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A foreign key in SQL is a field in a table that is primary key in another table.', true, 12);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A foreign key in SQL is a special index used to speed up queries.', false, 12);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A foreign key in SQL is a constraint that forces the values in a column to be unique.', false, 12);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A foreign key in SQL is a method for encrypting data stored in a database.', false, 12);
+INSERT INTO question (question, difficulty_id) VALUES ('What is a Foreign Key?', 1);  -- 12	
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - In SQL, a field in a table that is primary key in another table.', true, 12);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('In SQL, a is a special index used to speed up queries.', false, 12);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('In SQL, a constraint that forces the values in a column to be unique.', false, 12);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('In SQL, a method for encrypting data stored in a database.', false, 12);
 
-INSERT INTO question (question, difficulty_id) VALUES ('What is HTTP', 1);  -- 13
+INSERT INTO question (question, difficulty_id) VALUES ('What is HTTP?', 1);  -- 13
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - HTTP is a protocol used for transmitting hypertext over the internet.', true, 13);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('HTTP is a high-level programming language.', false, 13);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('HTTP is a hardware device used for data storage.', false, 13);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('HTTP is a type of computer virus.', false, 13);
 
-INSERT INTO question (question, difficulty_id) VALUES ('What is the difference between HTTP and HTTPS', 1);  -- 14
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - The difference between HTTP and HTTPS is that HTTPS uses encryption to secure the data during transmission, while HTTP does not.', true, 14);
+INSERT INTO question (question, difficulty_id) VALUES ('What is the difference between HTTP and HTTPS?', 1);  -- 14
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - HTTPS uses encryption to secure the data during transmission, while HTTP does not.', true, 14);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('HTTP and HTTPS are both programming languages, but HTTPS is object-oriented while HTTP is not.', false, 14);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('HTTP is used for transmitting hypertext over the internet, while HTTPS is a database management system.', false, 14);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('HTTP stands for HyperText Transfer Protocol, while HTTPS stands for HyperText Transfer Protocol Secure Socket.', false, 14);
 
-INSERT INTO question (question, difficulty_id) VALUES ('What is the difference between a GET and a POST', 1);  -- 15
+INSERT INTO question (question, difficulty_id) VALUES ('What is the difference between a GET and a POST?', 1);  -- 15
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - GET retrieves data from a server with parameters in the query string, POST sends data to a server with parameters in the message body.', true, 15);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('GET sends data to a server with parameters in the message body, POST retrieves data from a server with parameters in the header.', false, 15);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('GET and POST are used for the same purpose.', false, 15);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('GET is used to update data on a server, POST is used to retrieve data.', false, 15);
 	
-INSERT INTO question (question, difficulty_id) VALUES ('What is a port', 1);  -- 16
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A port is a communication endpoint in an operating system.', true, 16);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A port is a piece of hardware that connects peripherals to a computer.', false, 16);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A port is a protocol used for transmitting data over the internet.', false, 16);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A port is a type of computer memory.', false, 16);
-									
+INSERT INTO question (question, difficulty_id) VALUES ('What is a Port?', 1);  -- 16
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A communication endpoint in an operating system.', true, 16);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A piece of hardware that connects peripherals to a computer.', false, 16);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A protocol used for transmitting data over the internet.', false, 16);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A type of computer memory.', false, 16);
+		
+INSERT INTO question (question, difficulty_id) VALUES ('What is REST?', 1);  -- 17
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - REST stands for Representational State Transfer. It is an architectural style for designing networked applications.', true, 17);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('REST is a programming language used for building web applications.', false, 17);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('REST is a database management system used for storing and retrieving data over the internet.', false, 17);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('REST is a protocol used for secure communication between servers and clients.', false, 17);
+
+INSERT INTO question (question, difficulty_id) VALUES ('When would you use a GET request?', 1);  -- 18
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - To retrieve data from the server without changing anything on the server.', true, 18);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('To update or modify data on the server.', false, 18);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('To send sensitive information such as passwords to the server.', false, 18);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('To delete data from the server.', false, 18);
+
+
+--MEDIUM QUESTIONS
+INSERT INTO question (question, difficulty_id) VALUES ('What causes a NullPointerException?', 2);  -- 19
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - Attempting to use or access a reference variable that is currently null.', true, 19);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Using a variable that has not been declared.', false, 19);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Calling a method with incorrect arguments.', false, 19);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Using an uninitialized variable.', false, 19);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What is the stack and the heap?', 2);  -- 20
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - The stack is used for static memory allocation and stores method frames and local variables, while the heap is used for dynamic memory allocation and stores objects.', true, 20);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The stack is used for storing objects and data structures, while the heap is used for managing method calls and execution.', false, 20);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The stack is used for dynamic memory allocation and stores method frames and local variables, while the heap is used for static memory allocation and stores objects.', false, 20);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The stack is used for managing method calls and execution, while the heap is used for storing objects and data structures.', false, 20);
+
+
+INSERT INTO question (question, difficulty_id) VALUES ('Why is Encapsulation important?', 2);  -- 21
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - It hides the internal state of an object and only allows access through well-defined interfaces, which helps in achieving data abstraction, security, and maintainability in a software system.', true, 21);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It allows for the reuse of code across different projects.', false, 21);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It ensures that data is stored in a secure and encrypted manner.', false, 21);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It improves the performance of the software by optimizing memory usage.', false, 21);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What is the purpose of the MVC pattern?', 2);  -- 22
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - To separate the concerns of an application into three distinct components: Model, View, and Controller, thereby improving modularity, maintainability, and scalability of the application.', true, 22);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('To combine the Model, View, and Controller into a single component for simplicity and ease of development.', false, 22);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('To primarily focus on the visual representation of the data in an application.', false, 22);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('To replace traditional database systems with more efficient data storage mechanisms.', false, 22);
+
+INSERT INTO question (question, difficulty_id) VALUES ('How does a Java program go from source code to a running application?', 2);  -- 23
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - The source code is first compiled into bytecode by the Java compiler. Then, the bytecode is executed by the Java Virtual Machine (JVM), which translates it into machine code that can be understood and executed by the underlying hardware.', true, 23);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The source code is directly executed by the CPU after being compiled into machine code by the Java compiler.', false, 23);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The source code is interpreted line by line by the Java Virtual Machine (JVM), without any prior compilation step.', false, 23);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The source code is converted into binary executable files by the Java compiler, which are then directly executed by the operating system.', false, 23);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What is an immutable?', 2);  -- 24
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - An object whose state cannot be changed after it is created. This means that once an immutable object is created, its state remains constant throughout its lifetime.', true, 24);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('An object whose state can be changed after it is created.', false, 24);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('An object that is only accessible within a specific scope or context.', false, 24);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('An object that can be modified by multiple threads concurrently without synchronization.', false, 24);
+
+INSERT INTO question (question, difficulty_id) VALUES ('Why is loose coupling important?', 2);  -- 25
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - It reduces the dependencies between components in a system, making it easier to modify, maintain, and test individual components without affecting others.', true, 25);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It increases dependencies between components, leading to a more tightly integrated system.', false, 25);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It makes it difficult to modify or refactor components in a system.', false, 25);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It improves performance by increasing communication overhead between components.', false, 25);
+
+
+INSERT INTO question (question, difficulty_id) VALUES ('How can you Override a private method?', 2);  -- 26
+INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - You cannot override a private method in Java. Private methods are not visible to subclasses and cannot be overridden.', true, 26);
+INSERT INTO answer (answer, is_correct, question_id) VALUES ('You can override a private method by using the @Override annotation in the subclass.', false, 26);
+INSERT INTO answer (answer, is_correct, question_id) VALUES ('You can override a private method by redefining it with the same signature in the subclass.', false, 26);
+INSERT INTO answer (answer, is_correct, question_id) VALUES ('You can override a private method by using the super keyword to call the superclass method.', false, 26);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What is serialization/deserialization?', 2);  -- 27
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - Serialization is the process of converting an object into a stream of bytes to store it in memory, a database, or to transmit it over a network. Deserialization is the reverse process, where the serialized byte stream is converted back into an object.', true, 27);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Serialization is the process of converting an object into a string representation. Deserialization is the process of converting the string representation back into an object.', false, 27);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Serialization is the process of compressing an object to reduce its size. Deserialization is the process of decompressing the object back to its original size.', false, 27);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Serialization is the process of encrypting an object for secure transmission. Deserialization is the process of decrypting the object upon receipt.', false, 27);
+
+INSERT INTO question (question, difficulty_id) VALUES ('When would you use a Stack collection?', 2);  -- 28
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - When you need to implement Last-In-First-Out (LIFO) behavior, such as in applications involving undo functionality, backtracking, or recursive algorithms.', true, 28);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('When you need to implement First-In-First-Out (FIFO) behavior.', false, 28);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('When you need to maintain elements in sorted order.', false, 28);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('When you need to efficiently access elements at random positions.', false, 28);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What is a constraint in SQL?', 2);  -- 29
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A rule defined on a column or a set of columns that enforces data integrity and ensures that the data stored in the database meets certain criteria. Common types of constraints include primary key, foreign key, unique, not null, and check constraints.', true, 29);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A query used to retrieve data from the database.', false, 29);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A a function used to manipulate data in the database.', false, 29);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A keyword used to define the structure of a table in the database.', false, 29);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What is a composite primary key?', 2);  -- 30
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A composite primary key in a database table consists of two or more columns that uniquely identify each row in the table. Together, these columns form a primary key constraint, ensuring that the combination of values in the specified columns is unique.', true, 30);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A composite primary key in a database table is a primary key that is composed of a single column.', false, 30);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A composite primary key in a database table is a key that is used for foreign key references in other tables.', false, 30);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A composite primary key in a database table is a key that allows null values in its columns.', false, 30);
+
+INSERT INTO question (question, difficulty_id) VALUES ('Why is Login always a POST?', 2);  -- 31
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - It involves sending sensitive information such as usernames and passwords in the request body. Using a POST request allows this information to be encrypted and transmitted securely to the server.', true, 31);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('To ensure better performance and faster response times from the server.', false, 31);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('To prevent caching of sensitive information by web browsers.', false, 31);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('To simplify the implementation and reduce the complexity of the authentication process.', false, 31);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What does it mean that HTTP is stateless?', 2);  -- 32
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - It means that the server does not maintain any information about the state of the client between requests. Each request from the client to the server is treated as an independent transaction, and the server does not retain any knowledge of previous interactions with the client.', true, 32);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It means that HTTP requests are always encrypted to ensure the privacy and security of the data being transmitted.', false, 32);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It means that HTTP requests are always synchronous, with each request waiting for a response from the server before proceeding.', false, 32);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It means that HTTP requests are always initiated by the server, and the client passively responds to these requests.', false, 32);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What are the 3 factors of authentication?', 2);  -- 33
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - Something you know (e.g., a password), something you have (e.g., a smartphone or a security token), and something you are (e.g., biometric identifiers like fingerprint or iris scan).', true, 33);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Ssomething you see, something you say, and something you hear.', false, 33);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Something you type, something you click, and something you copy.', false, 33);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Something you download, something you install, and something you run.', false, 33);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What is the difference between authentication and authorization?', 2);  -- 34
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - Authentication is the process of verifying the identity of a user or system. Authorization is the process of determining whether an authenticated user or system has the necessary permissions to access specific resources or perform certain actions within a system.', true, 34);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Authentication and authorization are two terms that refer to the same process.', false, 34);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Authentication is the process of determining user permissions, while authorization is the process of verifying user identity.', false, 34);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Authorization is the process of providing credentials, while authentication is the process of granting access to specific resources.', false, 34);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What does a HTTP status 500 mean?', 2);  -- 35
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - It indicates an Internal Server Error. This means that the server encountered an unexpected condition that prevented it from fulfilling the request made by the client.', true, 35);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It indicates that the request made by the client was successful.', false, 35);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It indicates that the client made an invalid request.', false, 35);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It indicates that the server is temporarily unavailable.', false, 35);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What is a server?', 2);  -- 36
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A computer program or a device that provides functionality or services to other programs or devices, known as clients, over a network.', true, 36);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A device used by clients to access the internet.', false, 36);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A computer program or a device that consumes functionality or services provided by other programs or devices.', false, 36);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A term used to refer to any computer connected to a network.', false, 36);
+
+-- HARD QUESTIONS
+INSERT INTO question (question, difficulty_id) VALUES ('Which OO principle says "A class should have only one reason to change, meaning that it should have only one responsibility or job within the system."?', 3);  -- 37
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - The Single Responsibility Principle.', true, 37);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The Open/Closed Principle.', false, 37);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The Liskov Substitution Principle.', false, 37);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The Dependency Inversion Principle.', false, 37);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What is the difference between a final and immutable?', 3);  -- 38
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - In Java, "final" is a keyword used to declare that a variable can only be assigned once and cannot be reassigned thereafter. This means that the reference to the object pointed to by the final variable cannot change, but the state of the object itself may still be mutable. "Immutable," on the other hand, refers to objects whose state cannot be changed after they are created. Immutable objects guarantee that their state remains constant throughout their lifetime.', true, 38);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A final object is one that cannot be modified, while an immutable object is one whose reference cannot be reassigned.', false, 38);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A final variable is one whose reference cannot be reassigned, while an immutable variable is one whose state cannot be changed.', false, 38);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('There is no difference between a final and immutable; both terms refer to objects that cannot be modified.', false, 38);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What is Autoboxing?', 3);  -- 39
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - The automatic conversion of primitive data types into their corresponding wrapper class objects, and vice versa, by the Java compiler. This allows primitive data types to be used in places where objects are required, such as collections or method parameters that accept objects.', true, 39);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The manual conversion of wrapper class objects into their corresponding primitive data types.', false, 39);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The process of converting objects into their string representation.', false, 39);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The process of dynamically allocating memory for objects at runtime.', false, 39);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What is a generic?', 3);  -- 40
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A type that allows classes and methods to operate on objects of various types while providing compile-time type safety. Generics allow you to parameterize classes and methods with one or more types, making them more flexible and reusable.', true, 40);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A class or method that is restricted to operate on objects of a specific type.', false, 40);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A type that can only store primitive data types.', false, 40);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A keyword used to define variables with variable data types.', false, 40);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What is garbage collection?', 3);  -- 41
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - The process in Java where the runtime system automatically deallocates memory occupied by objects that are no longer referenced or needed by the program. This helps in managing memory efficiently and prevents memory leaks.', true, 41);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The process of manually releasing memory in Java programs to improve performance.', false, 41);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The process of identifying and removing unused code from Java programs.', false, 41);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The process of optimizing the performance of Java programs by removing redundant code.', false, 41);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What is the difference between the JRE, JVM, and JDK?', 3);  -- 42
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - The JRE is a software package that provides the JVM libraries, and other components necessary to run Java applications. The JVM is an abstract computing machine that enables Java bytecode to be executed on different hardware platforms. The JDK is a software development kit that includes the JRE, development tools, and libraries for developing Java applications.', true, 42);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The JRE is a subset of the JDK that includes only the Java Virtual Machine.', false, 42);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The JVM is a subset of the JRE that includes only the libraries and components necessary for running Java applications.', false, 42);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The JDK is a subset of the JRE that includes only the development tools for building Java applications.', false, 42);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What is the difference between a hash and encryption?', 3);  -- 43
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A hash function is a one-way mathematical function that converts input data into a fixed-size string of bytes, called a hash value or hash code. Encryption is a two-way process that converts plaintext data into ciphertext using an algorithm and a secret key.', true, 43);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A hash function is a reversible process used to convert plaintext data into ciphertext, while encryption is an irreversible process.', false, 43);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A hash function requires a secret key to operate, while encryption does not.', false, 43);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A hash function is used for securing data during transmission or storage, while encryption is primarily used for data integrity verification.', false, 43);
+
+INSERT INTO question (question, difficulty_id) VALUES ('When would you use == with a String?', 3);  -- 44
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - To compare the memory addresses of two String objects, not their contents.', true, 44);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('To compare the contents of two String objects.', false, 44);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('To concatenate two String objects.', false, 44);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('To convert a String object to uppercase.', false, 44);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What is a static method?', 3);  -- 45
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - A method that belongs to the class rather than to any instance of the class. It can be invoked without the need to create an instance of the class, using the class name itself. Static methods are commonly used for utility methods, where the behavior does not depend on the state of any particular object.', true, 45);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A method that can only be called on instances of a class, not on the class itself.', false, 45);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A method that can only be called within the same package where it is defined.', false, 45);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('A method that can only be called after creating an instance of the class.', false, 45);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What memory space do methods run in?', 3);  -- 46
+INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - The stack memory space.', true, 46);
+INSERT INTO answer (answer, is_correct, question_id) VALUES ('The heap memory space.', false, 46);
+INSERT INTO answer (answer, is_correct, question_id) VALUES ('The permanent generation memory space.', false, 46);
+INSERT INTO answer (answer, is_correct, question_id) VALUES ('The code cache memory space.', false, 46);
+
+INSERT INTO question (question, difficulty_id) VALUES ('Why is the main method public static void?', 3);  -- 47
+INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - It needs to be accessible from outside the class without the need to create an instance of the class, and it should be available to the Java runtime system to call it without instantiating the class. The void return type indicates that the main method does not return any value.', true, 47);
+INSERT INTO answer (answer, is_correct, question_id) VALUES ('To prevent other classes from accessing it.', false, 47);
+INSERT INTO answer (answer, is_correct, question_id) VALUES ('To allow it to accept command-line arguments.', false, 47);
+INSERT INTO answer (answer, is_correct, question_id) VALUES ('To make it thread-safe.', false, 47);
+
+INSERT INTO question (question, difficulty_id) VALUES ('Why can’t other uses see changes made inside your transaction?', 3);  -- 48
+INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - Because the transaction occurs on the connection and is not reflected in the database until it it committed.', true, 48);
+INSERT INTO answer (answer, is_correct, question_id) VALUES ('Because transactions are executed serially.', false, 48);
+INSERT INTO answer (answer, is_correct, question_id) VALUES ('Other users can see changes made inside your transaction immediately.', false, 48);
+INSERT INTO answer (answer, is_correct, question_id) VALUES ('Because they do not have explicit permission to do so.', false, 48);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What is the purpose of normalization?', 3);  -- 49
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - To eliminate redundancy and reduce data anomalies by organizing data into well-structured tables.', true, 49);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('To increase redundancy in the database to improve performance.', false, 49);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Normalization complicates the database structure without providing any benefits.', false, 49);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('To denormalize the database for better performance.', false, 49);
+
+INSERT INTO question (question, difficulty_id) VALUES ('Why it is important that HTTP is stateless?', 3);  -- 50  CHECK WITH BRIAN FOR THIS
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - It allows for better scalability and fault tolerance in web applications.', true, 50);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It ensures that all communication between clients and servers is encrypted.', false, 50);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It allows for real-time communication between clients and servers.', false, 50);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It prevents unauthorized access to server resources.', false, 50);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What does it mean that REST is caching?', 3);  -- 51 CHECK WITH BRIAN
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - It refers to the ability of clients and intermediaries to cache responses from RESTful services.', true, 51);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It refers to the encryption of data exchanged between clients and servers.', false, 51);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It refers to the compression of data exchanged between clients and servers.', false, 51);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It refers to the authentication mechanism used to secure RESTful APIs.', false, 51);
+
+INSERT INTO question (question, difficulty_id) VALUES ('How does the server know a JWT is valid?', 3);  -- 52
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - By verifying its digital signature using the public key of the issuer or by checking its authenticity and integrity using a secret key known only to the server.', true, 52);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('By checking the contents of the JWT and comparing them with the expected values.', false, 52);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('By consulting a central authority that maintains a list of valid JWTs.', false, 52);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('By querying a blockchain network to verify its authenticity.', false, 52);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What happens if you add a new item to a database with a GET request?', 3);  -- 53  GET BRIAN HELP WITH ALL ANSWERS
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - Adding a new item to a database should not be done with a GET request according to RESTful principles. GET requests are meant for retrieving data and should not have side effects such as creating, updating, or deleting resources. Using a GET request to add a new item to a database would violate the idempotent and safe nature of GET requests, and it may lead to unexpected behavior such as unintentional creation of duplicate resources or data corruption.', true, 53);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Adding a new item to a database with a GET request is a common practice in RESTful API design.', false, 53);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Adding a new item to a database with a GET request requires the client to include the new item data in the request body.', false, 53);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Adding a new item to a database with a GET request requires the server to respond with a status code indicating success or failure.', false, 53);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What is the difference between the 401 and 403 status codes?', 3);  -- 54
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - The 401 status code indicates that the request requires authentication, and the client needs to provide valid credentials in order to access the resource. In contrast, the 403 status code indicates that the server understood the request, but the client does not have permission to access the resource, even after authentication.', true, 54);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The 401 status code indicates that the server is temporarily unavailable, while the 403 status code indicates that the server is permanently unavailable.', false, 54);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The 401 status code indicates that the request was malformed, while the 403 status code indicates that the request was well-formed but failed due to invalid credentials.', false, 54);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The 401 status code indicates that the resource does not exist, while the 403 status code indicates that the resource exists but is inaccessible to the client.', false, 54);
+
+INSERT INTO question (question, difficulty_id) VALUES ('What does it mean to say a request is idempotent?', 3);  -- 55
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - Making the same request multiple times will produce the same result as making it once.', true, 55);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Making the request is not safe to retry.', false, 55);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Making the request can produce different results each time it is executed.', false, 55);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Making the request has side effects that persist beyond the lifetime of the request.', false, 55);
+
+
+
+
+-- PROMPT TO GENERATE ANSWERS
+-- You are a senior Java developer.  Given this question "When would you use a GET request?" that is being used for a quiz, generate 4 answers as insert statements in this format:  "INSERT INTO answer (answer, is_correct, question_id) VALUES ('A reference type holds a reference on the stack that points to the location of an object on the heap.', true, 3);"  One of the answers should be correct and there should be 3 incorrect answers that sound real.
+
+
+
+
+
+
 END $$;
 
 COMMIT TRANSACTION;
