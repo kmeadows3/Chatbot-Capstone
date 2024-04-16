@@ -55,7 +55,7 @@ export default {
             textBoxText: "",
             record: false,
             textToSpeech: false,
-            lastCommandSelector: undefined,
+            lastCommandSelector: this.$store.state.lastCommands.length,
         }
     },
 
