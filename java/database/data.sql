@@ -1177,14 +1177,14 @@ INSERT INTO question (question, difficulty_id) VALUES ('What is the purpose of n
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Normalization complicates the database structure without providing any benefits.', false, 49);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('To denormalize the database for better performance.', false, 49);
 
-INSERT INTO question (question, difficulty_id) VALUES ('Why it is important that HTTP is stateless?', 3);  -- 50  CHECK WITH BRIAN FOR THIS
+INSERT INTO question (question, difficulty_id) VALUES ('Why it is important that HTTP is stateless?', 3);  -- 50 
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - It allows for better scalability and fault tolerance in web applications.', true, 50);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It ensures that all communication between clients and servers is encrypted.', false, 50);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It allows for real-time communication between clients and servers.', false, 50);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It prevents unauthorized access to server resources.', false, 50);
 
-INSERT INTO question (question, difficulty_id) VALUES ('What does it mean that REST is caching?', 3);  -- 51 CHECK WITH BRIAN
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - It refers to the ability of clients and intermediaries to cache responses from RESTful services.', true, 51);
+INSERT INTO question (question, difficulty_id) VALUES ('What does it mean that REST is caching?', 3);  -- 51 
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - It refers to the ability of clients and intermediaries to store responses for easier retrieval from RESTful services.', true, 51);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It refers to the encryption of data exchanged between clients and servers.', false, 51);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It refers to the compression of data exchanged between clients and servers.', false, 51);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It refers to the authentication mechanism used to secure RESTful APIs.', false, 51);
@@ -1195,11 +1195,11 @@ INSERT INTO question (question, difficulty_id) VALUES ('How does the server know
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('By consulting a central authority that maintains a list of valid JWTs.', false, 52);
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('By querying a blockchain network to verify its authenticity.', false, 52);
 
-INSERT INTO question (question, difficulty_id) VALUES ('What happens if you add a new item to a database with a GET request?', 3);  -- 53  GET BRIAN HELP WITH ALL ANSWERS
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - Adding a new item to a database should not be done with a GET request according to RESTful principles. GET requests are meant for retrieving data and should not have side effects such as creating, updating, or deleting resources. Using a GET request to add a new item to a database would violate the idempotent and safe nature of GET requests, and it may lead to unexpected behavior such as unintentional creation of duplicate resources or data corruption.', true, 53);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Adding a new item to a database with a GET request is a common practice in RESTful API design.', false, 53);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Adding a new item to a database with a GET request requires the client to include the new item data in the request body.', false, 53);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Adding a new item to a database with a GET request requires the server to respond with a status code indicating success or failure.', false, 53);
+INSERT INTO question (question, difficulty_id) VALUES ('What happens if you add a new item to a database with a GET request?', 3);  -- 53
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - The item is added to the database', true, 53); 
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('You will get a Data Integrity Violation Exception.', false, 53);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('It will cause an error and the program will not compile.', false, 53);
+	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The program will run as normal, but the database will not be updated.', false, 53);
 
 INSERT INTO question (question, difficulty_id) VALUES ('What is the difference between the 401 and 403 status codes?', 3);  -- 54
 	INSERT INTO answer (answer, is_correct, question_id) VALUES ('CORRECT - The 401 status code indicates that the request requires authentication, and the client needs to provide valid credentials in order to access the resource. In contrast, the 403 status code indicates that the server understood the request, but the client does not have permission to access the resource, even after authentication.', true, 54);
