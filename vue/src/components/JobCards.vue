@@ -1,7 +1,7 @@
 <template>
+    <button class="toggle" v-show="$store.state.jobPostings.length!=0" @click="toggleJobs()">{{ showJobs ? "Show Instructions" : "Show Jobs" }}</button>
+    <Instructions v-show="$store.state.jobPostings.length===0 || !showJobs"/>
     <div class="job_postings" v-show="this.$store.state.selectedJobPosting.isEmpty">
-        <button class="toggle" v-show="$store.state.jobPostings.length!=0" @click="toggleJobs()">{{ showJobs ? "Show Instructions" : "Show Jobs" }}</button>
-        <Instructions v-show="$store.state.jobPostings.length===0 || !showJobs"/>
         <div class ="job_details" v-show="$store.state.jobPostings.length > 0 && showJobs">
             <h1>Recent Job Posting{{ $store.state.jobPostings.length > 1 ? 's' : '' }}</h1>
             <div class="job_cards_container">

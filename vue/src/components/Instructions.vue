@@ -1,13 +1,13 @@
 <template>
-    <div class="container">
+    <div class="container" :class="this.$store.state.jobPostings.length!=0?'shorten':''">
         <h1>CHATWICK</h1>
-        <div>
+        <div class="welcome">
             <p class='welcome'>Welcome to Chatwick, the Tech Elevator job search and interview prep chatbot.</p>
         </div>
         <div class='examples'>
             <p>Some example command you can give Chatwick are:</p>
             <ul>
-                <li>“I want some example behavioral interview questions.”</li>
+                <li>“I want to practice behavioral interview questions.”</li>
                 <li>“What is the STAR Method?”</li>
                 <li>“I want to search for jobs.”</li>
                 <li>“I would like company information.”</li>
@@ -29,30 +29,44 @@ div.container {
     display: flex;
     flex-direction: column;
     justify-content:space-between;
-    height: 90%;
     margin: 20px auto 10px auto;
     width: 90%;
-    border: solid 1px black;
+    min-height: calc(100% - 35px);
+;}
+
+div.shorten {
+    margin-top: 5px;
+    min-height: calc(100% - 80px);
+;}
+
+div.welcome {
+    flex-grow: 1;
 }
 
 h1 {
     margin: 0px;
     padding: 0px;
     text-align: center;
-    font-family: Luminari;
+    flex-grow: 1;
 }
 
 div.credits {
     margin: 0%;
+    flex-grow: 1;
 }
 
 p.welcome {
     text-align: center;
 }
 
+ul {
+    font-style:italic;
+}
+
 div.examples{
-    margin: 10px 30px;
+    margin: 0px 30px;
     align-self: center;
+    flex-grow: 1;
 }
 
 p.credits {
