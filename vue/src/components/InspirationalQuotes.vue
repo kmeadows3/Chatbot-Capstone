@@ -164,11 +164,11 @@ div.quote_container > p.attribute {
 
 @media only screen and (max-width: 900px) {
     div.quote_container > p.quote {
-        font-size: min(calc(3.2vh * 2.0), calc(1.45vw * 2.0));
+        font-size: max(16px, calc(1.45vw * 1.5));
     }
 
     div.quote_container > p.attribute {
-        font-size: min(calc(2.65vh * 2.0), calc(1.2vw * 2.0));
+        font-size: max(12px, calc(1.2vw * 1.5));
     }
 }
 
