@@ -1,7 +1,7 @@
 <template>
     <div class="box">
         <p class="question">{{question.question}}
-            <span class="difficulty">Difficulty: {{ question.difficultyString }}</span>
+            <span class="difficulty">Brian's Question Rating: {{ question.difficultyString }}</span>
         </p>
         <button v-for="answer in question.answers" v-bind:key="answer.id" @click="answerQuestion(answer)">
             <div class="answer">{{answer.answer}}</div>

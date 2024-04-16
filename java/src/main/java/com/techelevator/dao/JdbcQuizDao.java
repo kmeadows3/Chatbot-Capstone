@@ -25,7 +25,7 @@ public class JdbcQuizDao implements QuizDao{
     public List<Question> getRandomQuiz() {
         String sql = "SELECT question_id, question, q.difficulty_id, difficulty FROM question q " +
                 "JOIN difficulty d ON d.difficulty_id = q.difficulty_id " +
-                "ORDER BY RANDOM() LIMIT 4";
+                "ORDER BY RANDOM() LIMIT 10";
         List<Question> questions = new ArrayList<>();
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);

@@ -55,9 +55,11 @@ export default {
 
             if (avg == 1) {
                 result = "That's a perfect score, very impressive."
-            } else if (avg > 75) {
+            } else if (avg > .75) {
                 result = "Well done. If this were a technical interview, I would  move you along in the hiring process."
-            } else if (avg > 25) {
+            } else if (avg > .50){
+                result = "You got more than half the available points. You're making good progress, but can still improve."
+            } else if (avg > .25) {
                 result = "Your score could be improved. I would advise more studying."
             } else if (avg == 0) {
                 result = "That's impressive on a multiple choice test. Either you are extremely unlucky, or you knew the correct answers and intentionally"
