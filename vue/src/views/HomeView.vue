@@ -9,8 +9,8 @@
     </div>
     <div class="job_postings" v-show="this.$store.state.selectedJobPosting.isEmpty">
       <button v-show="$store.state.jobPostings.length!=0" @click="toggleJobs()">{{ showJobs ? "Show Instructions" : "Show Jobs" }}</button>
-      <Instructions v-show="$store.state.jobPostings.length==0 || !showJobs"/>
-      <JobCards v-show="showJobs"/>
+      <Instructions v-show="$store.state.jobPostings.length===0 || !showJobs"/>
+      <JobCards v-show="$store.state.jobPostings.length > 0 && showJobs"/>
     </div>
     <div class="job_postings" v-if="!this.$store.state.selectedJobPosting.isEmpty">
       <JobDescription />
@@ -98,7 +98,7 @@ div.job_postings::-webkit-scrollbar {
 }
 
 div.job_postings::-webkit-scrollbar-thumb {
-    background-color: #8888;
+    background-color: #f0010188;
     border-radius: 10px;
 }
 
