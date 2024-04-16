@@ -42,10 +42,11 @@ export default {
 
 div.job_description{
     background-color: #6cd9f7;
-    margin: calc(100vw / 150);
+    margin: calc(100vw / 130);
     border-radius: 8px;
     padding: 10px;
     overflow-wrap: break-word;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 div.job_description > p {

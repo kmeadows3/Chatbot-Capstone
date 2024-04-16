@@ -72,7 +72,6 @@ button.toggle {
     margin-bottom: 2%;
 
     width: 40%;
-    
     margin-left: 30%;
 }
 
