@@ -1,11 +1,7 @@
 <template>
     <div class="container">
-        <h1>Chatwick</h1>
-        <p>Chatwick is designed to be your all-in-one support for applying to jobs in the tech field. He can help you prepare for
-            interviews, show you recent job postings, or provide detailed information about companies.</p>
-        
         <div class='examples'>
-            <p>Some example command you can give me are:</p>
+            <p>Some example command you can give Chatwick are:</p>
             <ul>
                 <li>“I want some example behavioral interview questions.”</li>
                 <li>“What is the STAR Method?”</li>
@@ -23,10 +19,20 @@
 
 <style scoped>
 div.container {
+    color: #6c6c6c;
     display: flex;
     flex-direction: column;
     justify-content:space-between;
-    height: 90%;
+    height: auto;
+    margin: 20px;
+}
+
+h1 {
+    margin: 0%;
+}
+
+div.credits {
+    margin: 0%;
 }
 
 </style>
