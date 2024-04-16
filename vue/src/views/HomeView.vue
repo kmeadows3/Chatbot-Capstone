@@ -48,7 +48,7 @@ body {
 }
 
 div.home_display {
-  width: 96vw;
+  width: calc(96vw - 15px);
   height: 95vh;
   padding: 10px;
   
@@ -62,6 +62,20 @@ div.home_display {
   "chatbot job_postings";
 }
 
+@media only screen and (max-width: 900px) {
+  div.home_display {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 3fr 3fr;
+    gap: 10px;
+
+    grid-template-areas: 
+    "chatbot"
+    "quote"
+    "job_postings";
+  }
+}
+
 div.home_display > *{
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -70,7 +84,7 @@ div.home_display > *{
 div.chatbot_window {
   grid-area: chatbot;
   background-color: #297a98;
-  height: 100%;
+  height: 50%;
   border-radius: 14px;
 }
 
@@ -88,7 +102,7 @@ div.job_postings {
 }
 
 div.job_postings::-webkit-scrollbar {
-    width: 0px;
+    width: 10px;
     border-radius: 10px;
 }
 

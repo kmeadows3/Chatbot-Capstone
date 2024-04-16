@@ -13,7 +13,7 @@
                     placeholder="Type Here"></textarea>
             </form>
             <button @click.prevent="addUserBox()">
-                Send Response
+                {{this.$store.state.mode !== 1 ? "Send Response" : "Search Jobs"}}
             </button>
             <button @click.prevent="beginVoiceRecognition()">
                 Voice Response
