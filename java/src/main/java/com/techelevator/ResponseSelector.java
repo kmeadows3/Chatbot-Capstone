@@ -71,6 +71,9 @@ public class ResponseSelector {
                     rank--;
                 } else {
                     rank++;
+                    if (intent == 11) {
+                        rank +=5;
+                    }
                 }
             }
             responseRanks.put(response, rank);

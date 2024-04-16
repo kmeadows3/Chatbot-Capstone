@@ -58,7 +58,7 @@ export default {
 
                 // Picking picture from array representing the page
                 const pickedPhoto = Math.floor(Math.random() * photosPerPage);
-                this.quoteImage = photos[pickedPhoto].src.tiny;
+                this.quoteImage = photos[pickedPhoto].src.large2x;
                 
             })
             .then (response => {
@@ -131,22 +131,29 @@ div.quote_container > p {
 }
 
 div.quote_container {
-    border-radius: 14px;
+    border-radius: 10px;
     overflow: hidden; /* Makes a window for all the elements inside */
 }
 
 div.quote_container > img {
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: max-width;
+    position: relative;
     width: 100%;
-    
+    top: 0%;
+    transition: transform .4s; /* Animation */
+}
+
+div.quote_container > img:hover {
+  transform: scale(1.1); /* (130% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+div.quote_container > p.quote,
+div.quote_container > p.attribute {
+    pointer-events: none;
 }
 
 
 div.quote_container > p.quote {
-    font-size: min(calc(3.2vh), calc(1.45vw));
+    font-size: min(calc(3.2vh), calc(1.30vw));
     position: absolute;
     width: 95%;
     top: 30%;
@@ -155,7 +162,7 @@ div.quote_container > p.quote {
 }
 
 div.quote_container > p.attribute {
-    font-size: min(calc(2.65vh), calc(1.2vw));
+    font-size: min(calc(2.65vh), calc(1.1vw));
     position: absolute;
     width: 100%;
     bottom: 0%;

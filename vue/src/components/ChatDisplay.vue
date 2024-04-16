@@ -9,7 +9,13 @@
                 <JobSearchForm ref="jobSearchForm" />
             </div>
             <form v-show="this.$store.state.mode !== 1">
-                <textarea name="userInput" id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox"
+                <textarea name="userInput" id="userInput" v-model="textBoxText" 
+                    @keydown.enter.prevent="addUserBox" 
+                    @keydown.up.prevent="getLastCommandUp"
+                    @keydown.left.prevent="getLastCommandUp"
+                    @keydown.down.prevent="getLastCommandDown"
+                    @keydown.right.prevent="getLastCommandDown"
+                    @keydown="handleKeyDown"
                     placeholder="Type Here" :disabled="this.$store.state.mode == 4"></textarea>
             </form>
             <button @click.prevent="addUserBox()" :class="this.$store.state.mode == 4 ? 'disabled' : ''">
@@ -49,6 +55,7 @@ export default {
             textBoxText: "",
             record: false,
             textToSpeech: false,
+            lastCommandSelector: undefined,
         }
     },
 
@@ -74,6 +81,13 @@ export default {
             this.scrollChatDisplayToBottom(chatBox);
             this.respondToUserInput()
 
+            // Adds command to the last command array if it's a new command
+            if (this.textBoxText !== this.$store.state.lastCommands[this.$store.state.lastCommands.length - 1]) {
+                this.$store.commit('ADD_LAST_COMMAND', this.textBoxText);
+            }
+
+            // Sets selector to the last index in the last commands array
+            this.lastCommandSelector = this.$store.state.lastCommands.length; 
             this.textBoxText = "";
 
         },
@@ -107,7 +121,6 @@ export default {
                 });
         },
         createUserBox() {
-
             const newResponse = document.createElement('div');
             newResponse.classList.add('user');
             const userAvatarDiv = this.createUserHeading();
@@ -209,8 +222,8 @@ export default {
         setUserName() {
             let name = this.textBoxText;
             name = this.removeFromName(name, "hello");
-            name = this.removeFromName(name, "hey");
-            name = this.removeFromName(name, "hi");
+            name = this.removeFromName(name, "hey, ");
+            name = this.removeFromName(name, "hi, ");
             name = this.removeFromName(name, "greetings");
             name = this.removeFromName(name, "my name is");
             name = this.removeFromName(name, "I'm ");
@@ -328,10 +341,31 @@ export default {
             if (this.textToSpeech) {
                 speechButton.classList.add('text-to-speech');
             }
+        },
+
+        getLastCommandUp() {        
+            if (this.lastCommandSelector > 0) {
+                this.lastCommandSelector = this.lastCommandSelector - 1;
+            }
+            this.textBoxText = this.$store.state.lastCommands[this.lastCommandSelector];
+        },
+
+        getLastCommandDown() {
+            if (this.lastCommandSelector < this.$store.state.lastCommands.length - 1) {
+                this.lastCommandSelector = this.lastCommandSelector + 1;
+            }
+            this.textBoxText = this.$store.state.lastCommands[this.lastCommandSelector];
+        },
+
+        handleKeyDown(event) {
+            const keyCode = event.keyCode;
+
+            // Check if the pressed key is not arrow keys or enter
+            if (keyCode !== 37 && keyCode !== 38 && keyCode !== 39 && keyCode !== 40 && keyCode !== 13) {
+                // Resets the last command selector
+                this.lastCommandSelector = this.$store.state.lastCommands.length;
+            }
         }
-
-
-
     },
     mounted() {
         this.addRobotBox("Greetings, I'm Chatwick. What's your name?");

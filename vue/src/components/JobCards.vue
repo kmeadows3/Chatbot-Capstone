@@ -71,9 +71,10 @@ button.toggle {
     margin-top: 2%;
     margin-bottom: 2%;
 
-    width: 40%;
-    margin-left: 30%;
+    width: 200px;
+    margin-left: calc(50% - 100px);
 }
+
 
 div.job_details {
     max-width: 100%;
@@ -86,7 +87,9 @@ div.job_details {
 }
 
 div.job_details > h1 {
-    margin: 20;
+    margin: 10px;
+    margin-bottom: 20px;
+    
 }
 
 div.job_cards_container {

@@ -12,6 +12,7 @@ export function createStore(currentToken, currentUser) {
       intents: [1], // starts at 1 - Default intent
       entities: [1], // starts at 1 - Default entity
       mode: 0,
+      lastCommands: [],
     },
 
     mutations: {
@@ -37,6 +38,9 @@ export function createStore(currentToken, currentUser) {
       },
       SET_SELECTED_JOB_POSTING(state, jobPosting) {
         state.selectedJobPosting = jobPosting;
+      },
+      ADD_LAST_COMMAND(state, command) {
+        state.lastCommands.push(command);
       },
 
       /*

@@ -1,7 +1,7 @@
 <template>
     <form class="job-search-form">
         <input type="text" id="city" v-model="city" placeholder="City Name">
-        <input type="text" id="stateAbbreviation" v-model="stateAbbreviation" placeholder="State Abbreviation">
+        <input type="text" id="stateAbbreviation" v-model="stateAbbreviation" placeholder="State Abbreviation" maxlength="2">
         <input type="text" id="companyName" v-model="companyName" placeholder="Company Name (Optional)">
         <div>
             
