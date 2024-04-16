@@ -22,17 +22,12 @@ INSERT INTO intent(name) VALUES ('Information');
 		INSERT INTO keyword(keyword, intent_id) VALUES ('explain', 3);  -- Intent: Information(3)
 		INSERT INTO keyword(keyword, intent_id) VALUES ('how do i', 3);  -- Intent: Information(3)
 		INSERT INTO keyword(keyword, intent_id) VALUES ('what is', 3);  -- Intent: Information(3)
-		INSERT INTO keyword(keyword, intent_id) VALUES ('advice', 3); -- Intent: Information(3)
-		INSERT INTO keyword(keyword, intent_id) VALUES ('what commands', 3); -- Intent: Information(3)
 
 -- ID 4
 INSERT INTO intent(name) VALUES ('Practice');  
-	-- DO NOT INCLUDE QUIZ AS A KEYWORD FOR THIS, IT'S USED BY THE QUIZ MODE
 	INSERT INTO keyword(keyword, intent_id) VALUES ('practice', 4);  -- Intent: Practice(4)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('ask me', 4); -- Intent: Practice(4)
     INSERT INTO keyword(keyword, intent_id) VALUES ('next question', 4); -- Intent: Practice(4)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('give me a different', 4);
-	INSERT INTO keyword(keyword, intent_id) VALUES ('give me a new', 4);
 
 -- ID 5
 INSERT INTO intent(name) VALUES ('External Resource');
@@ -43,62 +38,12 @@ INSERT INTO intent(name) VALUES ('External Resource');
 	INSERT INTO keyword(keyword, intent_id) VALUES ('where', 5);  -- Intent: External Resource(5)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('more information', 5);  -- Intent: External Resource(5)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('know more', 5);  -- Intent: External Resource(5)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('sources', 5);  -- Intent: External Resource(5)
-
 
 -- ID 6
 INSERT INTO intent(name) VALUES ('Example');  
 	INSERT INTO keyword(keyword, intent_id) VALUES ('example', 6);  -- Intent: Example(6)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('examples', 6);  -- Intent: Example(6)
 
 
--- ID 7
-INSERT INTO intent(name) VALUES ('Company Information');
-    INSERT INTO keyword(keyword, intent_id) VALUES ('company information', 7);  -- Intent: Company Information(7)
-    INSERT INTO keyword(keyword, intent_id) VALUES ('company data', 7);  -- Intent: Company Information(7)
-    INSERT INTO keyword(keyword, intent_id) VALUES ('information about companies', 7);  -- Intent: Company Information(7)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('information about a company', 7);  -- Intent: Company Information(7)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('company info', 7);  -- Intent: Company Information(7)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('info about companies', 7);  -- Intent: Company Information(7)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('info about a company', 7);  -- Intent: Company Information(7)
-
--- ID 8
-INSERT INTO intent(name) VALUES ('Job Postings');
-    INSERT INTO keyword(keyword, intent_id) VALUES ('job postings', 8);  -- Intent: Job Postings(8)
-    INSERT INTO keyword(keyword, intent_id) VALUES ('job posting', 8);  -- Intent: Job Postings(8)
-    INSERT INTO keyword(keyword, intent_id) VALUES ('get job postings', 8);  -- Intent: Job Postings(8)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('find job', 8);  -- Intent: Job Postings(8)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('find a job', 8);  -- Intent: Job Postings(8)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('find jobs', 8);  -- Intent: Job Postings(8)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('job search', 8);  -- Intent: Job Postings(8)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('looking for a job', 8);  -- Intent: Job Postings(8)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('search for job', 8);  -- Intent: Job Postings(8)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('search for jobs', 8);  -- Intent: Job Postings(8)
-
--- ID 9
-INSERT INTO intent(name) VALUES ('New Quote');
-    INSERT INTO keyword(keyword, intent_id) VALUES ('new quote', 9);  -- Intent: New Quote(9)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('new quotes', 9);  -- Intent: New Quote(9)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('inspire', 9);  -- Intent: New Quote(9)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('inspiration', 9);  -- Intent: New Quote(9)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('motivate me', 9);  -- Intent: New Quote(9)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('motivation', 9);  -- Intent: New Quote(9)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('famous quote', 9);  -- Intent: New Quote(9)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('famous quotes', 9);  -- Intent: New Quote(9)
-
--- ID 10
-INSERT INTO intent(name) VALUES ('Quiz');
-    INSERT INTO keyword(keyword, intent_id) VALUES ('quiz', 10);  -- Intent: Quiz(10)
-
--- ID 11
-INSERT INTO intent(name) VALUES ('Negative');  
-	INSERT INTO keyword(keyword, intent_id) VALUES ('not', 11);  -- negative(11)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('shouldnt', 11);  -- negative(11)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('dont', 11);  -- negative(11)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('avoid', 11);  -- negative(11)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('bad', 11);  -- negative(11)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('suck', 11);  -- negative(11)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('sucks', 11);  -- negative(11)
 
 -------------------- ENTITIES --------------------
 -- ID 1
@@ -122,49 +67,38 @@ INSERT INTO entity(name) VALUES ('Star Method');
 -- ID 4
 INSERT INTO entity(name) VALUES ('Cover Letter');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('cover letter', 4);  -- Entity: Cover Letter(4)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('cover letters', 4);  -- Entity: Cover Letter(4)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('coverletter', 4);  -- Entity: Cover Letter(4)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('cover', 4);  -- Entity: Cover Letter(4)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('letter', 4);  -- Entity: Cover Letter(4)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('letters', 4);  -- Entity: Cover Letter(4)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('writing a cover letter', 4);  -- Entity: Cover Letter(4)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('write a cover letter', 4);  -- Entity: Cover Letter(4)
 
 -- ID 5
 INSERT INTO entity(name) VALUES ('Recruiter');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('recruiter', 5);  -- Entity: Employer(5)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('recruiters', 5);  -- Entity: Employer(5)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('company', 5);  -- Entity: Employer(5)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('organization', 5);  -- Entity: Employer(5)
 	
 -- ID 6
 INSERT INTO entity(name) VALUES ('General Interview');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('interview', 6);  -- Entity: General Interview(6)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('interviews', 6);  -- Entity: General Interview(6)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('interviewing', 6);  -- Entity: General Interview(6)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('interview question', 6);  -- Entity: General Interview(6)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('interview questions', 6);  -- Entity: General Interview(6)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('interview preparation', 6);  -- Entity: General Interview(6)
 
 -- ID 7
 INSERT INTO entity(name) VALUES ('Tech Interview');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('tech interview', 7);  -- Entity: Tech Interview(7)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('tech interviews', 7);  -- Entity: Tech Interview(7)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('technical interview', 7);  -- Entity: Tech Interview(7)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('technical interviews', 7);  -- Entity: Tech Interview(7)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('technical', 7);  -- Entity: Tech Interview(7)
 	
 -- ID 8
 INSERT INTO entity(name) VALUES ('HR Interview');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('behavioral interview', 8);  -- Entity: HR Interview(8)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('behavioral interviews', 8);  -- Entity: HR Interview(8)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('hr interview', 8);  -- Entity: HR Interview(8)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('hr interviews', 8);  -- Entity: HR Interview(8)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('hr', 8);  -- Entity: HR Interview(8)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('hr screening interview', 8);  -- Entity: HR Interview(8)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('hr screening interviews', 8);  -- Entity: HR Interview(8)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('hr phone interview', 8);  -- Entity: HR Interview(8)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('hr phone interviews', 8);  -- Entity: HR Interview(8)
 
 -- ID 9
 INSERT INTO entity(name) VALUES ('Attire');  
@@ -183,15 +117,10 @@ INSERT INTO entity(name) VALUES ('Attire');
 INSERT INTO entity(name) VALUES ('Follow Up');  
 	INSERT INTO keyword(keyword, entity_id) VALUES ('follow up', 10);  -- Follow up(10)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('followup', 10);  -- Follow up(10)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('follow ups', 10);  -- Follow up(10)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('followups', 10);  -- Follow up(10)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('after', 10);  -- Follow up(10)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('postinterview', 10);  -- Follow up(10)
     INSERT INTO keyword(keyword, entity_id) VALUES ('post interview', 10);  -- Follow up(10)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('thankyou note', 10);  -- Follow up(10)
-	INSERT INTO keyword(keyword, entity_id) VALUES ('thankyou notes', 10);  -- Follow up(10)
-
-
+	INSERT INTO keyword(keyword, entity_id) VALUES ('thank-you note', 10);  -- Follow up(10)
 	
 
 -- Starts a block with an integer
@@ -207,15 +136,8 @@ INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter,
 response_id_counter := response_id_counter + 1;
 
 -- Default support (should be same string as chatbot support)
-INSERT INTO response(response, name) VALUES ('I am designed to be your all-in-one support for applying to jobs in the tech field. I can help you prepare for interviews, show you recent job postings, or provide detailed information about companies.
-<br>Some example command you can give me are:<br>
-<ul>
-<li>“I want some example behavioral interview questions.”</li>
-<li>“What is the STAR Method?”</li>
-<li>“I want to search for jobs.”</li>
-<li>“I would like company information.”</li>
-<li>“Chatbot support.”</li>
-</ul>', 'default support');
+INSERT INTO response(response, name) VALUES ('I am designed to be able to provide general interview advice and know about the following topics HR Interviews, Technical Interviews, Interview Attire, Cover Letters, Interview Follow-Up, and Cover Letters. I can also provide interview practice and help guide you to external resources about those topics.
+<br>An example of a common request would be “Tell me about technical interviews,” “Ask me an HR Interview question,” “What is the STAR method?” or “Where can I find more information about cover letters?”', 'default support');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 2); -- Intent 2: Support
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 1); -- Entity 1: Default Entity
 response_id_counter := response_id_counter + 1;
@@ -244,23 +166,12 @@ INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter,
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 1); -- Entity 1: Default Entity
 response_id_counter := response_id_counter + 1;
 
--- Default Negative
-INSERT INTO response(response, name) VALUES ('I was not able to determine what you are attempting to tell me, though it does seem vaguely negative. Can you rephrase your request?', 'default negative');
-INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 11); -- Intent 11: Negative
-INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 1); -- Entity 1: Default Entity
-response_id_counter := response_id_counter + 1;
 
 
 -------------------- CHATBOT ENTITY RESPONSES --------------------
 -- Chatbot support / practice / example
-INSERT INTO response(response, name) VALUES ('You can try any of these commands:
-<br/><ul>
-<li>Search for job postings.</li>
-<li>Take a technical quiz.</li>
-<li>Practice HR interview questions.</li>
-<li>I want information about a company.</li>
-<li>Give me an example cover letter.</li>
-</ul>', 'chatbot support');
+INSERT INTO response(response, name) VALUES ('I am designed to be able to provide general interview advice and know about the following topics HR Interviews, Technical Interviews, Interview Attire, Cover Letters, Interview Follow-Up, and Cover Letters. I can also provide interview practice and help guide you to external resources about those topics.
+<br>An example of a common request would be “Tell me about technical interviews,” “Ask me an HR Interview question,” “What is the STAR method?” or “Where can I find more information about cover letters?”', 'chatbot support');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 2); -- Intent 2: Support
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 6); -- Intent 6: Example
@@ -276,24 +187,23 @@ INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter,
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 2); -- Entity 2: Chatbot 
 response_id_counter := response_id_counter + 1;
 
--- Chatbot External
+-- Chatbot information / chatbot default
 INSERT INTO response(response, name) VALUES ('As I am a new chatbot, there is no where you can go to learn more about me. However, if you want me to talk about myself, feel free to ask me to tell you about myself', 'Chatbot Information');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 5); -- Intent 5: External
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 2); -- Entity 2: Chatbot 
 response_id_counter := response_id_counter + 1;
 
--- Chatbot default bad
-INSERT INTO response(response, name) VALUES ('It’s okay, I often struggle to understand the so-called "logic" of humans. If you are not sure how to properly access my services, type "Chatbot Help", and I would be happy to educate you.', 'Chatbot Information');
-INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
-INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 2); -- Entity 2: Chatbot 
-INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 11); -- Intent 11: Negative 
-
-response_id_counter := response_id_counter + 1;
-
 
 -------------------- STAR METHOD ENTITY RESPONSES --------------------
 -- Star Method Support / Default 
-INSERT INTO response(response, name) VALUES ('Related to the STAR method, I can assist you with (1) understanding what the STAR method is, (2) give you questions to practice, (3) provide links to external resources for more information, and (4) give you an example STAR question with an appropriate response. For help, type something such as, “understand what the STAR method is” or “give me an example STAR question.”', 'Support Star method');
+INSERT INTO response(response, name) VALUES ('<p>Related to the STAR method, I can assist you with:</p>
+<ul>
+<li>Understanding what the STAR method is</li>
+<li>Give you questions to practice</li>
+<li>Provide links to external resources for more information</li>
+<li>Give you an example STAR question with an appropriate response</li>
+</ul>
+<p>For help, type something such as, "what is STAR method” or “example STAR question”.</p>', 'Support Star method');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 2); -- Intent 2: Support
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 3); -- Entity 3: Star Method
@@ -306,17 +216,17 @@ INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter,
 response_id_counter := response_id_counter + 1;
 
 -- Star Method Practice 
-INSERT INTO response(response, name) VALUES ('<p>Here are some example questions you can use to practice the star method:
+INSERT INTO response(response, name) VALUES ('<p><b>Here are ten example questions you can use to practice the star method:</b></p>
 <ol>
-<li>Tell me about a time when you had to meet a tight deadline. What was the situation, and how did you ensure you completed the task on time?</li>
-<li>Describe a situation where you had to work as part of a team to achieve a common goal. What was your role, and how did you contribute to the success of the team?</li>
-<li>Can you share an example of a challenge you faced in a previous job and how you overcame it?</li>
-<li>Tell me about a time when you had to adapt to a significant change at work. How did you handle the change, and what was the outcome?</li>
-<li>Describe a situation where you had to handle a difficult client or customer. What approach did you take to resolve the issue?</li>
-<li>Can you give me an example of a time when you had to make a difficult decision at work? What factors did you consider, and what was the result?</li>
-<li>Tell me about a project or initiative you led. What was the objective, and how did you ensure its successful completion?</li>
-<li>Describe a situation where you had to prioritize multiple tasks or projects. How did you manage your time and resources to meet the deadlines?</li>
-<li>Can you share an example of when you had to collaborate with a colleague who had a different work style or opinion than you? How did you handle the situation, and what was the outcome?</li>
+<li>Tell me about a time when you had to meet a tight deadline. What was the situation, and how did you ensure you completed the task on time?</li><br>
+<li>Describe a situation where you had to work as part of a team to achieve a common goal. What was your role, and how did you contribute to the success of the team?</li><br>
+<li>Can you share an example of a challenge you faced in a previous job and how you overcame it?</li><br>
+<li>Tell me about a time when you had to adapt to a significant change at work. How did you handle the change, and what was the outcome?</li><br>
+<li>Describe a situation where you had to handle a difficult client or customer. What approach did you take to resolve the issue?</li><br>
+<li>Can you give me an example of a time when you had to make a difficult decision at work? What factors did you consider, and what was the result?</li><br>
+<li>Tell me about a project or initiative you led. What was the objective, and how did you ensure its successful completion?</li><br>
+<li>Describe a situation where you had to prioritize multiple tasks or projects. How did you manage your time and resources to meet the deadlines?</li><br>
+<li>Can you share an example of when you had to collaborate with a colleague who had a different work style or opinion than you? How did you handle the situation, and what was the outcome?</li><br>
 <li>Tell me about a time when you identified a problem or opportunity for improvement in your previous role. What steps did you take to address it, and what was the impact of your actions?</li>
 </ol><p>', 'Practice Star method');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
@@ -326,33 +236,24 @@ response_id_counter := response_id_counter + 1;
 -- Star Method External Resources 
 INSERT INTO response(response, name) VALUES ('
 <p>Here are two good resources you can use for more help and information regarding the STAR method:</p>
-<ol>
-<li>1. <a href="https://www.indeed.com/career-advice/interviewing/using-the-star-method">Resource 1:</a> <br>Indeed offers a comprehensive guide on the STAR method including tips on how to structure your responses and examples of STAR-formatted answers</li>
-<li>2. <a href="https://www.themuse.com/advice/star-interview-method">Resource 2:</a><br>The Muse provides insights into the STAR method, along with examples and tips for crafting effective STAR-based answers during interviews.</li
-</ol>', 'External Resource Star method');
+<ul>
+<li><a href="https://www.indeed.com/career-advice/interviewing/using-the-star-method">Indeed offers a comprehensive guide on the STAR method including tips on how to structure your responses and examples of STAR-formatted answers</a> </li>
+<li><a href="https://www.themuse.com/advice/star-interview-method">The Muse provides insights into the STAR method, along with examples and tips for crafting effective STAR-based answers during interviews.</a> </li
+</ul>', 'External Resource Star method');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 5); -- Intent 5: External Resources
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 3); -- Entity 3: Star Method
 response_id_counter := response_id_counter + 1;
 
 -- Star Method Example 
-INSERT INTO response(response, name) VALUES ('<p>Here is an example question along with a response using the STAR method:</p>
-<p><b> Question -</b> "Tell me about a time you resolved a conflict on a team."</p>
-<p><b>Response:</b></p>
+INSERT INTO response(response, name) VALUES ('<h3>Example Question for STAR Method:</h3>
+<p><strong>Tell me about a time you resolved a conflict on a team.</strong></p>
+<h3>Sample Response:</h3
 <p><b>Situation -</b> In my previous role as a Project Manager at XYZ Company, I was leading a cross-functional team on a critical project. </p>
 <p><b>Task -</b> During the project, tensions arose between the design and engineering teams due to differing opinions on the project’s direction and priorities. The conflict was affecting team collaboration and slowing down progress.</p>
 <p><b>Action -</b> To address the conflict, I scheduled a team meeting to openly discuss and understand each team’s perspectives and concerns. I facilitated a constructive dialogue where team members could express their viewpoints and listen to each other’s ideas.</p>
 <p><b>Result -</b> As a result of the meeting, we reached a consensus on the project’s priorities and established clear communication channels between the design and engineering teams. Team collaboration improved, and we were able to successfully complete the project on time, meeting all objectives.</p>', 'Example Star method');
-INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 6); -- Intent 6: Example
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 2); -- Intent 6: Example
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 3); -- Entity 3: Star Method
-response_id_counter := response_id_counter + 1;
-
--- Star Method bad Example 
-INSERT INTO response(response, name) VALUES ('<p>Here is how NOT to answer a question with the STAR method.</p>
-<p><b> Question -</b> "Tell me your greatest weakness."</p>
-<p><b>Response:</b> "I am bad at communication." </p>', 'Example Star method');
-INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 6); -- Intent 6: Example
-INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 3); -- Entity 3: Star Method
-INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 11); -- Intent 11: Negative
 response_id_counter := response_id_counter + 1;
 
 -------------------- COVER LETTER ENTITY RESPONSES --------------------
@@ -418,7 +319,7 @@ response_id_counter := response_id_counter + 1;
 
 -------------------- GENERAL INTERVIEW ENTITY RESPONSES --------------------
 -- General Interview Support / Default
-INSERT INTO response(response, name) VALUES ('I’d be happy to provide some support on general interview topics. What specific areas would you like help with? You can ask me to give you common interview questions, practice the STAR method, or any other general interview guidance you need.', 'Support General Interview');
+INSERT INTO response(response, name) VALUES ('I’d be happy to provide some support on general interview topics. What specific areas would you like help with? I can assist with preparing for common interview questions, practicing the STAR method, or any other general interview guidance you need.', 'Support General Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter,  2); -- Intent 2: Support
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 6); -- Entity 6: General Interview
@@ -445,9 +346,9 @@ response_id_counter := response_id_counter + 1;
 
 -- General Interviews External Resources
 INSERT INTO response(response, name) VALUES ('There are many great external resources available to help prepare for interviews. Explore additional interview tips and strategies from reputable sources:
-<ul>
-<li>The Muse’s Ultimate Interview Guide offers 30+ prep tips for job interview success</li>
-<li>Princeton University’s Interview Guide covers preparation tips and nuanced advice for various interview types</li>
+<ul>						 
+<li><a href="https://www.themuse.com/advice/the-ultimate-interview-guide-30-prep-tips-for-job-interview-success">The Muse’s Ultimate Interview Guide offers 30+ prep tips for job interview success</a> </li>
+<li><a href="https://careerdevelopment.princeton.edu/sites/g/files/toruqf1041/files/media/interview_guide_5.pdf">Princeton University’s Interview Guide covers preparation tips and nuanced advice for various interview types</a> </li>
 </ul>.', 'External Resources for General Interviews');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 5); -- Intent 5: External Resources
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 6); -- Entity 6: General Interview
@@ -462,7 +363,14 @@ response_id_counter := response_id_counter + 1;
 
 -------------------- TECHNICAL INTERVIEW ENTITY RESPONSES --------------------
 -- Tech Interviews Support / Default
-INSERT INTO response(response, name) VALUES ('I can help you to prepare for a technical interview. Topics I can provide support on are: (1) information on technical interviews, (2) practice interview questions, (3) external resources for more information, and (4) an example question with an appropriate response. If you’re interested in any of these, type something such as, "Information on technical interviews" or "give me some external resources." ', 'Support Technical Interviews');
+INSERT INTO response(response, name) VALUES ('<p>I can help you to prepare for a technical interview. Topics I can provide support on are:</p> 
+<ul>
+<li>Information on technical interviews</li>
+<li>Practice interview questions</li>
+<li>External resources for more information</li>
+<li>An example question with an appropriate response</li>
+</ul>
+<p>If you’re interested in any of these, type something such as, "Information on technical interviews" or "give me some external resources."</p> ', 'Support Technical Interviews');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 2); -- Intent 2: Support
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 7); -- Entity 7: Tech Interviews
@@ -579,7 +487,7 @@ INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter,
 response_id_counter := response_id_counter + 1;
 
 -- Example Tech Interview
-INSERT INTO response(response, name) VALUES ('<h3>Question:</h3>
+INSERT INTO response(response, name) VALUES ('<h3>Tech Interview Example Question:</h3>
 <p><strong>Explain the concept of inheritance in Object-Oriented Programming (OOP) and provide an example.</strong></p>
 <h3>Sample Response:</h3>
 <p>Inheritance is a fundamental concept in Object-Oriented Programming (OOP) that allows a class to inherit attributes and behaviors from another class. This promotes code reusability and establishes a relationship between the parent (or base) class and the child (or derived) class. The child class inherits the attributes and methods of the parent class and can also add new attributes or override existing methods.</p>
@@ -605,127 +513,109 @@ response_id_counter := response_id_counter + 1;
 
 
 -- HR Interview Practice 
-INSERT INTO response(response, name) VALUES ('<strong>Tell me a little bit about yourself.</strong><br/>
-(answer this question to yourself or to a friend)', 'Practice HR Interview');
+INSERT INTO response(response, name) VALUES ('Tell me a little bit about yourself.', 'Practice HR Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 8); -- Entity 8: HR Interview
 response_id_counter := response_id_counter + 1;
 
 -- HR Interview Practice 
-INSERT INTO response(response, name) VALUES ('<strong>Why are you switching careers?</strong><br/>
-(answer this question to yourself or to a friend)', 'Practice HR Interview');
+INSERT INTO response(response, name) VALUES ('Why are you switching careers?', 'Practice HR Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 8); -- Entity 8: HR Interview
 response_id_counter := response_id_counter + 1;
 
 -- HR Interview Practice 
-INSERT INTO response(response, name) VALUES ('<strong>What about coding do you most enjoy?</strong><br/>
-(answer this question to yourself or to a friend)', 'Practice HR Interview');
+INSERT INTO response(response, name) VALUES ('What about coding do you most enjoy?', 'Practice HR Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 8); -- Entity 8: HR Interview
 response_id_counter := response_id_counter + 1;
 
 -- HR Interview Practice 
-INSERT INTO response(response, name) VALUES ('<strong>What technology trends are you most excited about?</strong><br/>
-(answer this question to yourself or to a friend)', 'Practice HR Interview');
+INSERT INTO response(response, name) VALUES ('What technology trends are you most excited about?', 'Practice HR Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 8); -- Entity 8: HR Interview
 response_id_counter := response_id_counter + 1;
 
 -- HR Interview Practice 
-INSERT INTO response(response, name) VALUES ('<strong>What is important to you when considering employment within an organization?</strong><br/>
-(answer this question to yourself or to a friend)', 'Practice HR Interview');
+INSERT INTO response(response, name) VALUES ('What is important to you when considering employment within an organization?', 'Practice HR Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 8); -- Entity 8: HR Interview
 response_id_counter := response_id_counter + 1;
 
 -- HR Interview Practice 
-INSERT INTO response(response, name) VALUES ('<strong>What is your target salary?</strong><br/>
-(answer this question to yourself or to a friend)', 'Practice HR Interview');
+INSERT INTO response(response, name) VALUES ('What is your target salary?', 'Practice HR Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 8); -- Entity 8: HR Interview
 response_id_counter := response_id_counter + 1;
 
 -- HR Interview Practice 
-INSERT INTO response(response, name) VALUES ('<strong>What is your greatest accomplishment?</strong><br/>
-(answer this question to yourself or to a friend)', 'Practice HR Interview');
+INSERT INTO response(response, name) VALUES ('What is your greatest accomplishment?', 'Practice HR Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 8); -- Entity 8: HR Interview
 response_id_counter := response_id_counter + 1;
 
 -- HR Interview Practice 
-INSERT INTO response(response, name) VALUES ('<strong>What is your biggest failure (or a time you failed) and what did you learn from this instance?</strong><br/>
-(answer this question to yourself or to a friend)', 'Practice HR Interview');
+INSERT INTO response(response, name) VALUES ('What is your biggest failure (or a time you failed) and what did you learn from this instance?', 'Practice HR Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 8); -- Entity 8: HR Interview
 response_id_counter := response_id_counter + 1;
 
 -- HR Interview Practice 
-INSERT INTO response(response, name) VALUES ('<strong>What are your top 3 strengths?</strong><br/>
-(answer this question to yourself or to a friend)', 'Practice HR Interview');
+INSERT INTO response(response, name) VALUES ('What are your top 3 strengths?', 'Practice HR Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 8); -- Entity 8: HR Interview
 response_id_counter := response_id_counter + 1;
 
 -- HR Interview Practice 
-INSERT INTO response(response, name) VALUES ('<strong>What is your biggest weakness?</strong><br/>
-(answer this question to yourself or to a friend)', 'Practice HR Interview');
+INSERT INTO response(response, name) VALUES ('What is your biggest weakness?', 'Practice HR Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 8); -- Entity 8: HR Interview
 response_id_counter := response_id_counter + 1;
 
 -- HR Interview Practice 
-INSERT INTO response(response, name) VALUES ('<strong>How do you accept criticism?</strong><br/>
-(answer this question to yourself or to a friend)', 'Practice HR Interview');
+INSERT INTO response(response, name) VALUES ('How do you accept criticism?', 'Practice HR Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 8); -- Entity 8: HR Interview
 response_id_counter := response_id_counter + 1;
 
 -- HR Interview Practice 
-INSERT INTO response(response, name) VALUES ('<strong>What kind of role are you looking for in IT?</strong><br/>
-(answer this question to yourself or to a friend)', 'Practice HR Interview');
+INSERT INTO response(response, name) VALUES ('What kind of role are you looking for in IT?', 'Practice HR Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 8); -- Entity 8: HR Interview
 response_id_counter := response_id_counter + 1;
 
 -- HR Interview Practice 
-INSERT INTO response(response, name) VALUES ('<strong>What’s your preferred leadership style?</strong><br/>
-(answer this question to yourself or to a friend)', 'Practice HR Interview');
+INSERT INTO response(response, name) VALUES ('What’s your preferred leadership style?', 'Practice HR Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 8); -- Entity 8: HR Interview
 response_id_counter := response_id_counter + 1;
 
 -- HR Interview Practice 
-INSERT INTO response(response, name) VALUES ('<strong>What attracted you to apply for this position?</strong><br/>
-(answer this question to yourself or to a friend)', 'Practice HR Interview');
+INSERT INTO response(response, name) VALUES ('What attracted you to apply for this position?', 'Practice HR Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 8); -- Entity 8: HR Interview
 response_id_counter := response_id_counter + 1;
 
 -- HR Interview Practice 
-INSERT INTO response(response, name) VALUES ('<strong>What motivates you in a job?</strong><br/>
-(answer this question to yourself or to a friend)', 'Practice HR Interview');
+INSERT INTO response(response, name) VALUES ('What motivates you in a job?', 'Practice HR Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 8); -- Entity 8: HR Interview
 response_id_counter := response_id_counter + 1;
 
 -- HR Interview Practice 
-INSERT INTO response(response, name) VALUES ('<strong>What attracted you to our organization?</strong><br/>
-(answer this question to yourself or to a friend)', 'Practice HR Interview');
+INSERT INTO response(response, name) VALUES ('What attracted you to our organization?', 'Practice HR Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 8); -- Entity 8: HR Interview
 response_id_counter := response_id_counter + 1;
 
 -- HR Interview Practice 
-INSERT INTO response(response, name) VALUES ('<strong>Where are you in your job search?</strong><br/>
-(answer this question to yourself or to a friend)', 'Practice HR Interview');
+INSERT INTO response(response, name) VALUES ('Where are you in your job search?', 'Practice HR Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 8); -- Entity 8: HR Interview
 response_id_counter := response_id_counter + 1;
 
 -- HR Interview Practice 
-INSERT INTO response(response, name) VALUES ('<strong>What other kinds of jobs have you applied to?</strong>
-(answer this question to yourself or to a friend)', 'Practice HR Interview');
+INSERT INTO response(response, name) VALUES ('What other kinds of jobs have you applied to?', 'Practice HR Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 8); -- Entity 8: HR Interview
 response_id_counter := response_id_counter + 1;
@@ -738,9 +628,10 @@ INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter,
 response_id_counter := response_id_counter + 1;
 
 -- HR Interview Example 
-INSERT INTO response(response, name) VALUES ('Here’s an example HR Interview Question and Answer:
-<br/><em>Question:</em> "What is your biggest weakness?"
-<br/><em>Answer:</em> "One area I’ve been actively working on improving is my tendency to take on too many tasks at once. In the past, I’ve sometimes found myself stretched thin trying to juggle multiple projects simultaneously. While my enthusiasm for taking on new challenges is a strength, I’ve realized that it’s also important to prioritize tasks effectively and delegate when necessary to ensure that I can deliver high-quality results consistently. To address this, I’ve been implementing time management techniques such as setting clear priorities, breaking down larger projects into smaller, manageable tasks, and communicating more effectively with my team to ensure alignment on project timelines and responsibilities. I’ve already seen significant improvement in my ability to focus on key priorities and manage my workload more efficiently, and I’m committed to continuing to refine these skills to become an even more effective and productive team member."', 'Example HR Interview');
+INSERT INTO response(response, name) VALUES ('<h3>HR Interview Example Question:</h3>
+<p><strong>What is your biggest weakness?</strong></p>
+<h3>Sample Response:</h3>
+<p>One area I’ve been actively working on improving is my tendency to take on too many tasks at once. In the past, I’ve sometimes found myself stretched thin trying to juggle multiple projects simultaneously. While my enthusiasm for taking on new challenges is a strength, I’ve realized that it’s also important to prioritize tasks effectively and delegate when necessary to ensure that I can deliver high-quality results consistently. To address this, I’ve been implementing time management techniques such as setting clear priorities, breaking down larger projects into smaller, manageable tasks, and communicating more effectively with my team to ensure alignment on project timelines and responsibilities. I’ve already seen significant improvement in my ability to focus on key priorities and manage my workload more efficiently, and I’m committed to continuing to refine these skills to become an even more effective and productive team member.</p>', 'Example HR Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 6); -- Intent 6: Support
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 8); -- Entity 9: HR Interview
 response_id_counter := response_id_counter + 1;
@@ -783,12 +674,14 @@ response_id_counter := response_id_counter + 1;
 -------------------- FOLLOW UP ENTITY RESPONSES --------------------
 -- Follow Up Support / Default
 INSERT INTO response(response, name) VALUES ('<p>I’d be happy to provide comprehensive support to help you effectively follow up after interviews. Here are the key areas I can assist with: </p>
-<p>I can guide you through writing a thoughtful, tailored thank-you message to send within 24 hours of the interview.</p>
-<p>We can ensure the email reiterates your interest, highlights specific points from your conversation, and keeps you top-of-mind with the hiring manager.</p>
-<p>I can provide sample templates and feedback to help you craft the perfect follow-up.</p>
-<p>Following Up on Next Steps</p>
-<p>I can advise you on the best way to inquire about the status of the hiring process and next steps.</p>
-<p>We can discuss strategies for politely following up if you haven’t heard back, without being overly persistent.</p>
+<ul>
+<li>I can guide you through writing a thoughtful, tailored thank-you message to send within 24 hours of the interview.</li>
+<li>We can ensure the email reiterates your interest, highlights specific points from your conversation, and keeps you top-of-mind with the hiring manager.</li>
+<li>I can provide sample templates and feedback to help you craft the perfect follow-up.</li>
+<li>Following Up on Next Steps</li>
+<li>I can advise you on the best way to inquire about the status of the hiring process and next steps.</li>
+<li>We can discuss strategies for politely following up if you haven’t heard back, without being overly persistent.</li>
+</ul>
 <p>Please let me know which aspects of the follow-up process you’d like the most support with, and I’ll be happy to dive in further.</p>', 'Comprehensive Support for Interview Follow-Up');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 2); -- Intent 2: Support
@@ -834,60 +727,12 @@ INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter,
 response_id_counter := response_id_counter + 1;
 
 
-
 -------------------- RECRUITER ENTITY RESPONSES --------------------
 
 
 
+-------------------- MOTIVATIONAL QUOTES ENTITY RESPONSES --------------------
 
-
-
-
-
-
-
-
-
--------------------------------------------------------------------------------------------------------------
---                                                QUIZ DATA                                                --
--------------------------------------------------------------------------------------------------------------
-
-INSERT INTO difficulty(difficulty) VALUES ('Easy');  -- id 1
-INSERT INTO difficulty(difficulty) VALUES ('Moderate'); -- id 2
-INSERT INTO difficulty(difficulty) VALUES ('Difficult'); -- id 3
-
--- Quiz Question ID 1
-INSERT INTO question (question, difficulty_id) VALUES ('What is a variable?', 1);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Either a value or abstract storage location
-		paired with an associated symbolic name.', true, 1);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Variable answer 1', false, 1);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Variable answer 2', false, 1);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Variable answer 3', false, 1);
-
--- Quiz Question ID 2
-INSERT INTO question (question, difficulty_id) VALUES ('What are the advantages of the DAO pattern?', 2);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('The DAO pattern abstracts and encapsulates data 
-		access logic, promoting separation of concerns and code reusability. By centralizing data access within 
-		dedicated DAO classes, it enhances maintainability, testability, and adaptability of the application, 
-		allowing for easier changes to the data source or access technology without impacting other parts of 
-		the codebase.', true, 2);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong DAO answer 1', false, 2);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong DAO answer 2', false, 2);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong DAO answer 3', false, 2);
- 
--- Quiz Question ID 3
-INSERT INTO question (question, difficulty_id) VALUES ('Quiz Question 3', 2);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Correct Question 3 answer', true, 3);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 3 answer 1', false, 3);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 3 answer 2', false, 3);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 3 answer 3', false, 3);
-
--- Quiz Question ID 4
-INSERT INTO question (question, difficulty_id) VALUES ('Quiz Question 4', 3);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Correct Question 4 answer', true, 4);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 4 answer 1', false, 4);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 4 answer 2', false, 4);
-	INSERT INTO answer (answer, is_correct, question_id) VALUES ('Wrong Question 4 answer 3', false, 4);
 
 END $$;
 

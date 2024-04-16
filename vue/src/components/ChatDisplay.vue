@@ -19,7 +19,7 @@
                 Voice Response
             </button>
             <button id="text-to-speech-button" @click.prevent="toggleTextToSpeech()">
-                {{ textToSpeech ? 'Disable text-to-speech' : 'Enable text-to-speech'}}
+                {{ textToSpeech ? 'Disable text-to-speech' : 'Enable text-to-speech' }}
             </button>
         </div>
     </div>
@@ -63,7 +63,7 @@ export default {
             } else if (!this.$store.state.preferredName) {
                 // Asking for and setting name if not already set
                 this.setUserName();
-            } else if (this.$store.state.mode === 1){
+            } else if (this.$store.state.mode === 1) {
                 this.textBoxText = "Show me results to my job search."
             }
 
@@ -77,18 +77,18 @@ export default {
             this.textBoxText = "";
 
         },
-        respondToUserInput(){
+        respondToUserInput() {
             if (greetUser) {
                 // Greet user if name was set in above 'if' statement
                 this.greetUser();
-            } else if (this.$store.state.mode === 1){
+            } else if (this.$store.state.mode === 1) {
                 // Job Searching Mode -- TODO
                 this.doJobSearch();
             } else {
                 this.getResponseFromServer();
             }
         },
-        doJobSearch(){
+        doJobSearch() {
             this.$refs.jobSearchForm.searchJobs()
                 .then(response => {
                     if (this.$store.state.jobPostings.length > 0) {
@@ -104,9 +104,9 @@ export default {
                 })
                 .catch(error => {
                     console.error(error);
-                }); 
+                });
         },
-        createUserBox(){
+        createUserBox() {
 
             const newResponse = document.createElement('div');
             newResponse.classList.add('user');
@@ -118,7 +118,7 @@ export default {
             newResponse.appendChild(userTextDiv);
             return newResponse;
         },
-        createUserHeading(){
+        createUserHeading() {
             const userAvatarDiv = document.createElement('div');
             userAvatarDiv.classList.add('avatar-div')
             const userAvatar = document.createElement('img');
@@ -242,11 +242,11 @@ export default {
             message += "I can help you with applying for technical jobs. ";
             message += `Type "Chatbot support" at any time, or try one of these commands:`;
             message += '<ul>';
-                message += '<li>Search for job postings.</li>';
-                message += '<li>Take a technical quiz.</li>';
-                message += '<li>Practice HR interview questions.</li>';
-                message += '<li>I want information about a company.</li>';
-                message += '<li>What should I wear to an interview?</li>';
+            message += '<li>Search for job postings.</li>';
+            message += '<li>Take a technical quiz.</li>';
+            message += '<li>Practice HR interview questions.</li>';
+            message += '<li>I want information about a company.</li>';
+            message += '<li>What should I wear to an interview?</li>';
             message += '</ul>';
             this.addRobotBox(message);
             greetUser = false;
@@ -266,10 +266,10 @@ export default {
                         this.$store.commit('SET_INTENTS', response.data.userIntents);
                         this.$store.commit('SET_ENTITIES', response.data.userEntities);
                         this.$store.commit('SET_MODE', response.data.mode);
-                        if(this.$store.state.mode == 4){
+                        if (this.$store.state.mode == 4) {
                             this.handleQuiz(response.data.quiz)
                         } else {
-                        this.addRobotBox(response.data.response);
+                            this.addRobotBox(response.data.response);
                         }
                     }
                 })
@@ -278,19 +278,19 @@ export default {
                     this.addRobotBox("I'm sorry, there seems to be an issue with the server. Please try again later.");
                 });
         },
-        handleQuiz(quiz){
+        handleQuiz(quiz) {
             const chatBox = document.getElementById('chat-display');
             const chatbotOuterBox = document.createElement('div');
             chatbotOuterBox.classList.add('chatbot');
             const chatbotAvatarDiv = this.createChatbotHeading();
             chatbotOuterBox.appendChild(chatbotAvatarDiv);
-            const quizDisplay = h(QuizDisplay, {quiz: quiz, onQuizOver:this.exitQuiz});
+            const quizDisplay = h(QuizDisplay, { quiz: quiz, onQuizOver: this.exitQuiz });
             render(quizDisplay, chatbotOuterBox);
             chatBox.appendChild(chatbotOuterBox);
             this.scrollChatDisplayToBottom(chatBox);
             // this.$store.commit('SET_MODE', 0);
         },
-        exitQuiz(){
+        exitQuiz() {
             console.log("QUIZ ENDED");
             this.$store.commit('SET_MODE', 0);
         },
@@ -302,6 +302,9 @@ export default {
                 startSound.play();
                 this.record = true;
             }, 1000);
+
+    
+
 
             recognition.onresult = (event) => {
                 setTimeout(() => {
@@ -325,11 +328,11 @@ export default {
         toggleTextToSpeech() {
             this.textToSpeech = !this.textToSpeech;
             const speechButton = document.getElementById('text-to-speech-button');
-            if(!this.textToSpeech) {
+            if (!this.textToSpeech) {
                 synthesis.cancel();
                 speechButton.classList.remove('text-to-speech');
             }
-            if(this.textToSpeech) {
+            if (this.textToSpeech) {
                 speechButton.classList.add('text-to-speech');
             }
         }
@@ -346,7 +349,6 @@ export default {
 </script>
     
 <style>
-
 body {
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
@@ -516,7 +518,7 @@ button {
 
 .text-to-speech {
     background-color: white;
-    
+
 }
 
 button:hover {
@@ -533,6 +535,5 @@ button:focus {
 form {
     display: flex;
 }
-
 </style>
     
