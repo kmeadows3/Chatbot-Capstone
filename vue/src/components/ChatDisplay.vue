@@ -88,6 +88,7 @@ export default {
 
             // Sets selector to the last index in the last commands array
             this.lastCommandSelector = this.$store.state.lastCommands.length; 
+            this.$store.commit('SET_SELECTED_JOB_POSTING', {isEmpty: true});
             this.textBoxText = "";
 
         },

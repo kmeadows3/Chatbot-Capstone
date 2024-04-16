@@ -3,8 +3,21 @@
         <input type="text" id="city" v-model="city" placeholder="City Name">
         <input type="text" id="stateAbbreviation" v-model="stateAbbreviation" placeholder="State Abbreviation" maxlength="2">
         <input type="text" id="companyName" v-model="companyName" placeholder="Company Name (Optional)">
+
+        <div class="dropdown">
+            <input type="text" class="dropdown-input" v-model="experienceLevel" readonly placeholder="Experience Level (Optional)" @click.prevent="toggleShowDropdown()">
+            <div class="dropdown-content" v-if="showDropdown">
+                <a href="#" class="experience_option" @click.prevent="setExperience('Any Level')">Any Level</a>
+                <a href="#" class="experience_option" @click.prevent="setExperience('Internship')">Internship</a>
+                <a href="#" class="experience_option" @click.prevent="setExperience('Entry Level')">Entry Level</a>
+                <a href="#" class="experience_option" @click.prevent="setExperience('Mid Level')">Mid Level</a>
+                <a href="#" class="experience_option" @click.prevent="setExperience('Senior Level')">Senior Level</a>
+                <a href="#" class="experience_option" @click.prevent="setExperience('Management')">Management</a>
+            </div>
+        </div>
+        
+        
         <div>
-            
             <input id="includeRemote" type="checkbox" v-model="includeRemote" />
             <label for="includeRemote">Include Remote Positions</label>
         </div>
@@ -23,6 +36,8 @@ export default {
             stateAbbreviation: '',
             companyName: '',
             includeRemote: false,
+            experienceLevel: 'Any Level',
+            showDropdown: false,
         }
     },
 
@@ -98,6 +113,23 @@ export default {
                 });
             }
 
+            //filters results by Experience Level (Only if selected)
+            if (this.experienceLevel !== "Any Level") {
+                jobResults = jobResults.filter((job) => {
+                    let hasMatchingExperienceLevel = false;
+
+                    // Checks if job posting contains the search location
+                    const experienceLevels = job.levels;
+                    experienceLevels.forEach((currentLevel) => {
+                        if(currentLevel.name.toLowerCase() === this.experienceLevel.toLowerCase()) {
+                            hasMatchingExperienceLevel = true;
+                        }
+                    });
+
+                    return hasMatchingExperienceLevel;
+                });
+            }
+
             // Filters Jobs By Locations
             jobResults = jobResults.filter((job) => {
                 let hasMatchingLocation = false;
@@ -137,6 +169,15 @@ export default {
 
         addJobPosting(jobPosting) {
             this.$store.commit("ADD_JOB_POSTING", jobPosting);
+        },
+
+        setExperience(level) {
+            this.experienceLevel = level;
+            this.toggleShowDropdown();
+        },
+
+        toggleShowDropdown() {
+            this.showDropdown = !this.showDropdown;
         }
     },
 
@@ -239,11 +280,16 @@ label {
     color: white;
 }
 
-.job-search-form input[type="text"] {
+input[type="text"],
+.dropdown-input {
     border: solid gray 2px;
     border-radius: 20px;
     font-size: 14px;
+    width: 100%;
+    padding: 3px;
+    padding-left: 10px;
 }
+
 
 .job-search-form > * {
     width: 100%;
@@ -254,5 +300,48 @@ label {
 .job-search-form > div {
     font-size: 16px;
 }
+
+
+
+
+/* Style for the dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    display: flex;
+  }
+
+
+
+  /* Style for the dropdown content */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Change the first value to negative */
+    bottom: 100%; /* Align the bottom of the dropdown content with the top of the dropdown */
+  }
+
+  /* Style for the dropdown links */
+  .dropdown-content a {
+    color: black;
+    padding: 6px;
+    text-decoration: none;
+    display: block;
+  }
+
+  /* Change color of links on hover */
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+
+  /* Show the dropdown content when the button is hovered over */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
 
 </style>
