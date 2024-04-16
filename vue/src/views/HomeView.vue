@@ -91,6 +91,8 @@ div.quote {
   grid-area: quote;
   display: flex;
   justify-content: center;
+  border-radius: 14px;
+  overflow: hidden;
 }
 
 div.job_postings {
