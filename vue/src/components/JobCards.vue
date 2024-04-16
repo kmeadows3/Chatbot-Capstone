@@ -1,19 +1,35 @@
 <template>
-    <div class ="job_details" v-show="$store.state.jobPostings.length > 0">
-        <h1>Recent Job Posting{{ $store.state.jobPostings.length > 1 ? 's' : '' }}</h1>
-        <div class="job_cards_container">
-            <a href="#" class="job_card" v-for="jobPosting in $store.state.jobPostings" @click.prevent="expandJobInfo(jobPosting)">          
-                <p id="position_title">{{ jobPosting.positionTitle }}</p>
-                <p id="position_details">{{ jobPosting.levels }} || Posted {{ jobPosting.datePosted }}</p>
-                <p><strong>Company</strong>: {{ jobPosting.companyName }} || ID: {{ jobPosting.companyId }}</p>
-                <p><strong>Location{{ jobPosting.locations.length > 1 ? 's' : '' }}</strong>: {{ formatLocations(jobPosting.locations) }}</p>
-            </a>
+    <div class="job_postings" v-show="this.$store.state.selectedJobPosting.isEmpty">
+        <button class="toggle" v-show="$store.state.jobPostings.length!=0" @click="toggleJobs()">{{ showJobs ? "Show Instructions" : "Show Jobs" }}</button>
+        <Instructions v-show="$store.state.jobPostings.length===0 || !showJobs"/>
+        <div class ="job_details" v-show="$store.state.jobPostings.length > 0 && showJobs">
+            <h1>Recent Job Posting{{ $store.state.jobPostings.length > 1 ? 's' : '' }}</h1>
+            <div class="job_cards_container">
+                <a href="#" class="job_card" v-for="jobPosting in $store.state.jobPostings" @click.prevent="expandJobInfo(jobPosting)">          
+                    <p id="position_title">{{ jobPosting.positionTitle }}</p>
+                    <p id="position_details">{{ jobPosting.levels }} || Posted {{ jobPosting.datePosted }}</p>
+                    <p><strong>Company</strong>: {{ jobPosting.companyName }} || ID: {{ jobPosting.companyId }}</p>
+                    <p><strong>Location{{ jobPosting.locations.length > 1 ? 's' : '' }}</strong>: {{ formatLocations(jobPosting.locations) }}</p>
+                </a>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+import Instructions from '../components/Instructions.vue';
+
 export default {
+    components : {
+        Instructions,
+    },
+
+    data() {
+        return {
+            showJobs: true,
+        }
+    },
+
     methods: {
         formatLocations(locationsArray) {
             let outputString = '';
@@ -37,14 +53,31 @@ export default {
             this.$store.commit('SET_SELECTED_JOB_POSTING', jobPosting);
             
         },
+
+        toggleJobs() {
+            this.showJobs = !this.showJobs;
+        },
     }
 }
 </script>
 
 <style>
+
+button.toggle {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: 6%;
+    margin: 0%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+    width: 40%;
+    margin-left: 30%;
+}
+
 div.job_details {
     max-width: 100%;
-    max-height: 100%;
+    max-height: 90%;
     overflow-y: auto; /* Enable vertical scrolling */
     display: flex; /* Use flexbox to control layout */
     flex-direction: column;

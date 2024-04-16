@@ -1,5 +1,5 @@
 <template>
-    <div class='quote_container'>
+    <div class='quote_container' ref="quoteContainer">
         <img :src="quoteImage" alt="">
         <p class='quote'>{{ quote }}</p>
         <p class='attribute'><em>{{ attribute }}</em></p>
@@ -155,12 +155,21 @@ div.quote_container > p.quote {
 }
 
 div.quote_container > p.attribute {
-    font-size: calc(1.2vw);
-    font-size: min(calc(2.65vh), calc(1.45vw));
+    font-size: min(calc(2.65vh), calc(1.2vw));
     position: absolute;
     width: 100%;
     bottom: 0%;
     left: 0%;
+}
+
+@media only screen and (max-width: 900px) {
+    div.quote_container > p.quote {
+        font-size: min(calc(3.2vh * 2.0), calc(1.45vw * 2.0));
+    }
+
+    div.quote_container > p.attribute {
+        font-size: min(calc(2.65vh * 2.0), calc(1.2vw * 2.0));
+    }
 }
 
 </style>

@@ -8,9 +8,7 @@
       <InspirationalQuotes />
     </div>
     <div class="job_postings" v-show="this.$store.state.selectedJobPosting.isEmpty">
-      <button v-show="$store.state.jobPostings.length!=0" @click="toggleJobs()">{{ showJobs ? "Show Instructions" : "Show Jobs" }}</button>
-      <Instructions v-show="$store.state.jobPostings.length===0 || !showJobs"/>
-      <JobCards v-show="$store.state.jobPostings.length > 0 && showJobs"/>
+      <JobCards/>
     </div>
     <div class="job_postings" v-if="!this.$store.state.selectedJobPosting.isEmpty">
       <JobDescription />
@@ -23,7 +21,7 @@ import ChatDisplay from '../components/ChatDisplay.vue';
 import InspirationalQuotes from '../components/InspirationalQuotes.vue'
 import JobCards from '../components/JobCards.vue';
 import JobDescription from '../components/JobDescription.vue';
-import Instructions from '../components/Instructions.vue';
+
 
 export default {
   components: {
@@ -31,17 +29,14 @@ export default {
     InspirationalQuotes,
     JobCards,
     JobDescription,
-    Instructions
   },
   data(){
     return {
-      showJobs: true
+      //
     }
   },
   methods: {
-    toggleJobs() {
-      this.showJobs = !this.showJobs;
-    }
+    //
   }
 }
 </script>
@@ -53,7 +48,6 @@ body {
 }
 
 div.home_display {
-  width: 96vw;
   height: 95vh;
   padding: 10px;
   
@@ -65,6 +59,20 @@ div.home_display {
   grid-template-areas: 
   "chatbot quote"
   "chatbot job_postings";
+}
+
+@media only screen and (max-width: 900px) {
+  div.home_display {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 150px 100vh;
+    gap: 10px;
+
+    grid-template-areas: 
+    "chatbot"
+    "quote"
+    "job_postings";
+  }
 }
 
 div.home_display > *{
@@ -98,7 +106,7 @@ div.job_postings::-webkit-scrollbar {
 }
 
 div.job_postings::-webkit-scrollbar-thumb {
-    background-color: #f0010188;
+    background-color: #8888;
     border-radius: 10px;
 }
 
