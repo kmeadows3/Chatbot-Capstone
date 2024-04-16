@@ -414,7 +414,6 @@ div#chat-display>div {
     flex-direction: column;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     height: auto;
-
 }
 
 div#user-input {
@@ -434,13 +433,19 @@ img.response_img {
 div.chatbot {
     align-self: start;
     background-color: #e1ffed;
+    overflow-wrap: break-word;
+
 }
 
+div {
+    overflow-wrap: break-word;
+}
 
 div.user {
     align-self: end;
     background-color: #e7e0ff;
     align-items: flex-end;
+    overflow-wrap: break-word;
 }
 
 .user-text-div {
@@ -469,6 +474,8 @@ div.user {
     display: flex;
     align-items: center;
     gap: 8px;
+    overflow-wrap: break-word;
+
 
 }
 
