@@ -293,7 +293,15 @@ response_id_counter := response_id_counter + 1;
 
 -------------------- STAR METHOD ENTITY RESPONSES --------------------
 -- Star Method Support / Default 
-INSERT INTO response(response, name) VALUES ('Related to the STAR method, I can assist you with (1) understanding what the STAR method is, (2) give you questions to practice, (3) provide links to external resources for more information, and (4) give you an example STAR question with an appropriate response. For help, type something such as, “understand what the STAR method is” or “give me an example STAR question.”', 'Support Star method');
+INSERT INTO response(response, name) VALUES ('<p>Related to the STAR method, I can assist you with:</p>
+<ul>
+<li>Understanding what the STAR method is</li>
+<li>Give you questions to practice</li>
+<li>Provide links to external resources for more information</li>
+<li>Give you an example STAR question with an appropriate response</li>
+</ul>
+<p>For help, type something such as, "what is STAR method” or “example STAR question”.</p>
+', 'Support Star method');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 2); -- Intent 2: Support
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 3); -- Entity 3: Star Method
@@ -306,19 +314,19 @@ INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter,
 response_id_counter := response_id_counter + 1;
 
 -- Star Method Practice 
-INSERT INTO response(response, name) VALUES ('<p>Here are some example questions you can use to practice the star method:
+INSERT INTO response(response, name) VALUES ('<p><b>Here are ten example questions you can use to practice the star method:</b></p>
 <ol>
-<li>Tell me about a time when you had to meet a tight deadline. What was the situation, and how did you ensure you completed the task on time?</li>
-<li>Describe a situation where you had to work as part of a team to achieve a common goal. What was your role, and how did you contribute to the success of the team?</li>
-<li>Can you share an example of a challenge you faced in a previous job and how you overcame it?</li>
-<li>Tell me about a time when you had to adapt to a significant change at work. How did you handle the change, and what was the outcome?</li>
-<li>Describe a situation where you had to handle a difficult client or customer. What approach did you take to resolve the issue?</li>
-<li>Can you give me an example of a time when you had to make a difficult decision at work? What factors did you consider, and what was the result?</li>
-<li>Tell me about a project or initiative you led. What was the objective, and how did you ensure its successful completion?</li>
-<li>Describe a situation where you had to prioritize multiple tasks or projects. How did you manage your time and resources to meet the deadlines?</li>
-<li>Can you share an example of when you had to collaborate with a colleague who had a different work style or opinion than you? How did you handle the situation, and what was the outcome?</li>
+<li>Tell me about a time when you had to meet a tight deadline. What was the situation, and how did you ensure you completed the task on time?</li><br>
+<li>Describe a situation where you had to work as part of a team to achieve a common goal. What was your role, and how did you contribute to the success of the team?</li><br>
+<li>Can you share an example of a challenge you faced in a previous job and how you overcame it?</li><br>
+<li>Tell me about a time when you had to adapt to a significant change at work. How did you handle the change, and what was the outcome?</li><br>
+<li>Describe a situation where you had to handle a difficult client or customer. What approach did you take to resolve the issue?</li><br>
+<li>Can you give me an example of a time when you had to make a difficult decision at work? What factors did you consider, and what was the result?</li><br>
+<li>Tell me about a project or initiative you led. What was the objective, and how did you ensure its successful completion?</li><br>
+<li>Describe a situation where you had to prioritize multiple tasks or projects. How did you manage your time and resources to meet the deadlines?</li><br>
+<li>Can you share an example of when you had to collaborate with a colleague who had a different work style or opinion than you? How did you handle the situation, and what was the outcome?</li><br>
 <li>Tell me about a time when you identified a problem or opportunity for improvement in your previous role. What steps did you take to address it, and what was the impact of your actions?</li>
-</ol><p>', 'Practice Star method');
+</ol>', 'Practice Star method');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: Practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 3); -- Entity 3: Star Method
 response_id_counter := response_id_counter + 1;
@@ -326,18 +334,18 @@ response_id_counter := response_id_counter + 1;
 -- Star Method External Resources 
 INSERT INTO response(response, name) VALUES ('
 <p>Here are two good resources you can use for more help and information regarding the STAR method:</p>
-<ol>
-<li>1. <a href="https://www.indeed.com/career-advice/interviewing/using-the-star-method">Resource 1:</a> <br>Indeed offers a comprehensive guide on the STAR method including tips on how to structure your responses and examples of STAR-formatted answers</li>
-<li>2. <a href="https://www.themuse.com/advice/star-interview-method">Resource 2:</a><br>The Muse provides insights into the STAR method, along with examples and tips for crafting effective STAR-based answers during interviews.</li
-</ol>', 'External Resource Star method');
+<ul>
+<li><a href="https://www.indeed.com/career-advice/interviewing/using-the-star-method">Indeed offers a comprehensive guide on the STAR method including tips on how to structure your responses and examples of STAR-formatted answers</a> </li>
+<li><a href="https://www.themuse.com/advice/star-interview-method">The Muse provides insights into the STAR method, along with examples and tips for crafting effective STAR-based answers during interviews.</a> </li
+</ul>', 'External Resource Star method');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 5); -- Intent 5: External Resources
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 3); -- Entity 3: Star Method
 response_id_counter := response_id_counter + 1;
 
 -- Star Method Example 
-INSERT INTO response(response, name) VALUES ('<p>Here is an example question along with a response using the STAR method:</p>
-<p><b> Question -</b> "Tell me about a time you resolved a conflict on a team."</p>
-<p><b>Response:</b></p>
+INSERT INTO response(response, name) VALUES ('<h3>Example Question for STAR Method:</h3>
+<p><strong>Tell me about a time you resolved a conflict on a team.</strong></p>
+<h3>Sample Response:</h3>
 <p><b>Situation -</b> In my previous role as a Project Manager at XYZ Company, I was leading a cross-functional team on a critical project. </p>
 <p><b>Task -</b> During the project, tensions arose between the design and engineering teams due to differing opinions on the project’s direction and priorities. The conflict was affecting team collaboration and slowing down progress.</p>
 <p><b>Action -</b> To address the conflict, I scheduled a team meeting to openly discuss and understand each team’s perspectives and concerns. I facilitated a constructive dialogue where team members could express their viewpoints and listen to each other’s ideas.</p>
@@ -418,7 +426,7 @@ response_id_counter := response_id_counter + 1;
 
 -------------------- GENERAL INTERVIEW ENTITY RESPONSES --------------------
 -- General Interview Support / Default
-INSERT INTO response(response, name) VALUES ('I’d be happy to provide some support on general interview topics. What specific areas would you like help with? You can ask me to give you common interview questions, practice the STAR method, or any other general interview guidance you need.', 'Support General Interview');
+INSERT INTO response(response, name) VALUES ('I’d be happy to provide some support on general interview topics. What specific areas would you like help with? I can assist with preparing for common interview questions, practicing the STAR method, or any other general interview guidance you need.', 'Support General Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter,  2); -- Intent 2: Support
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 6); -- Entity 6: General Interview
@@ -445,9 +453,9 @@ response_id_counter := response_id_counter + 1;
 
 -- General Interviews External Resources
 INSERT INTO response(response, name) VALUES ('There are many great external resources available to help prepare for interviews. Explore additional interview tips and strategies from reputable sources:
-<ul>
-<li>The Muse’s Ultimate Interview Guide offers 30+ prep tips for job interview success</li>
-<li>Princeton University’s Interview Guide covers preparation tips and nuanced advice for various interview types</li>
+<ul>						 
+<li><a href="https://www.themuse.com/advice/the-ultimate-interview-guide-30-prep-tips-for-job-interview-success">The Muse’s Ultimate Interview Guide offers 30+ prep tips for job interview success</a> </li>
+<li><a href="https://careerdevelopment.princeton.edu/sites/g/files/toruqf1041/files/media/interview_guide_5.pdf">Princeton University’s Interview Guide covers preparation tips and nuanced advice for various interview types</a> </li>
 </ul>.', 'External Resources for General Interviews');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 5); -- Intent 5: External Resources
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 6); -- Entity 6: General Interview
@@ -462,7 +470,15 @@ response_id_counter := response_id_counter + 1;
 
 -------------------- TECHNICAL INTERVIEW ENTITY RESPONSES --------------------
 -- Tech Interviews Support / Default
-INSERT INTO response(response, name) VALUES ('I can help you to prepare for a technical interview. Topics I can provide support on are: (1) information on technical interviews, (2) practice interview questions, (3) external resources for more information, and (4) an example question with an appropriate response. If you’re interested in any of these, type something such as, "Information on technical interviews" or "give me some external resources." ', 'Support Technical Interviews');
+INSERT INTO response(response, name) VALUES ('<p>I can help you to prepare for a technical interview. Topics I can provide support on are:</p> 
+<ul>
+<li>Information on technical interviews</li>
+<li>Practice interview questions</li>
+<li>External resources for more information</li>
+<li>An example question with an appropriate response</li>
+</ul>
+<p>If you’re interested in any of these, type something such as, "Information on technical interviews" or "give me some external resources."</p> 
+ ', 'Support Technical Interviews');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 2); -- Intent 2: Support
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 7); -- Entity 7: Tech Interviews
@@ -579,7 +595,7 @@ INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter,
 response_id_counter := response_id_counter + 1;
 
 -- Example Tech Interview
-INSERT INTO response(response, name) VALUES ('<h3>Question:</h3>
+INSERT INTO response(response, name) VALUES ('<h3>Tech Interview Example Question:</h3>
 <p><strong>Explain the concept of inheritance in Object-Oriented Programming (OOP) and provide an example.</strong></p>
 <h3>Sample Response:</h3>
 <p>Inheritance is a fundamental concept in Object-Oriented Programming (OOP) that allows a class to inherit attributes and behaviors from another class. This promotes code reusability and establishes a relationship between the parent (or base) class and the child (or derived) class. The child class inherits the attributes and methods of the parent class and can also add new attributes or override existing methods.</p>
@@ -738,9 +754,11 @@ INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter,
 response_id_counter := response_id_counter + 1;
 
 -- HR Interview Example 
-INSERT INTO response(response, name) VALUES ('Here’s an example HR Interview Question and Answer:
-<br/><em>Question:</em> "What is your biggest weakness?"
-<br/><em>Answer:</em> "One area I’ve been actively working on improving is my tendency to take on too many tasks at once. In the past, I’ve sometimes found myself stretched thin trying to juggle multiple projects simultaneously. While my enthusiasm for taking on new challenges is a strength, I’ve realized that it’s also important to prioritize tasks effectively and delegate when necessary to ensure that I can deliver high-quality results consistently. To address this, I’ve been implementing time management techniques such as setting clear priorities, breaking down larger projects into smaller, manageable tasks, and communicating more effectively with my team to ensure alignment on project timelines and responsibilities. I’ve already seen significant improvement in my ability to focus on key priorities and manage my workload more efficiently, and I’m committed to continuing to refine these skills to become an even more effective and productive team member."', 'Example HR Interview');
+INSERT INTO response(response, name) VALUES ('<h3>HR Interview Example Question:</h3>
+<p><strong>What is your biggest weakness?</strong></p>
+<h3>Sample Response:</h3>
+<p>One area I’ve been actively working on improving is my tendency to take on too many tasks at once. In the past, I’ve sometimes found myself stretched thin trying to juggle multiple projects simultaneously. While my enthusiasm for taking on new challenges is a strength, I’ve realized that it’s also important to prioritize tasks effectively and delegate when necessary to ensure that I can deliver high-quality results consistently. To address this, I’ve been implementing time management techniques such as setting clear priorities, breaking down larger projects into smaller, manageable tasks, and communicating more effectively with my team to ensure alignment on project timelines and responsibilities. I’ve already seen significant improvement in my ability to focus on key priorities and manage my workload more efficiently, and I’m committed to continuing to refine these skills to become an even more effective and productive team member.</p>
+', 'Example HR Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 6); -- Intent 6: Support
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 8); -- Entity 9: HR Interview
 response_id_counter := response_id_counter + 1;
@@ -783,12 +801,14 @@ response_id_counter := response_id_counter + 1;
 -------------------- FOLLOW UP ENTITY RESPONSES --------------------
 -- Follow Up Support / Default
 INSERT INTO response(response, name) VALUES ('<p>I’d be happy to provide comprehensive support to help you effectively follow up after interviews. Here are the key areas I can assist with: </p>
-<p>I can guide you through writing a thoughtful, tailored thank-you message to send within 24 hours of the interview.</p>
-<p>We can ensure the email reiterates your interest, highlights specific points from your conversation, and keeps you top-of-mind with the hiring manager.</p>
-<p>I can provide sample templates and feedback to help you craft the perfect follow-up.</p>
-<p>Following Up on Next Steps</p>
-<p>I can advise you on the best way to inquire about the status of the hiring process and next steps.</p>
-<p>We can discuss strategies for politely following up if you haven’t heard back, without being overly persistent.</p>
+<ul>
+<li>I can guide you through writing a thoughtful, tailored thank-you message to send within 24 hours of the interview.</li>
+<li>We can ensure the email reiterates your interest, highlights specific points from your conversation, and keeps you top-of-mind with the hiring manager.</li>
+<li>I can provide sample templates and feedback to help you craft the perfect follow-up.</li>
+<li>Following Up on Next Steps</li>
+<li>I can advise you on the best way to inquire about the status of the hiring process and next steps.</li>
+<li>We can discuss strategies for politely following up if you haven’t heard back, without being overly persistent.</li>
+</ul>
 <p>Please let me know which aspects of the follow-up process you’d like the most support with, and I’ll be happy to dive in further.</p>', 'Comprehensive Support for Interview Follow-Up');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 2); -- Intent 2: Support
