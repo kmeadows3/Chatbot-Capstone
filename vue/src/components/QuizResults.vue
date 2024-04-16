@@ -40,7 +40,7 @@ export default {
             this.quiz.forEach(question => {
                 let index = question.difficulty-1;
                 let currentCorrect = arr[index].correctCount;
-                let currentTotal = arr[index].correctCount;
+                let currentTotal = arr[index].totalCount;
                 question.correctlyAnswered ? currentCorrect ++ : currentCorrect += 0;
                 currentTotal++
                 
