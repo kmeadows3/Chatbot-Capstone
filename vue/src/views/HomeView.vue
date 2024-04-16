@@ -48,7 +48,6 @@ body {
 }
 
 div.home_display {
-  width: calc(96vw - 15px);
   height: 95vh;
   padding: 10px;
   
@@ -66,7 +65,7 @@ div.home_display {
   div.home_display {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 3fr 3fr;
+    grid-template-rows: 1fr 150px 100vh;
     gap: 10px;
 
     grid-template-areas: 
@@ -84,7 +83,7 @@ div.home_display > *{
 div.chatbot_window {
   grid-area: chatbot;
   background-color: #297a98;
-  height: 50%;
+  height: 100%;
   border-radius: 14px;
 }
 
