@@ -9,25 +9,26 @@
                 <JobSearchForm ref="jobSearchForm" />
             </div>
             <form v-show="this.$store.state.mode !== 1">
-                <textarea name="userInput" id="userInput" v-model="textBoxText" 
-                    @keydown.enter.prevent="addUserBox" 
-                    @keydown.up.prevent="getLastCommandUp"
-                    @keydown.left.prevent="getLastCommandUp"
-                    @keydown.down.prevent="getLastCommandDown"
-                    @keydown.right.prevent="getLastCommandDown"
-                    @keydown="handleKeyDown"
-                    placeholder="Type Here" :disabled="this.$store.state.mode == 4"></textarea>
+                <textarea name="userInput" id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox"
+                    @keydown.up.prevent="getLastCommandUp" @keydown.left.prevent="getLastCommandUp"
+                    @keydown.down.prevent="getLastCommandDown" @keydown.right.prevent="getLastCommandDown"
+                    @keydown="handleKeyDown" placeholder="Type Here" :disabled="this.$store.state.mode == 4"></textarea>
             </form>
             <button @click.prevent="addUserBox()" :class="this.$store.state.mode == 4 ? 'disabled' : ''">
-                {{this.$store.state.mode !== 1 ? "Send Response" : "Search Jobs"}}
+                {{ this.$store.state.mode !== 1 ? "Send Response" : "Search Jobs" }}
             </button>
             <button @click.prevent="beginVoiceRecognition()" :class="this.$store.state.mode == 4 ? 'disabled' : ''">
                 Voice Response
             </button>
-            <button id="text-to-speech-button" @click.prevent="toggleTextToSpeech()" :class="this.$store.state.mode == 4 ? 'disabled' : ''">
+            <button id="text-to-speech-button" @click.prevent="toggleTextToSpeech()"
+                :class="this.$store.state.mode == 4 ? 'disabled' : ''">
                 {{ textToSpeech ? 'Disable text-to-speech' : 'Enable text-to-speech' }}
             </button>
+            <button id="clear-chat" @click.prevent="clearChat()">
+                Clear Chat
+            </button>
         </div>
+
     </div>
 </template>
     
@@ -48,6 +49,7 @@ import QueryService from '../services/QueryService';
 import JobSearchForm from '../components/JobSearchForm.vue';
 import QuizDisplay from './QuizDisplay.vue';
 import { h, render } from 'vue';
+import { routerKey } from 'vue-router';
 
 export default {
     data() {
@@ -87,8 +89,8 @@ export default {
             }
 
             // Sets selector to the last index in the last commands array
-            this.lastCommandSelector = this.$store.state.lastCommands.length; 
-            this.$store.commit('SET_SELECTED_JOB_POSTING', {isEmpty: true});
+            this.lastCommandSelector = this.$store.state.lastCommands.length;
+            this.$store.commit('SET_SELECTED_JOB_POSTING', { isEmpty: true });
             this.textBoxText = "";
 
         },
@@ -317,7 +319,7 @@ export default {
                 this.record = true;
             }, 1000);
 
-    
+
 
 
             recognition.onresult = (event) => {
@@ -351,7 +353,7 @@ export default {
             }
         },
 
-        getLastCommandUp() {        
+        getLastCommandUp() {
             if (this.lastCommandSelector > 0) {
                 this.lastCommandSelector = this.lastCommandSelector - 1;
             }
@@ -373,6 +375,10 @@ export default {
                 // Resets the last command selector
                 this.lastCommandSelector = this.$store.state.lastCommands.length;
             }
+        },
+
+        clearChat() {
+            this.$router.go();
         }
     },
     mounted() {
@@ -419,6 +425,8 @@ div#chat-display>div {
 div#user-input {
     margin-left: 6px;
     margin-right: 6px;
+
+
 }
 
 img.response_img {
@@ -562,10 +570,14 @@ button {
     /* margin-left: 200px; */
 }
 
-button.disabled{
+
+
+
+
+button.disabled {
     background-color: #AAAAAA;
     box-shadow: 0px 0px 0px;
-    cursor:default;
+    cursor: default;
 }
 
 button.disabled:hover {
