@@ -61,6 +61,7 @@ CREATE TABLE question(
 	question_id serial PRIMARY KEY,
 	question text NOT NULL,
 	difficulty_id int NOT NULL,
+	topic varchar(10) NOT NULL,
 	CONSTRAINT FK_question_difficulty_id FOREIGN KEY(difficulty_id) REFERENCES difficulty(difficulty_id)
 );
 
