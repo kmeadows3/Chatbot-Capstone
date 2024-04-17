@@ -31,9 +31,6 @@
             <button id="clear-chat" @click.prevent="clearChat()">
                 Clear Chat
             </button>
-
-            <CameraDisplay />
-
         </div>
   
 </template>

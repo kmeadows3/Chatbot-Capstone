@@ -13,6 +13,7 @@ export function createStore(currentToken, currentUser) {
       entities: [1], // starts at 1 - Default entity
       mode: 0,
       lastCommands: [],
+      showCamera: false
     },
 
     mutations: {
@@ -41,6 +42,9 @@ export function createStore(currentToken, currentUser) {
       },
       ADD_LAST_COMMAND(state, command) {
         state.lastCommands.push(command);
+      },
+      TOGGLE_SHOW_CAMERA(state){
+        state.showCamera = !state.showCamera;
       },
 
       /*
