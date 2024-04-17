@@ -594,9 +594,25 @@ button {
     /* margin-left: 200px; */
 }
 
+div.chatbot p:first-child{
+    margin-top: 3px;
+}
 
+div.chatbot p:last-child{
+    margin-bottom: 3px;
+}
 
+div.chatbot p.practice{
+    margin-bottom: 10px;
+}
 
+div.chatbot p.next{
+    margin-top: 0px;
+}
+
+div.chatbot p.next>em{
+    font-size: .7em;
+}
 
 button.disabled {
     background-color: #AAAAAA;
@@ -612,7 +628,6 @@ button.disabled:hover {
 
 .text-to-speech {
     background-color: white;
-
 }
 
 button:hover {
