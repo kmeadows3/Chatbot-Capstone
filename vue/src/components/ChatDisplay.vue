@@ -46,6 +46,7 @@ const endSound = new Audio("/src/assets/endSound.mp3");
 
 var greetUser = false;
 import QueryService from '../services/QueryService';
+import EmailService from '../services/EmailService';
 import JobSearchForm from '../components/JobSearchForm.vue';
 import QuizDisplay from './QuizDisplay.vue';
 import { h, render } from 'vue';
@@ -94,6 +95,7 @@ export default {
             this.textBoxText = "";
 
         },
+
         respondToUserInput() {
             if (greetUser) {
                 // Greet user if name was set in above 'if' statement
@@ -101,10 +103,14 @@ export default {
             } else if (this.$store.state.mode === 1) {
                 // Job Searching Mode -- TODO
                 this.doJobSearch();
+            } else if (this.$store.state.mode === 5){
+                // Send email to user
+                this.emailUser();
             } else {
                 this.getResponseFromServer();
             }
         },
+
         doJobSearch() {
             this.$refs.jobSearchForm.searchJobs()
                 .then(response => {
@@ -123,6 +129,21 @@ export default {
                     console.error(error);
                 });
         },
+
+        emailUser() {
+            EmailService.sendEmail(this.textBoxText)
+            .then( response =>{
+                this.addRobotBox(response.data);
+                //this.addRobotBox(message);
+                this.$store.commit('SET_MODE', 0); // Resets chatbot from job posting mode to normal mode
+                this.$store.commit('SET_INTENTS', [1]); // Resets intents
+                this.$store.commit('SET_ENTITIES', [1]); // Resets entities
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        },
+
         createUserBox() {
             const newResponse = document.createElement('div');
             newResponse.classList.add('user');
@@ -229,6 +250,7 @@ export default {
             name = this.removeFromName(name, "hi, ");
             name = this.removeFromName(name, "greetings");
             name = this.removeFromName(name, "my name is");
+            name = this.removeFromName(name, "my name's");
             name = this.removeFromName(name, "I'm ");
             name = this.removeFromName(name, "I am ");
             name = this.removeFromName(name, "how are you");
@@ -263,6 +285,8 @@ export default {
             message += '<li>Practice HR interview questions.</li>';
             message += '<li>I want information about a company.</li>';
             message += '<li>What should I wear to an interview?</li>';
+            message += '<li>Motivate me.</li>';
+            message += '<li>Send me a special email.</li>';
             message += '</ul>';
             this.addRobotBox(message);
             greetUser = false;

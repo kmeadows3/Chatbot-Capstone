@@ -110,9 +110,8 @@ public class QueryService {
         } else if (intents.contains(QUIZ_INTENT_ID)) {
             outputResponse = sendQuizToClient();
         } else if (intents.contains(EMAIL_INTENT_ID)) {
-            Email email = new Email();
-            responseString = email.sendEmail("bransfordc@gmail.com");
-            outputResponse.setMode(0); // TODO: Set to email mode later
+            responseString = "Sure! Enter your email so I can send you a special message.";
+            outputResponse.setMode(EMAIL_MODE);
         }
 
         else {
