@@ -1,10 +1,11 @@
 <template>
-    <div id="outer-box">
+    
         <div id="chat-display"></div>
         <div class="overlay" v-if="record">
             <img src="/src/assets/record.gif" alt="Overlay" class="overlay-image">
         </div>
         <div id="user-input">
+            
             <div v-show="this.$store.state.mode === 1">
                 <JobSearchForm ref="jobSearchForm" />
             </div>
@@ -31,8 +32,10 @@
                 Clear Chat
             </button>
 
+            <CameraDisplay />
+
         </div>
-    </div>
+  
 </template>
     
     
@@ -52,6 +55,7 @@ import QueryService from '../services/QueryService';
 import JobSearchForm from '../components/JobSearchForm.vue';
 import QuizDisplay from './QuizDisplay.vue';
 import { h, render } from 'vue';
+import CameraDisplay from './CameraDisplay.vue';
 
 
 export default {
@@ -61,12 +65,14 @@ export default {
             record: false,
             textToSpeech: false,
             lastCommandSelector: this.$store.state.lastCommands.length,
+
         }
     },
 
     components: {
-        JobSearchForm,
-    },
+    JobSearchForm,
+    CameraDisplay
+},
 
     methods: {
         addUserBox() {
@@ -193,6 +199,7 @@ export default {
             this.textBoxText = "";
         },
 
+        
         createChatbotHeading() {
             const chatbotAvatarDiv = document.createElement('div');
             chatbotAvatarDiv.classList.add('avatar-div');
@@ -373,7 +380,7 @@ export default {
         },
         clearChat() {
             this.$router.go();
-        },
+        }
 
     },
     mounted() {
