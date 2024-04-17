@@ -26,15 +26,23 @@ public class QueryService {
             2, // Chatbot
             1, // Default
             11, // Negative
-    }; // Default
+    };
+
+    // Modes to send to front end
     public final int JOB_SEARCH_MODE = 1;
     public final int COMPANY_DATA_MODE = 2;
     public final int NEW_QUOTE_MODE = 3;
     public final int QUIZ_MODE = 4;
+    public final int EMAIL_MODE = 5;
+
+    // Special Action Intents
     public final int COMPANY_INFORMATION_INTENT_ID = 7;
     public final int JOB_SEARCH_INTENT_ID = 8;
     public final int NEW_QUOTE_INTENT_ID = 9;
     public final int QUIZ_INTENT_ID = 10;
+    public final int EMAIL_INTENT_ID = 12;
+
+
     public final int DEFAULT_INTENT_ID = 1;
     public final int DEFAULT_ENTITY_ID = 1;
     public final int INTENTS_INDEX = 0;
@@ -101,7 +109,13 @@ public class QueryService {
             outputResponse.setMode(NEW_QUOTE_MODE);
         } else if (intents.contains(QUIZ_INTENT_ID)) {
             outputResponse = sendQuizToClient();
-        } else {
+        } else if (intents.contains(EMAIL_INTENT_ID)) {
+            Email email = new Email();
+            responseString = email.sendEmail("bransfordc@gmail.com");
+            outputResponse.setMode(0); // TODO: Set to email mode later
+        }
+
+        else {
             List<Response> potentialResponses = getPotentialResponseList(intents, entities);
             responseString = responseSelector.selectResponse(potentialResponses,intents, entities);
         }

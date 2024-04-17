@@ -106,6 +106,7 @@ INSERT INTO intent(name) VALUES ('New Quote');
 	INSERT INTO keyword(keyword, intent_id) VALUES ('motivate', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('new picture', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('new pic', 9);  -- Intent: New Quote(9)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('motivational quote', 9);  -- Intent: New Quote(9)
 
 -- ID 10
 INSERT INTO intent(name) VALUES ('Quiz');
@@ -123,6 +124,10 @@ INSERT INTO intent(name) VALUES ('Negative');
 	INSERT INTO keyword(keyword, intent_id) VALUES ('lame', 11);  -- negative(11)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('worst', 11);  -- negative(11)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('shut up', 11);  -- negative(11)
+
+-- ID 12
+INSERT INTO intent(name) VALUES ('Email');  
+	INSERT INTO keyword(keyword, intent_id) VALUES ('email', 12);  -- email(12)
 
 
 -------------------- ENTITIES --------------------

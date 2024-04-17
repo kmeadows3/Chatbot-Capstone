@@ -3,6 +3,7 @@ package com.techelevator.service;
 import com.techelevator.ResponseSelector;
 import com.techelevator.dao.BaseDaoTests;
 import com.techelevator.dao.JdbcQueryDao;
+import com.techelevator.dao.JdbcQuizDao;
 import com.techelevator.model.Response;
 import com.techelevator.model.UserInput;
 import org.junit.Assert;
@@ -23,7 +24,7 @@ public class QueryServiceTests extends BaseDaoTests {
     public void setup(){
         jdbcTemplate = new JdbcTemplate(dataSource);
         jdbcQueryDao = new JdbcQueryDao(jdbcTemplate);
-        queryService = new QueryService(jdbcQueryDao, new CompanyInformationService(), new ResponseSelector());
+        queryService = new QueryService(jdbcQueryDao, new JdbcQuizDao(jdbcTemplate), new CompanyInformationService(), new ResponseSelector());
         UserInput input = new UserInput();
         List<Integer> intentList = new ArrayList<>();
         List<Integer> entityList = new ArrayList<>();
