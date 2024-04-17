@@ -1,9 +1,9 @@
 <template>
-    <div class="box">
+    <div class="box" @click="checkForFinished()">
         <p class="question">{{question.question}}
             <span class="difficulty">Brian's Question Rating: {{ question.difficultyString }}</span>
         </p>
-        <button v-for="answer in question.answers" v-bind:key="answer.id" @click="answerQuestion(answer)" :class="answerClass(answer)">
+        <button v-for="answer in question.answers" v-bind:key="answer.id" @click.stop="answerQuestion(answer)" :class="answerClass(answer)">
             <div class="answer">{{answer.answer}}</div>
         </button>
         <div v-show="questionAnswered" class="result">
@@ -30,7 +30,7 @@
                     this.questionAnswered = true;
                     answer.correct ? this.bottomString = "Correct!" : this.bottomString="I'm sorry, that is not correct :("
                 } else {
-                    this.bottomString = "You have already answered this question."
+                    this.nextQuestion();
                 }
                 
             },
@@ -48,6 +48,11 @@
                     name = "incorrectAnswer";
                 }
                 return name;
+            },
+            checkForFinished(){
+                if (this.questionAnswered){
+                    this.nextQuestion();
+                }
             }
         }
     }
