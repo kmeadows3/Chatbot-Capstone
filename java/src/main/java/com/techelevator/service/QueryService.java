@@ -109,7 +109,7 @@ public class QueryService {
             outputResponse.setMode(NEW_QUOTE_MODE);
         } else if (intents.contains(QUIZ_INTENT_ID)) {
             outputResponse = sendQuizToClient();
-        } else if (intents.contains(EMAIL_INTENT_ID)) {
+        } else if (intents.contains(EMAIL_INTENT_ID) && intents.size() < 2) {
             responseString = "Sure! Enter your email so I can send you a special message.";
             outputResponse.setMode(EMAIL_MODE);
         }

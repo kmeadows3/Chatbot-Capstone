@@ -8,7 +8,6 @@ const searchTerms = ['City', 'Nature', 'Landscapes', 'Thoughtful', 'Dog', 'Cat',
 
 export default {
     getRandom(pageNumber, photosPerPage) {
-        
         const randomIndexInSearchTerms = Math.floor(Math.random() * searchTerms.length);
         const randomSearchTerm = searchTerms[randomIndexInSearchTerms];
 
@@ -16,7 +15,11 @@ export default {
         console.log("Image Search Term:");
         console.log(randomSearchTerm);
 
-        return client.photos.search({ query: randomSearchTerm, page: pageNumber, per_page: photosPerPage });
-            
-    }
+        return client.photos.search({ query: randomSearchTerm, page: pageNumber, per_page: photosPerPage });   
+    },
+
+    getCuteAnimal() {
+        let pageNumber = 1 + Math.floor(Math.random() * 30); // random number between 1 and 30
+        return client.photos.search({ query: "Cute Animal", page: pageNumber, per_page: 100 });   
+    },
 }

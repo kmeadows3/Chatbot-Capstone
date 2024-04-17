@@ -57,7 +57,7 @@ export default {
                 const photos = response.photos;
 
                 // Picking picture from array representing the page
-                const pickedPhoto = Math.floor(Math.random() * photosPerPage);
+                const pickedPhoto = Math.floor(Math.random() * (photosPerPage - 1));
                 this.quoteImage = photos[pickedPhoto].src.large2x;
                 
             })
@@ -66,6 +66,7 @@ export default {
             })
             .catch(error => {
                 console.error('Error fetching photo from Pexels:', error);
+                this.quoteImage = 'https://images.pexels.com/photos/4588065/pexels-photo-4588065.jpeg';
             });
         },
     },

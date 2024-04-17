@@ -18,13 +18,16 @@ public class Email {
     /*******************************************************************************************************************
      * SMTP server configuration
      */
-    private String host = "smtp.gmail.com";
-    private int gmailSmtpPort = 587;
+    private final String host = "smtp.gmail.com";
+    private final int gmailSmtpPort = 587;
 
 
     /*******************************************************************************************************************
-     * CInstance Variable
+     * Instance Variable
      */
+    private String recipientEmail;
+    private String subject;
+    private String body;
 
 
 
@@ -36,7 +39,7 @@ public class Email {
     }
 
 
-    public String sendEmail(String recipientEmail) {
+    public String sendEmail() {
         String responseMessage = "There was an error sending your email.";
 
         // Create properties object
@@ -62,13 +65,13 @@ public class Email {
             message.setFrom(new InternetAddress(SENDER_EMAIL));
 
             // Set To: header field
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(this.recipientEmail));
 
             // Set Subject: header field
-            message.setSubject("Test Email from Java");
-
-            // Set Content: text/plain
-            message.setText("This is the message from the test email sent from Java program.");
+            message.setSubject(this.subject);
+            
+            // Set Content: text/html
+            message.setContent(this.body, "text/html");
 
             // Send the message
             Transport.send(message);
@@ -82,4 +85,35 @@ public class Email {
         return responseMessage;
     }
 
+
+    /*******************************************************************************************************************
+     * Getters
+     */
+    public String getRecipientEmail() {
+        return recipientEmail;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+
+    /*******************************************************************************************************************
+     * Getters
+     */
+    public void setRecipientEmail(String recipientEmail) {
+        this.recipientEmail = recipientEmail;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
 }

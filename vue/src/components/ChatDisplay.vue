@@ -47,6 +47,7 @@ const endSound = new Audio("/src/assets/endSound.mp3");
 var greetUser = false;
 import QueryService from '../services/QueryService';
 import EmailService from '../services/EmailService';
+import ImageService from '../services/imageService';
 import JobSearchForm from '../components/JobSearchForm.vue';
 import QuizDisplay from './QuizDisplay.vue';
 import { h, render } from 'vue';
@@ -59,6 +60,7 @@ export default {
             record: false,
             textToSpeech: false,
             lastCommandSelector: this.$store.state.lastCommands.length,
+            cuteAnimalPictures: [],
         }
     },
 
@@ -131,7 +133,13 @@ export default {
         },
 
         emailUser() {
-            EmailService.sendEmail(this.textBoxText)
+            const email = {
+                recipientEmail: this.textBoxText,
+                subject: "Special Message For " + this.$store.state.preferredName,
+                body: this.emailMessage()
+            }
+
+            EmailService.sendEmail(email)
             .then( response =>{
                 this.addRobotBox(response.data);
                 //this.addRobotBox(message);
@@ -142,6 +150,56 @@ export default {
             .catch(error => {
                 console.error(error);
             });
+        },
+
+        emailMessage() {
+            const name = this.$store.state.preferredName;
+            const imgSource = this.getCuteAnimalPicture();
+            console.log(imgSource);
+            let htmlMessage = "Hello " + name + ",";
+            htmlMessage += "This is Chatwick the chatbot. As thanks for stopping by my booth today, ";
+            htmlMessage += "here's a free picture of a cute animal!"
+            htmlMessage += "<br/>";
+            htmlMessage += "<br/>";
+
+            //htmlMessage += '<div style="border-radius: 20px; overflow: hidden;">';
+                htmlMessage += `<img src="${imgSource}" alt="${name}'s Cute Animal" height="300" style="border-radius: 20px;">`;
+            //htmlMessage += "</div>";
+
+            htmlMessage += "<br/>";
+            htmlMessage += "<br/>";
+            htmlMessage += "And don't forget to thank my wonderful developer friends:";
+            htmlMessage += "<ul>";
+                htmlMessage += "<li><a href='https://www.linkedin.com/in/cameron-coe-developer/'>Cameron Coe</a></li>";
+                htmlMessage += "<li><a href='https://www.linkedin.com/in/kmeadows3/'>Katherine Meadows</a></li>";
+                htmlMessage += "<li><a href='https://www.linkedin.com/in/erickuklinski/'>Eric Kuklinski</a></li>";
+                htmlMessage += "<li><a href='https://www.linkedin.com/in/hassanmohamud-dev/'>Hassan Mohamud</a></li>";
+            htmlMessage += "</ul>";
+
+            
+
+            
+
+            return htmlMessage;
+        },
+
+        getCuteAnimalPictureArray() {
+            ImageService.getCuteAnimal()
+            .then(response => {
+                const photos = response.photos;
+                this.cuteAnimalPictures = photos;
+            })
+            .catch(error => {
+                console.error('Error fetching cute animal photo from Pexels:', error);
+            });
+        },
+
+        getCuteAnimalPicture() {
+            console.log("MADE IT TO getCuteAnimalPicture!");
+            console.log(this.cuteAnimalPictures);
+            const pickedPhoto = Math.floor(Math.random() * (this.cuteAnimalPictures.length - 1)); // random index between 0 and 49
+            const selectedImage = this.cuteAnimalPictures[pickedPhoto].src.large2x;
+            return selectedImage;
         },
 
         createUserBox() {
@@ -405,9 +463,11 @@ export default {
             this.$router.go();
         }
     },
+
     mounted() {
         this.addRobotBox("Greetings, I'm Chatwick. What's your name?");
-    }
+        this.getCuteAnimalPictureArray();
+    },
 }
 
 

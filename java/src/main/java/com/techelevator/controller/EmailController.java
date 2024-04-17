@@ -12,11 +12,8 @@ public class EmailController {
     }
 
     @RequestMapping(path= "/email", method = RequestMethod.POST)
-    public String getResponse(@RequestBody String recipientEmail) {
-        recipientEmail = recipientEmail.replace("%40", "@");
-        recipientEmail = recipientEmail.replace("=", "");
-        Email email = new Email();
-        String response = email.sendEmail(recipientEmail);
+    public String getResponse(@RequestBody Email email) {
+        String response = email.sendEmail();
         return response;
     }
 
