@@ -113,6 +113,9 @@ div.quote_container {
     width: 100%;
     height: 100%;
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 div.quote_container > p {
@@ -138,7 +141,6 @@ div.quote_container {
 div.quote_container > img {
     position: relative;
     width: 100%;
-    top: 0%;
     transition: transform .4s; /* Animation */
 }
 

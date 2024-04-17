@@ -24,6 +24,11 @@ INSERT INTO intent(name) VALUES ('Information');
 		INSERT INTO keyword(keyword, intent_id) VALUES ('what is', 3);  -- Intent: Information(3)
 		INSERT INTO keyword(keyword, intent_id) VALUES ('advice', 3); -- Intent: Information(3)
 		INSERT INTO keyword(keyword, intent_id) VALUES ('what commands', 3); -- Intent: Information(3)
+		INSERT INTO keyword(keyword, intent_id) VALUES ('info', 3);  -- Intent: Information(3)
+		INSERT INTO keyword(keyword, intent_id) VALUES ('commands', 3); -- Intent: Information(3)
+		INSERT INTO keyword(keyword, intent_id) VALUES ('guidance', 3);  -- Intent: Information(3)
+
+
 
 -- ID 4
 INSERT INTO intent(name) VALUES ('Practice');  
@@ -44,12 +49,15 @@ INSERT INTO intent(name) VALUES ('External Resource');
 	INSERT INTO keyword(keyword, intent_id) VALUES ('more information', 5);  -- Intent: External Resource(5)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('know more', 5);  -- Intent: External Resource(5)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('sources', 5);  -- Intent: External Resource(5)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('more info', 5);  -- Intent: External Resource(5)
 
 
 -- ID 6
 INSERT INTO intent(name) VALUES ('Example');  
 	INSERT INTO keyword(keyword, intent_id) VALUES ('example', 6);  -- Intent: Example(6)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('examples', 6);  -- Intent: Example(6)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('give me', 6);  -- Intent: Example(6)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('sample', 6);  -- Intent: Example(6)
 
 
 -- ID 7
@@ -74,6 +82,14 @@ INSERT INTO intent(name) VALUES ('Job Postings');
 	INSERT INTO keyword(keyword, intent_id) VALUES ('looking for a job', 8);  -- Intent: Job Postings(8)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('search for job', 8);  -- Intent: Job Postings(8)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('search for jobs', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('job listing', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('job listings', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('jobs in', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('jobs at', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('jobs with', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('looking for jobs', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('want jobs', 8);  -- Intent: Job Postings(8)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('want a job', 8);  -- Intent: Job Postings(8)
 
 -- ID 9
 INSERT INTO intent(name) VALUES ('New Quote');
@@ -85,6 +101,11 @@ INSERT INTO intent(name) VALUES ('New Quote');
 	INSERT INTO keyword(keyword, intent_id) VALUES ('motivation', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('famous quote', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('famous quotes', 9);  -- Intent: New Quote(9)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('motivational', 9);  -- Intent: New Quote(9)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('inspirational', 9);  -- Intent: New Quote(9)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('motivate', 9);  -- Intent: New Quote(9)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('new picture', 9);  -- Intent: New Quote(9)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('new pic', 9);  -- Intent: New Quote(9)
 
 -- ID 10
 INSERT INTO intent(name) VALUES ('Quiz');
@@ -99,6 +120,10 @@ INSERT INTO intent(name) VALUES ('Negative');
 	INSERT INTO keyword(keyword, intent_id) VALUES ('bad', 11);  -- negative(11)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('suck', 11);  -- negative(11)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('sucks', 11);  -- negative(11)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('lame', 11);  -- negative(11)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('worst', 11);  -- negative(11)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('shut up', 11);  -- negative(11)
+
 
 -------------------- ENTITIES --------------------
 -- ID 1
@@ -111,6 +136,7 @@ INSERT INTO entity(name) VALUES ('Chatbot');
 	INSERT INTO keyword(keyword, entity_id) VALUES ('you', 2);  -- Entity: Chatbot(2)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('yourself', 2);  -- Entity: Chatbot(2)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('chatwick', 2);  -- Entity: Chatbot(2)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('your', 2);  -- Entity: Chatbot(2)
 
 -- ID 3
 INSERT INTO entity(name) VALUES ('Star Method');  
@@ -159,6 +185,7 @@ INSERT INTO entity(name) VALUES ('Tech Interview');
 	
 -- ID 8
 INSERT INTO entity(name) VALUES ('HR Interview');  
+	INSERT INTO keyword(keyword, entity_id) VALUES ('behavioral', 8);  -- Entity: HR Interview(8)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('behavioral interview', 8);  -- Entity: HR Interview(8)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('behavioral interviews', 8);  -- Entity: HR Interview(8)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('hr interview question', 8);  -- Entity: HR Interview(8)
@@ -273,9 +300,9 @@ INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter,
 response_id_counter := response_id_counter + 1;
 
 -- Chatbot information / default
-INSERT INTO response(response, name) VALUES ('I am Chatwick, the Tech Elevator Attendant. I am designed to provide Tech Elevators Students with help as they are interviewing for jobs.
-<br> While I may appear to be intelligent, I function by using keyword matching and a rudimentary history to determine which of my vast number of prewritten responses is most appropriate for your request. For support and to see common commands, you can type "help" now, or "Chatwick help" at any time.
-<br>I am programmed by Cameron Coe, Eric Kuklinski, Hassan Mohamud, and Katherine Meadows. They are <em>very</em> intelligent and likable humans, and you should absolutely hire them if you have an opening at your company.', 'Chatbot Information');
+INSERT INTO response(response, name) VALUES ('<p>I am Chatwick, the Tech Elevator Attendant. I am designed to provide Tech Elevators Students with help as they are interviewing for jobs.</p>
+<p>While I may appear to be intelligent, I function by using keyword matching and a rudimentary history to determine which of my vast number of prewritten responses is most appropriate for your request. For support and to see common commands, you can type "help" now, or "Chatwick help" at any time.</p>
+<p>I am programmed by Cameron Coe, Eric Kuklinski, Hassan Mohamud, and Katherine Meadows. They are <em>very</em> intelligent and likable humans, and you should absolutely hire them if you have an opening at your company.<p>', 'Chatbot Information');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 3); -- Intent 3: Information 
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 2); -- Entity 2: Chatbot 
@@ -370,7 +397,7 @@ response_id_counter := response_id_counter + 1;
 
 -------------------- COVER LETTER ENTITY RESPONSES --------------------
 -- Cover Letter Support / Default
-INSERT INTO response(response, name) VALUES ('If you’re stuck writing a cover letter, here are some tips to help: You can look at examples online for how to format a cover letter online to get ideas for formatting. Also read both the job description and the company’s about us page carefully, and write down the key points their company is looking for. Anything your skills align with is something you should mention on your cover letter. Organize those points into an outline, and write your cover letter.<br/>For more information about how to write a cover letter, ask me, "How do I write a cover letter?", "How do I write a cover letter?"', 'Support about Cover Letters');
+INSERT INTO response(response, name) VALUES ('If you’re stuck writing a cover letter, here are some tips to help: You can look at examples online for how to format a cover letter online to get ideas for formatting. Also read both the job description and the company’s about us page carefully, and write down the key points their company is looking for. Anything your skills align with is something you should mention on your cover letter. Organize those points into an outline, and write your cover letter.<br/>For more information about how to write a cover letter, ask me, "How do I write a cover letter?"', 'Support about Cover Letters');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 2); -- Intent 2: Support
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 4); -- Entity 4: Cover Letter
