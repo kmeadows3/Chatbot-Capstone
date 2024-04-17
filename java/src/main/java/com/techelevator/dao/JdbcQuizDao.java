@@ -23,7 +23,7 @@ public class JdbcQuizDao implements QuizDao{
 
     @Override
     public List<Question> getRandomQuiz() {
-        String sql = "SELECT question_id, question, q.difficulty_id, difficulty FROM question q " +
+        String sql = "SELECT question_id, question, topic, q.difficulty_id, difficulty FROM question q " +
                 "JOIN difficulty d ON d.difficulty_id = q.difficulty_id " +
                 "ORDER BY RANDOM() LIMIT 10";
         List<Question> questions = new ArrayList<>();
@@ -35,6 +35,7 @@ public class JdbcQuizDao implements QuizDao{
                 question.setQuestion(results.getString("question"));
                 question.setDifficulty(results.getInt("difficulty_id"));
                 question.setDifficultyString(results.getString("difficulty"));
+                question.setTopic(results.getString("topic"));
                 question.setAnswers(getAnswers(question.getId()));
                 questions.add(question);
             }

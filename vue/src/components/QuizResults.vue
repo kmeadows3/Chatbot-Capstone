@@ -5,7 +5,10 @@
         }}</p>
         <div class="resultBreakdown">
             <div class="graphs">
-                <canvas class="myChart"></canvas>
+                <canvas class="difficultyChart"></canvas>
+            </div>
+            <div class="graphs">
+                <canvas class="topicChart"></canvas>
             </div>
         </div>
     </div>
@@ -64,6 +67,27 @@ export default {
             })
             return arr;
         },
+        topicArray(){
+            let arr = [0,0,0,0,0,0];
+            this.quiz.forEach(question => {
+                let index = -1;
+                let topic = question.topic;
+                if (topic == 'Java'){
+                    index = 0;
+                } else if (topic == 'SQL'){
+                    index = 2;
+                } else {
+                    index = 4;
+                }
+
+                if(!question.correctlyAnswered){
+                    index ++;
+                }
+                arr[index]++;
+            })
+            return arr;
+        }
+        ,
         resultString() {
             let result = "I would advise more studying.";
             const avg = this.totalScore / this.totalPossibleScore;
@@ -101,10 +125,29 @@ export default {
         hardIncorrectCount() {
             return this.difficultyArray[2].totalCount - this.difficultyArray[2].correctCount;
         },
+        javaCorrect(){
+            return this.topicArray[0];
+        },
+        javaIncorrect(){
+            return this.topicArray[1];
+        },
+        sqlCorrect(){
+            return this.topicArray[2];
+        },
+        sqlIncorrect(){
+            return this.topicArray[3];
+        },
+        apiCorrect(){
+            return this.topicArray[4];
+        },
+        apiIncorrect(){
+            return this.topicArray[5];
+        },
+        
     },
     methods: {
-        createChart() {
-            const allChartCanvases = document.querySelectorAll('.myChart');
+        createDifficultyChart() {
+            const allChartCanvases = document.querySelectorAll('.difficultyChart');
             const canvas = allChartCanvases.item(allChartCanvases.length - 1);
             const chart = new Chart(canvas, {
                 type: "doughnut",
@@ -119,12 +162,12 @@ export default {
                     ],
                     datasets: [{
                         backgroundColor: [
-                            "rgba(34, 136, 51, 1)", 
-                            "rgba(34, 136, 51, 0.5)",
-                            "rgba(204, 187, 68, 1)", 
-                            "rgba(184, 127, 0, 0.5)",
-                            "rgba(238, 102, 119, 1)", 
-                            "rgba(238, 102, 119, 0.5)"
+                            "#2064A8",
+                            "#6699CC", 
+                            "#B99720",
+                            "#EECC66", 
+                            "#B96475",
+                            "#EE99AA"
                         ],
                         data: [
                             this.easyCorrectCount,
@@ -145,7 +188,7 @@ export default {
                         },
                         title: {
                             display: true,
-                            text: "Score Breakdown",
+                            text: "Score Breakdown by Difficulty",
                             font: {
                                 size: 16,
                             }
@@ -153,7 +196,63 @@ export default {
 
                     },
                     responsive: true,
-                    maintainAspectRatio: true,
+                    maintainAspectRatio: false,
+                }
+
+            });
+            return chart;
+        },
+        createTopicChart() {
+            const allChartCanvases = document.querySelectorAll('.topicChart');
+            const canvas = allChartCanvases.item(allChartCanvases.length - 1);
+            const chart = new Chart(canvas, {
+                type: "doughnut",
+                data: {
+                    labels: [
+                        ['Java', 'Correct'],
+                        ['Java', 'Incorrect'],
+                        ['SQL', 'Correct'],
+                        ['SQL', 'Incorrect'],
+                        ['API', 'Correct'],
+                        ['API', 'Incorrect'],
+                    ],
+                    datasets: [{
+                        backgroundColor: [
+                            "rgba(34, 136, 51, 1)", 
+                            "rgba(34, 136, 51, 0.5)",
+                            "rgba(204, 187, 68, 1)", 
+                            "rgba(184, 127, 0, 0.5)",
+                            "rgba(238, 102, 119, 1)", 
+                            "rgba(238, 102, 119, 0.5)"
+                        ],
+                        data: [
+                            this.javaCorrect,
+                            this.javaIncorrect,
+                            this.sqlCorrect,
+                            this.sqlIncorrect,
+                            this.apiCorrect,
+                            this.apiIncorrect
+                        ]
+                    }]
+                },
+                options: {
+                    
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'right'
+                        },
+                        title: {
+                            display: true,
+                            text: "Score Breakdown by Topic",
+                            font: {
+                                size: 16,
+                            }
+                        },
+
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false,
                 }
 
             });
@@ -161,7 +260,8 @@ export default {
         }
     },
     mounted() {
-        this.createChart()
+        this.createDifficultyChart();
+        this.createTopicChart();
 
     }
 
@@ -197,12 +297,15 @@ li {
 
 div.resultBreakdown {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 
 div.graphs {
     display: inline-block;
+    position: relative;
     width: 50%;
+    flex-grow: 1;
     min-width: 200px;
     min-height: 200px;
 }
