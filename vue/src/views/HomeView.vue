@@ -5,7 +5,8 @@
       <ChatDisplay />
     </div>
     <div class="quote">
-      <InspirationalQuotes />
+      <InspirationalQuotes v-show="!this.$store.state.showCamera"/>
+      <CameraDisplay/>
     </div>
     <div class="job_postings" v-show="this.$store.state.selectedJobPosting.isEmpty">
       <JobCards/>
@@ -18,6 +19,7 @@
 
 <script>
 import ChatDisplay from '../components/ChatDisplay.vue';
+import CameraDisplay from '../components/CameraDisplay.vue';
 import InspirationalQuotes from '../components/InspirationalQuotes.vue'
 import JobCards from '../components/JobCards.vue';
 import JobDescription from '../components/JobDescription.vue';
@@ -29,6 +31,7 @@ export default {
     InspirationalQuotes,
     JobCards,
     JobDescription,
+    CameraDisplay
   },
   data(){
     return {

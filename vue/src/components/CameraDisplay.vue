@@ -1,15 +1,14 @@
 <template>
-    <div id="app" class="web-camera-container">
-      <div class="camera-button">
-        <button type="button" class="button is-rounded is-small" :class="{ 'is-primary' : !isCameraOpen, 'is-danger' : isCameraOpen}" @click="toggleCamera">
-          <span v-if="!isCameraOpen">
-            <img src="https://img.icons8.com/material-outlined/24/000000/camera--v2.png"> 
-          </span>
-          <span v-else> <img src="../assets/eye-slash.svg" ></span>
-        </button>
-      </div>
-  
-      <div v-show="isCameraOpen && isLoading" class="camera-loading">
+    <div class="camera-button">
+      <button type="button" class="button is-rounded is-small" :class="{ 'is-primary': !$store.state.showCamera, 'is-danger': $store.state.showCamera }" @click="toggleCamera">
+        <span v-if="!$store.state.showCamera">
+          <img src="https://img.icons8.com/material-outlined/24/000000/camera--v2.png"> 
+        </span>
+        <span v-else> <img src="../assets/eye-slash.svg" ></span>
+      </button>
+    </div>
+    <div class="web-camera-container" v-show="$store.state.showCamera">
+      <div v-show="$store.state.showCamera && isLoading" class="camera-loading">
         <div class="lds-ring">
           <div></div>
           <div></div>
@@ -18,23 +17,23 @@
         </div>
       </div>
   
-      <div v-if="isCameraOpen && isError" class="camera-error">
+      <div v-if="$store.state.showCamera && isError" class="camera-error">
         <p>Sorry, we couldn't access your camera. Please check your permissions and try again.</p>
       </div>
   
-      <div v-if="isCameraOpen" v-show="!isLoading && !isError" class="camera-box" :class="{ 'flash' : isShotPhoto }">
+      <div v-if="$store.state.showCamera" v-show="!isLoading && !isError" class="camera-box" :class="{ 'flash' : isShotPhoto }">
         <div class="camera-shutter" :class="{'flash' : isShotPhoto}"></div>
         <video v-show="!isPhotoTaken" ref="camera" :width="450" :height="337.5" autoplay></video>
         <canvas v-show="isPhotoTaken" id="photoTaken" ref="canvas" :width="450" :height="337.5"></canvas>
       </div>
   
-      <div v-if="isCameraOpen && !isLoading && !isError" class="camera-shoot">
+      <div v-if="$store.state.showCamera && !isLoading && !isError" class="camera-shoot">
         <button type="button" class="button is-rounded is-small" @click="takePhoto">
           <img src="https://img.icons8.com/material-outlined/24/000000/camera--v2.png">
         </button>
       </div>
   
-      <div v-if="isPhotoTaken && isCameraOpen" class="camera-download">
+      <div v-if="isPhotoTaken && $store.state.showCamera" class="camera-download">
         <a id="downloadPhoto" download="my-photo.jpg" class="button is-rounded is-small" role="button" @click="downloadImage">
           Download
         </a>
@@ -46,7 +45,6 @@
   export default {
     data() {
       return {
-        isCameraOpen: false,
         isPhotoTaken: false,
         isShotPhoto: false,
         isLoading: false,
@@ -57,17 +55,16 @@
     
     methods: {
       toggleCamera() {
-        if(this.isCameraOpen) {
-          this.isCameraOpen = false;
+        if(this.$store.state.showCamera) {
+          this.$store.commit('TOGGLE_SHOW_CAMERA')
           this.isPhotoTaken = false;
           this.isShotPhoto = false;
           this.stopCameraStream();
         } else {
-          this.isCameraOpen = true;
+          this.$store.commit('TOGGLE_SHOW_CAMERA')
           this.createCameraElement();
         }
-      },
-      
+      },      
       createCameraElement() {
         this.isLoading = true;
         this.isError = false;
@@ -126,8 +123,18 @@
   </script>
   
   <style>
+
+  div.web-camera-container{
+    width: 100%;
+    height: 100%;
+  }
+
   .camera-button {
     margin-bottom: 1rem;
+    position: absolute;
+    z-index: 1000;
+    top:20px;
+    right: 20px;
   }
   
   .camera-shoot {
@@ -153,19 +160,21 @@
   }
   
   .camera-box {    
-    .camera-shutter {
-      opacity: 0;
-      width: 450px;
-      height: 337.5px;
-      background-color: #fff;
-      position: absolute;
-      
-      &.flash {
-        opacity: 1;
-      }
+    width: 100%;
+    height: 100%;
+  }
+
+.camera-shutter {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    position: absolute;
+    
+    &.flash {
+      opacity: 1;
     }
   }
-  
   .camera-loading {
     position: absolute;
     top: 0;
@@ -176,6 +185,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
   }
   
   .camera-error {
@@ -196,6 +206,7 @@
     width: 80px;
     height: 80px;
   }
+
   .lds-ring div {
     box-sizing: border-box;
     display: block;
