@@ -458,7 +458,7 @@ response_id_counter := response_id_counter + 1;
 
 -------------------- GENERAL INTERVIEW ENTITY RESPONSES --------------------
 -- General Interview Support / Default
-INSERT INTO response(response, name) VALUES ('I’d be happy to provide some support on general interview topics. What specific areas would you like help with? I can assist with preparing for common interview questions, practicing the STAR method, or any other general interview guidance you need.', 'Support General Interview');
+INSERT INTO response(response, name) VALUES ('I’d be happy to provide some support on general interview topics. What specific areas would you like help with? I can help you practice either technical or HR interview questions, tell you about the STAR method, or any other general interview guidance you need.', 'Support General Interview');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter,  2); -- Intent 2: Support
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 6); -- Entity 6: General Interview
@@ -477,7 +477,7 @@ INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter,
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 6); -- Entity 6: General Interview
 response_id_counter := response_id_counter + 1;
 
--- General Interviews Information
+-- General Interviews practice
 INSERT INTO response(response, name) VALUES ('What type of interview would you like to practice? I can perform practice HR interviews or practice technical interviews.', 'Determine Practice Type');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 4); -- Intent 4: practice
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 6); -- Entity 6: General Interview
