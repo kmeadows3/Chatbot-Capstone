@@ -1,35 +1,41 @@
 <template>
-    <div id="outer-box">
+    
         <div id="chat-display"></div>
         <div class="overlay" v-if="record">
             <img src="/src/assets/record.gif" alt="Overlay" class="overlay-image">
         </div>
         <div id="user-input">
+            
             <div v-show="this.$store.state.mode === 1">
                 <JobSearchForm ref="jobSearchForm" />
             </div>
             <form v-show="this.$store.state.mode !== 1">
-                <textarea name="userInput" id="userInput" v-model="textBoxText" @keydown.enter.prevent="addUserBox"
-                    @keydown.up.prevent="getLastCommandUp" @keydown.left.prevent="getLastCommandUp"
-                    @keydown.down.prevent="getLastCommandDown" @keydown.right.prevent="getLastCommandDown"
-                    @keydown="handleKeyDown" placeholder="Type Here" :disabled="this.$store.state.mode == 4"></textarea>
+                <textarea name="userInput" id="userInput" v-model="textBoxText" 
+                    @keydown.enter.prevent="addUserBox" 
+                    @keydown.up.prevent="getLastCommandUp"
+                    @keydown.left.prevent="getLastCommandUp"
+                    @keydown.down.prevent="getLastCommandDown"
+                    @keydown.right.prevent="getLastCommandDown"
+                    @keydown="handleKeyDown"
+                    placeholder="Type Here" :disabled="this.$store.state.mode == 4"></textarea>
             </form>
             <button @click.prevent="addUserBox()" :class="this.$store.state.mode == 4 ? 'disabled' : ''">
-                {{ this.$store.state.mode !== 1 ? "Send Response" : "Search Jobs" }}
+                {{this.$store.state.mode !== 1 ? "Send Response" : "Search Jobs"}}
             </button>
             <button @click.prevent="beginVoiceRecognition()" :class="this.$store.state.mode == 4 ? 'disabled' : ''">
                 Voice Response
             </button>
-            <button id="text-to-speech-button" @click.prevent="toggleTextToSpeech()"
-                :class="this.$store.state.mode == 4 ? 'disabled' : ''">
+            <button id="text-to-speech-button" @click.prevent="toggleTextToSpeech()" :class="this.$store.state.mode == 4 ? 'disabled' : ''">
                 {{ textToSpeech ? 'Disable text-to-speech' : 'Enable text-to-speech' }}
             </button>
             <button id="clear-chat" @click.prevent="clearChat()">
                 Clear Chat
             </button>
-        </div>
 
-    </div>
+            <CameraDisplay />
+
+        </div>
+  
 </template>
     
     
@@ -51,7 +57,8 @@ import ImageService from '../services/imageService';
 import JobSearchForm from '../components/JobSearchForm.vue';
 import QuizDisplay from './QuizDisplay.vue';
 import { h, render } from 'vue';
-import { routerKey } from 'vue-router';
+import CameraDisplay from './CameraDisplay.vue';
+
 
 export default {
     data() {
@@ -65,8 +72,9 @@ export default {
     },
 
     components: {
-        JobSearchForm,
-    },
+    JobSearchForm,
+    CameraDisplay
+},
 
     methods: {
         addUserBox() {
@@ -92,8 +100,7 @@ export default {
             }
 
             // Sets selector to the last index in the last commands array
-            this.lastCommandSelector = this.$store.state.lastCommands.length;
-            this.$store.commit('SET_SELECTED_JOB_POSTING', { isEmpty: true });
+            this.lastCommandSelector = this.$store.state.lastCommands.length; 
             this.textBoxText = "";
 
         },
@@ -270,6 +277,7 @@ export default {
             this.textBoxText = "";
         },
 
+        
         createChatbotHeading() {
             const chatbotAvatarDiv = document.createElement('div');
             chatbotAvatarDiv.classList.add('avatar-div');
@@ -310,27 +318,20 @@ export default {
             name = this.removeFromName(name, "my name is");
             name = this.removeFromName(name, "my name's");
             name = this.removeFromName(name, "I'm ");
+            name = this.removeFromName(name, "Im ");
             name = this.removeFromName(name, "I am ");
-            name = this.removeFromName(name, "how are you");
             name = this.removeFromName(name, ", ");
             name = this.removeFromName(name, ".");
             name = this.removeFromName(name, ". ");
             name = this.removeFromName(name, "?");
-            name = this.removeFromName(name, "<");
-            name = this.removeFromName(name, ">");
-            name = this.removeFromName(name, "/");
-            name = this.removeFromName(name, `"`);
-            name = this.removeFromName(name, "`");
-            name = this.removeFromName(name, `'`);
             this.$store.commit('SET_PREFERREDNAME', name);
             greetUser = true;
         },
 
         removeFromName(oldString, textToReplace) {
-            const escapedText = textToReplace.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            const regex = new RegExp(escapedText.toUpperCase(), 'g');
             oldString = oldString.toUpperCase();
-            return oldString.replace(regex, "");
+            textToReplace = textToReplace.toUpperCase();
+            return oldString.replace(textToReplace, "");
         },
 
         greetUser() {
@@ -401,7 +402,7 @@ export default {
                 this.record = true;
             }, 1000);
 
-
+    
 
 
             recognition.onresult = (event) => {
@@ -435,7 +436,7 @@ export default {
             }
         },
 
-        getLastCommandUp() {
+        getLastCommandUp() {        
             if (this.lastCommandSelector > 0) {
                 this.lastCommandSelector = this.lastCommandSelector - 1;
             }
@@ -458,10 +459,10 @@ export default {
                 this.lastCommandSelector = this.$store.state.lastCommands.length;
             }
         },
-
         clearChat() {
             this.$router.go();
         }
+
     },
 
     mounted() {
@@ -504,13 +505,12 @@ div#chat-display>div {
     flex-direction: column;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     height: auto;
+
 }
 
 div#user-input {
     margin-left: 6px;
     margin-right: 6px;
-
-
 }
 
 img.response_img {
@@ -525,19 +525,13 @@ img.response_img {
 div.chatbot {
     align-self: start;
     background-color: #e1ffed;
-    overflow-wrap: break-word;
-
 }
 
-div {
-    overflow-wrap: break-word;
-}
 
 div.user {
     align-self: end;
     background-color: #e7e0ff;
     align-items: flex-end;
-    overflow-wrap: break-word;
 }
 
 .user-text-div {
@@ -566,8 +560,6 @@ div.user {
     display: flex;
     align-items: center;
     gap: 8px;
-    overflow-wrap: break-word;
-
 
 }
 
@@ -654,14 +646,30 @@ button {
     /* margin-left: 200px; */
 }
 
+div.chatbot p:first-child{
+    margin-top: 3px;
+}
 
+div.chatbot p:last-child{
+    margin-bottom: 3px;
+}
 
+div.chatbot p.practice{
+    margin-bottom: 10px;
+}
 
+div.chatbot p.next{
+    margin-top: 0px;
+}
+
+div.chatbot p.next>em{
+    font-size: .7em;
+}
 
 button.disabled {
     background-color: #AAAAAA;
     box-shadow: 0px 0px 0px;
-    cursor: default;
+    cursor:default;
 }
 
 button.disabled:hover {
@@ -672,7 +680,6 @@ button.disabled:hover {
 
 .text-to-speech {
     background-color: white;
-
 }
 
 button:hover {
