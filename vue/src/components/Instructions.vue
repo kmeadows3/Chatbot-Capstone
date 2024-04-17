@@ -37,6 +37,7 @@ div.container {
 div.shorten {
     margin-top: 5px;
     min-height: calc(100% - 80px);
+    color: #5c5c5c;
 ;}
 
 div.welcome {

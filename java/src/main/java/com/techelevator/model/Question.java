@@ -5,6 +5,7 @@ public class Question {
     private int id;
     private String question;
     private List<Answer> answers;
+    private String topic;
     private int difficulty;
     private String difficultyString;
     private boolean isCorrectlyAnswered = false;
@@ -55,5 +56,13 @@ public class Question {
 
     public void setCorrectlyAnswered(boolean correctlyAnswered) {
         this.isCorrectlyAnswered = correctlyAnswered;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 }
