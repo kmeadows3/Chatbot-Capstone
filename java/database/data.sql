@@ -125,6 +125,10 @@ INSERT INTO intent(name) VALUES ('Negative');
 	INSERT INTO keyword(keyword, intent_id) VALUES ('worst', 11);  -- negative(11)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('shut up', 11);  -- negative(11)
 
+-- ID 12
+INSERT INTO intent(name) VALUES ('Email');  
+	INSERT INTO keyword(keyword, intent_id) VALUES ('email', 12);  -- email(12)
+
 
 -------------------- ENTITIES --------------------
 -- ID 1
