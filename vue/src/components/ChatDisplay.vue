@@ -27,6 +27,10 @@
             <button id="text-to-speech-button" @click.prevent="toggleTextToSpeech()" :class="this.$store.state.mode == 4 ? 'disabled' : ''">
                 {{ textToSpeech ? 'Disable text-to-speech' : 'Enable text-to-speech' }}
             </button>
+            <button id="clear-chat" @click.prevent="clearChat()">
+                Clear Chat
+            </button>
+
         </div>
     </div>
 </template>
@@ -366,7 +370,11 @@ export default {
                 // Resets the last command selector
                 this.lastCommandSelector = this.$store.state.lastCommands.length;
             }
-        }
+        },
+        clearChat() {
+            this.$router.go();
+        },
+
     },
     mounted() {
         this.addRobotBox("Greetings, I'm Chatwick. What's your name?");
