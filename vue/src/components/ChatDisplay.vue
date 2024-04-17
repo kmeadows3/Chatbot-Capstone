@@ -163,29 +163,22 @@ export default {
             const name = this.$store.state.preferredName;
             const imgSource = this.getCuteAnimalPicture();
             console.log(imgSource);
-            let htmlMessage = "Hello " + name + ",";
-            htmlMessage += "This is Chatwick the chatbot. As thanks for stopping by my booth today, ";
-            htmlMessage += "here's a free picture of a cute animal!"
-            htmlMessage += "<br/>";
-            htmlMessage += "<br/>";
-
-            //htmlMessage += '<div style="border-radius: 20px; overflow: hidden;">';
-                htmlMessage += `<img src="${imgSource}" alt="${name}'s Cute Animal" height="300" style="border-radius: 20px;">`;
-            //htmlMessage += "</div>";
-
-            htmlMessage += "<br/>";
-            htmlMessage += "<br/>";
-            htmlMessage += "And don't forget to thank my wonderful developer friends:";
-            htmlMessage += "<ul>";
-                htmlMessage += "<li><a href='https://www.linkedin.com/in/cameron-coe-developer/'>Cameron Coe</a></li>";
-                htmlMessage += "<li><a href='https://www.linkedin.com/in/kmeadows3/'>Katherine Meadows</a></li>";
-                htmlMessage += "<li><a href='https://www.linkedin.com/in/erickuklinski/'>Eric Kuklinski</a></li>";
-                htmlMessage += "<li><a href='https://www.linkedin.com/in/hassanmohamud-dev/'>Hassan Mohamud</a></li>";
-            htmlMessage += "</ul>";
-
-            
-
-            
+            let htmlMessage = `
+            <div style="max-width: 600px; margin: 20px auto; padding: 20px; background-color: #ffffff; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);  font-size: 20px;">
+                <h1 style="color: #333333; text-align: center;">Dear ${name},</h1>
+                <p style="font-family: Arial, sans-serif; color: #333333;">Thank you for visiting our booth today! As a token of appreciation, we'd like to share a free picture of a cute animal with you:</p>
+                <img src="${imgSource}" alt="${name}'s Cute Animal" height="300" style="display: block; margin: 0 auto; border-radius: 20px;">
+                <p style="font-family: Arial, sans-serif; color: #333333;">Don't forget to extend your gratitude to our talented developer friends:</p>
+                <ul style="list-style-type: none; padding: 0;">
+                    <li style="font-family: Arial, sans-serif; color: #007bff;"><a href='https://www.linkedin.com/in/cameron-coe-developer/' style="color: #007bff; text-decoration: none;">Cameron Coe - LinkedIn</a></li>
+                    <li style="font-family: Arial, sans-serif; color: #007bff;"><a href='https://www.linkedin.com/in/kmeadows3/' style="color: #007bff; text-decoration: none;">Katherine Meadows - LinkedIn</a></li>
+                    <li style="font-family: Arial, sans-serif; color: #007bff;"><a href='https://www.linkedin.com/in/erickuklinski/' style="color: #007bff; text-decoration: none;">Eric Kuklinski - LinkedIn</a></li>
+                    <li style="font-family: Arial, sans-serif; color: #007bff;"><a href='https://www.linkedin.com/in/hassanmohamud-dev/' style="color: #007bff; text-decoration: none;">Hassan Mohamud - LinkedIn</a></li>
+                </ul>
+                <br/>
+                <p style="font-family: Arial, sans-serif; color: #333333;">Sincerely,</p>
+                <p style="font-family: Arial, sans-serif; color: #333333;">Chatwick the Chatbot</p>
+            </div>`;
 
             return htmlMessage;
         },
