@@ -23,7 +23,7 @@ public class JdbcQuizDaoTests extends BaseDaoTests{
     @Test
     public void getRandomQuiz_returns_list_of_questions(){
         List<Question> testList = sut.getRandomQuiz();
-        Assert.assertEquals(3, testList.size());
+        Assert.assertEquals(4, testList.size());
         Assert.assertEquals(4, testList.get(0).getAnswers().size());
 
     }

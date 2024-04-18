@@ -379,10 +379,8 @@ export default {
             render(quizDisplay, chatbotOuterBox);
             chatBox.appendChild(chatbotOuterBox);
             this.scrollChatDisplayToBottom(chatBox);
-            // this.$store.commit('SET_MODE', 0);
         },
         exitQuiz() {
-            console.log("QUIZ ENDED");
             this.$store.commit('SET_MODE', 0);
         },
 

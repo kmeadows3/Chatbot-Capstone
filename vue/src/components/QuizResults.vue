@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Chart from '../components/QuizResults.vue';
+import Chart from 'chart.js/auto';
 
 export default {
     props: ['quiz'],
