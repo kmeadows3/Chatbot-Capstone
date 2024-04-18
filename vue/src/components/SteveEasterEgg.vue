@@ -12,22 +12,22 @@
   
           <ol class="container">
               <li class="slide slide-1">
-                  <h2>SSS</h2>
+                  <h2>SS</h2>
               </li>
               <li class="slide slide-2">
-                  <h2>SSS</h2>
+                  <h2>SS</h2>
               </li>
               <li class="slide slide-3">
-                  <h2>SSS</h2>
+                  <h2>SS</h2>
               </li>
               <li class="slide slide-4">
-                  <h2>SSS</h2>
+                  <h2>SS</h2>
               </li>
               <li class="slide slide-5">
-                    <h2>SSS</h2>
+                    <h2>SS</h2>
               </li>
               <li class="slide slide-1">
-                  <h2>SSS</h2>
+                  <h2>SS</h2>
               </li>
           </ol>
           <span class="slide-indicator"></span>
