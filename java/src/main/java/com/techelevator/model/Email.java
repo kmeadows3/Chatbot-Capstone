@@ -69,7 +69,7 @@ public class Email {
 
             // Set Subject: header field
             message.setSubject(this.subject);
-            
+
             // Set Content: text/html
             message.setContent(this.body, "text/html");
 
