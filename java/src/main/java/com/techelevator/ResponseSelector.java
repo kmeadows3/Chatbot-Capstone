@@ -111,7 +111,8 @@ public class ResponseSelector {
     private List<Response> handlePracticeInterviews(List<Response> responses) {
 
         responses = responses.stream()
-                .filter(response -> response.getResponseIntents().contains(PRACTICE_INTENT_ID))
+                .filter(response -> (response.getResponseIntents().contains(PRACTICE_INTENT_ID)
+                                    ||response.getResponseIntents().contains(JOHN_INTENT)))
                 .collect(Collectors.toList());
         responses = getResponseListWithOnlyOneRandomResponse(responses);
 
