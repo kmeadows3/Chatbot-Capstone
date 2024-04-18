@@ -284,11 +284,7 @@ INSERT INTO entity(name) VALUES ('.Net');
 
 -- ID 16
 INSERT INTO entity(name) VALUES ('Eric'); 
-<<<<<<< HEAD
 	INSERT INTO keyword(keyword, entity_id) VALUES ('Eric', 16);  -- Eric (16)
-=======
-	INSERT INTO keyword(keyword, entity_id) VALUES ('eric', 16);  -- .Net (16)
->>>>>>> b71dc8965502acf9f8fbdef2974aa15679af8933
 
 	
 
