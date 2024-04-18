@@ -26,6 +26,11 @@ public class QueryService {
             2, // Chatbot
             1, // Default
             11, // Negative
+            12,
+            13,
+            14,
+            15,
+            16
     };
 
     // Modes to send to front end

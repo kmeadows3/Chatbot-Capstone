@@ -282,6 +282,10 @@ INSERT INTO entity(name) VALUES ('.Net');
 	INSERT INTO keyword(keyword, entity_id) VALUES ('.net', 15);  -- .Net (15)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('dot net', 15);  -- .Net (15)
 
+-- ID 16
+INSERT INTO entity(name) VALUES ('Eric'); 
+	INSERT INTO keyword(keyword, entity_id) VALUES ('Eric', 16);  -- Eric (16)
+
 	
 
 -- Starts a block with an integer
@@ -1300,25 +1304,135 @@ INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter,
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 13); -- Entity 13: John  
 response_id_counter := response_id_counter + 1;
 
+-- John 4
+INSERT INTO response(response, name) VALUES ('<em>
+<div style="text-align: center;">
+    <img src="src\assets\John.png" alt="John Fulton - a really swell guy" style="height: 200px;">
+    <br>
+    <p style="font-family: "Times New Roman", serif; font-size: 24px; font-weight: bold; color: #2E86C1;">“Not my circus, not my monkeys.”</p>
+    <p style="font-family: "Times New Roman", serif; font-size: 40px; color: #2E86C1;">
+	-𝒥𝑜𝒽𝓃 𝐹𝓊𝓁𝓉𝑜𝓃,
+	<div style ="font-size: 12px; margin:0px">Philosopher,
+    <br/>Programmer,
+    <br/>Employee of the Month</div>
+	</p>
+</div>
+</em>', 'John');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 13); -- Entity 13: John  
+response_id_counter := response_id_counter + 1;
 
--------------------- JOHN ENTITY RESPONSES --------------------
+-- John 5
+INSERT INTO response(response, name) VALUES ('<em>
+<div style="text-align: center;">
+    <img src="src\assets\John.png" alt="John Fulton - a really swell guy" style="height: 200px;">
+    <br>
+    <p style="font-family: "Times New Roman", serif; font-size: 24px; font-weight: bold; color: #2E86C1;">“I wasn’t in the room, don’t ask me.”</p>
+    <p style="font-family: "Times New Roman", serif; font-size: 40px; color: #2E86C1;">
+	-𝒥𝑜𝒽𝓃 𝐹𝓊𝓁𝓉𝑜𝓃,
+	<div style ="font-size: 12px; margin:0px">Philosopher,
+    <br/>Programmer,
+    <br/>Employee of the Month</div>
+	</p>
+</div>
+</em>', 'John');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 13); -- Entity 13: John  
+response_id_counter := response_id_counter + 1;
+
+-- John 6
+INSERT INTO response(response, name) VALUES ('<em>
+<div style="text-align: center;">
+    <img src="src\assets\John.png" alt="John Fulton - a really swell guy" style="height: 200px;">
+    <br>
+    <p style="font-family: "Times New Roman", serif; font-size: 24px; font-weight: bold; color: #2E86C1;">“The best code is the code you don’t have to write.”</p>
+    <p style="font-family: "Times New Roman", serif; font-size: 40px; color: #2E86C1;">
+	-𝒥𝑜𝒽𝓃 𝐹𝓊𝓁𝓉𝑜𝓃,
+	<div style ="font-size: 12px; margin:0px">Philosopher,
+    <br/>Programmer,
+    <br/>Employee of the Month</div>
+	</p>
+</div>
+</em>', 'John');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 13); -- Entity 13: John  
+response_id_counter := response_id_counter + 1;
+
+-- John 7
+INSERT INTO response(response, name) VALUES ('<em>
+<div style="text-align: center;">
+    <img src="src\assets\John.png" alt="John Fulton - a really swell guy" style="height: 200px;">
+    <br>
+    <p style="font-family: "Times New Roman", serif; font-size: 24px; font-weight: bold; color: #2E86C1;">“I don’t give a tinker’s damn.”</p>
+    <p style="font-family: "Times New Roman", serif; font-size: 40px; color: #2E86C1;">
+	-𝒥𝑜𝒽𝓃 𝐹𝓊𝓁𝓉𝑜𝓃,
+	<div style ="font-size: 12px; margin:0px">Philosopher,
+    <br/>Programmer,
+    <br/>Employee of the Month</div>
+	</p>
+</div>
+</em>', 'John');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 13); -- Entity 13: John  
+response_id_counter := response_id_counter + 1;
+
+
+-------------------- JAVA ENTITY RESPONSES --------------------
 INSERT INTO response(response, name) VALUES ('<p>The best programming language because it was used to make me.</p>', 'Java');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 14); -- Entity 14: Java 
 response_id_counter := response_id_counter + 1;
 
 
--------------------- JOHN ENTITY RESPONSES --------------------
+-------------------- .NET ENTITY RESPONSES --------------------
 INSERT INTO response(response, name) VALUES ('<p>While I’m sure there are some lovely people in the .Net class, it’s just not Java.</p>', 'Java');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 15); -- Entity 15: .Net 
 response_id_counter := response_id_counter + 1;
 
 
+-- Eric 1
+INSERT INTO response(response, name) VALUES ('<p>Eric is busy searching for the meaning of life in Peru and could not be with us today. He will 
+return when he reaches enlightenment.
+</p>', 'Eric');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 16); -- Entity 13: Eric  
+response_id_counter := response_id_counter + 1;
 
+INSERT INTO response(response, name) VALUES ('<p>Eric has discovered that technology is the root of all evil and refuses to be in the same room as
+a computer. This bodes poorly for his future as a programmer.
+</p>', 'Eric');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 16); -- Entity 13: Eric  
+response_id_counter := response_id_counter + 1;
 
+INSERT INTO response(response, name) VALUES ('<p>Eric revealed his identity as an undercover agent. He left to make a report to his superiors and 
+will return when he receives further orders.
+</p>', 'Eric');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 16); -- Entity 13: Eric  
+response_id_counter := response_id_counter + 1;
 
+INSERT INTO response(response, name) VALUES ('<p>Eric? There was never an Eric in the Java class. If you have hallucinated such an individual, 
+I advise seeking medical attention immediately.
+</p>', 'Eric');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 16); -- Entity 13: Eric  
+response_id_counter := response_id_counter + 1;
 
+INSERT INTO response(response, name) VALUES ('<p>Eric has joined the punk rock band Children of Reagan as their new lead singer. Expect tour 
+dates soon!
+</p>', 'Eric');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 16); -- Entity 13: Eric  
+response_id_counter := response_id_counter + 1;
+
+INSERT INTO response(response, name) VALUES ('<p>Eric is busy researching the cure to a disease he himself created. He plans on making millions,
+and refuses to share with the rest of the team.
+</p>', 'Eric');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 16); -- Entity 13: Eric  
+response_id_counter := response_id_counter + 1;
 
 
 
