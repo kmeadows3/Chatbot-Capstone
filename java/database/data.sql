@@ -140,6 +140,7 @@ INSERT INTO intent(name) VALUES ('Take Photo');
 	INSERT INTO keyword(keyword, intent_id) VALUES ('change my profile', 13);  -- Take Photo(13)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('change picture', 13);  -- Take Photo(13)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('new picture', 13);  -- Take Photo(13)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('avatar', 13);  -- Take Photo(13)
 
 -- ID 14
 INSERT INTO intent(name) VALUES ('Compliment Looks');  
@@ -369,7 +370,7 @@ INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter,
 response_id_counter := response_id_counter + 1;
 
 -- Thanked
-INSERT INTO response(response, name) VALUES ('<p>I’s my pleasure (and programming) to help!</p>', 'Chatbot thanked');
+INSERT INTO response(response, name) VALUES ('<p>It’s my pleasure (and programming) to help!</p>', 'Chatbot thanked');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 15); -- Intent 15: Thanked
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 1); -- Entity 1: Default 
 response_id_counter := response_id_counter + 1;
