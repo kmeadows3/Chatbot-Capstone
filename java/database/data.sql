@@ -105,7 +105,6 @@ INSERT INTO intent(name) VALUES ('New Quote');
 	INSERT INTO keyword(keyword, intent_id) VALUES ('famous quotes', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('motivational', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('inspirational', 9);  -- Intent: New Quote(9)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('new picture', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('new pic', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('motivational quote', 9);  -- Intent: New Quote(9)
 
@@ -133,10 +132,12 @@ INSERT INTO intent(name) VALUES ('Email');
 -- ID 13
 INSERT INTO intent(name) VALUES ('Take Photo');  
 	INSERT INTO keyword(keyword, intent_id) VALUES ('update profile', 13);  -- Take Photo(13)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('update my profile', 13);  -- Take Photo(13)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('take picture', 13);  -- Take Photo(13)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('take a picture', 13);  -- Take Photo(13)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('selfie', 13);  -- Take Photo(13)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('change profile', 13);  -- Take Photo(13)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('change my profile', 13);  -- Take Photo(13)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('change picture', 13);  -- Take Photo(13)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('new picture', 13);  -- Take Photo(13)
 
