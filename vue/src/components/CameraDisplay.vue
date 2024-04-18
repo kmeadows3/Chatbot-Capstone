@@ -127,6 +127,9 @@
   div.web-camera-container{
     width: 100%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .camera-button {
@@ -139,6 +142,7 @@
   
   .camera-shoot {
     margin: 0.5rem 0;
+    z-index: 1000;
   }
   
   .camera-download {
@@ -152,6 +156,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 100;
   }
   
   .button.is-rounded.is-small img {
