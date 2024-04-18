@@ -30,7 +30,7 @@ public class CompanyInformationService {
         HttpEntity<CompanyRequestDTO> entity = new HttpEntity<>(companyRequestDTO, headers);
         Company company = new Company();
         try {
-            ResponseEntity<CompanyResponseDTO> response = restTemplate.exchange(BROKEN_URL, HttpMethod.POST, entity,
+            ResponseEntity<CompanyResponseDTO> response = restTemplate.exchange(URL, HttpMethod.POST, entity,
                     CompanyResponseDTO.class);
             CompanyResponseDTO companyResponseDTO = response.getBody();
             company = companyResponseDTO.getData();

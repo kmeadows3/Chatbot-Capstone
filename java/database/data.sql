@@ -452,7 +452,7 @@ INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter,
 response_id_counter := response_id_counter + 1;
 
 -- Chatbot default bad
-INSERT INTO response(response, name) VALUES ('<p>I often struggle to understand the so-called "logic" of humans. If you 
+INSERT INTO response(response, name) VALUES ('<p>I see. I suppose your response is understandable. I often struggle to follow the so-called "logic" of humans. If you 
 	are not sure how to properly access my services, type "Chatbot Help", and I would be happy to educate you.
 	</p>', 'Chatbot Information');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default

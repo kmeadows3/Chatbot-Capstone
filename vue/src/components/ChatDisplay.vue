@@ -1,5 +1,5 @@
 <template>
-    <div id="chat-display"></div>
+    <div id="chat-display" :class="this.$store.state.mode === 1 ? 'job-mode' : ''"></div>
     <div class="overlay" v-if="record">
         <img src="/src/assets/record.gif" alt="Overlay" class="overlay-image">
     </div>
@@ -69,9 +69,9 @@ export default {
     },
 
     components: {
-    JobSearchForm,
-    CameraDisplay,
-},
+    JobSearchForm    
+    
+    },
 
     methods: {
         addUserBox() {
@@ -507,6 +507,10 @@ div#chat-display {
     margin-bottom: 6px;
 
     position: relative;
+}
+
+div#chat-display.job-mode {
+    height: calc(105vh - 302px);
 }
 
 div#chat-display>div {
