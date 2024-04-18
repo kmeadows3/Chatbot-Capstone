@@ -388,10 +388,14 @@ response_id_counter := response_id_counter + 1;
 -- John
 INSERT INTO response(response, name) VALUES ('<p><em>
 “Standard programmer answer #1, it depends.”
--John Fulton,
-Philosopher,
-Programmer,
-Employee of the Month
+<br/>
+<br/>
+-John Fulton,<br/>
+Philosopher,<br/>
+Programmer,<br/>
+Employee of the Month<br/>
+<img src="src\assets\John.png" alt="John Fulton - a really great guy" style="height: 100px;">
+
 
 </em></p>', 'John');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 19); -- Intent 19: John
@@ -452,7 +456,7 @@ INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter,
 response_id_counter := response_id_counter + 1;
 
 -- Chatbot default bad
-INSERT INTO response(response, name) VALUES ('<p>I see. I suppose your response is understandable. I often struggle to follow the so-called "logic" of humans. If you 
+INSERT INTO response(response, name) VALUES ('<p>I often struggle to understand the so-called "logic" of humans. If you 
 	are not sure how to properly access my services, type "Chatbot Help", and I would be happy to educate you.
 	</p>', 'Chatbot Information');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
