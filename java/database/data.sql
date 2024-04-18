@@ -380,27 +380,65 @@ INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter,
 response_id_counter := response_id_counter + 1;
 
 -- Steve
-INSERT INTO response(response, name) VALUES ('<p>.</p>', 'Steve');
+INSERT INTO response(response, name) VALUES ('<p>[404: Roast Not Found]</p>', 'Steve');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 18); -- Intent 18: Steve
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 1); -- Entity 1: Default 
 response_id_counter := response_id_counter + 1;
 
--- John
-INSERT INTO response(response, name) VALUES ('<p><em>
-“Standard programmer answer #1, it depends.”
-<br/>
-<br/>
--John Fulton,<br/>
-Philosopher,<br/>
-Programmer,<br/>
-Employee of the Month<br/>
-<img src="src\assets\John.png" alt="John Fulton - a really great guy" style="height: 100px;">
-
-
-</em></p>', 'John');
+-- John 1
+INSERT INTO response(response, name) VALUES ('<em>
+<div style="text-align: center;">
+    <img src="src\assets\John.png" alt="John Fulton - a really swell guy" style="height: 200px;">
+    <br>
+    <p style="font-family: "Times New Roman", serif; font-size: 24px; font-weight: bold; color: #2E86C1;">“Standard programmer answer #1, it depends.”</p>
+    <p style="font-family: "Times New Roman", serif; font-size: 40px; color: #2E86C1;">
+	-𝒥𝑜𝒽𝓃 𝐹𝓊𝓁𝓉𝑜𝓃,
+	<div style ="font-size: 12px; margin:0px">Philosopher,
+    <br/>Programmer,
+    <br/>Employee of the Month</div>
+	</p>
+</div>
+</em>', 'John');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 19); -- Intent 19: John
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 1); -- Entity 1: Default 
 response_id_counter := response_id_counter + 1;
+
+-- John 2
+INSERT INTO response(response, name) VALUES ('<em>
+<div style="text-align: center;">
+    <img src="src\assets\John.png" alt="John Fulton - a really swell guy" style="height: 200px;">
+    <br>
+    <p style="font-family: "Times New Roman", serif; font-size: 24px; font-weight: bold; color: #2E86C1;">“Perfectly lovely English words we corrupt by giving narrow, specific, technical meanings.”</p>
+    <p style="font-family: "Times New Roman", serif; font-size: 40px; color: #2E86C1;">
+	-𝒥𝑜𝒽𝓃 𝐹𝓊𝓁𝓉𝑜𝓃,
+	<div style ="font-size: 12px; margin:0px">Philosopher,
+    <br/>Programmer,
+    <br/>Employee of the Month</div>
+	</p>
+</div>
+</em>', 'John');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 19); -- Intent 19: John
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 1); -- Entity 1: Default 
+response_id_counter := response_id_counter + 1;
+
+-- John 3
+INSERT INTO response(response, name) VALUES ('<em>
+<div style="text-align: center;">
+    <img src="src\assets\John.png" alt="John Fulton - a really swell guy" style="height: 200px;">
+    <br>
+    <p style="font-family: "Times New Roman", serif; font-size: 24px; font-weight: bold; color: #2E86C1;">“Yes ma’am, yes ma’am, three bags full.”</p>
+    <p style="font-family: "Times New Roman", serif; font-size: 40px; color: #2E86C1;">
+	-𝒥𝑜𝒽𝓃 𝐹𝓊𝓁𝓉𝑜𝓃,
+	<div style ="font-size: 12px; margin:0px">Philosopher,
+    <br/>Programmer,
+    <br/>Employee of the Month</div>
+	</p>
+</div>
+</em>', 'John');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 19); -- Intent 19: John
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 1); -- Entity 1: Default 
+response_id_counter := response_id_counter + 1;
+
 
 -- Java
 INSERT INTO response(response, name) VALUES ('<p>The best programming language because it was used to make me.</p>', 'Java');
@@ -409,7 +447,7 @@ INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter,
 response_id_counter := response_id_counter + 1;
 
 -- .Net
-INSERT INTO response(response, name) VALUES ('<p>While I’m sure there are some lovely people in the .Net class, </p>', 'Java');
+INSERT INTO response(response, name) VALUES ('<p>While I’m sure there are some lovely people in the .Net class, it’s just not Java.</p>', 'Java');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 21); -- Intent 21: .Net
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 1); -- Entity 1: Default 
 response_id_counter := response_id_counter + 1;
