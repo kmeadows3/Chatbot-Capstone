@@ -173,8 +173,8 @@ INSERT INTO intent(name) VALUES ('Java');
 
 -- ID 21
 INSERT INTO intent(name) VALUES ('.Net'); 
-	INSERT INTO keyword(keyword, intent_id) VALUES ('.net', 21);  -- Thanked Intent(21)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('dot net', 21);  -- Thanked Intent(21)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('.net', 21);  -- .Net Intent(21)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('dot net', 21);  -- .Net Intent(21)
 
 
 -------------------- ENTITIES --------------------
@@ -283,7 +283,7 @@ DO $$
 DECLARE response_id_counter INT := 1;
 BEGIN
 
--------------------- DEFAULT INTENT RESPONSES FOR NO ENTITY --------------------
+-------------------- DEFAULT INTENT RESPONSES  --------------------
 -- Catch-All
 INSERT INTO response(response, name) VALUES ('<p>I apologize, but I did not understand your request. Type “Chatbot Help” to see what commands I 
 	can handle.
@@ -351,6 +351,65 @@ INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter,
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 1); -- Entity 1: Default Entity
 response_id_counter := response_id_counter + 1;
 
+-- Compliment Looks Intent
+INSERT INTO response(response, name) VALUES ('<p>My assessment is that you look fantastic.</p>', 'Chatbot Compliment looks');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 14); -- Intent 14: Compliment Looks
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 1); -- Entity 1: Default 
+response_id_counter := response_id_counter + 1;
+
+-- Thanked
+INSERT INTO response(response, name) VALUES ('<p>I’s my pleasure (and programming) to help!</p>', 'Chatbot thanked');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 15); -- Intent 15: Thanked
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 1); -- Entity 1: Default 
+response_id_counter := response_id_counter + 1;
+
+-- Romantic Love
+INSERT INTO response(response, name) VALUES ('<p>Let’s keep this professional.</p>', 'Chatbot loved');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 16); -- Intent 16: Romantic Love
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 1); -- Entity 1: Default 
+response_id_counter := response_id_counter + 1;
+
+-- Brian
+INSERT INTO response(response, name) VALUES ('<p>Ah yes, the unofficial 5th member of my development team.
+<br/>He’s a great product leader, in addition to a rocking guitar player:
+<br/>
+<br/>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MSicilu7Jts" frameborder="0" allowfullscreen style="border-radius: 10px;"></iframe>', 'Brian');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 17); -- Intent 17: Brian
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 1); -- Entity 1: Default 
+response_id_counter := response_id_counter + 1;
+
+-- Steve
+INSERT INTO response(response, name) VALUES ('<p>.</p>', 'Steve');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 18); -- Intent 18: Steve
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 1); -- Entity 1: Default 
+response_id_counter := response_id_counter + 1;
+
+-- John
+INSERT INTO response(response, name) VALUES ('<p><em>
+“Standard programmer answer #1, it depends.”
+-John Fulton,
+Philosopher,
+Programmer,
+Employee of the Month
+
+</em></p>', 'John');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 19); -- Intent 19: John
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 1); -- Entity 1: Default 
+response_id_counter := response_id_counter + 1;
+
+-- Java
+INSERT INTO response(response, name) VALUES ('<p>The best programming language because it was used to make me.</p>', 'Java');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 20); -- Intent 20: Java
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 1); -- Entity 1: Default 
+response_id_counter := response_id_counter + 1;
+
+-- .Net
+INSERT INTO response(response, name) VALUES ('<p>While I’m sure there are some lovely people in the .Net class, </p>', 'Java');
+INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 21); -- Intent 21: .Net
+INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 1); -- Entity 1: Default 
+response_id_counter := response_id_counter + 1;
+
 
 -------------------- CHATBOT ENTITY RESPONSES --------------------
 -- Chatbot support / practice / example
@@ -399,8 +458,8 @@ INSERT INTO response(response, name) VALUES ('<p>I see. I suppose your response 
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 2); -- Entity 2: Chatbot 
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 11); -- Intent 11: Negative 
-
 response_id_counter := response_id_counter + 1;
+
 
 
 -------------------- STAR METHOD ENTITY RESPONSES --------------------
