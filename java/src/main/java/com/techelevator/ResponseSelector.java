@@ -12,6 +12,7 @@ public class ResponseSelector {
     public final int PRACTICE_INTENT_ID = 4;
     public final int HR_INTERVIEW_ENTITY_ID = 7;
     public final int TECHNICAL_INTERVIEW_ENTITY_ID = 8;
+    public final int JOHN_INTENT = 19;
 
 
 
@@ -26,8 +27,8 @@ public class ResponseSelector {
     public String selectResponse(List<Response> responses, List<Integer> inputIntents, List<Integer> inputEntities){
 
         //get list with one random response if the user wants a practice interview
-        if (inputIntents.contains(PRACTICE_INTENT_ID) &&
-                (inputEntities.contains(HR_INTERVIEW_ENTITY_ID) || inputEntities.contains(TECHNICAL_INTERVIEW_ENTITY_ID))) {
+        if (inputIntents.contains(JOHN_INTENT)||(inputIntents.contains(PRACTICE_INTENT_ID) &&
+                (inputEntities.contains(HR_INTERVIEW_ENTITY_ID) || inputEntities.contains(TECHNICAL_INTERVIEW_ENTITY_ID)))) {
             responses = handlePracticeInterviews(responses);
         }
 
