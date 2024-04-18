@@ -1,7 +1,6 @@
 <template>
     <button class="toggle" v-show="$store.state.jobPostings.length!=0" @click="toggleJobs()">{{ showJobs ? "Show Instructions" : "Show Jobs" }}</button>
-    <!-- <Instructions v-show="$store.state.jobPostings.length===0 || !showJobs"/> -->
-    <BrainEasterEgg v-show="$store.state.jobPostings.length===0 || !showJobs"/>
+    <Instructions v-show="$store.state.jobPostings.length===0 || !showJobs"/>
     <div class="job_postings" v-show="this.$store.state.selectedJobPosting.isEmpty">
         <div class ="job_details" v-show="$store.state.jobPostings.length > 0 && showJobs">
             <h1>Recent Job Posting{{ $store.state.jobPostings.length > 1 ? 's' : '' }}</h1>
@@ -19,12 +18,10 @@
 
 <script>
 import Instructions from '../components/Instructions.vue';
-import BrainEasterEgg from './BrainEasterEgg.vue';
 
 export default {
     components : {
         Instructions,
-        BrainEasterEgg
     },
 
     data() {
