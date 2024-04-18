@@ -99,13 +99,12 @@ INSERT INTO intent(name) VALUES ('New Quote');
 	INSERT INTO keyword(keyword, intent_id) VALUES ('new quotes', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('inspire', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('inspiration', 9);  -- Intent: New Quote(9)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('motivate me', 9);  -- Intent: New Quote(9)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('motivate', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('motivation', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('famous quote', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('famous quotes', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('motivational', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('inspirational', 9);  -- Intent: New Quote(9)
-	INSERT INTO keyword(keyword, intent_id) VALUES ('motivate', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('new picture', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('new pic', 9);  -- Intent: New Quote(9)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('motivational quote', 9);  -- Intent: New Quote(9)
@@ -130,6 +129,52 @@ INSERT INTO intent(name) VALUES ('Negative');
 -- ID 12
 INSERT INTO intent(name) VALUES ('Email');  
 	INSERT INTO keyword(keyword, intent_id) VALUES ('email', 12);  -- email(12)
+
+-- ID 13
+INSERT INTO intent(name) VALUES ('Take Photo');  
+	INSERT INTO keyword(keyword, intent_id) VALUES ('update profile', 13);  -- Take Photo(13)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('take picture', 13);  -- Take Photo(13)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('selfie', 13);  -- Take Photo(13)
+
+-- ID 14
+INSERT INTO intent(name) VALUES ('Compliment Looks');  
+	INSERT INTO keyword(keyword, intent_id) VALUES ('how do I look', 14);  -- Compliment Looks(14)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('do i look good', 14);  -- Compliment Looks(14)
+
+-- ID 15
+INSERT INTO intent(name) VALUES ('Thanked'); 
+	INSERT INTO keyword(keyword, intent_id) VALUES ('thank you', 15);  -- Thanked Intent(15)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('thanks', 15);  -- Thanked Intent(15)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('appreciate it', 15);  -- Thanked Intent(15)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('im grateful', 15);  -- Thanked Intent(15)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('I owe you one', 15);  -- Thanked Intent(15)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('cheers', 15);  -- Thanked Intent(15)
+
+-- ID 16
+INSERT INTO intent(name) VALUES ('Romantic Love'); 
+	INSERT INTO keyword(keyword, intent_id) VALUES ('love you', 16);  -- Romantic Love Intent(16)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('love me', 16);  -- Romantic Love Intent(16)
+
+-- ID 17
+INSERT INTO intent(name) VALUES ('Brian'); 
+	INSERT INTO keyword(keyword, intent_id) VALUES ('brian', 17);  -- Brian Intent(17)
+
+-- ID 18
+INSERT INTO intent(name) VALUES ('Steve'); 
+	INSERT INTO keyword(keyword, intent_id) VALUES ('steve', 18);  -- Steve Intent(18)
+
+-- ID 19
+INSERT INTO intent(name) VALUES ('John'); 
+	INSERT INTO keyword(keyword, intent_id) VALUES ('john', 19);  -- John Intent(19)
+
+-- ID 20
+INSERT INTO intent(name) VALUES ('Java'); 
+	INSERT INTO keyword(keyword, intent_id) VALUES ('java', 20);  -- Java Intent(20)
+
+-- ID 21
+INSERT INTO intent(name) VALUES ('.Net'); 
+	INSERT INTO keyword(keyword, intent_id) VALUES ('.net', 21);  -- Thanked Intent(21)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('dot net', 21);  -- Thanked Intent(21)
 
 
 -------------------- ENTITIES --------------------

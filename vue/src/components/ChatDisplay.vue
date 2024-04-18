@@ -1,37 +1,36 @@
 <template>
-    
-        <div id="chat-display"></div>
-        <div class="overlay" v-if="record">
-            <img src="/src/assets/record.gif" alt="Overlay" class="overlay-image">
+    <div id="chat-display"></div>
+    <div class="overlay" v-if="record">
+        <img src="/src/assets/record.gif" alt="Overlay" class="overlay-image">
+    </div>
+    <div id="user-input">
+        
+        <div v-show="this.$store.state.mode === 1">
+            <JobSearchForm ref="jobSearchForm" />
         </div>
-        <div id="user-input">
-            
-            <div v-show="this.$store.state.mode === 1">
-                <JobSearchForm ref="jobSearchForm" />
-            </div>
-            <form v-show="this.$store.state.mode !== 1">
-                <textarea name="userInput" id="userInput" v-model="textBoxText" 
-                    @keydown.enter.prevent="addUserBox" 
-                    @keydown.up.prevent="getLastCommandUp"
-                    @keydown.left.prevent="getLastCommandUp"
-                    @keydown.down.prevent="getLastCommandDown"
-                    @keydown.right.prevent="getLastCommandDown"
-                    @keydown="handleKeyDown"
-                    placeholder="Type Here" :disabled="this.$store.state.mode == 4"></textarea>
-            </form>
-            <button @click.prevent="addUserBox()" :class="this.$store.state.mode == 4 ? 'disabled' : ''">
-                {{this.$store.state.mode !== 1 ? "Send Response" : "Search Jobs"}}
-            </button>
-            <button @click.prevent="beginVoiceRecognition()" :class="this.$store.state.mode == 4 ? 'disabled' : ''">
-                Voice Response
-            </button>
-            <button id="text-to-speech-button" @click.prevent="toggleTextToSpeech()" :class="this.$store.state.mode == 4 ? 'disabled' : ''">
-                {{ textToSpeech ? 'Disable text-to-speech' : 'Enable text-to-speech' }}
-            </button>
-            <button id="clear-chat" @click.prevent="clearChat()">
-                Clear Chat
-            </button>
-        </div>
+        <form v-show="this.$store.state.mode !== 1">
+            <textarea name="userInput" id="userInput" v-model="textBoxText" 
+                @keydown.enter.prevent="addUserBox" 
+                @keydown.up.prevent="getLastCommandUp"
+                @keydown.left.prevent="getLastCommandUp"
+                @keydown.down.prevent="getLastCommandDown"
+                @keydown.right.prevent="getLastCommandDown"
+                @keydown="handleKeyDown"
+                placeholder="Type Here" :disabled="this.$store.state.mode == 4"></textarea>
+        </form>
+        <button @click.prevent="addUserBox()" :class="this.$store.state.mode == 4 ? 'disabled' : ''">
+            {{this.$store.state.mode !== 1 ? "Send Response" : "Search Jobs"}}
+        </button>
+        <button @click.prevent="beginVoiceRecognition()" :class="this.$store.state.mode == 4 ? 'disabled' : ''">
+            Voice Response
+        </button>
+        <button id="text-to-speech-button" @click.prevent="toggleTextToSpeech()" :class="this.$store.state.mode == 4 ? 'disabled' : ''">
+            {{ textToSpeech ? 'Disable text-to-speech' : 'Enable text-to-speech' }}
+        </button>
+        <button id="clear-chat" @click.prevent="clearChat()">
+            Clear Chat
+        </button>
+    </div>
   
 </template>
     
@@ -65,12 +64,13 @@ export default {
             textToSpeech: false,
             lastCommandSelector: this.$store.state.lastCommands.length,
             cuteAnimalPictures: [],
+            userImageSource: "/src/assets/UserIcon.jpg",
         }
     },
 
     components: {
     JobSearchForm,
-    CameraDisplay
+    CameraDisplay,
 },
 
     methods: {
@@ -214,7 +214,7 @@ export default {
             const userAvatarDiv = document.createElement('div');
             userAvatarDiv.classList.add('avatar-div')
             const userAvatar = document.createElement('img');
-            userAvatar.src = "/src/assets/UserIcon.jpg";
+            userAvatar.src = this.userImageSource;
             userAvatar.classList.add('user-avatar');
             const userNameDiv = document.createElement('div');
             userNameDiv.classList.add('name-divs');
@@ -357,6 +357,8 @@ export default {
                         this.$store.commit('SET_MODE', response.data.mode);
                         if (this.$store.state.mode == 4) {
                             this.handleQuiz(response.data.quiz)
+                        } else if (this.$store.state.mode == 6) {
+                            this.handleCamera();
                         } else {
                             this.addRobotBox(response.data.response);
                         }
@@ -380,6 +382,30 @@ export default {
         },
         exitQuiz() {
             this.$store.commit('SET_MODE', 0);
+        },
+
+        handleCamera() {
+            const chatBox = document.getElementById('chat-display');
+            const chatbotOuterBox = document.createElement('div');
+            chatbotOuterBox.classList.add('chatbot');
+            const chatbotAvatarDiv = this.createChatbotHeading();
+            chatbotOuterBox.appendChild(chatbotAvatarDiv);
+            
+            const cameraDisplay = h(CameraDisplay, {
+                onPhoto: this.setUserPhoto // Listen to the photo event and call setUserPhoto method
+            });
+            render(cameraDisplay, chatbotOuterBox);
+            
+            chatBox.appendChild(chatbotOuterBox);
+            this.scrollChatDisplayToBottom(chatBox);
+            this.$store.commit('SET_MODE', 0);
+        },
+
+        setUserPhoto(photo) {
+            this.userImageSource = photo;
+
+            this.textBoxText = "How do I look?";
+            this.addUserBox();
         },
 
         beginVoiceRecognition() {
@@ -529,8 +555,8 @@ div.user {
 }
 
 .user-avatar {
-    max-width: 45px;
-    max-height: 45px;
+    width: 45px;
+    height: 45px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
     border-radius: 70%;
 }
