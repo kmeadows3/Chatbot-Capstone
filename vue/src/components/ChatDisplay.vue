@@ -19,16 +19,16 @@
                 placeholder="Type Here" :disabled="this.$store.state.mode == 4"></textarea>
         </form>
         <button @click.prevent="addUserBox()" :class="this.$store.state.mode == 4 ? 'disabled' : ''">
-            {{this.$store.state.mode !== 1 ? "Send Response" : "Search Jobs"}}
+            <strong>{{this.$store.state.mode !== 1 ? "Send Response" : "Search Jobs"}}</strong>
         </button>
         <button @click.prevent="beginVoiceRecognition()" :class="this.$store.state.mode == 4 ? 'disabled' : ''">
-            Voice Response
+            <strong>Voice Response</strong>
         </button>
         <button id="text-to-speech-button" @click.prevent="toggleTextToSpeech()" :class="this.$store.state.mode == 4 ? 'disabled' : ''">
-            {{ textToSpeech ? 'Disable text-to-speech' : 'Enable text-to-speech' }}
+            <strong>{{ textToSpeech ? 'Disable text-to-speech' : 'Enable text-to-speech' }}</strong>
         </button>
         <button id="clear-chat" @click.prevent="clearChat()">
-            Clear Chat
+        <strong>Clear Chat</strong>
         </button>
     </div>
   
@@ -276,7 +276,7 @@ export default {
             chatbotAvatar.classList.add('chatbot-avatar');
             const chatwickNameDiv = document.createElement('div');
             chatwickNameDiv.classList.add('name-divs');
-            chatwickNameDiv.innerText = "CHATWICK";
+            chatwickNameDiv.innerText = "Chatwick";
             chatbotAvatarDiv.appendChild(chatbotAvatar);
             chatbotAvatarDiv.appendChild(chatwickNameDiv);
             return chatbotAvatarDiv;
@@ -314,6 +314,7 @@ export default {
             name = this.removeFromName(name, ".");
             name = this.removeFromName(name, ". ");
             name = this.removeFromName(name, "?");
+            name = this.capitalizeFirstLetterOfEveryWord(name);
             this.$store.commit('SET_PREFERREDNAME', name);
             greetUser = true;
         },
@@ -322,6 +323,14 @@ export default {
             oldString = oldString.toUpperCase();
             textToReplace = textToReplace.toUpperCase();
             return oldString.replace(textToReplace, "");
+        },
+
+        capitalizeFirstLetterOfEveryWord(string) {
+            let words = string.split(' ');
+            for (let i = 0; i < words.length; i++) {
+                words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+            }
+            return words.join(' ');
         },
 
         greetUser() {
@@ -403,6 +412,10 @@ export default {
 
         setUserPhoto(photo) {
             this.userImageSource = photo;
+
+            this.$store.commit('SET_MODE', 0); // Resets chatbot from job posting mode to normal mode
+            this.$store.commit('SET_INTENTS', [1]); // Resets intents
+            this.$store.commit('SET_ENTITIES', [1]); // Resets entities
 
             this.textBoxText = "How do I look?";
             this.addUserBox();
