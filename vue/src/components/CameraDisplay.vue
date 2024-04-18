@@ -2,13 +2,15 @@
     <div id="camera_display">
         <div id="camera" v-if="!photo">
             <div id="video_display">
-                <video ref="video" height="300" autoplay ></video>
+                <!-- Apply CSS class to mirror the video -->
+                <video ref="video" height="300" autoplay class="mirrored-video"></video>
             </div>
             <br>
             <button @click="takePicture">Take Picture</button>
         </div>
         <canvas ref="canvas" style="display: none;"></canvas>
-        <img :src="photo" v-if="photo" height="300" width="300" alt="Taken Picture" style="border-radius: 10000px;"/>
+        <!-- Apply CSS class to mirror the taken picture -->
+        <img :src="photo" v-if="photo" height="300" width="300" alt="Taken Picture" style="border-radius: 10000px;" class="mirrored-picture"/>
     </div>
 </template>
   
@@ -85,5 +87,15 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    /* CSS class to mirror the video */
+    .mirrored-video {
+        transform: scaleX(-1);
+    }
+
+    /* CSS class to mirror the taken picture */
+    .mirrored-picture {
+        transform: scaleX(-1);
     }
 </style>

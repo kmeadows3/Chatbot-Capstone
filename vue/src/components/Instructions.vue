@@ -13,6 +13,8 @@
                 <li>“I would like company information.”</li>
                 <li>“Give me a technical quiz.”</li>
                 <li>“Give me an example cover letter.”</li>
+                <br/>
+                <li>“Change my profile picture”</li>
                 <li>“Send me a special email”</li>
                 <li><strong>“Chatbot support.”</strong></li>
             </ul>

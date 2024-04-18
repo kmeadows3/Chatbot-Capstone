@@ -134,7 +134,11 @@ INSERT INTO intent(name) VALUES ('Email');
 INSERT INTO intent(name) VALUES ('Take Photo');  
 	INSERT INTO keyword(keyword, intent_id) VALUES ('update profile', 13);  -- Take Photo(13)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('take picture', 13);  -- Take Photo(13)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('take a picture', 13);  -- Take Photo(13)
 	INSERT INTO keyword(keyword, intent_id) VALUES ('selfie', 13);  -- Take Photo(13)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('change profile', 13);  -- Take Photo(13)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('change picture', 13);  -- Take Photo(13)
+	INSERT INTO keyword(keyword, intent_id) VALUES ('new picture', 13);  -- Take Photo(13)
 
 -- ID 14
 INSERT INTO intent(name) VALUES ('Compliment Looks');  

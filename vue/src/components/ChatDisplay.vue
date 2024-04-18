@@ -139,7 +139,7 @@ export default {
         emailUser() {
             const email = {
                 recipientEmail: this.textBoxText,
-                subject: "Special Message For " + this.$store.state.preferredName,
+                subject: "A Special Message For " + this.$store.state.preferredName,
                 body: this.emailMessage()
             }
 
@@ -343,6 +343,8 @@ export default {
             message += '<li>Practice HR interview questions.</li>';
             message += '<li>I want information about a company.</li>';
             message += '<li>What should I wear to an interview?</li>';
+            message += '<br/>';
+            message += '<li>Change my profile picture</li>';
             message += '<li>Motivate me.</li>';
             message += '<li>Send me a special email.</li>';
             message += '</ul>';
@@ -575,7 +577,8 @@ div.user {
     width: 45px;
     height: 45px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
-    border-radius: 70%;
+    border-radius: 100%;
+    transform: scaleX(-1);
 }
 
 .chatbot-avatar {
