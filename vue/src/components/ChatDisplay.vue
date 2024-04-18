@@ -435,6 +435,7 @@ export default {
 
             const steveEasterEgg = h(SteveEasterEgg, {});
             render(steveEasterEgg, chatbotOuterBox);
+            
             chatBox.appendChild(chatbotOuterBox);
             this.scrollChatDisplayToBottom(chatBox);
 

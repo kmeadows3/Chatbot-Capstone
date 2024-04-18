@@ -282,6 +282,10 @@ INSERT INTO entity(name) VALUES ('.Net');
 	INSERT INTO keyword(keyword, entity_id) VALUES ('.net', 15);  -- .Net (15)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('dot net', 15);  -- .Net (15)
 
+-- ID 16
+INSERT INTO entity(name) VALUES ('Eric'); 
+	INSERT INTO keyword(keyword, entity_id) VALUES ('eric', 16);  -- .Net (16)
+
 	
 
 -- Starts a block with an integer

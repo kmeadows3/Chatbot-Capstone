@@ -1,38 +1,42 @@
 <template>
-    <input type="radio" id="autoplay" name="type" value="autoplay" checked>
-    <main>
-        <input type="radio" id="option-1" name="slider" value="option-1" checked>
-        <input type="radio" id="option-2" name="slider" value="option-2">
-        <input type="radio" id="option-3" name="slider" value="option-3">
-        <input type="radio" id="option-4" name="slider" value="option-4">
-        <input type="radio" id="option-5" name="slider" value="option-5">
+    <div class="slider-component">
+      <input type="radio" id="autoplay" name="type" value="autoplay" checked>
+      <main>
+          <input type="radio" id="option-1" name="slider" value="option-1" checked>
+          <input type="radio" id="option-2" name="slider" value="option-2">
+          <input type="radio" id="option-3" name="slider" value="option-3">
+          <input type="radio" id="option-4" name="slider" value="option-4">
+          <input type="radio" id="option-5" name="slider" value="option-5">
+  
+          <ol class="container">
+              <li class="slide slide-1">
+                  <h2>Slide 1</h2>
+              </li>
+              <li class="slide slide-2">
+                  <h2>Slide 2</h2>
+              </li>
+              <li class="slide slide-3">
+                  <h2>Slide 3</h2>
+              </li>
+              <li class="slide slide-4">
+                  <h2>Slide 4</h2>
+              </li>
+              <li class="slide slide-5">
+                  <h2>Slide 5</h2>
+              </li>
+              <li class="slide slide-1">
+                  <h2>Slide 1</h2>
+              </li>
+          </ol>
+          <span class="slide-indicator"></span>
+      </main>
+    </div>
+  </template>
 
-        <ol class="container">
-            <li class="slide slide-1">
-                <h2>Slide 1</h2>
-            </li>
-            <li class="slide slide-2">
-                <h2>Slide 2</h2>
-            </li>
-            <li class="slide slide-3">
-                <h2>Slide 3</h2>
-            </li>
-            <li class="slide slide-4">
-                <h2>Slide 4</h2>
-            </li>
-            <li class="slide slide-5">
-                <h2>Slide 5</h2>
-            </li>
-            <li class="slide slide-1">
-                <h2>Slide 1</h2>
-            </li>
-        </ol>
-        <span class="slide-indicator"></span>
-    </main>
-</template>
+<style scoped>
 
-<style>
 @keyframes slide {
+    
     0% {
         left: 0%;
     }
