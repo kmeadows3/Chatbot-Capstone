@@ -1,4 +1,6 @@
 <template>
+    <p>I don't know a steve, let me see what I can find online...</p>
+    <br/>
     <div class="slider-component">
       <input type="radio" id="autoplay" name="type" value="autoplay" checked>
       <main>
@@ -10,22 +12,22 @@
   
           <ol class="container">
               <li class="slide slide-1">
-                  <h2>Slide 1</h2>
+                  <h2>SSS</h2>
               </li>
               <li class="slide slide-2">
-                  <h2>Slide 2</h2>
+                  <h2>SSS</h2>
               </li>
               <li class="slide slide-3">
-                  <h2>Slide 3</h2>
+                  <h2>SSS</h2>
               </li>
               <li class="slide slide-4">
-                  <h2>Slide 4</h2>
+                  <h2>SSS</h2>
               </li>
               <li class="slide slide-5">
-                  <h2>Slide 5</h2>
+                    <h2>SSS</h2>
               </li>
               <li class="slide slide-1">
-                  <h2>Slide 1</h2>
+                  <h2>SSS</h2>
               </li>
           </ol>
           <span class="slide-indicator"></span>
@@ -34,6 +36,11 @@
   </template>
 
 <style scoped>
+
+.slider-component {
+    border-radius: 10px;
+    overflow: hidden;
+}
 
 @keyframes slide {
     
@@ -105,7 +112,7 @@ main {
     animation-iteration-count: infinite;
     width: 600%;
     display: flex;
-    height: 100vh;
+    height: 350px; /* Controls the height */
     transition: all 1s ease;
 }
 
@@ -318,8 +325,7 @@ ol li {
 }
 
 ol li * {
-    text-align: center;
-    color: white;
+    color: rgba(255, 255, 255, 0.0);
 }
 
 /* option Controls */
