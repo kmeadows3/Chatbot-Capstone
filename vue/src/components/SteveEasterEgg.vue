@@ -1,5 +1,5 @@
 <template>
-    <p>I don't know a steve, let me see what I can find online...</p>
+    <p>I don't know a Steve. Let me see what I can find online...</p>
     <br/>
     <div class="slider-component">
       <input type="radio" id="autoplay" name="type" value="autoplay" checked>
