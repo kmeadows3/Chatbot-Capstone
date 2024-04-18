@@ -42,7 +42,6 @@ public class QueryService {
     public final int QUIZ_INTENT_ID = 10;
     public final int EMAIL_INTENT_ID = 12;
 
-
     public final int DEFAULT_INTENT_ID = 1;
     public final int DEFAULT_ENTITY_ID = 1;
     public final int INTENTS_INDEX = 0;
