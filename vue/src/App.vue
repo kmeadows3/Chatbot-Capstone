@@ -7,3 +7,10 @@
     <router-view />
   </div>
 </template>
+
+<script>
+//importing bootstrap 5
+export default {
+ 
+}
+</script>

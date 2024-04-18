@@ -7,6 +7,7 @@
     <div class="quote">
       <InspirationalQuotes v-show="!this.$store.state.showCamera"/>
     </div>
+  
     <div class="job_postings" v-show="this.$store.state.selectedJobPosting.isEmpty">
       <JobCards/>
     </div>

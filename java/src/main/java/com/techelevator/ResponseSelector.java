@@ -12,7 +12,7 @@ public class ResponseSelector {
     public final int PRACTICE_INTENT_ID = 4;
     public final int HR_INTERVIEW_ENTITY_ID = 7;
     public final int TECHNICAL_INTERVIEW_ENTITY_ID = 8;
-    public final int JOHN_INTENT = 19;
+    public final int JOHN_ENTITY = 13;
 
 
 
@@ -27,7 +27,7 @@ public class ResponseSelector {
     public String selectResponse(List<Response> responses, List<Integer> inputIntents, List<Integer> inputEntities){
 
         //get list with one random response if the user wants a practice interview
-        if (inputIntents.contains(JOHN_INTENT)||(inputIntents.contains(PRACTICE_INTENT_ID) &&
+        if (inputEntities.contains(JOHN_ENTITY)||(inputIntents.contains(PRACTICE_INTENT_ID) &&
                 (inputEntities.contains(HR_INTERVIEW_ENTITY_ID) || inputEntities.contains(TECHNICAL_INTERVIEW_ENTITY_ID)))) {
             responses = handlePracticeInterviews(responses);
         }
@@ -112,7 +112,7 @@ public class ResponseSelector {
 
         responses = responses.stream()
                 .filter(response -> (response.getResponseIntents().contains(PRACTICE_INTENT_ID)
-                                    ||response.getResponseIntents().contains(JOHN_INTENT)))
+                                    ||response.getResponseEntities().contains(JOHN_ENTITY)))
                 .collect(Collectors.toList());
         responses = getResponseListWithOnlyOneRandomResponse(responses);
 
