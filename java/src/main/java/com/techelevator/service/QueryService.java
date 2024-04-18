@@ -35,6 +35,7 @@ public class QueryService {
     public final int QUIZ_MODE = 4;
     public final int EMAIL_MODE = 5;
     public final int CAMERA_MODE = 6;
+    public final int STEVE_MODE = 7;
 
     // Special Action Intents -- pulled from IDs in Database
     public final int COMPANY_INFORMATION_INTENT_ID = 7;
@@ -43,6 +44,10 @@ public class QueryService {
     public final int QUIZ_INTENT_ID = 10;
     public final int EMAIL_INTENT_ID = 12;
     public final int TAKE_PHOTO_INTENT_ID = 13;
+
+
+    // Special Action Entities -- pulled from IDs in Database
+    public final int STEVE_ENTITY_ID = 12;
 
     public final int DEFAULT_INTENT_ID = 1;
     public final int DEFAULT_ENTITY_ID = 1;
@@ -113,7 +118,10 @@ public class QueryService {
         } else if (intents.contains(TAKE_PHOTO_INTENT_ID)) {
             responseString = "Smile for the camera!";
             outputResponse.setMode(CAMERA_MODE);
-        }  else if (intents.contains(EMAIL_INTENT_ID) && intents.size() < 2) {
+        } else if (entities.contains(STEVE_ENTITY_ID)) {
+            responseString = "Here you go Steve!";
+            outputResponse.setMode(STEVE_MODE);
+        } else if (intents.contains(EMAIL_INTENT_ID) && intents.size() < 2) {
             responseString = "Sure! Enter your email so I can send you a special message.";
             outputResponse.setMode(EMAIL_MODE);
         }

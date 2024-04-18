@@ -52,6 +52,7 @@ import EmailService from '../services/EmailService';
 import ImageService from '../services/imageService';
 import JobSearchForm from '../components/JobSearchForm.vue';
 import QuizDisplay from './QuizDisplay.vue';
+import SteveEasterEgg from './SteveEasterEgg.vue';
 import { h, render } from 'vue';
 import CameraDisplay from './CameraDisplay.vue';
 
@@ -370,6 +371,8 @@ export default {
                             this.handleQuiz(response.data.quiz)
                         } else if (this.$store.state.mode == 6) {
                             this.handleCamera();
+                        } else if (this.$store.state.mode == 7) {
+                            this.handleSteveEasterEgg();
                         } else {
                             this.addRobotBox(response.data.response);
                         }
@@ -421,6 +424,20 @@ export default {
 
             this.textBoxText = "How do I look?";
             this.addUserBox();
+        },
+
+        handleSteveEasterEgg() {
+            const chatBox = document.getElementById('chat-display');
+            const chatbotOuterBox = document.createElement('div');
+            chatbotOuterBox.classList.add('chatbot');
+            const chatbotAvatarDiv = this.createChatbotHeading();
+            chatbotOuterBox.appendChild(chatbotAvatarDiv);
+
+            const steveEasterEgg = h(SteveEasterEgg, {});
+            render(steveEasterEgg, chatbotOuterBox);
+            chatBox.appendChild(chatbotOuterBox);
+            this.scrollChatDisplayToBottom(chatBox);
+
         },
 
         beginVoiceRecognition() {
