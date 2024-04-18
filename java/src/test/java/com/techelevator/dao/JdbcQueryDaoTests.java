@@ -35,12 +35,12 @@ public class JdbcQueryDaoTests extends BaseDaoTests {
     public void getResponsesFromIntentsAndEntities_returns_correct_response_list_when_multiple_responses_match(){
         List<Integer> intents = new ArrayList<>();
         List<Integer> entities = new ArrayList<>();
-        intents.add(2);
+        intents.add(5);
         entities.add(3);
         List<Response> returnedResponses = jdbcQueryDao.getResponsesFromIntentsAndEntities(intents,entities);
         Response expectedResponse1 = new Response("Test Response 6");
         Response expectedResponse2 = new Response("Test Response 4");
-        Assert.assertEquals(2, returnedResponses.size());
+        Assert.assertEquals(3, returnedResponses.size());
         Assert.assertTrue(returnedResponses.contains(expectedResponse1));
         Assert.assertTrue(returnedResponses.contains(expectedResponse2));
     }

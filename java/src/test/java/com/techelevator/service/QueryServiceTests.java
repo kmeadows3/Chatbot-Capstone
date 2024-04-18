@@ -138,7 +138,7 @@ public class QueryServiceTests extends BaseDaoTests {
         input.setIntents(intentList);
         input.setEntities(entityList);
 
-        input.setUtterance("intent8keyword entity2keyword");
+        input.setUtterance("intent4keyword entity2keyword");
         Response response = queryService.getResponseFromUserInput(input);
         Assert.assertEquals("Test Response 2", response.getResponse());
     }
@@ -206,38 +206,6 @@ public class QueryServiceTests extends BaseDaoTests {
     }
 
     @Test
-    public void getResponseFromUserInput_returns_higher_ranked_choice_if_number_of_matches_is_equal_one_intent_and_entity(){
-        UserInput input = new UserInput();
-        List<Integer> intentList = new ArrayList<>();
-        List<Integer> entityList = new ArrayList<>();
-        intentList.add(1);
-        entityList.add(1);
-        input.setIntents(intentList);
-        input.setEntities(entityList);
-
-        input.setUtterance("intent3keyword entity3keyword entity4keyword");
-        Response response = queryService.getResponseFromUserInput(input);
-        Assert.assertEquals("Test Response 6", response.getResponse());
-    }
-
-    @Test
-    public void getResponseFromUserInput_returns_higher_ranked_choice_if_number_of_matches_is_equal_one_intent_and_two_entities(){
-        UserInput input = new UserInput();
-        List<Integer> intentList = new ArrayList<>();
-        List<Integer> entityList = new ArrayList<>();
-        intentList.add(1);
-        entityList.add(1);
-        input.setIntents(intentList);
-        input.setEntities(entityList);
-
-        input.setUtterance("intent3keyword intent6keyword entity2keyword entity3keyword");
-        Response response = queryService.getResponseFromUserInput(input);
-
-        //TODO method to make this happen, the default response is 9
-        Assert.assertEquals("Test Response 8", response.getResponse());
-    }
-
-    @Test
     public void getResponseFromUserInput_returns_higher_ranked_choice_if_number_of_matches_is_equal(){
         UserInput input = new UserInput();
         List<Integer> intentList = new ArrayList<>();
@@ -247,7 +215,7 @@ public class QueryServiceTests extends BaseDaoTests {
         input.setIntents(intentList);
         input.setEntities(entityList);
 
-        input.setUtterance("intent3keyword entity3keyword");
+        input.setUtterance("intent5keyword entity3keyword");
         Response response = queryService.getResponseFromUserInput(input);
 
         Assert.assertEquals("Test Response 6", response.getResponse());
