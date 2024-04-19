@@ -280,7 +280,8 @@ INSERT INTO entity(name) VALUES ('Java');
 
 -- ID 15
 INSERT INTO entity(name) VALUES ('.Net'); 
-	INSERT INTO keyword(keyword, entity_id) VALUES ('.net', 15);  -- .Net (15)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('cnet', 15);  -- .Net (15)
+	INSERT INTO keyword(keyword, entity_id) VALUES ('net', 15);  -- .Net (15)
 	INSERT INTO keyword(keyword, entity_id) VALUES ('dot net', 15);  -- .Net (15)
 
 -- ID 16
@@ -1234,11 +1235,10 @@ response_id_counter := response_id_counter + 1;
 
 
 -------------------- BRIAN ENTITY RESPONSES --------------------
-INSERT INTO response(response, name) VALUES ('<p>Ah yes, the unofficial 5th member of my development team.
-<br/>He’s a great product leader, in addition to a rocking guitar player:
-<br/>
-<br/>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/MSicilu7Jts" frameborder="0" allowfullscreen style="border-radius: 10px;"></iframe>', 'Brian');
+INSERT INTO response(response, name) VALUES ('<p>Ah yes, the unofficial 5th member of my development team.</p>
+<p>He’s a great product leader, an outstanding teacher, and it turns out he’s a rocking guitar player.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MSicilu7Jts" frameborder="0" allowfullscreen style="border-radius: 10px;"></iframe>
+<p>Wow, that’s impressive! A round of applause for Brian! </p>', 'Brian');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 11); -- Entity 11: Brian
 response_id_counter := response_id_counter + 1;
@@ -1386,7 +1386,9 @@ response_id_counter := response_id_counter + 1;
 
 
 -------------------- .NET ENTITY RESPONSES --------------------
-INSERT INTO response(response, name) VALUES ('<p>While I’m sure there are some lovely people in the .Net class, it’s just not Java.</p>', 'Java');
+INSERT INTO response(response, name) VALUES ('<p>While I’m sure there are some lovely people in the .NET class, it’s just not Java.</p>
+<p>I mean, those peasants can’t even generate their own setters. What is this, the dark ages?
+</p>', 'Java');
 INSERT INTO response_intent(response_id, intent_id) VALUES (response_id_counter, 1); -- Intent 1: Default
 INSERT INTO response_entity(response_id, entity_id) VALUES (response_id_counter, 15); -- Entity 15: .Net 
 response_id_counter := response_id_counter + 1;
